@@ -103,8 +103,3 @@ While you should direct the reader to the Supplemental Materials to access the a
 
 ## Reproducible Research Principles
 An *appendix* with R, SAS, or other code should be included starting on a new page after your references with code that is clearly commented for the simulations, analyses, figures, and tables ultimately included in the report. Code that was ultimately not used in the final report should be excluded from this appendix.
-
-
-
-
-

@@ -21,42 +21,87 @@ library(kableExtra)
 library(dplyr)
 ```
 
-This page includes the asynchronous lecture videos, PDF slides, and other materials for Advanced Biostatistical Methods I (BIOS 6618). It builds and expands upon material from its predecessor course [Biostatistical Methods I (BIOS 6618)](www.alexkaizer.com/bios_6618/). The material is broadly broken down by theme with links provided to download materials or view the videos. **A brief overview of the material covered in a given lecture can be viewed by hovering over or clicking the given "Lecture Topic".**
+This page includes the asynchronous lecture videos, PDF slides, and other materials for Advanced Biostatistical Methods I (BIOS 6618). It builds and expands upon material from its predecessor course [Biostatistical Methods I (BIOS 6611)](www.alexkaizer.com/bios_6611/). The material is broadly broken down by theme with links provided to download materials or view the videos. **A brief overview of the material covered in a given lecture can be viewed by hovering over or clicking the given "Lecture Topic".**
 
+
+## Prerequisite Materials
+
+We assume some material has been covered in previous statistic coursework. No worries if it isn't ringing a bell, feel free to review the material below.
+
+```{r, echo=F}
+review_dist_lectures <- c('Probability and Bayes Theorem',
+                          'Discrete Distributions',
+'Common Discrete Distributions',
+'Continuous Distributions',
+'Other Continuous Distributions',
+'Methods of Estimation (MoM, MLE, LSE)'
+)
+
+review_dist_desc <- c('Joint, marginal, and conditional distributions/probabilities for bivariate distributions, with an introduction to Bayes\' theorem.',
+                      'An introduction to discrete random variables and their probability mass function (PMF), cumulative density function (CDF), expected value, variance, and standard deviation.',
+                    'The Bernoulli, Binomial, and Poisson distributions.',
+                    'Continuous random variables and their probability density function (PDF), cumulative density function (CDF), expected value, variance, and standard deviation.',
+                    'The chi-squared, F, and t distributions.',
+                    'An introduction to Methods of Moments, Maximum Likelihood Estimation, and Least Squares Estimates.'
+)
+
+review_dist_pdf_link <- paste0('./files/bios6618/',
+                             c('W2/Probability_Joint_Marginal_Conditional.pdf',
+                               'W2/DiscreteData_PMF_EX_Var.pdf',
+                               'W2/DiscreteDistributions.pdf',
+                               'W3/ContinuousData_PDF_EX_Var.pdf',
+                               'W3/OtherContDistr_t_F_chisq.pdf',
+                               'W2/EstimatorMethods.pdf'))
+review_dist_pdf <- paste0('[PDF](',review_dist_pdf_link,')')
+
+review_dist_videos_link <-c('https://youtu.be/rcGAXNdy9VQ',
+                            'https://youtu.be/Uuy_r3itw5k',
+  'https://youtu.be/84Nkyd8A0Qw',
+  'https://youtu.be/NBGvCw7yWUo',
+  'https://youtu.be/lWeB25hRFuU',
+  'https://youtu.be/idKDhP8Wo-w'
+  )
+review_dist_videos <- paste0('[YouTube](',review_dist_videos_link,')')
+
+review_dist <- data.frame(
+  'Lecture' = review_dist_lectures,
+  'File' = review_dist_pdf,
+  'Video' = review_dist_videos)
+
+review_dist$Lecture <- cell_spec(review_dist$Lecture, popover = spec_popover(
+  content = review_dist_desc,
+  title = 'General Overview',
+  position = 'top'
+))
+
+kbl(x = review_dist, escape=F, align='lcc', col.names = c('Lecture Topic','Slides','Video Link')) %>%
+  column_spec(1, width='18em') %>%
+  column_spec(2, width='5em') %>%
+  column_spec(3, width='5em') %>%
+  kable_styling(bootstrap_options = c("striped")) 
+```
 
 ## Probability and Distributions
 
-The first theme in BIOS 6618 discusses core concepts in statistics (e.g., simulation studies, estimators, estimation) and both discrete and continuous probability distributions.
+The first theme in BIOS 6618 discusses core concepts in statistics (e.g., simulation studies, estimators, estimation), the normal distribution, and the central limit theorem.
 
 ```{r, echo=F}
 prob_dist_lectures <- c('Intro to Statistical Topics',
 'Properties of Estimators',
 'Simulations Studies',
 'Brief, but Complete, Interpretations',
-'Discrete Distributions',
-'Common Discrete Distributions',
-'Probability and Bayes Theorem',
-'Methods of Estimation (MoM, MLE, LSE)',
-'Continuous Distributions',
 'The Normal Distribution',
 'Assessing Normality in Samples',
 'The Central Limit Theorem',
-'Other Continuous Distributions',
 'Deriving the Sampling Distribution of the Sample Mean and Sample Variance')
 
 prob_dist_desc <- c('The starting point of BIOS 6618, where we discuss what is statistics/biostatistics, populations vs. samples, parameters vs. statistics, descriptive vs. inferential stats, and point vs. interval estimation.',
                     'An introduction to notation used for statistical estimation. Then bias, efficiency, mean square error, and asymptotic consistency are discussed as properties of estimators. An example using a simulation study in R is presented for the sample mean.',
                     'Simulation studies in R and the difference between the population distribution and sampling distribution.',
                     'Providing the point estimate, an interval estimate, our uncertainty (i.e., p-value), and our ultimate decision are the four elements to try and include in every brief, but complete, summary.',
-                    'An introduction to discrete random variables and their probability mass function (PMF), cumulative density function (CDF), expected value, variance, and standard deviation.',
-                    'The Bernoulli, Binomial, and Poisson distributions.',
-                    'Joint, marginal, and conditional distributions/probabilities for bivariate distributions, with an introduction to Bayes\' theorem.',
-                    'An introduction to Methods of Moments, Maximum Likelihood Estimation, and Least Squares Estimates.',
-                    'Continuous random variables and their probability density function (PDF), cumulative density function (CDF), expected value, variance, and standard deviation.',
                     'The normal (Gaussian) distribution in all its glory!',
                     'Graphical and formal hypothesis tests to evaluate normality in a sample.',
                     'The central limit theorem (CLT) is one of the most consequential theorems in statistics. In this lecture we introduce the CLT and illustrate its power through a simulation study.',
-                    'The chi-squared, F, and t distributions.',
                     'Deriving the sampling distributions of the sample mean and variance and their corresponding properties.'
 )
 
@@ -65,15 +110,9 @@ prob_dist_pdf_link <- paste0('./files/bios6618/',
                                'W1/PropertiesOfEstimators.pdf',
                                'W1/Simulations.pdf',
                                'W1/BriefButCompleteInterpretations.pdf',
-                               'W2/DiscreteData_PMF_EX_Var.pdf',
-                               'W2/DiscreteDistributions.pdf',
-                               'W2/Probability_Joint_Marginal_Conditional.pdf',
-                               'W2/EstimatorMethods.pdf',
-                               'W3/ContinuousData_PDF_EX_Var.pdf',
                                'W3/The_Normal_Distribution.pdf',
                                'W3/Assessing_Normality_in_Samples.pdf',
                                'W3/CentralLimitThm.pdf',
-                               'W3/OtherContDistr_t_F_chisq.pdf',
                                'W3/Samping_Dist_Xbar.pdf'))
 prob_dist_pdf <- paste0('[PDF](',prob_dist_pdf_link,')')
 
@@ -81,15 +120,9 @@ prob_dist_videos_link <-c('https://youtu.be/5tRJs1jAaRE',
   'https://youtu.be/AERMb-fkMWY',
   'https://youtu.be/u9Zq6ZdMthw',
   'https://youtu.be/pv-mCRuxVp8',
-  'https://youtu.be/Uuy_r3itw5k',
-  'https://youtu.be/84Nkyd8A0Qw',
-  'https://youtu.be/rcGAXNdy9VQ',
-  'https://youtu.be/idKDhP8Wo-w',
-  'https://youtu.be/NBGvCw7yWUo',
   'https://youtu.be/fTe8NOjoY1E',
   'https://youtu.be/hW0cHyh7Xpo',
   'https://youtu.be/ppEgbv_ddXA',
-  'https://youtu.be/lWeB25hRFuU',
   'https://youtu.be/Z2-6UenBYRI'
   )
 prob_dist_videos <- paste0('[YouTube](',prob_dist_videos_link,')')
@@ -122,13 +155,16 @@ hyp_test_lectures <- c('Fisher\'s p-value',
   'The Neyman-Pearson Tradeoffs',
   'Null Hypothesis Significance Testing (Fisher-Neyman-Pearson Hybrid)',
   'Statistical Power and Derivations for a Two-Sided, One-Sample Z-test',
-  'Power Calculation Examples in R')
+  'Power Calculation Examples in R',
+  'Multiple Testing/Comparisons'
+  )
 
 hyp_test_desc <- c('Ever wonder where ubiquitous p-value comes from? Well it started out a little bit differently than we think of it today with the modern NHST framework. In this lecture we introduce Fisher\'s p-value and the idea of permutation tests.',
                    'Neyman and Pearson developed a competing framework for significance testing from Fisher based on rejection regions. It ultimately led to the concepts of type I errors and power we use for NHST today.',
                    'The modern framework used for significance testing is an amalgamation of Fisher-Neyman-Pearson, leading to some nuanced interpretations.',
                    'Power can be a scary and foreign concept, but we break it down here for the normal distribution with known SD and walk through plenty of examples.',
-                   'Examples of power calculations using functions in R.'
+                   'Examples of power calculations using functions in R.',
+                   'Multiple comparisons represent a potential challenge in statistical inference. Different approaches to adjust for multiple comparisons are included, with an emphasis on the False Discovery Rate (FDR).'
 )
 
 hyp_test_pdf_link <- paste0('./files/bios6618/',
@@ -136,14 +172,16 @@ hyp_test_pdf_link <- paste0('./files/bios6618/',
                                'W4/Neyman_Pearson_tradeoffs.pdf',
                                'W4/NHST.pdf',
                                'W4/powerIntro_deriveZ.pdf',
-                               'W4/power_examples.pdf'))
+                               'W4/power_examples.pdf',
+                               'W10/multiple_comparisons.pdf'))
 hyp_test_pdf <- paste0('[PDF](',hyp_test_pdf_link,')')
 
 hyp_test_videos_link <-c('https://youtu.be/a5UIRGaB4bk',
   'https://youtu.be/4boPRRKl0GY',
   'https://youtu.be/s-L5SKskBv8',
   'https://youtu.be/mhlIQ-S_PxQ',
-  'https://youtu.be/HNQzFZWpIpY'
+  'https://youtu.be/HNQzFZWpIpY',
+  'https://youtu.be/0OHkLET008Q'
   )
 hyp_test_videos <- paste0('[YouTube](',hyp_test_videos_link,')')
 
@@ -366,7 +404,7 @@ kbl(x = simp_reg, escape=F, align='lcc', col.names = c('Lecture Topic','Slides',
 
 ## Multiple Linear Regression
 
-The final theme of BIOS 6618 expands our linear regression framework to account for more than one predictor. This results in a variety of different applications and topics that are broken down further into subthemes below.
+The penultimate theme of BIOS 6618 expands our linear regression framework to account for more than one predictor. This results in a variety of different applications and topics that are broken down further into subthemes below.
 
 ### MLR Introduction
 
@@ -374,26 +412,40 @@ The final theme of BIOS 6618 expands our linear regression framework to account 
 mult_reg_lectures <- c('Multiple Linear Regression (MLR): Motivation, Assumptions, Example',
   'MLR: Diagnostic Plots and Multicollinearity',
   'MLR: Inference on Independent Variables',
-  'Multiple Testing/Comparisons'
+  'Linear Regression in Matrix Format',
+  'Linear Regression with Matrices in SAS',
+  'Linear Regression with Matrices in R'
 )
 
 mult_reg_desc <- c('The extension from one predictor (simple) to two or more predictors (multiple) in regression.',
                    'Diagnostic plots in the context of linear regression with multiple predictors.',
                    'The use of the overall F-test, partial F-test, and t-test to evaluate the significance of the overall model, a subset of predictors, and a single predictor, respectively.',
-                   'Multiple comparisons represent a potential challenge in statistical inference. Different approaches to adjust for multiple comparisons are included, with an emphasis on the False Discovery Rate (FDR).'
+                   'Our prior lectures have focused on an algebraic approach to regression. In this lecture we derive the matrix approach and provide the corresponding equations with matrix notation.',
+                  'An example of coding matrices in SAS for linear regression.',
+                  'An example of coding matrices in R for linear regression.'
 )
 
 mult_reg_pdf_link <- paste0('./files/bios6618/',
                              c('W10/MLR_Introduction.pdf',
                                'W10/MLR_diagnostics_vif.pdf',
                                'W10/MLR_IVinference.pdf',
-                               'W10/multiple_comparisons.pdf'))
-mult_reg_pdf <- paste0('[PDF](',mult_reg_pdf_link,')')
+                               'W15/linear_regression_with_matrices.pdf',
+                               'W15/matrices_in_sas.sas',
+                               'W15/matrices_in_R.html'))
+
+mult_reg_pdf <- c(paste0('[PDF](',mult_reg_pdf_link[1],')'),
+                 paste0('[PDF](',mult_reg_pdf_link[2],')'),
+                 paste0('[PDF](',mult_reg_pdf_link[3],')'),
+                 paste0('[PDF](',mult_reg_pdf_link[4],')'),
+                 paste0('[SAS](',mult_reg_pdf_link[5],')'),
+                 paste0('[HTML](',mult_reg_pdf_link[6],')'))
 
 mult_reg_videos_link <-c('https://youtu.be/a7rBONeAHfA',
   'https://youtu.be/fA-Ud07gPE8',
   'https://youtu.be/2a4RY85D4Qg',
-  'https://youtu.be/0OHkLET008Q'
+  'https://youtu.be/twA_9-o1J44',
+  'https://youtu.be/Dz1n1zCECd4',
+  'https://youtu.be/FFX9WyxEa7o'
   )
 mult_reg_videos <- paste0('[YouTube](',mult_reg_videos_link,')')
 
@@ -533,39 +585,58 @@ kbl(x = reg_topics, escape=F, align='lcc', col.names = c('Lecture Topic','Slides
 ```
 
 
-### Matrix Approaches to Regression
+## Advanced Topics
+
+The final theme of BIOS 6618 explores advanced topics that build what we have covered this semester. It includes segmented/piecewise regression, quantile regression, Bayesian regression, splines, and advanced bootstrap approaches. We close with material that builds a bridge to BIOS 6619 with exponential families and generalized linear models.
+
 
 ```{r, echo=F}
-mat_reg_lectures <- c('Linear Regression in Matrix Format',
-  'Linear Regression with Matrices in SAS',
-  'Linear Regression with Matrices in R',
-  'MLE and Regression',
+mat_reg_lectures <- c('Segmented/Piecewise Regression',
+                      'Quantile Regression',
+                      'Splines',
+                      'Bootstrap p-values',
+                      'Alternative Bootstraps',
+                      'Intro to Bayes',
+                      'Bayesian Simple Linear Regression',
+                      'Bayesian Multiple Linear Regression',
+                      'MLE and Regression',
   'Exponential Families and Generalized Linear Models'
 )
 
-mat_reg_desc <- c('Our prior lectures have focused on an algebraic approach to regression. In this lecture we derive the matrix approach and provide the corresponding equations with matrix notation.',
-                  'An example of coding matrices in SAS for linear regression.',
-                  'An example of coding matrices in R for linear regression.',
+mat_reg_desc <- c('In some cases data may have change points where the slope significantly changes before versus after the point, this can be evaluated through segmented regression.',
+                  'The ability to model the quantiles of our data (e.g., median, 5th percentile, 99th percentile) in a regression framework.',
+                  'A more flexible approach for polynomial regression which can model complex nonlinear trends.',
+                  'Previously we noted permutation approaches to calculate p-values, but it is possible to estimate a p-value from bootstrap resamples.',
+                  'Alternative bootstrap algorithms to case-resampling and their advantages are introduced.',
+                  'The Bayesian paradigm is an alternative framework for statistical inference, with unique topics and considerations such as the prior, posterior, and MCMCs.',
+                  'The Bayesian version of simple linear regression, with examples of models fits in JAGS and Stan.',
+                  'The Bayesian version of multiple linear regression, with examples of models fits in JAGS and Stan.',
                   'In addition to the ordinary least squares estimators, we can also derive our regression coefficients with maximum likelihood estimation which is included in this lecture.',
                   'To prepare for BIOS 6612, the topic of exponential families and generalized linear models, of which linear regression is a subsest of, is introduced.'
 )
 
 mat_reg_pdf_link <- paste0('./files/bios6618/',
-                             c('W15/linear_regression_with_matrices.pdf',
-                               'W15/matrices_in_sas.sas',
-                               'W15/matrices_in_R.html',
+                             c('W16/Coming_Soon.pdf',
+                               'W16/Coming_Soon.pdf',
+                               'W16/Coming_Soon.pdf',
+                               'W16/Coming_Soon.pdf',
+                               'W16/Coming_Soon.pdf',
+                               'W16/Coming_Soon.pdf',
+                               'W16/Coming_Soon.pdf',
+                               'W16/Coming_Soon.pdf',
                                'W15/alternative_estimation_approaches.pdf',
                                'W15/generalized_linear_models.pdf'))
-mat_reg_pdf <- c(paste0('[PDF](',mat_reg_pdf_link[1],')'),
-                 paste0('[SAS](',mat_reg_pdf_link[2],')'),
-                 paste0('[HTML](',mat_reg_pdf_link[3],')'),
-                 paste0('[PDF](',mat_reg_pdf_link[4],')'),
-                 paste0('[PDF](',mat_reg_pdf_link[5],')'))
+mat_reg_pdf <- paste0('[PDF](',mat_reg_pdf_link,')')
 
-mat_reg_videos_link <-c('https://youtu.be/twA_9-o1J44',
-  'https://youtu.be/Dz1n1zCECd4',
-  'https://youtu.be/FFX9WyxEa7o',
-  'https://youtu.be/uPmBobwXaTE',
+mat_reg_videos_link <-c('NA',
+                        'NA',
+                        'NA',
+                        'NA',
+                        'NA',
+                        'NA',
+                        'NA',
+                        'NA',
+                        'https://youtu.be/uPmBobwXaTE',
   'https://youtu.be/IClVegLqRKc'
   )
 mat_reg_videos <- paste0('[YouTube](',mat_reg_videos_link,')')

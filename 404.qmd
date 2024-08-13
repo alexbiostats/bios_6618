@@ -2,7 +2,8 @@
 title: "Page Not Found"
 toc: FALSE
 format:
-  html
+  html:
+    theme: flatly
 ---
 
 Baisy the Bayesian pupper thinks you may have specified a bad prior. Try specifying a new prior.

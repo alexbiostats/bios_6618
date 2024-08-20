@@ -22,10 +22,10 @@ Differential and integral calculus is a prerequisite for the course, along with 
 
 ### Lecture Videos, Slides, and Other Materials
 
-All BIOS 6618 lecture videos have been broken down into modular sections and posted to [YouTube](https://www.youtube.com/channel/UCB9212rDruEh_xEXQxoExGQ). To view the list of videos, download slides, and access other materials, please visit the [BIOS 6618 Materials](bios_6618_materials) page.
+All BIOS 6618 lecture videos have been broken down into modular sections and posted to [YouTube](https://www.youtube.com/channel/UCB9212rDruEh_xEXQxoExGQ). To view the list of videos, download slides, and access other materials, please visit the [BIOS 6618 Materials](bios_6618_materials/index.qmd) page.
 
 
 ### Journal of BIOS 6618
 
-The *Journal of BIOS 6618* is the official publication for Advanced Biostatistical Methods I. It has two annual issues relating to simulation studies and applied data analysis. To learn more about the journal's requirements for submission, please visit the the [Guide for Authors](journal_of_bios_6618) page.
+The *Journal of BIOS 6618* is the official publication for Advanced Biostatistical Methods I. It has two annual issues relating to simulation studies and applied data analysis. To learn more about the journal's requirements for submission, please visit the the [Guide for Authors](journal_of_bios_6618/index.qmd) page.
 

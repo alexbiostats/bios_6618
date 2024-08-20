@@ -39,7 +39,7 @@ library(dplyr)
 jquerylib::jquery_core(3)
 ```
 
-This page includes the asynchronous lecture videos, PDF slides, and other materials for Advanced Biostatistical Methods I (BIOS 6618). It builds and expands upon material from its predecessor course [Biostatistical Methods I (BIOS 6611)](www.alexkaizer.com/bios_6611/). The material is broadly broken down by theme with links provided to download materials or view the videos. **A brief overview of the material covered in a given lecture can be viewed by hovering over or clicking the given "Lecture Topic".**
+This page includes the asynchronous lecture videos, PDF slides, and other materials for Advanced Biostatistical Methods I (BIOS 6618). It builds and expands upon material from its predecessor course [Biostatistical Methods I (BIOS 6611)](https://www.alexkaizer.com/bios_6611/). The material is broadly broken down by theme with links provided to download materials or view the videos. **A brief overview of the material covered in a given lecture can be viewed by hovering over or clicking the given "Lecture Topic".**
 
 ## Prerequisite Materials
 

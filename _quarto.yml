@@ -33,6 +33,8 @@ website:
             href: bios_6618_materials 
           - text: "Journal of BIOS 6618"
             href: journal_of_bios_6618
+          - text: "Recitation Questions"
+            href: recitation
     right:
       - icon: envelope
         href: mailto:alex.kaizer@cuanschutz.edu

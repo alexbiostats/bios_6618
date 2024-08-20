@@ -1,0 +1,20 @@
+---
+title: "BIOS 6618 Recitation"
+toc: TRUE
+toc_float: TRUE
+toc-location: left
+format:
+  html:
+    theme: flatly
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page includes the responses to various recitation requests submitted over the semester. The questions are broadly broken down by theme with links provided to download materials or view the videos, but you may also use the Quarto search feature to try and find relevant pages throughout the course website. Responses often reinforce the content from [lecture slides](bios_6618_materials/index.qmd) or extend the material to advanced topics. When possible, case studies or simulation studies are used to assist in answering the questions.
+
+## Prerequisite Materials
+
+Test

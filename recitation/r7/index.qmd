@@ -1,0 +1,53 @@
+---
+title: "What are some alternatives to p-values?"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Alternatives to p-values
+
+P-values are somewhat ubiquitous in research, however we know from the special issue of *The American Statistician* (Volume 73, Supplement 1) ([URL](https://www.tandfonline.com/toc/utas20/73/sup1)) that there may be misinterpretations and various alternatives to their use in research.
+
+The following comments aren't an exhaustive list of alternatives, but highlight some that I've seen discussed in practice (with some of the pros/cons of each).
+
+## Confidence Intervals
+
+One strategy that has been proposed and may be required by certain journals is to report findings as confidence intervals around your point estimate without the p-value. Some potential strengths/weaknesses:
+
+* *Strength:* Summarizes the range of values taking into account sample size, variability, etc. Thus one can determine if the interval is wider than they may be comfortable with or if it includes effect sizes that they would be worried about (e.g., null, harmful, not strong enough, etc.)
+* *Strength:* If we don't report p-values, but only CIs, we do not have to worry about situations where the software has different assumptions for the p-value and confidence interval calculations. This can lead to cases where the CI and p-value do not agree and make for challenging interpretations (will potentially see this with quantile regression, more common with complex models that have various approximations in different packages).
+* *Weakness:* Oftentimes we do have a direct connection between p-value and CI, so this doesn't really address the use of p-values for "statistical significance" since we may be checking if our $H_0$ value falls within our interval.
+* *Weakness:* The actual interpretation of a CI is challenging (i.e., we are 95% confident that...).
+* *Note:* If we use the brief, but complete, framework to writing our results we would have both the p-value and confidence interval to give a more full evaluation of the setting.
+
+## Bayesian Alternatives
+
+Another approach is to explore the Bayesian statistical framework. This includes summaries like **Bayes factors**, **posterior probabilities**, and **credible intervals**. We will discuss these in greater detail towards the end of the semester.
+
+Within our paper repository, we have a nice paper by Steven Goodman on "Toward Evidence-Based Medical Statistics. 2: The Bayes Factor" where he walks through the concept and its potential use. Bayes factors compare two competing models based on the observed data (e.g., $H_0$ versus a specific $H_1$). Some authors propose various thresholds/groupings to define the strength of the evidence (e.g., 1=no evidence in favor of $H_1$, values <1 show evidence in favor of $H_0$, values >1 show evidence in favor of $H_1$), but the specific threshold for "strong" evidence isn't universally agreed upon. It is most similar to the frequentist *likelihood ratio test*.
+
+Posterior probabilities and credible intervals are most similar to p-values and confidence intervals, respectively. Some potential strengths/weaknesses:
+
+* *Strength:* The PP and CrI have natural interpretations that represent what many think p-values or CIs are actually doing. The posterior probability is the probability of observing your specific hypothesis (e.g., $P(\mu > 0) = 0.92$, the probability our mean is greater than 0 is 92%) and the X% CrI is we have X% probability that the true estimate lies within the interval.
+* *Strength:* Strictly speaking, in a Bayesian philosophy you do not have to correct for multiple comparisons. However, in practice we still need to consider corrections if we wish to control the family-wise type I error rate because certain regulatory authorities (e.g., the FDA) expects all designs/approaches to maintain the "frequentist operating characteristics" (e.g., 80% power and 5% type I error rate).
+* *Strength:* We don't have to define a threshold for "significance". Instead, one can leverage the PP and determine if the summary suggests sufficient evidence for their own comfort. However, we do need thresholds to calculate the frequentist operating characteristics.
+* *Weakness:* Prior specification is challenging and seen as subjective. While true to some extent, best practice is to consider multiple priors and evaluate how/if the results change under different *a priori* assumptions.
+
+

@@ -1,0 +1,34 @@
+---
+title: How Are `t.test` and `power.t.test` Different?
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Comparison of `t.test` and `power.t.test`
+
+In [Power and Type I Error Rate Calculations via Simulation Studies](/recitation/r34.qmd) we conducted a power calculation for a given combination of assumptions. In the case of the **unknown** SD we used `power.t.test` to enter arguments related to the sample size (`n`), detectable difference (`delta`), standard deviation (`sd`), type I error rate (`sig.level`), and power (`power`), with whatever argument was `NULL` being solved for.
+
+On the other hand, once we have collected (or simulated) data to analyze, then we can implement the actual t-test (e.g., using `t.test`). Since we only have a single sample we can only estimate the mean and SD from our sample of $n$ and evaluate the one-sample t-test results like a p-value for statistical significance.  
+
+However, in a single experiment or single simulated data set, we don't know if our statistical result is a true positive, false positive, true negative, or false negative. In other words, we can't estimate $\alpha$ or $\beta$ which were assumed for our initial power calculation. This is because in the NHST (null hypothesis significance testing) approach, $\alpha$ and $\beta$ can only be estimated from repeated experiments, which we know in practice hardly happens.
+
+To summarize, we only use `power.t.test` if we trying to design a future experiment. In practice, once we have data we will use `t.test` to actually compare the one-sample mean to some defined null value (or compare two samples to each other, paired samples, etc.). If we wanted to use simulation to conduct our power calculations, then we will use `t.test` applied to a "large" number of simulated data sets to see the performance based on the proportion of times we reject or fail to reject our null hypothesis.
+
+

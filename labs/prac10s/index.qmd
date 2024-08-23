@@ -1,0 +1,272 @@
+---
+title: "Week 10 Practice Problems: Solutions"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page includes the solutions to the optional practice problems for the given week. If you want to see a version [without solutions please click here](/labs/prac10/index.qmd). Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.
+
+This week's extra practice exercises focus on ANOVA and categorical variables.
+
+
+# Dataset Background
+
+The following code can load the `Licorice_Gargle.csv` file into R:
+
+```{r, class.source = 'fold-show'}
+dat <- read.csv('../../.data/Licorice_Gargle.csv')
+```
+
+The dataset represents a randomized control trial of 236 adult patients undergoing elective thoracic surgery requiring a double-lumen endotracheal tube comparing if licorice vs. sugar-water gargle prevents postoperative sore throat. For our exercises below we will focus on the following variables:
+
+* `preOp_age`: age (in years)
+* `preOp_asa`: ASA status (1=normal healthy patient, 2=patient with mild systemic disease, 3=patient with severe systemic disease)
+* `intraOp_surgerySize`: surgery size (1=small, 2=medium, 3=large)
+
+For this dataset, our summary of the mean age and SD by group is:
+
+```{r, class.source = 'fold-hide', warning=F, message=F}
+#| code-fold: true
+library(kableExtra)
+library(doBy)
+
+mean_sd <- function(x){ paste0(round(mean(x),1), ' (',round(sd(x),1),')') } # function to return mean (SD) for "x"
+
+t1 <- summaryBy( preOp_age ~ preOp_asa, data=dat, FUN=mean_sd)
+t2 <- summaryBy( preOp_age ~ intraOp_surgerySize, data=dat, FUN=mean_sd)
+
+mean_tab <- rbind(ASA = t1[,2], Size= t2[,2])
+
+kbl(mean_tab, col.names=c('1','2','3'), align='ccc', escape=F) %>%
+      kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```
+
+
+## Exercise 1: One-Way ANOVA
+
+For this exercise, we will compare age as our outcome against surgery size with a one-way ANOVA.
+
+### 1a: Testing Homogeneity of the Variances Assumption
+
+Use both Levene's test and Bartlett's test to evaluate if the variances are homogeneous (i.e., equal) across our three surgery size groups. Write the null and alternative hypothesis being tested.
+
+**Solution:**
+
+We are testing 
+
+$$ H_{0}\colon \sigma^2_{small} = \sigma^2_{medium} = \sigma^2_{large} \text{ versus } H_{1}\colon \text{at least one variance is different}  $$
+
+Based on Levene's and Bartlett's test we have
+
+```{r, message=F, warning=F}
+library(car)
+
+leveneTest( preOp_age ~ as.factor(intraOp_surgerySize), data=dat )
+bartlett.test( preOp_age ~ as.factor(intraOp_surgerySize), data=dat )
+```
+
+For both tests, $p<0.05$. Therefore, we reject our null hypothesis that the variances are equal within each surgery size group for our outcome of age.
+
+
+### 1b: One-Way ANOVA with Equal Variances
+
+Assume that the variances *are equal* across groups and test the hypothesis that the mean age between groups is equal across the three surgery size groups. State the null and alternative hypothesis being tested.
+
+**Solution:**
+
+The hypothesis we are testing is
+
+$$ H_0\colon \mu_{small} = \mu_{medium} = \mu_{large} \text{ versus } H_1\colon \text{ at least one mean is different} $$
+
+We can fit our one-way ANOVA assuming equal variances with `oneway.test`:
+
+```{r}
+oneway.test(preOp_age ~ as.factor(intraOp_surgerySize), data=dat, var.equal=T)
+```
+
+Since $p=0.1203>0.05$, we fail to reject our null hypothesis and cannot conclude that at least one mean age is different.
+
+
+### 1c: One-Way ANOVA with Unequal Variances
+
+Assume that the variances *are unequal* across groups and test the hypothesis that the mean age between groups is equal across the three surgery size groups. State the null and alternative hypothesis being tested.
+
+**Solution:**
+
+We have the same hypothesis being tested in **1c** even though we are not assuming equal variances:
+
+$$ H_0\colon \mu_{small} = \mu_{medium} = \mu_{large} \text{ versus } H_1\colon \text{ at least one mean is different} $$
+
+We can fit our one-way ANOVA allowing for unequal variances with `oneway.test`:
+
+```{r}
+oneway.test(preOp_age ~ as.factor(intraOp_surgerySize), data=dat, var.equal=F)
+```
+
+Since $p=0.1346>0.05$, we fail to reject our null hypothesis and cannot conclude that at least one mean age is different.
+
+
+### 1d: Nonparametric Kruskal-Wallis Test
+
+Assume that we think our normality assumption for one-way ANOVA is violated. Implement the nonparametric Kruskal-Wallis test and interpret our result. State the null and alternative hypothesis being tested.
+
+**Solution:**
+
+Even though some call the Kruskal-Wallis test a nonparametric ANOVA, it does not test the same hypothesis as the one-way ANOVA. Instead it tests:
+
+* $H_0$: the mean ranks of the groups are the same
+* $H_1$: at least one group has a different mean rank
+
+We can use `kruskal.test` to implement this test:
+
+```{r}
+kruskal.test(preOp_age ~ as.factor(intraOp_surgerySize), data=dat)
+```
+
+Since $p=0.3614 > 0.05$, we fail to reject our null hypothesis and cannot conclude that at least one group's mean rank for age is different.
+
+
+### 1e: Post-Hoc Testing
+
+Regardless of our earlier results in **1b**, compare the means of each pair of groups with the Tukey HSD method and summarize the results. Was post-hoc testing necessary in this case?
+
+**Solution:**
+
+There are various functions we could use to implement Tukey's HSD. Here we will use the default `TukeyHSD` function after fitting an `aov` ANOVA model:
+
+```{r}
+aov1 <- aov(preOp_age ~ as.factor(intraOp_surgerySize), data=dat)
+TukeyHSD(aov1)
+```
+
+Our Tukey's HSD post-hoc test result does not indicate any significant pairwise comparisons based on the adjusted p-values (all $p>0.05$). This is not necessarily surprising since our overall test in **1b** did not reject the null hypothesis that at least one group's mean was different.
+
+
+## Exercise 2: Categorical Variables
+
+For this exercise, we will use age our continuous outcome and consider both ASA status and surgery size as predictors.
+
+### 2a: Reference Cell Model
+
+The reference cell model is our more common approach to regression modeling in many biostatistics applications. Write down the true regression equation and any assumptions for a model where ASA status 1 and surgery size small are the reference categories.
+
+**Solution:**
+
+Our true regression equation is
+
+$$ Y = \beta_0 + \beta_1 I_{G=2} + \beta_2 I_{G=3} + \beta_3 I_{A=2} + \beta_4 I_{A=3} + \epsilon $$
+
+where $I_{G=g}$ and $I_{A=a}$ represent indicators for surgery group (medium for $G=2$ and large for $G=3$) and ASA status (ASA II for $A_2$ and ASA III for $A_3$), and $\epsilon \sim N(0,\sigma^{2}_{Y|X})$.
+
+
+### 2b: Partial $F$-test for ASA Status
+
+Evaluate if ASA status contributes significantly to the model from **2a**. Write the null and alternative hypotheses, test the null hypothesis, and state your conclusion.
+
+**Solution:**
+
+Based on our specified model in **2a**, our hypothesis is
+
+$$ H_0\colon \beta_3 = \beta_4 = 0 \text{ versus } H_1\colon \text{ at least one coefficient is not 0} $$
+
+We can fit a full and reduced model to use in evaluating this hypothesis with a partial $F$-test:
+
+```{r}
+# Fit full model and summarize output for our own information
+mod_full <- glm(preOp_age ~ as.factor(intraOp_surgerySize) + as.factor(preOp_asa), data=dat)
+summary(mod_full)
+```
+
+```{r}
+# Fit reduced model and summarize output for our own information
+mod_red_b <- glm(preOp_age ~ as.factor(intraOp_surgerySize), data=dat)
+summary(mod_red_b)
+```
+
+```{r}
+# Partial F-test
+anova(mod_full, mod_red_b, test='F')
+```
+
+Since $p<0.05$, we reject the null hypothesis and conclude that at least one beta coefficient for ASA status is not equal to 0. This indicates that the addition of our three category ASA variable is meaningful in predicting age above and beyond just surgery size alone.
+
+
+### 2c: Partial $F$-test for Surgery Size
+
+Evaluate if surgery size contributes significantly to the model from **2a**. Write the null and alternative hypotheses, test the null hypothesis, and state your conclusion.
+
+**Solution:**
+
+Based on our specified model in **2a**, our hypothesis is
+
+$$ H_0\colon \beta_1 = \beta_2 = 0 \text{ versus } H_1\colon \text{ at least one coefficient is not 0} $$
+
+We can fit a new reduced model to use in evaluating this hypothesis with a partial $F$-test:
+
+```{r}
+# Fit reduced model and summarize output for our own information
+mod_red_c <- glm(preOp_age ~ as.factor(preOp_asa), data=dat)
+summary(mod_red_c)
+```
+
+```{r}
+# Partial F-test
+anova(mod_full, mod_red_c, test='F')
+```
+
+Since $p=0.5518 > 0.05$, we fail to reject the null hypothesis that at least one beta coefficient for surgery size is not equal to 0. This indicates that the addition of our three category surgery size variable is not meaningful in predicting age above and beyond just ASA status alone.
+
+
+### 2d: Overall $F$-test
+
+Evaluate if ASA status and surgery size contribute significantly to the prediction of $Y$. Write the null and alternative hypotheses, test the null hypothesis, and state your conclusion.
+
+**Solution:**
+
+Based on our specified model in **2a**, our hypothesis is
+
+$$ H_0\colon \beta_1 = \beta_2 = \beta_3 = \beta_4 = 0 \text{ versus } H_1\colon \text{ at least one coefficient is not 0} $$
+
+We can fit a new reduced model with only any intercept to use in evaluating this hypothesis with an $F$-test:
+
+```{r}
+mod_int <- glm(preOp_age ~ 1, data=dat)
+anova(mod_full, mod_int, test='F')
+```
+
+Since $p<0.05$, we reject our null hypothesis and conclude that at least one beta coefficient is significantly different from 0. In other words, while the full model might not be the "best" model, it is better than just using the mean of age alone.
+
+
+### 2e: ASA Status III Significance
+
+Evaluate the significance of an ASA status of III and provide an interpretation for the beta coefficient.
+
+**Solution:**
+
+From our full regression output in **2b** we see that `as.factor(preOp_asa)3` has an estimated beta coefficient of 18.067 with $p<0.05$. Our beta coefficient indicates that those with ASA III status are older by 18.067 years on average than those with ASA I (our reference category). And since $p<0.05$, this is a significantly higher age.
+
+
+### 2f: ASA Status III Removal
+
+Regardless of your conclusion in **2e**, if $p>0.05$ and we failed to reject the null hypothesis that our beta coefficient was equal to 0, should we consider removing just ASA III from our regression model and refitting (i.e., still have ASA II in the model)?
+
+**Solution:**
+
+No, it would not make sense to exclude a single indicator variable/category from the model. Currently, the reference category is ASA I and the two indicator variables represent ASA II and ASA III. If we drop the indicator for ASA III in the model, this implies that everyone with $I_{A=3}=1$ joins the reference category, which becomes a combination of ASA I and III. This likely does not make clinical or biological sense, so even if ASA III was not statistically significant, we would still want to include it as its own category (or exclude the entire ASA variable from the model).
+
+

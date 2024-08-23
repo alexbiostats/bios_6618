@@ -1,0 +1,27 @@
+---
+title: "Week 14 Lab"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Labs](/labs/index.qmd) collection, the mini-lecture content delivered at the start of class before breaking out into small groups to work on the homework assignment.
+
+# TBD
+
+Content for this week is to be decided.
+

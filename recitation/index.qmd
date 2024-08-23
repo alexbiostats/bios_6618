@@ -13,8 +13,114 @@ library(kableExtra)
 library(dplyr)
 ```
 
-This page includes the responses to various recitation requests submitted over the semester. The questions are broadly broken down by theme with links provided to download materials or view the videos, but you may also use the Quarto search feature to try and find relevant pages throughout the course website. Responses often reinforce the content from [lecture slides](bios_6618_materials/index.qmd) or extend the material to advanced topics. When possible, case studies or simulation studies are used to assist in answering the questions.
+This page includes the responses to various recitation requests submitted over various semesters of teaching BIOS 6618. These topics were covered during Thursday classes, so each request below may appear to come out of left field but related to topics worked on by students during the semester. The questions are broadly broken down by theme, but you may also use the Quarto search feature to try and find relevant pages throughout the course website. Responses often reinforce the content from [lecture slides](../bios_6618_materials/index.qmd) or extend the material to advanced topics. When possible, case studies or simulation studies are used to assist in answering the questions. There is also a page with BIOS 6618 class labs and practice problems (with solutions) on our [BIOS 6618 labs page](../labs/index.qmd) that provides additional examples corresponding to each week's material.
+
+## R-Related Questions
+
+- [Approaches to Generating Data for a Simulation: for loops and apply Functions](../recitation/r26/index.qmd)
+- [Creating Tables in Rmd Documents](../recitation/r10/index.qmd)
+- [Why Do We Set Seeds?](../recitation/r25/index.qmd)
+- [Ways to Enter Data for t.test](../recitation/r27/index.qmd)
+- [Distribution Functions in R (e.g., dnorm, qnorm, pnorm, rnorm)](../recitation/r30/index.qmd)
 
 ## Prerequisite Materials
 
-Test
+- [Z-Scores](../recitation/r55/index.qmd)
+- [Poisson Approximations to Exact Binomial Probabilities](../recitation/r29/index.qmd)
+
+## Week 1: Introduction to BIOS 6618, Estimators
+
+- [Variance, Consistency, and Bias of Estimators](../recitation/r1/index.qmd)
+- [Mini-Simulation Study for Bias, Consistency, and Efficiency of the Sample Median versus the Sample Mean](../recitation/r2/index.qmd)
+- [Population Moments](../recitation/r3/index.qmd)
+- [Brief, but Complete, Interpretations: A t-test Example](../recitation/r28/index.qmd)
+- [Missing Data Considerations](../recitation/r43/index.qmd)
+
+## Week 2: Normal Distribution and the CLT
+
+- [Is the CLT Only for the Mean?](../recitation/r6/index.qmd)
+- [Sampling Distributions of the Mean, Median, and Variance](../recitation/r31/index.qmd)
+- [Central Limit Theorem Example: Chi-Squared Distributed Data](../recitation/r32/index.qmd)
+
+## Week 3: Hypothesis Testing and Power
+
+- [Long-Run Properties of $\alpha$ and $\beta$](../recitation/r5/index.qmd)
+- [Power and Type I Error with Comparison of Known and Unknown One-Sample Mean Calculations](../recitation/r33/index.qmd)
+- [Power and Type I Error Rate Calculations via Simulation Studies](../recitation/r34/index.qmd)
+- [Multiple Testing Correction and Their Use in Randomized Trials](../recitation/r4/index.qmd)
+- [Multiple Testing Adjusting in R with p.adjust](../recitation/r58/index.qmd)
+- [What are Some Alternatives to p-values?](../recitation/r7/index.qmd)
+- [How Are t.test and power.t.test Different?](../recitation/r35/index.qmd)
+
+## Week 4: Conditional Probability, Diagnostic Testing, 2x2 Tables
+
+- [McNemar's Paired Test and Discordant Pairs](../recitation/r8/index.qmd)
+- [ROC Curves Under Different Strengths of Predictors](../recitation/r9/index.qmd)
+- [Creating ROC Curves from Tabular Data](../recitation/r36/index.qmd)
+- [Diagnostic Testing: Likelihood Ratios, Odds, and Bayes’ Theorem](../recitation/r37/index.qmd)
+- [Tests of Association for 2x2 Tables](../recitation/r38/index.qmd)
+- [What Are Some R Packages for Diagnostic Testing Calculations?](../recitation/r39/index.qmd)
+- [Study Designs and RD, RR, and OR Terminology](../recitation/r56/index.qmd)
+
+## Week 5: Bootstrap Sampling and Nonparametric Tests
+
+- [Nonparametric Test Choices](../recitation/r11/index.qmd)
+- [Wilcoxon Rank Sum Examples and Using Vectorized Data in Functions](../recitation/r12/index.qmd)
+- [Bootstraps: the Normal Percentile Interval and Coverage, the Bootstrap Percentile Interval and Accuracy](../recitation/r41/index.qmd)
+- [Permuation Test p-values](../recitation/r42/index.qmd)
+- [Confidence Interval Interpretations and Calculations](../recitation/r40/index.qmd)
+- [Simulation vs. Bootstrap vs. Permutation](../recitation/r51/index.qmd)
+
+## Week 6: Simple Linear Regression and Derivations
+
+- [Simple Linear Regression Assumptions](../recitation/r44/index.qmd)
+
+## Week 7: SLR Diagnostics, Confidence and Prediction Intervals, ANOVA
+
+- [Confidence versus Prediction Intervals in Linear Regression](../recitation/r14/index.qmd)
+- [Confidence Interval Differences in `lm` and `glm`](../recitation/r15/index.qmd)
+- [The ANOVA Table and the F-test in SLR](../recitation/r45/index.qmd)
+- [Post-Hoc Testing Justification for One-Way ANOVA](../recitation/r57/index.qmd)
+
+## Week 8: SLR Examples, Log(Y) Transformation
+
+- [Log Transformations and Interpretations in Linear Regression](../recitation/r46/index.qmd)
+
+## Week 9: Multiple Linear Regression and Matrix Approaches to Regression
+
+- [Hat and Design Matrices in Linear Regression](../recitation/r13/index.qmd)
+
+## Week 10: Categorical Predictors and ANOVA
+
+- [Hypothesis Testing in Intercept-Only, Simple, and Multiple Linear Regression Models](../recitation/r16/index.qmd)
+- [ANOVA versus Linear Regression](../recitation/r17/index.qmd)
+- [General Linear Hypothesis Testing (GLHT) and Matrices, Contrasts, and F-Tests](../recitation/r18/index.qmd)
+- [Categorical Predictors in Linear Regression](../recitation/r47/index.qmd)
+- [Hypothesis Testing for F-tests](../recitation/r48/index.qmd)
+
+## Week 11: Confounding, Mediation, Interactions, and Polynomials
+
+- [Interpreting Polynomial Regression Models, Selecting Your Highest Order Polynomial Term, and Calculus in R](../recitation/r19/index.qmd)
+- [Classical Criteria of Confounding](../recitation/r20/index.qmd)
+- [Precision Variables](../recitation/r21/index.qmd)
+- [Degrees of Freedom with Interactions, Polynomials, and Categorical Variables](../recitation/r49/index.qmd)
+- [Estimating Pure Error (Polynomials)](../recitation/r50/index.qmd)
+- [The Three Models for Mediation and Confounding](../recitation/r52/index.qmd)
+- [Is It Possible to Tell The Role of a Variable (e.g., PEV, Confounder, etc.) From the Regression Model?](../recitation/r53/index.qmd)
+- [Mediation Modeling Example with Bootstrap CI Estimate](../recitation/r54/index.qmd)
+
+## Week 12: Model Selection, Variable Selection, Outliers/Influential Points
+
+- [Collinearity in Regression](../recitation/r22/index.qmd)
+
+## Week 13: Segmented Regression, Quantile Regression, Splines, and Advanced Bootstrap Topics
+
+- [Splines in Linear Regression](../recitation/r23/index.qmd)
+
+## Week 14: Bayesian Linear Regression
+
+No current recitation topics.
+
+## Week 15: Exponential Families and Generalized Linear Models
+
+- [Generalized Linear Models and Their Connection to Ordinary Least Squares Linear Regression](../recitation/r24/index.qmd)

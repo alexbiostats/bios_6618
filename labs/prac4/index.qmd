@@ -1,0 +1,140 @@
+---
+title: "Week 4 Practice Problems"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page includes optional practice problems, many of which are structured to assist you on the homework with [Solutions provided on a separate page](/labs/prac4s/index.qmd). Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.
+
+This week's extra practice exercises are focusing on the various diagnostic testing summaries and categorical data analyses covered in the lecture videos for this week. There is a lot of different material covered, so plenty of practice exercises are provided below to give you a wide range of exposure to the topics.
+
+# Exercise 1: RD, RR, OR
+
+The following code can load the `Surgery_Time.csv` file into R:
+
+```{r}
+dat1 <- read.csv('../../.data/Surgery_Timing.csv')
+```
+
+The surgery time data is based on a retrospective observational study of 32,001 elective general surgical patients. The study was designed to examine if timing (during the day, during the week, or during the year) are associated with 30-day mortality.
+
+## 1a
+
+Create a 2x2 table for arthroplasty knee (subset based on `ahrq_ccs`) that summarizes the in-hospital complication rate (`complication`) for surgeries by time of day (`hour` less than 12 for morning).
+
+## 1b
+
+Calculate the risk difference, risk ratio, and odds ratio with 95% CIs *by hand* comparing morning surgeries versus afternoon surgeries.
+
+## 1c
+
+Check your calculations by using a package in R (e.g., `epi.2by2()` in the `epiR` package).
+
+## 1d
+
+Discuss with the similarity or the difference between the estimated RR and OR with respect to incidence of complications.
+
+
+
+# Exercise 2: Categorical Data Hypothesis Testing
+
+The following code can load the `Blood_Storage.csv` file into R:
+
+```{r}
+dat2 <- read.csv('../../.data/Blood_Storage.csv')
+```
+
+The blood storage data includes 316 men who had undergone radical prostatectomy and received transfusion during or within 30 days of the procedure with PSA follow-up data. The study design a retrospective cohort study.
+
+The researchers are interested in if the preoperative tumor volume (`TVol` with values for 1=low, 2=medium, 3=extensive) is associated with biochemical recurrence of prostate cancer (`Recurrence` with values for 0=no recurrence, 1=recurrence).
+
+## 2a 
+
+Create a contingency table summarizing our data.
+
+## 2b
+
+Discuss what test(s) could be used to evaluate the potential association between tumor volume and recurrence.
+
+## 2c
+
+Select the test you believe is most appropriate. State the null hypothesis ($H_0$) you are testing.
+
+## 2d
+
+Implement the test using `R` and interpret your result.
+
+
+
+# Exercise 3: ROC Curves
+
+The following code can load the `Seasonal_Effect.csv` file into R:
+
+```{r}
+dat3 <- read.csv('../../.data/Seasonal_Effect.csv')
+```
+
+The study included 2,919 adults undergoing colorectal surgery to examine if season of the year and vitamin D levels affect the probability for surgical site infection (SSI). We will use the data to evaluate if vitamin D (ng/mL) has any potential as a predictor for SSI.
+
+## 3a
+
+First, remove all rows from the data frame that are missing vitamin D (`VitaminD`). One function in R that may be useful is `is.na()` which returns `TRUE` or `FALSE` for each item in a vector if it is missing or not, respectively.
+
+## 3b
+
+Create an ROC curve for vitamin D (`VitaminD`) to predict SSI (`SSI`).
+
+## 3c
+
+Calculate the AUC, does it suggest any potential benefit?
+
+## 3d
+
+The `pROC` package includes the `ci.auc` function that can calculate a confidence interval for your AUC. It does this in two ways, using either `method=delong` or `method=bootstrap`, where DeLong's approach is based on asymptotics and the bootstrap is nonparametric. Calculate the 95% confidence interval for the AUC using either method. Based on this interval, if we are interested in testing $H_0: AUC=0.5$ what would we conclude?
+ 
+
+
+# Exercise 4: Sensitivity and Specificity
+
+The following code can load the `Licorice_Gargle.csv` file into R:
+
+```{r}
+dat4 <- read.csv('../../.data/Licorice_Gargle.csv')
+```
+
+This was a randomized clinical trial of 236 adult patients undergoing elective thoracic surgery requiring a double-lumen endotracheal tube to compare if a licorice gargle prevents postoperative sore throat better than a sugar-water gargle.
+
+The researchers are interested in seeing if BMI (`preOp_calcBMI`) can be used to predict who will report any pain at 30 minutes after surgery (`pacu30min_throatPain` is an 11-point Likert scale from 0=no pain to 10=worst pain).
+
+## 4a
+
+Subset the data to only include the control group (`treat=0`).
+
+## 4b
+
+Create a 2x2 table summarizing an overweight BMI (i.e., BMI > 25) to predict any throat pain at 30 minutes (i.e., pain > 0).
+
+## 4c
+
+Calculate the sensitivity and specificity *by hand* from our 2x2 table and interpret.
+
+## 4d
+
+Discuss if there is any potential use of BMI as a predictor of throat pain in those who are treated with a sugar-water placebo.
+
+

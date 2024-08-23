@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alex Kaizer">
+
+<title>Alex Kaizer - Week 10 Practice Problems: Solutions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/academicons-1.9.1/css/academicons.css" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="./files/favicon.ico">
+
+<script type="text/javascript">
+function setBrand() {
+document.getElementsByClassName("navbar-brand")[0].href="https://www.alexkaizer.com";
+}
+window.onload = setBrand;
+</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5PBG7BL207"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5PBG7BL207');
+</script>
+
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Alex Kaizer</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/research" rel="" target="">
+ <span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/publications" rel="" target="">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Teaching</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching">    
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/teaching" rel="" target="">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6618" rel="" target="">
+ <span class="dropdown-text">BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6611" rel="" target="">
+ <span class="dropdown-text">BIOS 6611</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/study_design_berd" rel="" target="">
+ <span class="dropdown-text">BERD Study Design Short Course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/adaptivetrials_sc" rel="" target="">
+ <span class="dropdown-text">WNAR Adaptive and Bayesian Clinical Trial Design Short Course</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bios-6618" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">BIOS 6618</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-bios-6618">    
+        <li>
+    <a class="dropdown-item" href="../../index.html" rel="" target="">
+ <span class="dropdown-text">Home</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../bios_6618_materials" rel="" target="">
+ <span class="dropdown-text">Materials</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../journal_of_bios_6618" rel="" target="">
+ <span class="dropdown-text">Journal of BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../recitation" rel="" target="">
+ <span class="dropdown-text">Recitation Questions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs" rel="" target="">
+ <span class="dropdown-text">Labs and Practice Problems</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:alex.kaizer@cuanschutz.edu" rel="" target=""><i class="bi bi-envelope" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=ICpH74EAAAAJ&amp;hl=en" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-google-scholar ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="http://github.com/alexbiostats" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/files/Alex_CV.pdf" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-cv ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/alex-kaizer/" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#dataset-background" id="toc-dataset-background" class="nav-link active" data-scroll-target="#dataset-background">Dataset Background</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1-one-way-anova" id="toc-exercise-1-one-way-anova" class="nav-link" data-scroll-target="#exercise-1-one-way-anova">Exercise 1: One-Way ANOVA</a>
+  <ul class="collapse">
+  <li><a href="#a-testing-homogeneity-of-the-variances-assumption" id="toc-a-testing-homogeneity-of-the-variances-assumption" class="nav-link" data-scroll-target="#a-testing-homogeneity-of-the-variances-assumption">1a: Testing Homogeneity of the Variances Assumption</a></li>
+  <li><a href="#b-one-way-anova-with-equal-variances" id="toc-b-one-way-anova-with-equal-variances" class="nav-link" data-scroll-target="#b-one-way-anova-with-equal-variances">1b: One-Way ANOVA with Equal Variances</a></li>
+  <li><a href="#c-one-way-anova-with-unequal-variances" id="toc-c-one-way-anova-with-unequal-variances" class="nav-link" data-scroll-target="#c-one-way-anova-with-unequal-variances">1c: One-Way ANOVA with Unequal Variances</a></li>
+  <li><a href="#d-nonparametric-kruskal-wallis-test" id="toc-d-nonparametric-kruskal-wallis-test" class="nav-link" data-scroll-target="#d-nonparametric-kruskal-wallis-test">1d: Nonparametric Kruskal-Wallis Test</a></li>
+  <li><a href="#e-post-hoc-testing" id="toc-e-post-hoc-testing" class="nav-link" data-scroll-target="#e-post-hoc-testing">1e: Post-Hoc Testing</a></li>
+  </ul></li>
+  <li><a href="#exercise-2-categorical-variables" id="toc-exercise-2-categorical-variables" class="nav-link" data-scroll-target="#exercise-2-categorical-variables">Exercise 2: Categorical Variables</a>
+  <ul class="collapse">
+  <li><a href="#a-reference-cell-model" id="toc-a-reference-cell-model" class="nav-link" data-scroll-target="#a-reference-cell-model">2a: Reference Cell Model</a></li>
+  <li><a href="#b-partial-f-test-for-asa-status" id="toc-b-partial-f-test-for-asa-status" class="nav-link" data-scroll-target="#b-partial-f-test-for-asa-status">2b: Partial <span class="math inline">\(F\)</span>-test for ASA Status</a></li>
+  <li><a href="#c-partial-f-test-for-surgery-size" id="toc-c-partial-f-test-for-surgery-size" class="nav-link" data-scroll-target="#c-partial-f-test-for-surgery-size">2c: Partial <span class="math inline">\(F\)</span>-test for Surgery Size</a></li>
+  <li><a href="#d-overall-f-test" id="toc-d-overall-f-test" class="nav-link" data-scroll-target="#d-overall-f-test">2d: Overall <span class="math inline">\(F\)</span>-test</a></li>
+  <li><a href="#e-asa-status-iii-significance" id="toc-e-asa-status-iii-significance" class="nav-link" data-scroll-target="#e-asa-status-iii-significance">2e: ASA Status III Significance</a></li>
+  <li><a href="#f-asa-status-iii-removal" id="toc-f-asa-status-iii-removal" class="nav-link" data-scroll-target="#f-asa-status-iii-removal">2f: ASA Status III Removal</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Week 10 Practice Problems: Solutions</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Alex Kaizer </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Colorado-Anschutz Medical Campus
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This page includes the solutions to the optional practice problems for the given week. If you want to see a version <a href="../../labs/prac10/index.html">without solutions please click here</a>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</p>
+<p>This week’s extra practice exercises focus on ANOVA and categorical variables.</p>
+<section id="dataset-background" class="level1">
+<h1>Dataset Background</h1>
+<p>The following code can load the <code>Licorice_Gargle.csv</code> file into R:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r fold-show code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../../.data/Licorice_Gargle.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The dataset represents a randomized control trial of 236 adult patients undergoing elective thoracic surgery requiring a double-lumen endotracheal tube comparing if licorice vs.&nbsp;sugar-water gargle prevents postoperative sore throat. For our exercises below we will focus on the following variables:</p>
+<ul>
+<li><code>preOp_age</code>: age (in years)</li>
+<li><code>preOp_asa</code>: ASA status (1=normal healthy patient, 2=patient with mild systemic disease, 3=patient with severe systemic disease)</li>
+<li><code>intraOp_surgerySize</code>: surgery size (1=small, 2=medium, 3=large)</li>
+</ul>
+<p>For this dataset, our summary of the mean age and SD by group is:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r fold-hide code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(doBy)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>mean_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(x){ <span class="fu">paste0</span>(<span class="fu">round</span>(<span class="fu">mean</span>(x),<span class="dv">1</span>), <span class="st">' ('</span>,<span class="fu">round</span>(<span class="fu">sd</span>(x),<span class="dv">1</span>),<span class="st">')'</span>) } <span class="co"># function to return mean (SD) for "x"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">summaryBy</span>( preOp_age <span class="sc">~</span> preOp_asa, <span class="at">data=</span>dat, <span class="at">FUN=</span>mean_sd)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> <span class="fu">summaryBy</span>( preOp_age <span class="sc">~</span> intraOp_surgerySize, <span class="at">data=</span>dat, <span class="at">FUN=</span>mean_sd)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>mean_tab <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="at">ASA =</span> t1[,<span class="dv">2</span>], <span class="at">Size=</span> t2[,<span class="dv">2</span>])</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(mean_tab, <span class="at">col.names=</span><span class="fu">c</span>(<span class="st">'1'</span>,<span class="st">'2'</span>,<span class="st">'3'</span>), <span class="at">align=</span><span class="st">'ccc'</span>, <span class="at">escape=</span>F) <span class="sc">%&gt;%</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>, <span class="at">full_width =</span> F, <span class="at">position =</span> <span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">1</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">2</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ASA</td>
+<td style="text-align: center;">42.2 (15)</td>
+<td style="text-align: center;">60.5 (13.9)</td>
+<td style="text-align: center;">60.8 (12.9)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Size</td>
+<td style="text-align: center;">53.9 (19.4)</td>
+<td style="text-align: center;">58.1 (14.3)</td>
+<td style="text-align: center;">61 (10.2)</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<section id="exercise-1-one-way-anova" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-one-way-anova">Exercise 1: One-Way ANOVA</h2>
+<p>For this exercise, we will compare age as our outcome against surgery size with a one-way ANOVA.</p>
+<section id="a-testing-homogeneity-of-the-variances-assumption" class="level3">
+<h3 class="anchored" data-anchor-id="a-testing-homogeneity-of-the-variances-assumption">1a: Testing Homogeneity of the Variances Assumption</h3>
+<p>Use both Levene’s test and Bartlett’s test to evaluate if the variances are homogeneous (i.e., equal) across our three surgery size groups. Write the null and alternative hypothesis being tested.</p>
+<p><strong>Solution:</strong></p>
+<p>We are testing</p>
+<p><span class="math display">\[ H_{0}\colon \sigma^2_{small} = \sigma^2_{medium} = \sigma^2_{large} \text{ versus } H_{1}\colon \text{at least one variance is different}  \]</span></p>
+<p>Based on Levene’s and Bartlett’s test we have</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>( preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize), <span class="at">data=</span>dat )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+       Df F value    Pr(&gt;F)    
+group   2  7.9072 0.0004763 ***
+      232                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>( preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize), <span class="at">data=</span>dat )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Bartlett test of homogeneity of variances
+
+data:  preOp_age by as.factor(intraOp_surgerySize)
+Bartlett's K-squared = 13.887, df = 2, p-value = 0.0009649</code></pre>
+</div>
+</div>
+<p>For both tests, <span class="math inline">\(p&lt;0.05\)</span>. Therefore, we reject our null hypothesis that the variances are equal within each surgery size group for our outcome of age.</p>
+</section>
+<section id="b-one-way-anova-with-equal-variances" class="level3">
+<h3 class="anchored" data-anchor-id="b-one-way-anova-with-equal-variances">1b: One-Way ANOVA with Equal Variances</h3>
+<p>Assume that the variances <em>are equal</em> across groups and test the hypothesis that the mean age between groups is equal across the three surgery size groups. State the null and alternative hypothesis being tested.</p>
+<p><strong>Solution:</strong></p>
+<p>The hypothesis we are testing is</p>
+<p><span class="math display">\[ H_0\colon \mu_{small} = \mu_{medium} = \mu_{large} \text{ versus } H_1\colon \text{ at least one mean is different} \]</span></p>
+<p>We can fit our one-way ANOVA assuming equal variances with <code>oneway.test</code>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oneway.test</span>(preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize), <span class="at">data=</span>dat, <span class="at">var.equal=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One-way analysis of means
+
+data:  preOp_age and as.factor(intraOp_surgerySize)
+F = 2.137, num df = 2, denom df = 232, p-value = 0.1203</code></pre>
+</div>
+</div>
+<p>Since <span class="math inline">\(p=0.1203&gt;0.05\)</span>, we fail to reject our null hypothesis and cannot conclude that at least one mean age is different.</p>
+</section>
+<section id="c-one-way-anova-with-unequal-variances" class="level3">
+<h3 class="anchored" data-anchor-id="c-one-way-anova-with-unequal-variances">1c: One-Way ANOVA with Unequal Variances</h3>
+<p>Assume that the variances <em>are unequal</em> across groups and test the hypothesis that the mean age between groups is equal across the three surgery size groups. State the null and alternative hypothesis being tested.</p>
+<p><strong>Solution:</strong></p>
+<p>We have the same hypothesis being tested in <strong>1c</strong> even though we are not assuming equal variances:</p>
+<p><span class="math display">\[ H_0\colon \mu_{small} = \mu_{medium} = \mu_{large} \text{ versus } H_1\colon \text{ at least one mean is different} \]</span></p>
+<p>We can fit our one-way ANOVA allowing for unequal variances with <code>oneway.test</code>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oneway.test</span>(preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize), <span class="at">data=</span>dat, <span class="at">var.equal=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One-way analysis of means (not assuming equal variances)
+
+data:  preOp_age and as.factor(intraOp_surgerySize)
+F = 2.0796, num df = 2.000, denom df = 55.683, p-value = 0.1346</code></pre>
+</div>
+</div>
+<p>Since <span class="math inline">\(p=0.1346&gt;0.05\)</span>, we fail to reject our null hypothesis and cannot conclude that at least one mean age is different.</p>
+</section>
+<section id="d-nonparametric-kruskal-wallis-test" class="level3">
+<h3 class="anchored" data-anchor-id="d-nonparametric-kruskal-wallis-test">1d: Nonparametric Kruskal-Wallis Test</h3>
+<p>Assume that we think our normality assumption for one-way ANOVA is violated. Implement the nonparametric Kruskal-Wallis test and interpret our result. State the null and alternative hypothesis being tested.</p>
+<p><strong>Solution:</strong></p>
+<p>Even though some call the Kruskal-Wallis test a nonparametric ANOVA, it does not test the same hypothesis as the one-way ANOVA. Instead it tests:</p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: the mean ranks of the groups are the same</li>
+<li><span class="math inline">\(H_1\)</span>: at least one group has a different mean rank</li>
+</ul>
+<p>We can use <code>kruskal.test</code> to implement this test:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize), <span class="at">data=</span>dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Kruskal-Wallis rank sum test
+
+data:  preOp_age by as.factor(intraOp_surgerySize)
+Kruskal-Wallis chi-squared = 2.0355, df = 2, p-value = 0.3614</code></pre>
+</div>
+</div>
+<p>Since <span class="math inline">\(p=0.3614 &gt; 0.05\)</span>, we fail to reject our null hypothesis and cannot conclude that at least one group’s mean rank for age is different.</p>
+</section>
+<section id="e-post-hoc-testing" class="level3">
+<h3 class="anchored" data-anchor-id="e-post-hoc-testing">1e: Post-Hoc Testing</h3>
+<p>Regardless of our earlier results in <strong>1b</strong>, compare the means of each pair of groups with the Tukey HSD method and summarize the results. Was post-hoc testing necessary in this case?</p>
+<p><strong>Solution:</strong></p>
+<p>There are various functions we could use to implement Tukey’s HSD. Here we will use the default <code>TukeyHSD</code> function after fitting an <code>aov</code> ANOVA model:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>aov1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize), <span class="at">data=</span>dat)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(aov1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = preOp_age ~ as.factor(intraOp_surgerySize), data = dat)
+
+$`as.factor(intraOp_surgerySize)`
+        diff       lwr       upr     p adj
+2-1 4.161166 -1.483245  9.805578 0.1929435
+3-1 7.005952 -2.281060 16.292965 0.1787406
+3-2 2.844786 -5.585118 11.274690 0.7058412</code></pre>
+</div>
+</div>
+<p>Our Tukey’s HSD post-hoc test result does not indicate any significant pairwise comparisons based on the adjusted p-values (all <span class="math inline">\(p&gt;0.05\)</span>). This is not necessarily surprising since our overall test in <strong>1b</strong> did not reject the null hypothesis that at least one group’s mean was different.</p>
+</section>
+</section>
+<section id="exercise-2-categorical-variables" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-categorical-variables">Exercise 2: Categorical Variables</h2>
+<p>For this exercise, we will use age our continuous outcome and consider both ASA status and surgery size as predictors.</p>
+<section id="a-reference-cell-model" class="level3">
+<h3 class="anchored" data-anchor-id="a-reference-cell-model">2a: Reference Cell Model</h3>
+<p>The reference cell model is our more common approach to regression modeling in many biostatistics applications. Write down the true regression equation and any assumptions for a model where ASA status 1 and surgery size small are the reference categories.</p>
+<p><strong>Solution:</strong></p>
+<p>Our true regression equation is</p>
+<p><span class="math display">\[ Y = \beta_0 + \beta_1 I_{G=2} + \beta_2 I_{G=3} + \beta_3 I_{A=2} + \beta_4 I_{A=3} + \epsilon \]</span></p>
+<p>where <span class="math inline">\(I_{G=g}\)</span> and <span class="math inline">\(I_{A=a}\)</span> represent indicators for surgery group (medium for <span class="math inline">\(G=2\)</span> and large for <span class="math inline">\(G=3\)</span>) and ASA status (ASA II for <span class="math inline">\(A_2\)</span> and ASA III for <span class="math inline">\(A_3\)</span>), and <span class="math inline">\(\epsilon \sim N(0,\sigma^{2}_{Y|X})\)</span>.</p>
+</section>
+<section id="b-partial-f-test-for-asa-status" class="level3">
+<h3 class="anchored" data-anchor-id="b-partial-f-test-for-asa-status">2b: Partial <span class="math inline">\(F\)</span>-test for ASA Status</h3>
+<p>Evaluate if ASA status contributes significantly to the model from <strong>2a</strong>. Write the null and alternative hypotheses, test the null hypothesis, and state your conclusion.</p>
+<p><strong>Solution:</strong></p>
+<p>Based on our specified model in <strong>2a</strong>, our hypothesis is</p>
+<p><span class="math display">\[ H_0\colon \beta_3 = \beta_4 = 0 \text{ versus } H_1\colon \text{ at least one coefficient is not 0} \]</span></p>
+<p>We can fit a full and reduced model to use in evaluating this hypothesis with a partial <span class="math inline">\(F\)</span>-test:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit full model and summarize output for our own information</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>mod_full <span class="ot">&lt;-</span> <span class="fu">glm</span>(preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize) <span class="sc">+</span> <span class="fu">as.factor</span>(preOp_asa), <span class="at">data=</span>dat)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = preOp_age ~ as.factor(intraOp_surgerySize) + as.factor(preOp_asa), 
+    data = dat)
+
+Coefficients:
+                                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                       40.788      2.563  15.917  &lt; 2e-16 ***
+as.factor(intraOp_surgerySize)2    2.187      2.174   1.006    0.315    
+as.factor(intraOp_surgerySize)3    3.025      3.608   0.839    0.403    
+as.factor(preOp_asa)2             17.939      2.498   7.180 9.57e-12 ***
+as.factor(preOp_asa)3             18.067      2.859   6.319 1.35e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 192.4575)
+
+    Null deviance: 55935  on 234  degrees of freedom
+Residual deviance: 44265  on 230  degrees of freedom
+AIC: 1909.9
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit reduced model and summarize output for our own information</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>mod_red_b <span class="ot">&lt;-</span> <span class="fu">glm</span>(preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize), <span class="at">data=</span>dat)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_red_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = preOp_age ~ as.factor(intraOp_surgerySize), data = dat)
+
+Coefficients:
+                                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                       53.946      2.056  26.238   &lt;2e-16 ***
+as.factor(intraOp_surgerySize)2    4.161      2.393   1.739   0.0834 .  
+as.factor(intraOp_surgerySize)3    7.006      3.937   1.779   0.0765 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 236.7369)
+
+    Null deviance: 55935  on 234  degrees of freedom
+Residual deviance: 54923  on 232  degrees of freedom
+AIC: 1956.6
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Partial F-test</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod_full, mod_red_b, <span class="at">test=</span><span class="st">'F'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: preOp_age ~ as.factor(intraOp_surgerySize) + as.factor(preOp_asa)
+Model 2: preOp_age ~ as.factor(intraOp_surgerySize)
+  Resid. Df Resid. Dev Df Deviance      F    Pr(&gt;F)    
+1       230      44265                                 
+2       232      54923 -2   -10658 27.689 1.681e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Since <span class="math inline">\(p&lt;0.05\)</span>, we reject the null hypothesis and conclude that at least one beta coefficient for ASA status is not equal to 0. This indicates that the addition of our three category ASA variable is meaningful in predicting age above and beyond just surgery size alone.</p>
+</section>
+<section id="c-partial-f-test-for-surgery-size" class="level3">
+<h3 class="anchored" data-anchor-id="c-partial-f-test-for-surgery-size">2c: Partial <span class="math inline">\(F\)</span>-test for Surgery Size</h3>
+<p>Evaluate if surgery size contributes significantly to the model from <strong>2a</strong>. Write the null and alternative hypotheses, test the null hypothesis, and state your conclusion.</p>
+<p><strong>Solution:</strong></p>
+<p>Based on our specified model in <strong>2a</strong>, our hypothesis is</p>
+<p><span class="math display">\[ H_0\colon \beta_1 = \beta_2 = 0 \text{ versus } H_1\colon \text{ at least one coefficient is not 0} \]</span></p>
+<p>We can fit a new reduced model to use in evaluating this hypothesis with a partial <span class="math inline">\(F\)</span>-test:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit reduced model and summarize output for our own information</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>mod_red_c <span class="ot">&lt;-</span> <span class="fu">glm</span>(preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(preOp_asa), <span class="at">data=</span>dat)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_red_c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = preOp_age ~ as.factor(preOp_asa), data = dat)
+
+Coefficients:
+                      Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)             42.195      2.163  19.509  &lt; 2e-16 ***
+as.factor(preOp_asa)2   18.297      2.472   7.403 2.44e-12 ***
+as.factor(preOp_asa)3   18.572      2.806   6.618 2.49e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 191.7873)
+
+    Null deviance: 55935  on 234  degrees of freedom
+Residual deviance: 44495  on 232  degrees of freedom
+AIC: 1907.1
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Partial F-test</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod_full, mod_red_c, <span class="at">test=</span><span class="st">'F'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: preOp_age ~ as.factor(intraOp_surgerySize) + as.factor(preOp_asa)
+Model 2: preOp_age ~ as.factor(preOp_asa)
+  Resid. Df Resid. Dev Df Deviance      F Pr(&gt;F)
+1       230      44265                          
+2       232      44495 -2  -229.45 0.5961 0.5518</code></pre>
+</div>
+</div>
+<p>Since <span class="math inline">\(p=0.5518 &gt; 0.05\)</span>, we fail to reject the null hypothesis that at least one beta coefficient for surgery size is not equal to 0. This indicates that the addition of our three category surgery size variable is not meaningful in predicting age above and beyond just ASA status alone.</p>
+</section>
+<section id="d-overall-f-test" class="level3">
+<h3 class="anchored" data-anchor-id="d-overall-f-test">2d: Overall <span class="math inline">\(F\)</span>-test</h3>
+<p>Evaluate if ASA status and surgery size contribute significantly to the prediction of <span class="math inline">\(Y\)</span>. Write the null and alternative hypotheses, test the null hypothesis, and state your conclusion.</p>
+<p><strong>Solution:</strong></p>
+<p>Based on our specified model in <strong>2a</strong>, our hypothesis is</p>
+<p><span class="math display">\[ H_0\colon \beta_1 = \beta_2 = \beta_3 = \beta_4 = 0 \text{ versus } H_1\colon \text{ at least one coefficient is not 0} \]</span></p>
+<p>We can fit a new reduced model with only any intercept to use in evaluating this hypothesis with an <span class="math inline">\(F\)</span>-test:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mod_int <span class="ot">&lt;-</span> <span class="fu">glm</span>(preOp_age <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>dat)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod_full, mod_int, <span class="at">test=</span><span class="st">'F'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: preOp_age ~ as.factor(intraOp_surgerySize) + as.factor(preOp_asa)
+Model 2: preOp_age ~ 1
+  Resid. Df Resid. Dev Df Deviance      F    Pr(&gt;F)    
+1       230      44265                                 
+2       234      55935 -4   -11670 15.159 5.147e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Since <span class="math inline">\(p&lt;0.05\)</span>, we reject our null hypothesis and conclude that at least one beta coefficient is significantly different from 0. In other words, while the full model might not be the “best” model, it is better than just using the mean of age alone.</p>
+</section>
+<section id="e-asa-status-iii-significance" class="level3">
+<h3 class="anchored" data-anchor-id="e-asa-status-iii-significance">2e: ASA Status III Significance</h3>
+<p>Evaluate the significance of an ASA status of III and provide an interpretation for the beta coefficient.</p>
+<p><strong>Solution:</strong></p>
+<p>From our full regression output in <strong>2b</strong> we see that <code>as.factor(preOp_asa)3</code> has an estimated beta coefficient of 18.067 with <span class="math inline">\(p&lt;0.05\)</span>. Our beta coefficient indicates that those with ASA III status are older by 18.067 years on average than those with ASA I (our reference category). And since <span class="math inline">\(p&lt;0.05\)</span>, this is a significantly higher age.</p>
+</section>
+<section id="f-asa-status-iii-removal" class="level3">
+<h3 class="anchored" data-anchor-id="f-asa-status-iii-removal">2f: ASA Status III Removal</h3>
+<p>Regardless of your conclusion in <strong>2e</strong>, if <span class="math inline">\(p&gt;0.05\)</span> and we failed to reject the null hypothesis that our beta coefficient was equal to 0, should we consider removing just ASA III from our regression model and refitting (i.e., still have ASA II in the model)?</p>
+<p><strong>Solution:</strong></p>
+<p>No, it would not make sense to exclude a single indicator variable/category from the model. Currently, the reference category is ASA I and the two indicator variables represent ASA II and ASA III. If we drop the indicator for ASA III in the model, this implies that everyone with <span class="math inline">\(I_{A=3}=1\)</span> joins the reference category, which becomes a combination of ASA I and III. This likely does not make clinical or biological sense, so even if ASA III was not statistically significant, we would still want to include it as its own category (or exclude the entire ASA variable from the model).</p>
+
+
+<!-- -->
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb27" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 10 Practice Problems: Solutions"</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>This page includes the solutions to the optional practice problems for the given week. If you want to see a version <span class="co">[</span><span class="ot">without solutions please click here</span><span class="co">](/labs/prac10/index.qmd)</span>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>This week's extra practice exercises focus on ANOVA and categorical variables.</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a><span class="fu"># Dataset Background</span></span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>The following code can load the <span class="in">`Licorice_Gargle.csv`</span> file into R:</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.source = 'fold-show'}</span></span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../../.data/Licorice_Gargle.csv'</span>)</span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>The dataset represents a randomized control trial of 236 adult patients undergoing elective thoracic surgery requiring a double-lumen endotracheal tube comparing if licorice vs. sugar-water gargle prevents postoperative sore throat. For our exercises below we will focus on the following variables:</span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`preOp_age`</span>: age (in years)</span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`preOp_asa`</span>: ASA status (1=normal healthy patient, 2=patient with mild systemic disease, 3=patient with severe systemic disease)</span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`intraOp_surgerySize`</span>: surgery size (1=small, 2=medium, 3=large)</span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>For this dataset, our summary of the mean age and SD by group is:</span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.source = 'fold-hide', warning=F, message=F}</span></span>
+<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(doBy)</span>
+<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a>mean_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(x){ <span class="fu">paste0</span>(<span class="fu">round</span>(<span class="fu">mean</span>(x),<span class="dv">1</span>), <span class="st">' ('</span>,<span class="fu">round</span>(<span class="fu">sd</span>(x),<span class="dv">1</span>),<span class="st">')'</span>) } <span class="co"># function to return mean (SD) for "x"</span></span>
+<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">summaryBy</span>( preOp_age <span class="sc">~</span> preOp_asa, <span class="at">data=</span>dat, <span class="at">FUN=</span>mean_sd)</span>
+<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> <span class="fu">summaryBy</span>( preOp_age <span class="sc">~</span> intraOp_surgerySize, <span class="at">data=</span>dat, <span class="at">FUN=</span>mean_sd)</span>
+<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a>mean_tab <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="at">ASA =</span> t1[,<span class="dv">2</span>], <span class="at">Size=</span> t2[,<span class="dv">2</span>])</span>
+<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(mean_tab, <span class="at">col.names=</span><span class="fu">c</span>(<span class="st">'1'</span>,<span class="st">'2'</span>,<span class="st">'3'</span>), <span class="at">align=</span><span class="st">'ccc'</span>, <span class="at">escape=</span>F) <span class="sc">%&gt;%</span></span>
+<span id="cb27-56"><a href="#cb27-56" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>, <span class="at">full_width =</span> F, <span class="at">position =</span> <span class="st">"left"</span>)</span>
+<span id="cb27-57"><a href="#cb27-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-58"><a href="#cb27-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-59"><a href="#cb27-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-60"><a href="#cb27-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 1: One-Way ANOVA</span></span>
+<span id="cb27-61"><a href="#cb27-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-62"><a href="#cb27-62" aria-hidden="true" tabindex="-1"></a>For this exercise, we will compare age as our outcome against surgery size with a one-way ANOVA.</span>
+<span id="cb27-63"><a href="#cb27-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-64"><a href="#cb27-64" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1a: Testing Homogeneity of the Variances Assumption</span></span>
+<span id="cb27-65"><a href="#cb27-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-66"><a href="#cb27-66" aria-hidden="true" tabindex="-1"></a>Use both Levene's test and Bartlett's test to evaluate if the variances are homogeneous (i.e., equal) across our three surgery size groups. Write the null and alternative hypothesis being tested.</span>
+<span id="cb27-67"><a href="#cb27-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-68"><a href="#cb27-68" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb27-69"><a href="#cb27-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-70"><a href="#cb27-70" aria-hidden="true" tabindex="-1"></a>We are testing </span>
+<span id="cb27-71"><a href="#cb27-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-72"><a href="#cb27-72" aria-hidden="true" tabindex="-1"></a>$$ H_{0}\colon \sigma^2_{small} = \sigma^2_{medium} = \sigma^2_{large} \text{ versus } H_{1}\colon \text{at least one variance is different}  $$</span>
+<span id="cb27-73"><a href="#cb27-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-74"><a href="#cb27-74" aria-hidden="true" tabindex="-1"></a>Based on Levene's and Bartlett's test we have</span>
+<span id="cb27-75"><a href="#cb27-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-76"><a href="#cb27-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=F, warning=F}</span></span>
+<span id="cb27-77"><a href="#cb27-77" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb27-78"><a href="#cb27-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-79"><a href="#cb27-79" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>( preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize), <span class="at">data=</span>dat )</span>
+<span id="cb27-80"><a href="#cb27-80" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>( preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize), <span class="at">data=</span>dat )</span>
+<span id="cb27-81"><a href="#cb27-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-82"><a href="#cb27-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-83"><a href="#cb27-83" aria-hidden="true" tabindex="-1"></a>For both tests, $p&lt;0.05$. Therefore, we reject our null hypothesis that the variances are equal within each surgery size group for our outcome of age.</span>
+<span id="cb27-84"><a href="#cb27-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-85"><a href="#cb27-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-86"><a href="#cb27-86" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1b: One-Way ANOVA with Equal Variances</span></span>
+<span id="cb27-87"><a href="#cb27-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-88"><a href="#cb27-88" aria-hidden="true" tabindex="-1"></a>Assume that the variances *are equal* across groups and test the hypothesis that the mean age between groups is equal across the three surgery size groups. State the null and alternative hypothesis being tested.</span>
+<span id="cb27-89"><a href="#cb27-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-90"><a href="#cb27-90" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb27-91"><a href="#cb27-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-92"><a href="#cb27-92" aria-hidden="true" tabindex="-1"></a>The hypothesis we are testing is</span>
+<span id="cb27-93"><a href="#cb27-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-94"><a href="#cb27-94" aria-hidden="true" tabindex="-1"></a>$$ H_0\colon \mu_{small} = \mu_{medium} = \mu_{large} \text{ versus } H_1\colon \text{ at least one mean is different} $$</span>
+<span id="cb27-95"><a href="#cb27-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-96"><a href="#cb27-96" aria-hidden="true" tabindex="-1"></a>We can fit our one-way ANOVA assuming equal variances with <span class="in">`oneway.test`</span>:</span>
+<span id="cb27-97"><a href="#cb27-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-100"><a href="#cb27-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-101"><a href="#cb27-101" aria-hidden="true" tabindex="-1"></a><span class="fu">oneway.test</span>(preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize), <span class="at">data=</span>dat, <span class="at">var.equal=</span>T)</span>
+<span id="cb27-102"><a href="#cb27-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-103"><a href="#cb27-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-104"><a href="#cb27-104" aria-hidden="true" tabindex="-1"></a>Since $p=0.1203&gt;0.05$, we fail to reject our null hypothesis and cannot conclude that at least one mean age is different.</span>
+<span id="cb27-105"><a href="#cb27-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-106"><a href="#cb27-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-107"><a href="#cb27-107" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1c: One-Way ANOVA with Unequal Variances</span></span>
+<span id="cb27-108"><a href="#cb27-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-109"><a href="#cb27-109" aria-hidden="true" tabindex="-1"></a>Assume that the variances *are unequal* across groups and test the hypothesis that the mean age between groups is equal across the three surgery size groups. State the null and alternative hypothesis being tested.</span>
+<span id="cb27-110"><a href="#cb27-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-111"><a href="#cb27-111" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb27-112"><a href="#cb27-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-113"><a href="#cb27-113" aria-hidden="true" tabindex="-1"></a>We have the same hypothesis being tested in **1c** even though we are not assuming equal variances:</span>
+<span id="cb27-114"><a href="#cb27-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-115"><a href="#cb27-115" aria-hidden="true" tabindex="-1"></a>$$ H_0\colon \mu_{small} = \mu_{medium} = \mu_{large} \text{ versus } H_1\colon \text{ at least one mean is different} $$</span>
+<span id="cb27-116"><a href="#cb27-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-117"><a href="#cb27-117" aria-hidden="true" tabindex="-1"></a>We can fit our one-way ANOVA allowing for unequal variances with <span class="in">`oneway.test`</span>:</span>
+<span id="cb27-118"><a href="#cb27-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-121"><a href="#cb27-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-122"><a href="#cb27-122" aria-hidden="true" tabindex="-1"></a><span class="fu">oneway.test</span>(preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize), <span class="at">data=</span>dat, <span class="at">var.equal=</span>F)</span>
+<span id="cb27-123"><a href="#cb27-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-124"><a href="#cb27-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-125"><a href="#cb27-125" aria-hidden="true" tabindex="-1"></a>Since $p=0.1346&gt;0.05$, we fail to reject our null hypothesis and cannot conclude that at least one mean age is different.</span>
+<span id="cb27-126"><a href="#cb27-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-127"><a href="#cb27-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-128"><a href="#cb27-128" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1d: Nonparametric Kruskal-Wallis Test</span></span>
+<span id="cb27-129"><a href="#cb27-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-130"><a href="#cb27-130" aria-hidden="true" tabindex="-1"></a>Assume that we think our normality assumption for one-way ANOVA is violated. Implement the nonparametric Kruskal-Wallis test and interpret our result. State the null and alternative hypothesis being tested.</span>
+<span id="cb27-131"><a href="#cb27-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-132"><a href="#cb27-132" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb27-133"><a href="#cb27-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-134"><a href="#cb27-134" aria-hidden="true" tabindex="-1"></a>Even though some call the Kruskal-Wallis test a nonparametric ANOVA, it does not test the same hypothesis as the one-way ANOVA. Instead it tests:</span>
+<span id="cb27-135"><a href="#cb27-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-136"><a href="#cb27-136" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$H_0$: the mean ranks of the groups are the same</span>
+<span id="cb27-137"><a href="#cb27-137" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$H_1$: at least one group has a different mean rank</span>
+<span id="cb27-138"><a href="#cb27-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-139"><a href="#cb27-139" aria-hidden="true" tabindex="-1"></a>We can use <span class="in">`kruskal.test`</span> to implement this test:</span>
+<span id="cb27-140"><a href="#cb27-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-143"><a href="#cb27-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-144"><a href="#cb27-144" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize), <span class="at">data=</span>dat)</span>
+<span id="cb27-145"><a href="#cb27-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-146"><a href="#cb27-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-147"><a href="#cb27-147" aria-hidden="true" tabindex="-1"></a>Since $p=0.3614 &gt; 0.05$, we fail to reject our null hypothesis and cannot conclude that at least one group's mean rank for age is different.</span>
+<span id="cb27-148"><a href="#cb27-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-149"><a href="#cb27-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-150"><a href="#cb27-150" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1e: Post-Hoc Testing</span></span>
+<span id="cb27-151"><a href="#cb27-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-152"><a href="#cb27-152" aria-hidden="true" tabindex="-1"></a>Regardless of our earlier results in **1b**, compare the means of each pair of groups with the Tukey HSD method and summarize the results. Was post-hoc testing necessary in this case?</span>
+<span id="cb27-153"><a href="#cb27-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-154"><a href="#cb27-154" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb27-155"><a href="#cb27-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-156"><a href="#cb27-156" aria-hidden="true" tabindex="-1"></a>There are various functions we could use to implement Tukey's HSD. Here we will use the default <span class="in">`TukeyHSD`</span> function after fitting an <span class="in">`aov`</span> ANOVA model:</span>
+<span id="cb27-157"><a href="#cb27-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-160"><a href="#cb27-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-161"><a href="#cb27-161" aria-hidden="true" tabindex="-1"></a>aov1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize), <span class="at">data=</span>dat)</span>
+<span id="cb27-162"><a href="#cb27-162" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(aov1)</span>
+<span id="cb27-163"><a href="#cb27-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-164"><a href="#cb27-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-165"><a href="#cb27-165" aria-hidden="true" tabindex="-1"></a>Our Tukey's HSD post-hoc test result does not indicate any significant pairwise comparisons based on the adjusted p-values (all $p&gt;0.05$). This is not necessarily surprising since our overall test in **1b** did not reject the null hypothesis that at least one group's mean was different.</span>
+<span id="cb27-166"><a href="#cb27-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-167"><a href="#cb27-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-168"><a href="#cb27-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 2: Categorical Variables</span></span>
+<span id="cb27-169"><a href="#cb27-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-170"><a href="#cb27-170" aria-hidden="true" tabindex="-1"></a>For this exercise, we will use age our continuous outcome and consider both ASA status and surgery size as predictors.</span>
+<span id="cb27-171"><a href="#cb27-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-172"><a href="#cb27-172" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2a: Reference Cell Model</span></span>
+<span id="cb27-173"><a href="#cb27-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-174"><a href="#cb27-174" aria-hidden="true" tabindex="-1"></a>The reference cell model is our more common approach to regression modeling in many biostatistics applications. Write down the true regression equation and any assumptions for a model where ASA status 1 and surgery size small are the reference categories.</span>
+<span id="cb27-175"><a href="#cb27-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-176"><a href="#cb27-176" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb27-177"><a href="#cb27-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-178"><a href="#cb27-178" aria-hidden="true" tabindex="-1"></a>Our true regression equation is</span>
+<span id="cb27-179"><a href="#cb27-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-180"><a href="#cb27-180" aria-hidden="true" tabindex="-1"></a>$$ Y = \beta_0 + \beta_1 I_{G=2} + \beta_2 I_{G=3} + \beta_3 I_{A=2} + \beta_4 I_{A=3} + \epsilon $$</span>
+<span id="cb27-181"><a href="#cb27-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-182"><a href="#cb27-182" aria-hidden="true" tabindex="-1"></a>where $I_{G=g}$ and $I_{A=a}$ represent indicators for surgery group (medium for $G=2$ and large for $G=3$) and ASA status (ASA II for $A_2$ and ASA III for $A_3$), and $\epsilon \sim N(0,\sigma^{2}_{Y|X})$.</span>
+<span id="cb27-183"><a href="#cb27-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-184"><a href="#cb27-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-185"><a href="#cb27-185" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2b: Partial $F$-test for ASA Status</span></span>
+<span id="cb27-186"><a href="#cb27-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-187"><a href="#cb27-187" aria-hidden="true" tabindex="-1"></a>Evaluate if ASA status contributes significantly to the model from **2a**. Write the null and alternative hypotheses, test the null hypothesis, and state your conclusion.</span>
+<span id="cb27-188"><a href="#cb27-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-189"><a href="#cb27-189" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb27-190"><a href="#cb27-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-191"><a href="#cb27-191" aria-hidden="true" tabindex="-1"></a>Based on our specified model in **2a**, our hypothesis is</span>
+<span id="cb27-192"><a href="#cb27-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-193"><a href="#cb27-193" aria-hidden="true" tabindex="-1"></a>$$ H_0\colon \beta_3 = \beta_4 = 0 \text{ versus } H_1\colon \text{ at least one coefficient is not 0} $$</span>
+<span id="cb27-194"><a href="#cb27-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-195"><a href="#cb27-195" aria-hidden="true" tabindex="-1"></a>We can fit a full and reduced model to use in evaluating this hypothesis with a partial $F$-test:</span>
+<span id="cb27-196"><a href="#cb27-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-199"><a href="#cb27-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-200"><a href="#cb27-200" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit full model and summarize output for our own information</span></span>
+<span id="cb27-201"><a href="#cb27-201" aria-hidden="true" tabindex="-1"></a>mod_full <span class="ot">&lt;-</span> <span class="fu">glm</span>(preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize) <span class="sc">+</span> <span class="fu">as.factor</span>(preOp_asa), <span class="at">data=</span>dat)</span>
+<span id="cb27-202"><a href="#cb27-202" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_full)</span>
+<span id="cb27-203"><a href="#cb27-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-204"><a href="#cb27-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-207"><a href="#cb27-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-208"><a href="#cb27-208" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit reduced model and summarize output for our own information</span></span>
+<span id="cb27-209"><a href="#cb27-209" aria-hidden="true" tabindex="-1"></a>mod_red_b <span class="ot">&lt;-</span> <span class="fu">glm</span>(preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(intraOp_surgerySize), <span class="at">data=</span>dat)</span>
+<span id="cb27-210"><a href="#cb27-210" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_red_b)</span>
+<span id="cb27-211"><a href="#cb27-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-212"><a href="#cb27-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-215"><a href="#cb27-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-216"><a href="#cb27-216" aria-hidden="true" tabindex="-1"></a><span class="co"># Partial F-test</span></span>
+<span id="cb27-217"><a href="#cb27-217" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod_full, mod_red_b, <span class="at">test=</span><span class="st">'F'</span>)</span>
+<span id="cb27-218"><a href="#cb27-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-219"><a href="#cb27-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-220"><a href="#cb27-220" aria-hidden="true" tabindex="-1"></a>Since $p&lt;0.05$, we reject the null hypothesis and conclude that at least one beta coefficient for ASA status is not equal to 0. This indicates that the addition of our three category ASA variable is meaningful in predicting age above and beyond just surgery size alone.</span>
+<span id="cb27-221"><a href="#cb27-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-222"><a href="#cb27-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-223"><a href="#cb27-223" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2c: Partial $F$-test for Surgery Size</span></span>
+<span id="cb27-224"><a href="#cb27-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-225"><a href="#cb27-225" aria-hidden="true" tabindex="-1"></a>Evaluate if surgery size contributes significantly to the model from **2a**. Write the null and alternative hypotheses, test the null hypothesis, and state your conclusion.</span>
+<span id="cb27-226"><a href="#cb27-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-227"><a href="#cb27-227" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb27-228"><a href="#cb27-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-229"><a href="#cb27-229" aria-hidden="true" tabindex="-1"></a>Based on our specified model in **2a**, our hypothesis is</span>
+<span id="cb27-230"><a href="#cb27-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-231"><a href="#cb27-231" aria-hidden="true" tabindex="-1"></a>$$ H_0\colon \beta_1 = \beta_2 = 0 \text{ versus } H_1\colon \text{ at least one coefficient is not 0} $$</span>
+<span id="cb27-232"><a href="#cb27-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-233"><a href="#cb27-233" aria-hidden="true" tabindex="-1"></a>We can fit a new reduced model to use in evaluating this hypothesis with a partial $F$-test:</span>
+<span id="cb27-234"><a href="#cb27-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-237"><a href="#cb27-237" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-238"><a href="#cb27-238" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit reduced model and summarize output for our own information</span></span>
+<span id="cb27-239"><a href="#cb27-239" aria-hidden="true" tabindex="-1"></a>mod_red_c <span class="ot">&lt;-</span> <span class="fu">glm</span>(preOp_age <span class="sc">~</span> <span class="fu">as.factor</span>(preOp_asa), <span class="at">data=</span>dat)</span>
+<span id="cb27-240"><a href="#cb27-240" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_red_c)</span>
+<span id="cb27-241"><a href="#cb27-241" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-242"><a href="#cb27-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-245"><a href="#cb27-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-246"><a href="#cb27-246" aria-hidden="true" tabindex="-1"></a><span class="co"># Partial F-test</span></span>
+<span id="cb27-247"><a href="#cb27-247" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod_full, mod_red_c, <span class="at">test=</span><span class="st">'F'</span>)</span>
+<span id="cb27-248"><a href="#cb27-248" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-249"><a href="#cb27-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-250"><a href="#cb27-250" aria-hidden="true" tabindex="-1"></a>Since $p=0.5518 &gt; 0.05$, we fail to reject the null hypothesis that at least one beta coefficient for surgery size is not equal to 0. This indicates that the addition of our three category surgery size variable is not meaningful in predicting age above and beyond just ASA status alone.</span>
+<span id="cb27-251"><a href="#cb27-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-252"><a href="#cb27-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-253"><a href="#cb27-253" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2d: Overall $F$-test</span></span>
+<span id="cb27-254"><a href="#cb27-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-255"><a href="#cb27-255" aria-hidden="true" tabindex="-1"></a>Evaluate if ASA status and surgery size contribute significantly to the prediction of $Y$. Write the null and alternative hypotheses, test the null hypothesis, and state your conclusion.</span>
+<span id="cb27-256"><a href="#cb27-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-257"><a href="#cb27-257" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb27-258"><a href="#cb27-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-259"><a href="#cb27-259" aria-hidden="true" tabindex="-1"></a>Based on our specified model in **2a**, our hypothesis is</span>
+<span id="cb27-260"><a href="#cb27-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-261"><a href="#cb27-261" aria-hidden="true" tabindex="-1"></a>$$ H_0\colon \beta_1 = \beta_2 = \beta_3 = \beta_4 = 0 \text{ versus } H_1\colon \text{ at least one coefficient is not 0} $$</span>
+<span id="cb27-262"><a href="#cb27-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-263"><a href="#cb27-263" aria-hidden="true" tabindex="-1"></a>We can fit a new reduced model with only any intercept to use in evaluating this hypothesis with an $F$-test:</span>
+<span id="cb27-264"><a href="#cb27-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-267"><a href="#cb27-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-268"><a href="#cb27-268" aria-hidden="true" tabindex="-1"></a>mod_int <span class="ot">&lt;-</span> <span class="fu">glm</span>(preOp_age <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>dat)</span>
+<span id="cb27-269"><a href="#cb27-269" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod_full, mod_int, <span class="at">test=</span><span class="st">'F'</span>)</span>
+<span id="cb27-270"><a href="#cb27-270" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-271"><a href="#cb27-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-272"><a href="#cb27-272" aria-hidden="true" tabindex="-1"></a>Since $p&lt;0.05$, we reject our null hypothesis and conclude that at least one beta coefficient is significantly different from 0. In other words, while the full model might not be the "best" model, it is better than just using the mean of age alone.</span>
+<span id="cb27-273"><a href="#cb27-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-274"><a href="#cb27-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-275"><a href="#cb27-275" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2e: ASA Status III Significance</span></span>
+<span id="cb27-276"><a href="#cb27-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-277"><a href="#cb27-277" aria-hidden="true" tabindex="-1"></a>Evaluate the significance of an ASA status of III and provide an interpretation for the beta coefficient.</span>
+<span id="cb27-278"><a href="#cb27-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-279"><a href="#cb27-279" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb27-280"><a href="#cb27-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-281"><a href="#cb27-281" aria-hidden="true" tabindex="-1"></a>From our full regression output in **2b** we see that <span class="in">`as.factor(preOp_asa)3`</span> has an estimated beta coefficient of 18.067 with $p&lt;0.05$. Our beta coefficient indicates that those with ASA III status are older by 18.067 years on average than those with ASA I (our reference category). And since $p&lt;0.05$, this is a significantly higher age.</span>
+<span id="cb27-282"><a href="#cb27-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-283"><a href="#cb27-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-284"><a href="#cb27-284" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2f: ASA Status III Removal</span></span>
+<span id="cb27-285"><a href="#cb27-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-286"><a href="#cb27-286" aria-hidden="true" tabindex="-1"></a>Regardless of your conclusion in **2e**, if $p&gt;0.05$ and we failed to reject the null hypothesis that our beta coefficient was equal to 0, should we consider removing just ASA III from our regression model and refitting (i.e., still have ASA II in the model)?</span>
+<span id="cb27-287"><a href="#cb27-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-288"><a href="#cb27-288" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb27-289"><a href="#cb27-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-290"><a href="#cb27-290" aria-hidden="true" tabindex="-1"></a>No, it would not make sense to exclude a single indicator variable/category from the model. Currently, the reference category is ASA I and the two indicator variables represent ASA II and ASA III. If we drop the indicator for ASA III in the model, this implies that everyone with $I_{A=3}=1$ joins the reference category, which becomes a combination of ASA I and III. This likely does not make clinical or biological sense, so even if ASA III was not statistically significant, we would still want to include it as its own category (or exclude the entire ASA variable from the model).</span>
+<span id="cb27-291"><a href="#cb27-291" aria-hidden="true" tabindex="-1"></a></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

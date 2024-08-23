@@ -1,0 +1,91 @@
+---
+title: "Week 6 Practice Problems: Solutions"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page includes the solutions to the optional practice problems for the given week. If you want to see a version [without solutions please click here](/labs/prac6/index.qmd). Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.
+
+This week's extra practice exercise focuses on showing the total sums of squares is indeed equal to the model sums of squares plus the error sums of squares.
+
+# Exercise 1: Deriving the Sums of Squares
+
+In our lecture slides we noted that SS~total~ = SS~model~ + SS~error~. For this problem, you will work through the math and perform some algebraic acrobatics to "prove" this is true.
+
+Consider $\hat{Y}_{i} = \hat{\beta}_{0} + \hat{\beta}_{1}X_{i}$. Using material from the lecture slides, we can rewrite this in terms of our residual ($\hat{e}_{i} = Y_{i} - \hat{Y}_{i}$):
+
+$\begin{aligned}
+\frac{\partial}{\partial \beta_{0}} SS_{Error} =& \frac{\partial}{\partial \beta_{0}} \left( \sum_{i=1}^{n} (Y_{i} - \beta_{0} - \beta_{1}X_{i})^2 \right) = 0 \to \sum_{i=1}^{n} -2 (Y_{i} - \hat{\beta}_{0} - \hat{\beta}_{1}X_{i}) = -2 \sum_{i=1}^{n} \hat{e}_{i} = 0 \\
+\frac{\partial}{\partial \beta_{1}} SS_{Error} =& \frac{\partial}{\partial \beta_{1}} \left( \sum_{i=1}^{n} (Y_{i} - \beta_{0} - \beta_{1}X_{i})^2 \right) = 0 \to \sum_{i=1}^{n} -2 X_{i} (Y_{i} - \hat{\beta}_{0} - \hat{\beta}_{1}X_{i}) = -2 \sum_{i=1}^{n} X_{i} \hat{e}_{i} = 0 
+\end{aligned}$
+
+Additionally, we can use the following properties/definitions and hint:
+
+* Note 1: $\sum_{i=1}^{n} \hat{e}_{i} = \sum_{i=1}^{n} (Y_{i} - \hat{Y}_{i}) = 0$
+* Note 2: $\sum_{i=1}^{n} X_{i} \hat{e}_{i} = 0$
+* Note 3: $SS_{Error} = \sum_{i=1}^{n} (Y_{i} - \hat{Y}_{i})^2$
+* Note 4: $SS_{Model} = \sum_{i=1}^{n} (\hat{Y}_{i} - \bar{Y})^2$
+* Hint: 
+
+\begin{align}
+SS_{Total} =& \sum_{i=1}^{n} (Y_{i} - \bar{Y})^2 \\
+=& \sum_{i=1}^{n} \left( (Y_{i} - \hat{Y}_{i}) + (\hat{Y}_{i} - \bar{Y}) \right)^2 \\
+=& \sum_{i=1}^{n} (Y_{i} - \hat{Y}_{i})^2 + \sum_{i=1}^{n} (\hat{Y}_{i} - \bar{Y})^2 + 2 \sum_{i=1}^{n} (Y_{i} - \hat{Y}_{i})(\hat{Y}_{i} - \bar{Y})
+\end{align}
+
+**Solution:**
+
+In our equation for the total sums of squares, we can see that we have $SS_{Error} = \sum_{i=1}^{n} (Y_{i} - \hat{Y}_{i})^2$ and $SS_{Model} = \sum_{i=1}^{n} (\hat{Y}_{i} - \bar{Y})^2$. Therefore, we really just need to focus on showing that 
+
+$$ 2 \sum_{i=1}^{n} (Y_{i} - \hat{Y}_{i})(\hat{Y}_{i} - \bar{Y}) = 0 $$
+
+so that SS~total~ = SS~model~ + SS~error~.
+
+The first step, we can divide each side of our problem by 2 (to get rid of the constant):
+
+$$ \frac{2 \sum_{i=1}^{n} (Y_{i} - \hat{Y}_{i})(\hat{Y}_{i} - \bar{Y})}{2} = \frac{0}{2} $$
+
+This simplifies our problem to 
+
+$$ \sum_{i=1}^{n} (Y_{i} - \hat{Y}_{i})(\hat{Y}_{i} - \bar{Y}) = 0 $$
+
+Next, we can substitute the definition of $\hat{e}_{i}$ into our problem:
+
+$$ \sum_{i=1}^{n} (Y_{i} - \hat{Y}_{i})(\hat{Y}_{i} - \bar{Y}) = \sum_{i=1}^{n} \hat{e}_{i}(\hat{Y}_{i} - \bar{Y}) = \sum_{i=1}^{n} \hat{Y}_{i} \hat{e}_{i} - \sum_{i=1}^{n} \bar{Y} \hat{e}_{i}  $$
+
+This can be further simplified by recognizing that $\bar{Y}$ is a constant that does not depend on $i$, so it can be factored out to get:
+
+$$ \sum_{i=1}^{n} \hat{Y}_{i} \hat{e}_{i} - \sum_{i=1}^{n} \bar{Y} \hat{e}_{i} = \sum_{i=1}^{n} \hat{Y}_{i} \hat{e}_{i} - \bar{Y} \sum_{i=1}^{n}  \hat{e}_{i} $$
+
+For $\hat{Y}_{i}$, we can plug in its definition for the fitted regression line:
+
+\begin{align} 
+\sum_{i=1}^{n} \hat{Y}_{i} \hat{e}_{i} - \bar{Y} \sum_{i=1}^{n}  \hat{e}_{i} =& \sum_{i=1}^{n} (\hat{\beta}_{0} + \hat{\beta}_{1}X_{i}) \hat{e}_{i} - \bar{Y} \sum_{i=1}^{n} \hat{e}_{i} \\
+=& \sum_{i=1}^{n} (\hat{\beta}_{0}\hat{e}_{i} + \hat{\beta}_{1}X_{i}\hat{e}_{i}) - \bar{Y} \sum_{i=1}^{n} \hat{e}_{i} \\
+=& \hat{\beta}_{0} \sum_{i=1}^{n} \hat{e}_{i} + \hat{\beta}_{1} \sum_{i=1}^{n} X_{i}\hat{e}_{i} - \bar{Y} \sum_{i=1}^{n} \hat{e}_{i}
+\end{align}
+
+Similar to $\bar{Y}$, $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$ can be thought of as constant values that do not depend on $i$, so can be factored out of the summation.
+
+We can now apply *Notes 1 and 2* to see that all our summation components are equal to 0:
+
+$$ \hat{\beta}_{0} \sum_{i=1}^{n} \hat{e}_{i} + \hat{\beta}_{1} \sum_{i=1}^{n} X_{i}\hat{e}_{i} - \bar{Y} \sum_{i=1}^{n} \hat{e}_{i} = \hat{\beta}_{0} (0) + \hat{\beta}_{1}(0) - \bar{Y} (0) = 0 $$
+
+Therefore, since we showed $2 \sum_{i=1}^{n} (Y_{i} - \hat{Y}_{i})(\hat{Y}_{i} - \bar{Y}) = 0$, it is true that SS~total~ = SS~model~ + SS~error~.
+
+

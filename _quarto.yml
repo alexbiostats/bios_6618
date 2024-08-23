@@ -35,6 +35,8 @@ website:
             href: journal_of_bios_6618
           - text: "Recitation Questions"
             href: recitation
+          - text: "Labs and Practice Problems"
+            href: labs
     right:
       - icon: envelope
         href: mailto:alex.kaizer@cuanschutz.edu

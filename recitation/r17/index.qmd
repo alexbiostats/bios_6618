@@ -1,0 +1,50 @@
+---
+title: "ANOVA versus Linear Regression"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# ANOVA versus Regression
+
+Different disciplines have different ways to refer to different approaches to modeling continuous outcomes. While I think of most things as forms of regression, you may see the following terminology:
+
+- **ANOVA** (analysis of variance): predictor can only be categorical (one-way ANOVA which we considered has one predictor, but two-way ANOVA has two categorical predictors, etc.)
+- **Regression**: predictors are only continuous
+- **ANCOVA** (analysis of covariance): predictors can be both categorical and continuous
+
+There are some other subtle differences with the basics of the methods as we covered them:
+
+| **Feature**      | **ANOVA**     | **ANCOVA/Regression**    |
+|------------------|---------------|--------------------------|
+| $H_0$ | Compares group means | Evaluates if overall model predicts $Y$ better than group mean (can test group means with contrasts and/or cell means) |
+| Assumptions  | Equal or unequal variances | Homogeneity of variances  |
+| Post-Hoc Testing | Lots of procedures and corrections for multiplicity | Do not necessarily do corrections for multiple testing   |
+| Covariates | Can't accommodate | Can easily accommodate |
+
+In practice, the biggest limitation of using ANOVA more often in practice is the fact you cannot adjust for other variables. I often choose regression/ANCOVA approaches, even if I am initially fitting a model with only 1 categorical predictor, because I never know if I'll need to expand my model to include other covariates in the future. If I have a very well-defined problem with a continuous outcome and single categorical predictor, I may use ANOVA to provide a little more flexibility with the unequal variance assumption.
+
+A more philosophical question is if regression should use the same explicit post-hoc corrections that ANOVA uses. There is no clear answer here with various viewpoints:
+
+- You should correct whenever doing multiple testing (e.g., fitting linear regression with a categorical predictor) to avoid type I errors
+- You should consider corrections that are appropriate to your setting if your research is confirmatory (e.g., pre-planned, specific comparisons with corrections to control a small set of comparisons)
+- You should only report nominal (i.e., uncorrected) p-values and note no corrections were taken
+- You should conduct simultaneous inference to more dynamically adjust the estimates, p-values, and confidence intervals (e.g., GLHT versus one-by-one comparisons)
+
+

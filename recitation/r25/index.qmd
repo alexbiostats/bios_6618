@@ -1,0 +1,101 @@
+---
+title: "Why Do We Set Seeds?"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Setting the Seed
+
+One aspect of reproducible coding is setting the seed. Seeds are used to initialize a pseudorandom number generator that ultimately gives us the "random" aspects we may request in our statistical processes. I like to informally think of it as an address that tells the computer where to start generating random numbers.
+
+## Pseudo vs. True Random Number Generation
+
+Randomness is fundamental to statistical inference. Our control of randomness is key to experimentation and the scientific method. We ultimately use pseudo-random number generation (PRNG) because of some of the properties described in the table below as compared to true random number generation (TRNG). PRNGs are generated via an algorithm(s) using mathematical formula to produce sequences of numbers that seem random (enough) to us. TRNGs are extracted from physical phenomena and introduced to a computer (e.g., lightning strikes, atmospheric noise). The table from [random.org](https://www.random.org/randomness/) below describes some of these differences:
+
+
+| Characteristic | Pseudo Random Number Generators | True Random Number Generators |
+|----------------|:-------------------------------:|:-----------------------------:|
+| Efficiency     |            Excellent            |              Poor             |
+| Determinism    |          Deterministic          |        Nondeterministic       |
+| Periodicity    |             Periodic            |           Aperiodic           |
+
+**Efficiency** is if we can produce many numbers in a short time.
+
+**Determinism** is if we can reproduce our results (given a known starting point, i.e., set seed).
+
+**Periodicity** is the idea that if we go for long enough, we will eventually repeat the sequence. This isn't really a concern with PRNGs for what we'll do in 6618.
+
+
+## Seed Selection
+
+The good news about selecting a seed, anything works as long as you know what the seed is! If you do not set the seed yourself, I believe R uses some combination fo current time and the process ID (i.e., not really reproducible). Let's walk through a short example to illustrate why this is important by simulating some data from a Poisson distribution.
+
+### Generating Data *Without* Setting the Seed
+
+As an example, let's simulate 5 values from a Poisson distribution with $\lambda=3$ without setting the seed. Our results are
+
+```{r}
+five_vals <- rpois(n=5, lambda=3) # simulate 5 random values from a Poisson distribution with lambda=3
+five_vals # print those 5 random values
+mean(five_vals) # calculate the mean of those 5 random values
+```
+
+From this output we see that the mean of these values was `r round(mean(five_vals),2)`. Let's say we lost power or shared our code with someone else to run. If we just reran this code without setting the seed we would see 5 new estimates that do not necessarily match what we had before:
+
+```{r}
+five_vals <- rpois(n=5, lambda=3) # simulate 5 random values from a Poisson distribution with lambda=3
+five_vals # print those 5 random values
+mean(five_vals) # calculate the mean of those 5 random values
+```
+
+
+### Generating Data With `set.seed`
+
+If, instead, we set the seed at some location, such as `set.seed(6611)` we see that we will get the same responses every time we simulate the five values (as long as we re-set the seed before running the code):
+
+```{r}
+set.seed(6611) # set the seed for reproducibility
+
+five_vals_seed_set <- rpois(n=5, lambda=3) # simulate 5 random values from a Poisson distribution with lambda=3
+five_vals_seed_set # print those 5 random values
+mean(five_vals_seed_set) # calculate the mean of those 5 random values
+```
+
+Now, let's set the seed again and re-run the code:
+
+```{r}
+set.seed(6611) # set the seed for reproducibility
+
+five_vals_seed_set <- rpois(n=5, lambda=3) # simulate 5 random values from a Poisson distribution with lambda=3
+five_vals_seed_set # print those 5 random values
+mean(five_vals_seed_set) # calculate the mean of those 5 random values
+```
+
+If we continue to generate new data without setting the seed to 6611 we see there are 5 new values:
+
+```{r}
+five_vals_seed_set_five_more <- rpois(n=5, lambda=3) # simulate 5 random values from a Poisson distribution with lambda=3
+five_vals_seed_set_five_more # print those 5 random values
+mean(five_vals_seed_set_five_more) # calculate the mean of those 5 random values
+```
+
+Therefore setting the seed helps you to recreate your past work and avoid subtle (or potentially large) changes in some simulated data estimate. My own personal go-to seeds include `set.seed(515)` (the area code for central Iowa where I grew up) or things like `set.seed(090122)` (i.e., the date of this recitation request).
+
+

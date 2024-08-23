@@ -1,0 +1,67 @@
+---
+title: "Log Transformations and Interpretations in Linear Regression"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Log Transformations and Interpretations
+
+First, remember that in statistics and mathematics we almost always mean the *natural* log ($\ln$, $\log_{e}$) and not $\log_2$ which may be more commonly assumed in computer science/informatics settings or $\log_{10}$ that might be more commonly assumed in engineering contexts. 
+
+When we take a log-transformation of our outcome, $Y$, it obviously changes the model we are fitting. For example, consider the blood storage dataset from our course website:
+
+```{r}
+datb <- read.csv('../../.data/Blood_Storage.csv')
+```
+
+The dataset includes 316 men who had undergone radical prostatectomy and received transfusion during or within 30 days of the surgical procedure and had available PSA follow-up data. Of the 316 men, 307 have data for prostate volume (in grams) and age (in years).
+
+Let's examine the outcome of prostate volume and a single predictor of age. The *true* regression equation, for our observed prostate volume is 
+
+$$ Y = \beta_{0,Y} + \beta_{1,Y} X_{age}+ \epsilon; \; \epsilon \sim N(0,\sigma^{2}_{e})  $$
+
+The *true* regression equation for our log-transformed prostate volume is very similar:
+
+$$ \log(Y) = \beta_{0,\log(Y)} + \beta_{1,\log(Y)} X_{age}+ \epsilon; \; \epsilon \sim N(0,\sigma^{2}_{e})  $$
+
+If we fit both models we also have similar interpretations for our beta coefficients, but they change with respect to what the outcome is:
+
+* $\hat{\beta}_{1,Y}$ for $Y$: For a one-year increase in age, prostate volume increases by an average of $\hat{\beta}_{1,Y}$.
+* $\hat{\beta}_{1,\log(Y)}$ for $\log(Y)$: For a one-year increase in age, log(prostate volume) increases by an average of $\hat{\beta}_{1,\log(Y)}$.
+
+**However, we often want to interpret our outcome for $\log(Y)$ back on its original scale.** Here, we can do a back-transformation from $\log(Y)$ to $Y$. For our regression model, this changes our interpretation of $\beta_{1,\log(Y)}$ on an arithmetic scale to $\exp(\beta_{1,\log(Y)})$ on a multiplicative scale. This follows for our confidence intervals as well.
+
+Let's see our example and interpret:
+
+```{r}
+mod2 <- lm( log(PVol) ~ Age, data=datb )
+summary(mod2)
+confint(mod2)
+```
+
+The slope is the average increase in log(prostate volume) for a one year increase in age. In our problem, it represents that log(prostate volume) increases on average by 0.0182 log(grams) for a one year increase in age (95% CI: 0.0124, 0.0240 log(grams)).
+
+If we exponentiate the slope, our interpretation changes from additive change to multiplicative change: $e^{0.0182}=1.018367$. On average, a one year increase in age results in a prostate volume that is 1.84% higher (i.e., 1.0184 times higher). This also applies to our 95% confidence interval: $e^{(0.0124, 0.0240)} = (1.0125,1.0243)$. We are 95% confident that a one year increase in age results in a prostate volume (in grams) that is 1.25% to 2.43% higher (i.e., 1.0125 to 1.0243 higher).
+
+If we conduct any diagnostics (e.g., plots, calculating residuals), we will do this for the model we fit with `log(PVol)`. Otherwise, we are really examining the relationship of the original, non-transformed `PVol` that may lead to different conclusions on model assumptions. 
+
+The intercept when back-transformed now represents the [*geometric* mean](https://en.wikipedia.org/wiki/Geometric_mean) and not the [arithmetic mean](https://en.wikipedia.org/wiki/Arithmetic_mean).
+
+

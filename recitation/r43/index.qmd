@@ -1,0 +1,50 @@
+---
+title: "Missing Data Considerations"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Missing Data Considerations
+
+There is a lot of work that has been done for missing data, and here we'll just highlight some approaches that are used (many of which we don't explicitly discuss in BIOS 6618 but you might encounter in the future). There are entire textbooks devoted to this topic, so the below is meant to be a super *brief* introduction.
+
+## Removal of Missing Data
+
+Likely the easiest approach, we simply remove missing data from our analysis(es). This is known as a *complete case analysis* or *listwise deletion*. In the most extreme version, records with *any* missing data in the data set are removed. In practice, I think of this more as complete cases for a specific analysis (e.g., one record might only be missing one variable, so they would only be excluded for analyses that involve that variable, but are kept for everything else). If you pull up the documentation for base R's correlation function, `?cor`, we see it lists a `use` argument where you specify the approach for calculation pairwise correlations (ranging from returning `NA` values if missing one, to complete cases, to pairwise complete cases).
+
+The limitation to this approach is that we are excluding potentially valuable information. Depending on the context, it can also lead to increasingly small sample sizes even if the original data set was much larger. Biases can also be introduced, such as those who finished a study may have had a better experience than those who are lost to follow-up or dropped out.
+
+As we embark on regression analyses, if we do not specify any other approach, R will assume complete case analyses for the variables included in the model (e.g., our outcome, $Y$, and all predictors $X$).
+
+
+## Imputation
+
+An alternative to excluding missing data is to use some form of imputation. These range from simple to extremely complex:
+
+* Plug in the sample mean, median, mode, etc.
+* Use the last observation carried forward (i.e., *LOCF*)
+* Attempt some form of interpolation if the missing data is between two longitudinal time points we do have
+* Impute a single data set using statistical approaches
+* Imputation of multiple data sets (i.e., *multiple imputation*)
+
+The most robust is generally multiple imputation, but it can be extremely complex to implement. The simpler choices may be better than nothing, but can also bias the results of the analysis with respect to the underlying "truth".
+
+In practice, the best choice will be context dependent. For BIOS 6618, we will rely primarily on removing missing data since we won't discuss some of these more advanced approaches or the limitations of mean imputation or LOCF.
+

@@ -1,0 +1,96 @@
+---
+title: "Hypothesis Testing for F-tests"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Carotenoids Dataset and F-tests
+
+On our homework you are given a dataset on a cross-sectional study was designed to investigate the relationship between personal characteristics, dietary factors, and plasma concentrations of retinol, beta-carotene and other carotenoids:
+
+```{r}
+carotenoids <- read.table('../../.data/carotenoids.dat') 
+colnames(carotenoids) <- c('age','sex','smoke','bmi','vitamins','calories','fat',
+                    'fiber','alcohol','chol','betadiet','retdiet','betaplas','retplas')
+```
+
+One question asks you to use the carotenoids data set to fit a full linear regression model using the *reference cell* approach that includes smoking status (current, former, never) and calories. When working with categorical predictors and the reference cell model, we always leave one category out of the model to serve as the *reference category*. If we leave all categories in, R will usually return some sort of error/warning about singularities (i.e., there is essentially unneeded information in this case since we can infer if someone is in the reference category if all their other indicators are equal to 0/FALSE).
+
+For our example, let's define our terms so the never smokers are the reference group:
+
+* $X_1$: indicator variable for former smoker
+* $X_2$: indicator variable for current smoker
+* $X_3$: continuous variable for calories
+
+The full true regression model is $Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \epsilon$, where $\epsilon \sim N(0,\sigma^{2}_{Y|X})$.
+
+
+## The Overall Model Fit
+
+One question we might be interested in is, do calories and smoking status contribute significantly to the prediction of beta-carotene levels? Specifically, is this model better than using just the sample mean on its own?
+
+More generally, we might ask this question as *do any of the predictors in my model contribute significantly to the prediction of my outcome?*
+
+The hypothesis we are testing is evaluated with the overall $F$-test:
+
+* $H_0$: $\beta_1 = \beta_2 = \beta_3 = 0$
+* $H_1$: at least one $\beta_{i}$ ($i \in (1,2,3)$) is not equal to 0
+
+There are two direct approaches we've covered in R that use functions without any additional packages:
+
+1. If you fit your model with `lm`, the `summary()` of your model includes the overall $F$-test in the output.
+    * `lm_full <- lm(y ~ x1 + x2 + x3, data=dat)`
+    * `summary(lm_full)`
+2. If you fit your model with `glm` (or also `lm`), you can use the `anova` function to compare 2 models. In this case, we'd still need to fit a null model with only the intercept as our comparator.
+    * `glm_full <- glm(y ~ x1 + x2 + x3, data=dat)`
+    * `glm_null <- glm(y ~ 1, data=dat)`
+    * `anova(glm_full, glm_null, test='F')`
+
+One challenge is that your full model may contain variables that obfuscate the true effect and mislead the potential significance of variables. For example, in this problem we will see that **3c** suggests no significant predictors in the model, but the model without calories in **3e** *does* have a significant overall $F$-test! We will discuss other strategies to evaluating model fit in the near future (e.g., model selection criterion).
+
+
+## Reduced Models
+
+Another question that might be of interest is if a specific variable contributes meaningfully above and beyond that of other variables in the model.
+
+More generally, we might ask this question as *does this subset of variables (which could be just a single variable) contribute significantly to the prediction of our outcome above and beyond the other variables remaining in the model?*
+
+In the case of categorical variables with multiple categories, this is similar to asking *is my multi-categorical variable significantly associated with my outcome?*
+
+In other words, we may see the terms *associated*, *contribute*, or *predict* use fairly interchangeably in our class. In some contexts there are special considerations (e.g., prediction modeling is not something we cover in BIOS 6611 beyond diagnostic testing principles like sensitivity and specificity).
+
+These types of hypotheses are evaluated with the partial $F$-test.
+
+Recall, for our carotenoids data our full regression model is $Y = \beta_0 + \beta_1 X_{\text{former}} + \beta_2 X_{\text{current}} + \beta_3 X_{\text{calories}} + \epsilon$. We may ask questions like:
+
+1. Is smoking status significantly associated with plasma beta-carotene levels?
+    * $H_0$: $\beta_1 = \beta_2 = 0$
+    * $H_1$: either $\beta_1$ and/or $\beta_2$ are not 0
+    * The most direct way to implement the partial $F$-test is using the `anova` function for both `lm` and `glm` models:
+        * `glm_full <- glm(y ~ x1 + x2 + x3, data=dat)`
+        * `glm_red <- glm(y ~ x3, data=dat)`
+        * `anova(glm_full, glm_red, test='F')`
+    
+2. Is calories significantly associated with plasma beta-carotene levels?
+    * $H_0$: $\beta_3 = 0$
+    * $H_1$: $\beta_3 \neq 0$
+    * This question could also be answered directly from the regression output's coefficient table with the $t$-statistic and p-value.
+
+

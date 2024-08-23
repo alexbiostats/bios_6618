@@ -1,0 +1,136 @@
+---
+title: Confidence Interval Differences in `lm` and `glm`
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Confidence Interval Approaches
+
+In lecture we discussed how you can calculate confidence intervals "by hand" or using R (or SAS) to do so for our beta coefficients. For example, by hand our confidence interval formula is generally along the lines of 
+
+$$ \hat{\beta_k} \pm t_{1-\alpha/2, n-p-1} SE(\hat{\beta}_k) $$
+
+where $n$ is our number of observations and $p$ is our number of predictors in the model.
+
+Let's illustrate the calculation of the slope of $\hat{\beta}_{1}$ for the following simulated simple linear regression model:
+
+```{r}
+set.seed(1103) # set seed for reproducibility
+
+# Simulate data to use for our true regression model
+x4 <- rnorm(n=10,mean=100,sd=15) # simulate a continuous predictor
+
+# Simulate the error term for our regression model with SD=10
+error <- rnorm(n=10, mean=0, sd=10) 
+
+# Create the "true" model
+y2 <- -15 + 0.5*x4 + error
+
+# Fit regression model with both lm and glm
+lm_ci <- lm(y2 ~ x4)
+glm_ci <- glm(y2 ~ x4)
+```
+
+## Using `confint` with `lm` vs. By Hand
+
+Our summary output for our `lm` object is
+
+```{r}
+summary(lm_ci)
+```
+
+and its calculated confidence intervals are
+
+```{r}
+confint(lm_ci)
+```
+
+If we calculate the 95% CI by hand from the output provided we arrive at:
+
+$$ \hat{\beta_1} \pm t_{1-\alpha/2, n-p-1} SE(\hat{\beta}_1) = 0.5303 \pm 2.306004 \times 0.1627 $$
+
+We pull $\hat{\beta}_1$ and $SE(\hat{\beta}_1)$ directly from our regression output. We can calculate the value from our $t$-distribution corresponding to $t_{1-\alpha/2, n-p-1} = t_{1-0.05/2, 10-1-1}$ by using `qt(0.975, df=8)`. The estimated 95% CI is therefore 
+
+$$ (0.1551131, \; 0.9054869) $$
+
+**This does NOT exactly match the confidence interval provided by `confint` for our `lm` model.** No need to be overly concerned in this situation, because it is simply due to rounding. R is able to retain many, many more decimal places of information. If we instead stored the pieces of information and had R calculate our confidence interval "by hand" we find that we do achieve agreement:
+
+```{r}
+b1 <- summary(lm_ci)$coefficients['x4','Estimate']
+b1_se <- summary(lm_ci)$coefficients['x4','Std. Error']
+tval <- qt(0.975, df=8)
+b1 + c(-1,1)*tval*b1_se
+```
+
+
+## Using `confint` with `glm` vs. By Hand
+
+What would happen if we used `glm` instead of `lm` to calculate our confidence intervals:
+
+```{r}
+summary(glm_ci)
+confint(glm_ci)
+```
+
+**Ruh-oh, looks like this interval is very different from our `lm` output!** In this case, we need to remember that `glm` uses the standard normal distribution in its calculation of the confidence interval:
+
+$$ \hat{\beta_1} \pm Z_{1-\alpha/2} SE(\hat{\beta}_1) = 0.5303 \pm 1.959964 \times 0.1627 = (0.2114139,\; 0.849186) $$
+
+Again, our "by hand" and `confint` intervals are slightly different due to rounding. If we have R do the calculations for us the confidence intervals match:
+
+```{r}
+b1 <- summary(glm_ci)$coefficients['x4','Estimate']
+b1_se <- summary(glm_ci)$coefficients['x4','Std. Error']
+zval <- qnorm(0.975)
+b1 + c(-1,1)*zval*b1_se
+```
+
+
+## When Should `lm` and `glm` More-or-Less Match?
+
+We know that the $t$-distribution looks increasingly normal as $n \to \infty$. Therefore, as our sample size increases the differences in our confidence interval grow increasingly small. Let's examine the confidence intervals across a range of increasing sample sizes to see this firsthand:
+
+```{r, message=F, class.source = 'fold-hide'}
+#| code-fold: true
+#| fig-cap: "We see that at $N=30000$ the confidence intervals are nearly identical (the LCI differs by 0.000001). "
+#| filters:
+#| - parse-latex
+
+set.seed(515)
+
+size_vec <- c(10,30,100,300,1000,3000,10000,30000)
+conf_mat <- matrix(nrow=length(size_vec), ncol=5, dimnames = list(paste0('N=',size_vec), c('lm LCI','glm LCI','b1','glm UCI','lm UCI')) )
+
+for( s in 1:length(size_vec) ){
+  x <- rnorm(n=size_vec[s], mean=100, sd=50)
+  y <- 100 + 3*x + rnorm(n=size_vec[s], mean=0, sd=45)
+  lms <- lm(y ~ x)
+  glms <- glm(y ~ x)
+  conf_mat[s,] <- c( confint(lms)[2,1], confint(glms)[2,1], coef(lms)[2], confint(glms)[2,2], confint(lms)[2,2])
+}
+
+library(kableExtra)
+kableExtra::kbl(conf_mat, col.names=c('lm LCI','glm LCI','$\\hat{\\beta}_{1}$','glm UCI','lm UCI'), align='ccccc', escape=F) %>%
+      kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```
+
+
+
+

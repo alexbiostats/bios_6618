@@ -1,0 +1,339 @@
+---
+title: "General Linear Hypothesis Testing (GLHT) and Matrices, Contrasts, and F-Tests"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Contrasts and General Linear Hypothesis Testing
+
+We've discussed various ways we can compare different variables in our regression model:
+
+* With categorical variables we can either change the reference category and refit the model to compare two groups if neither is the reference (e.g., never smokers as reference, with former and current smokers as the indicators included in the model). Or we can use the variance-covariance matrix to calculate these differences from the original model.
+* We can calculate the difference for more than a 1-unit change in a continuous predictor (e.g., what if $X$ increases by 5 units).
+
+As noted above, we could potentially refit the models the change the reference category or otherwise transform some aspect of the data/model to try and answer hypotheses that may stem from these questions:
+
+* Is there a significant difference between former and heavy smokers?
+* Is the change for a 5-unit increase in $X$ significantly different from 0 (or any other null hypothesis)?
+
+Let's examine some of these questions with our carotenoids data set:
+
+On our homework you are given a dataset on a cross-sectional study was designed to investigate the relationship between personal characteristics, dietary factors, and plasma concentrations of retinol, beta-carotene and other carotenoids:
+
+```{r, warning=F, message=F}
+library(multcomp) # package to load for contrasts/general linear hypothesis testing
+
+dat <- read.table("../../.data/carotenoids.dat")
+
+colnames(dat) <- c('age','sex','smoke','bmi','vitamins','calories','fat',
+                    'fiber','alcohol','chol','betadiet','retdiet','betaplas','retplas')
+
+dat$AK_smoke_f <- factor(dat$smoke, levels=c(1,2,3), labels=c('Never','Former','Current'))
+```
+
+
+## Contrasts
+
+In the most general sense, contrasts are differences between regression coefficients. Further, the comparison of coefficients must sum to 0: $\sum c_i = 0$.
+
+For example, if our regression model was comparing some outcome between never, former, and current smokers we might have:
+
+$$ \hat{Y} = \hat{\beta}_{0} + \hat{\beta}_{\text{former}} I_{F} + \hat{\beta}_{\text{current}} I_{C} $$
+
+If we wanted to compare (1) never and former or (2) never and current smokers we would be able to simply evaluate our output's regression coefficient table and interpret the $t$-test/p-value provided.
+
+If we wanted to compare if the mean levels were the same between former and current smokers, we could propose a contrast: $(0, 1, -1)$. This would translate to $H_0 \colon \hat{\beta}_{\text{former}} - \hat{\beta}_{\text{current}} = 0$.
+
+We can make a more direct connection to the mean for each group if we recall:
+
+* $\mu_{\text{never}} = \hat{\beta}_{0}$
+* $\mu_{\text{former}} = \hat{\beta}_{0} + \hat{\beta}_{\text{former}}$
+* $\mu_{\text{current}} = \hat{\beta}_{0} + \hat{\beta}_{\text{current}}$
+
+Then we can see what is being compared for each pairwise comparison (and a more direct connection to ANOVA):
+
+* Never vs. Former: $(\hat{\beta}_{0} + \hat{\beta}_{\text{former}}) - \hat{\beta}_{0} = \hat{\beta}_{\text{former}}$
+* Never vs. Current: $(\hat{\beta}_{0} + \hat{\beta}_{\text{current}}) - \hat{\beta}_{0} = \hat{\beta}_{\text{current}}$
+* Current vs. Former: $(\hat{\beta}_{0} + \hat{\beta}_{\text{former}}) - (\hat{\beta}_{0} + \hat{\beta}_{\text{current}}) = \hat{\beta}_{\text{former}} - \hat{\beta}_{\text{current}}$
+
+Our default hypothesis test for each of these is that there is no difference (e.g., 0).
+
+While this is meant to be a general comparison of regression coefficients, it is restricted in that the contrast must sum to 0. We are also restricted to testing if the difference is 0.
+
+
+### Contrasts Example
+
+Let's fit a reference cell model first between beta-carotene in the diet as our outcome and smoking status as our predictor:
+
+```{r}
+mod1 <- glm(betadiet ~ AK_smoke_f, data=dat)
+summary(mod1)
+```
+
+We see from our output, that there is no statistically significant difference between never smokers and former or current smokers (p=0.3685, p=0.0528, respectively). However, if we wished to compare the former and current smokers we would need to specify our contrast:
+
+```{r}
+c <- matrix( c(0,1,-1), nrow=1 )
+summary(glht(mod1,linfct=c))
+```
+
+We see here that p=0.0128, so we'd reject the null hypothesis that former and current smokers have equal means for the dietary beta-carotene.
+
+
+### Contrasts with Cell Means Models
+
+One of the natural applications for contrasts is with cell means models for regression:
+
+```{r}
+mod1_cellmeans <- glm(betadiet ~ AK_smoke_f - 1, data=dat)
+summary(mod1_cellmeans)
+```
+
+We see in our summary output that all of our means are significantly different from 0, but we haven't completed any pairwise comparisons. We can specify three contrasts to replicate our results above from the reference cell model:
+
+```{r}
+c_cellmeans <- matrix( c(1,-1,0, 
+                         1,0,-1, 
+                         0,1,-1), 
+                       nrow=3, byrow=T ) # specify a matrix with 3 rows (one for each contrast)
+
+pairwise_cellmeans <- glht(mod1_cellmeans, linfct=c_cellmeans)
+summary(pairwise_cellmeans, test=adjusted("none"))
+```
+
+This reflects our results from before!
+
+We can also note that `summary.glht` includes options to adjust for multiplicity (the default is a "single-step method" adjustment):
+
+```{r}
+summary(pairwise_cellmeans)
+```
+
+With these specific results, we see that our conclusions would not change for each pairwise test even after accounting for multiple testing.
+
+
+## General Linear Hypothesis Testing
+
+### Testing Differences Other Than 0
+
+We can generalize contrasts to test for differences that aren't just 0. For example, we might wish to revise our cell means result to compare to a difference of 0.5 between groups:
+
+```{r}
+c_cellmeans <- matrix( c(1,-1,0, 
+                         1,0,-1, 
+                         0,1,-1), 
+                       nrow=3, byrow=T ) # specify a matrix with 3 rows (one for each contrast)
+pairwise_cellmeans_glht <- glht(mod1_cellmeans, linfct=c_cellmeans, rhs=c(0.5,0.5,0.5))
+summary(pairwise_cellmeans_glht, test=adjusted("none"))
+```
+
+We can see that the linear hypothesis test is now comparing our estimates to 0.5 instead of 0. It makes sense that the first pairwise difference (Never-Former) is now significant, but the other two are not. However, direction does matter since we aren't testing if the difference is either positive or negative 0.5, just +0.5.
+
+
+### Comparisons with $\sum c_i \neq 0$
+
+With GLHT, we can also compare any combination of interest, even if it doesn't sum to 0.
+
+For example, we can compare if the means for current smokers is equal to half that of never smokers. This null hypothesis is $\frac{1}{2}\mu_{N} = \mu_{C} \implies \frac{1}{2}\mu_{N} + 0 \mu_F + -1 \mu_{C} = 0$:
+
+```{r}
+c3_cellmeans <- matrix(c(0.5,0,-1), nrow=1)
+summary(glht(mod1_cellmeans,linfct=c3_cellmeans))
+```
+
+We can also specify this in terms of the reference cell model with 
+
+$$ \frac{1}{2}\mu_{N} + 0 \mu_F + -1 \mu_{C} = 0 \implies \frac{1}{2}\hat{\beta}_{0} - (\hat{\beta}_{0} + \hat{\beta}_{C}) = 0 \implies -\frac{1}{2}\hat{\beta}_{0} - \hat{\beta}_{C} = 0 $$
+
+```{r}
+c3 <- matrix(c(-0.5,0,-1), nrow=1)
+summary(glht(mod1,linfct=c3))
+```
+
+We see the reference cell and cell means model results match, even though our contrasts were:
+
+$$
+\begin{matrix} \text{Reference Cell} \\ \text{Cell Means} \end{matrix} 
+\begin{matrix} = \\ = \end{matrix}
+\begin{pmatrix}
+-0.5 & 0 & -1 \\
+0.5 & 0 & -1
+\end{pmatrix}
+$$
+
+
+### More Complex Models
+
+We can also play around with far more complex models and use our GLHT to estimate various effects, combinations of predictors, and/or compare to hypotheses that are equal to 0 or any other value. Consider:
+
+```{r}
+glm_be_cray <- glm(betadiet ~ AK_smoke_f + bmi + age, data=dat)
+summary(glm_be_cray)
+```
+
+If we wanted to compare a 35-year old nonsmoker and 50-year old former smoker with the same BMI, we would have:
+
+$$
+\begin{align}
+&\hat{\beta}_0 &+ 0 \hat{\beta}_{F} &+ 0 \hat{\beta}_{C} &+ X_{BMI}\hat{\beta}_{BMI} &+ 35 \hat{\beta}_{age} \\
+- (&\hat{\beta}_0 &+ 1 \hat{\beta}_{F} &+ 0 \hat{\beta}_{C} &+ X_{BMI}\hat{\beta}_{BMI} &+ 50 \hat{\beta}_{age}) \\
+\hline
+&0\hat{\beta}_0 & -1 \hat{\beta}_{F} & \;\;\;\;0 \hat{\beta}_{C} & 0 \hat{\beta}_{BMI} & -15 \hat{\beta}_{age}
+\end{align}
+$$
+
+```{r}
+c4 <- matrix(c(0,-1,0,0,-15), nrow=1)
+summary(glht(glm_be_cray,linfct=c4))
+```
+
+From this test result we see that there is no significant difference between these two combinations based on our regression output.
+
+We could also calculate a confidence interval around our estimate:
+
+```{r}
+confint(glht(glm_be_cray,linfct=c4))
+```
+
+Note that it summarize our results as "simultaneous CIs" to control the 95% *family-wise* confidence level. In other words, if we were testing multiple hypotheses, it would apply a correction to not just our p-value, but also the confidence intervals:
+
+```{r}
+c4_plus2random <- matrix(c(0,-1,0,0,-15, 
+                           1,0,0,10,0, 
+                           0,-1,1,10,10), 
+                         nrow=3, byrow=T)
+confint(glht(glm_be_cray, linfct=c4_plus2random))
+```
+
+The first CI is now wider, reflecting the correction for multiple testing to maintain the family-wise type I error rate.
+
+
+
+## Joint Testing
+
+One aspect we haven't covered yet, what if you wish to *jointly* test multiple hypotheses at the same time (e.g., like an overall $F$-test)? This would account for the potential of multiple testing and may better reflect specific combinations of hypotheses.
+
+In one case, we might have a specific question of interest that relies on specifying multiple hypotheses. For instance, what if we believed that our dietary beta-carotene should have a linear trend where former smokers have a 0.5 higher level than never smokers, and current smokers are 1.0 higher level than never smokers:
+
+```{r}
+# returning to our simpler reference cell model with just smoking status
+K <- matrix( c(0,1,0,
+               0,0,1),
+             nrow=2, byrow=T)
+hyp_val <- c(0.5,1.0)
+
+joint_test <- glht(mod1, linfct = K, rhs = hyp_val)
+
+# Specify a joint test with test=Ftest() that conducts an overall F-test for the two hypotheses
+summary(joint_test, test=Ftest())
+```
+
+This $F$-test indicates that we would reject the *joint* null hypothesis, at least one of the null hypotheses would be rejected.
+
+A natural follow-up question would be, which one(s) do we reject? To correct for multiple comparisons, we see
+
+```{r}
+# For comparison, summarize the family-wise corrected individual tests
+summary(joint_test)
+```
+
+In other words, we would reject our second null hypothesis that $H_0 \colon \beta_{C} = 1$, but not the first that $H_0 \colon \beta_{F} = 0.5$.
+
+In practice, I tend to favor conducting the hypothesis test that directly addresses the question of interest (especially if you end up correcting for multiple comparisons anyway). However, there are likely cases where a global test of a joint hypothesis is most appropriate and efficient.
+
+
+## F-tests with Matrices versus `anova` and Connections to Joint Testing
+
+The $F$-test can be used to test the GLH:
+\begin{equation*}
+F = \frac{[(\mathbf{c}\hat{\boldsymbol{\beta}}-\mathbf{d})^T(\mathbf{c}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{c}^T)^{-1}(\mathbf{c}\hat{\boldsymbol{\beta}}-\mathbf{d})/r]}{\hat{\sigma}^2_{Y|X}} \sim F_{r,n-p-1}
+\end{equation*}
+
+where $\hat{\sigma}^2_{Y|X}$ is our MSE from the full model. This reduces to our Partial $F$-test for testing a group of variables, because
+
+\begin{equation*}
+(\mathbf{c}\hat{\boldsymbol{\beta}})^T(\mathbf{c}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{c}^T)^{-1}(\mathbf{c}\hat{\boldsymbol{\beta}}) = SS_{model}(full)-SS_{model}(reduced)
+\end{equation*}
+
+Therefore, a test of a single linear hypothesis for a single parameter also reduces to our $t$-test.
+
+Note, the above formulas do NOT require us to refit a "reduced" model to compare to our full model. Instead, all of our needed information is contained within our design matrix and our $\mathbf{c}_{r \times p}$ matrix of rank $r$ where $r \leq p$ (i.e., number of rows that are "unique" (i.e., not made up of other combinations of rows)).
+
+Let's compare the overall F-test for the following model using matrices or by fitting a reduced model and using the `anova()` function:
+
+```{r}
+### Model-based approach
+glm_be_cray <- glm(betadiet ~ AK_smoke_f + bmi + age, data=dat)
+glm_be_null <- glm(betadiet ~ 1, data=dat)
+anova(glm_be_cray, glm_be_null, test='F')
+
+### Matrix approach
+# Create indicators for smoking categories
+dat$AK_smoke_former <- dat$smoke==2
+dat$AK_smoke_current <- dat$smoke==3
+
+Y <- dat$betadiet
+YtY <- t(Y) %*% Y
+X <- cbind(1, dat$AK_smoke_former, dat$AK_smoke_current, dat$bmi, dat$age)
+Xt <- t(X)
+XtX <- t(X) %*% X
+XtX_inv <- solve(XtX)
+beta_vec <- XtX_inv %*% t(X) %*% Y
+Yhat <- X %*% beta_vec
+mse <- ( YtY - t(beta_vec) %*% t(X) %*% Y ) / ( length(Y) - ncol(X) )
+c <- matrix( c(0,1,0,0,0,
+               0,0,1,0,0,
+               0,0,0,1,0,
+               0,0,0,0,1), ncol=ncol(X), byrow=T)
+d <- matrix( c(0,0,0,0), ncol=1 )
+Fstat_num <- ( t(c%*%beta_vec - d) %*% solve(c %*% XtX_inv %*% t(c)) %*% (c%*%beta_vec - d) ) / nrow(c)
+Fstat <- Fstat_num / mse
+Fstat
+```
+
+We can see that we've arrived at the same result, but without having to fit the reduced model!
+
+The connection between the partial F-test and the GLHT may help us better draw connections between our formulas and the two approaches:
+
+$$ F = \frac{[SS_{model}(full) - SS_{model}(reduced)]/k^{*}}{MS_{error}(full)} \sim F_{k^{*},n-p^{*}-k^{*}-1} $$
+$$ F = \frac{[(\mathbf{c}\hat{\boldsymbol{\beta}}-\mathbf{d})^T(\mathbf{c}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{c}^T)^{-1}(\mathbf{c}\hat{\boldsymbol{\beta}}-\mathbf{d})/r]}{\hat{\sigma}^2_{Y|X}} \sim F_{r,n-p-1} $$
+
+From our notation we see for the partial F-test that the total number of parameters in the full model is $p^{*}+k^{*}$; whereas in the GLH F-test it is just $p$. 
+
+Further, for the partial F-test $k^{*}$ is the number of parameters removed from the full model; whereas in the GLH F-test $r$ is the rank of $\mathbf{c}$: 
+
+\begin{bmatrix}
+0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 1
+\end{bmatrix} 
+
+where each column represents a beta coefficient, including the intercept, and each row represents a different hypothesis test being conducted jointly/simultaneously). 
+
+For completeness, the null hypothesis the GLH is testing is:
+
+$$ H_0 \colon \; \mathbf{c}\boldsymbol{\beta} = \mathbf{d} \implies \begin{bmatrix}
+0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 1
+\end{bmatrix} \begin{bmatrix} \beta_0 \\ \beta_{former} \\ \beta_{current} \\ \beta_{bmi} \\ \beta_{age} \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \end{bmatrix}  $$
+

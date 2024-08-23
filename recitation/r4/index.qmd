@@ -1,0 +1,61 @@
+---
+title: "Multiple Testing Correction and Their Use in Randomized Trials"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Multiple Testing Correction
+
+In our lecture on "Multiple Comparisons", we discussed that there are a few contexts where one may be wary of conducting multiple tests:
+
+* there is an overall/global hypothesis, but we then want to do post-hoc testing between groups (e.g., a multiple comparisons problem)
+* in genomics we may wish to evaluate 1000s of SNPs in one study (e.g., a multiple testing problem)
+* for a trial, we may define multiple primary outcomes of interest. (e.g., potentially both a multiple testing and comparisons problem)
+
+In these cases, we may wish to control the overall type I error across multiple tests (known as the *family-wise type I error rate*), and not just the type I error rate for a single test (known as the *marginal type I error rate*). 
+
+There are a few ways we can account for these analyses:
+
+* during the design stage of a study (e.g., power calculations using a more conservative $\alpha$)
+* during the analysis stage after we have our data (e.g., FDR or Bonferroni adjustments; post-hoc testing in ANOVA)
+
+However, this issue may not be as cut-and-dried as it looks. For example, Mark Rubin published ["When to adjust alpha during multiple testing: a consideration of disjunction, conjunction, and individual testing"](https://link.springer.com/article/10.1007/s11229-021-03276-4) in *Synthese*, where he argues corrections are only needed for "disjunction testing" where you care that "at least one test result must be significant in order to reject the associated joint null hypothesis". 
+
+Others question *what* we should correct, a series of p-values for the same outcome? Within a class of hypotheses (e.g., within the same table)? *The lifetime accumulation of hypothesis tests?(!)*
+
+In practice, I approach each new project and evaluate its context and the history of the discipline. If I don't correct for multiple comparisons, I make sure to very clearly note this in the statistical methods section of the paper. Sometimes I present both unadjusted (raw) and adjusted (corrected) p-values for transparency. In certain cases, journals are shunning p-values except for the primary outcome(s) and suggesting only descriptive estimates with confidence intervals be provided (which we know connect to p-values).
+
+## Multiple Testing Within Clinical Trials
+
+Within a randomized controlled trial, controlling for multiple testing is often considered very important. But there are some caveats:
+
+* It depends on the phase of the trial. Phase I (safety, dose-finding, feasibility) and Phase II (more safety, initial efficacy) may not be as concerned since we are looking for any signal of a significant association (for safety concerns, efficacy, etc.) to know if future phases are worth investing in.
+* It depends on whether the tests are for the primary, secondary, exploratory, or safety outcomes. Often we try to only define a single primary outcome, but sometimes we may have co-primary. Many times we have multiple secondary outcomes, and we do wish to control for multiple testing if we are in a Phase III (or Phase IIb potentially) trial (i.e., a trial used for FDA approval or to have "confirmatory" results). Exploratory and safety may be less concerning given the more open-ended nature (exploratory) or the desire to be conservative with respect to participant experiences (safety).
+
+If we do want to consider multiple testing corrections, there exist a wide range of strategies:
+
+* Run all your tests and don't correct, noting in the results there is no adjustment for multiple testing. You could also provide justification like the Rubin paper above or this commentary by Parker and Weir from 2022 in *Trials* ["Multiple secondary outcome analyses: precise interpretation is important"](https://trialsjournal.biomedcentral.com/articles/10.1186/s13063-021-05975-2).
+* Use one of the corrections or strategies from lecture (e.g., Bonferroni, FDR, etc.).
+* Employ a *hierarchical testing* strategy where you order your outcome(s) by priority and keep testing them at the $\alpha$ level until one is not significant. Check out the European Medicines Agency (EMA) guidance [pages 3/10 and 6/10 in "Points to Consider on Multiplicity Issues in Clinical Trials"](https://www.ema.europa.eu/en/documents/scientific-guideline/points-consider-multiplicity-issues-clinical-trials_en.pdf).
+
+Another common setting where we correct for multiple testing is with *interim monitoring* (i.e., where we look at study data accrued at a given stage and determine if we should stop for futility, efficacy, safety, re-estimate the sample size, etc.). Depending on the method, if we see the unblinded trial data we need to account for that by "spending $\alpha$" and adjusting our final threshold. For example, you may specify an overall $\alpha=0.05$, but with 3 interim looks using O'Brien-Fleming boundaries for efficacy our final threshold may be $p<0.045$ instead of $p<0.05$. The trade-off being we could stop the trial early (saving resources and money) if needed.
+
+
+

@@ -1,0 +1,280 @@
+---
+title: "Splines in Linear Regression"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Splines
+
+## Why Extra Knots?
+
+In our lecture slides we noted:
+
+The B-spline basis is a common spline basis and can be fit in `R` using the `splines::bs()` function.
+
+The B-spline basis is based on the knot sequence:
+\begin{align*} 
+\xi_1 \leq \cdots &  \leq \xi_d \leq \color{red}{\xi_{d+1}} < \color{blue}{\xi_{d+2}} < \cdots \color{blue}{\xi_{d+K+1}} \\
+ & < \color{red}{\xi_{d+K+2}} \leq \xi_{d+K+3} \leq \cdots \leq \xi_{2d+K+2}
+ \end{align*}
+
+The "inner knots" are represented by $\color{blue}{\xi_{d+2}} = \tau_1, \cdots, \color{blue}{\xi_{d+K+1}}=\tau_K$.
+
+The "boundary knots" are defined as $\color{red}{\xi_{d+1}}=a$ and $\color{red}{\xi_{d+K+2}}=b$.
+
+The choice of additional knots $\xi_1, \cdots, \xi_d$ and $\xi_{d+K+3}, \cdots, \xi_{2d+K+2}$ is somewhat arbitrary, with a common strategy being to set them equal to the boundary knots.
+
+The reason we set these additional knots before and after the boundary knots (even if we set them to be identical) is to assist in defining appropriate basis functions for each segment of our data (i.e., between any two knots). This could be thought of as a mathematical trick to ensure certain properties of the B-spline are maintained, but the specific mathematical details go beyond the material for our class.
+
+
+## Selecting Optimal Parameters
+
+In our lecture we also mentioned approaches to selecting optimal spline parameters:
+
+- Use of visual evaluation (e.g., seeing that the data does not appear to be overfit)
+- Model selection criterion (e.g., AIC, AICc, BIC, etc.) to compare models with different parameters (minimized AIC is preferred)
+- Cross validation (CV) by dividing the $N$ data points into $K$ groups/folds for train/test set evaluation
+
+We've seen examples of visual evaluation already, so we'll explore some approaches using model selection criteria. Let's revisit our NHANES data example focusing on modeling testosterone in males:
+
+```{r}
+dat <- read.csv('../../.data/nhanes1516_sexhormone.csv')
+datm <- dat[which(dat$MALE==TRUE),] # subset to males
+
+plot(x=datm$RIDAGEYR, y=datm$TESTOSTERONE, xlab='Age (years)', ylab='Testosterone (ng/dL)', col='gray85', cex=0.5)
+```
+
+We again see a clearly non-linear trend for age and testosterone. Let's fit a range of models with different degrees of freedom (3, 4, and 5) using B-splines and natural cubic splines:
+
+```{r}
+library(splines)
+
+# create empty lists to store results in
+bs_list <- ns_list <- list()
+
+# loop through degrees of freedom of 3 to 15 and save model
+for( df in 3:15 ){
+  bs_list[[(df-2)]] <- lm( TESTOSTERONE ~ bs(RIDAGEYR, df=df), data=datm)
+  ns_list[[(df-2)]] <- lm( TESTOSTERONE ~ ns(RIDAGEYR, df=df), data=datm)
+}
+```
+
+Let's plot some of these trends:
+
+```{r, class.source = 'fold-hide'}
+#| code-fold: true
+newdatm <- data.frame( RIDAGEYR = 6:80 )
+
+par(mfrow=c(2,2), mar=c(4,4,3,1))
+
+# df=3
+plot(x=datm$RIDAGEYR, y=datm$TESTOSTERONE, xlab='Age (years)', ylab='Testosterone (ng/dL)', col='gray85', cex=0.5, main='df=3')
+lines(x=newdatm$RIDAGEYR, y=predict(bs_list[[1]], newdata=newdatm))
+lines(x=newdatm$RIDAGEYR, y=predict(ns_list[[1]], newdata=newdatm), lty=2)
+legend('topright', col=c('black','black'), lty=c(1,2), legend=c('bs','ns'), bty='n', cex=0.8)
+
+# df=6
+plot(x=datm$RIDAGEYR, y=datm$TESTOSTERONE, xlab='Age (years)', ylab='Testosterone (ng/dL)', col='gray85', cex=0.5, main='df=6')
+lines(x=newdatm$RIDAGEYR, y=predict(bs_list[[4]], newdata=newdatm))
+lines(x=newdatm$RIDAGEYR, y=predict(ns_list[[4]], newdata=newdatm), lty=2)
+legend('topright', col=c('black','black'), lty=c(1,2), legend=c('bs','ns'), bty='n', cex=0.8)
+
+# df=8
+plot(x=datm$RIDAGEYR, y=datm$TESTOSTERONE, xlab='Age (years)', ylab='Testosterone (ng/dL)', col='gray85', cex=0.5, main='df=8')
+lines(x=newdatm$RIDAGEYR, y=predict(bs_list[[6]], newdata=newdatm))
+lines(x=newdatm$RIDAGEYR, y=predict(ns_list[[6]], newdata=newdatm), lty=2)
+legend('topright', col=c('black','black'), lty=c(1,2), legend=c('bs','ns'), bty='n', cex=0.8)
+
+# df=9
+plot(x=datm$RIDAGEYR, y=datm$TESTOSTERONE, xlab='Age (years)', ylab='Testosterone (ng/dL)', col='gray85', cex=0.5, main='df=9')
+lines(x=newdatm$RIDAGEYR, y=predict(bs_list[[7]], newdata=newdatm))
+lines(x=newdatm$RIDAGEYR, y=predict(ns_list[[7]], newdata=newdatm), lty=2)
+legend('topright', col=c('black','black'), lty=c(1,2), legend=c('bs','ns'), bty='n', cex=0.8)
+```
+
+Visually evaluating the figures, we might think df=3 looks pretty decent (expect, perhaps, at the younger ages). The fit at lower ages is improved as we increase the degrees of freedom. We also might wish to compare the B-spline and the natural cubic splines within any degree of freedom.
+
+One approach is to use model selection criteria. Let's examine a table and plot of our values for AIC and BIC:
+
+```{r}
+# estimate AIC
+aic_bs <- sapply(1:13, function(x) AIC(bs_list[[x]]))
+aic_ns <- sapply(1:13, function(x) AIC(ns_list[[x]]))
+
+# estimate BIC
+bic_bs <- sapply(1:13, function(x) BIC(bs_list[[x]]))
+bic_ns <- sapply(1:13, function(x) BIC(ns_list[[x]]))
+
+# table of values
+tbl <- cbind(aic_bs,aic_ns,bic_bs,bic_ns)
+rownames(tbl) <- 3:15
+tbl # print
+```
+
+There is a lot going on here. To help us identify the "best" model using AIC or BIC, let's take the minimum AIC or BIC observed across both B-splines and natural cubic splines and compare:
+
+```{r}
+diff <- tbl - matrix(rep(c(min(tbl[,c('aic_bs','aic_ns')]),min(tbl[,c('bic_bs','bic_ns')])), each=nrow(tbl)*2), ncol=4, byrow=F)
+round(diff,1)
+```
+
+With these results and a rule of thumb of decreases in AIC or BIC greater than 4, we notice:
+
+- For AIC, the natural cubic spline model with df=9 minimizes the AIC. Models within 4 of this include:
+    - df=11 B-spline ($\Delta=2.1$)
+    - df=15 B-spline ($\Delta=3.1$)
+    - df=13 natural cubic spline ($\Delta=1.4$)
+    - df=14 natural cubic spline ($\Delta=2.3$)
+    - However, all these models have higher degrees of freedom and are less parsimonious.
+- For BIC, the natural cubic spline model with df=9 minimizes the BIC. Models within 4 of this include:
+    - df=8 natural cubic spline ($\Delta=3.6$)
+    - Since df=8 has fewer degrees of freedom, could select it instead of df=9 because it is slightly more parsimonious
+
+However, it may also be useful to visualize if there is a point where we might start to experience "diminishing returns" for increasing our model complexity (and risking overfitting the data). Here we can plot the AIC and BIC for each method and degree of freedom:
+
+```{r}
+# plot of values
+plot(x=3:15, y=aic_bs, xlab='df', ylab='AIC/BIC Value', type='o', ylim=range(c(aic_bs,aic_ns,bic_bs,bic_ns)))
+lines(x=3:15, y=aic_ns, pch=2, lty=2, col='blue', type='o')
+lines(x=3:15, y=bic_bs, pch=16, lty=3, col='orangered2', type='o')
+lines(x=3:15, y=bic_ns, pch=17, lty=4, col='purple', type='o')
+legend('topright', lty=1:4, pch=c(1,2,16,17), col=c('black','blue','orangered2','purple'), legend=c('AIC bs','AIC ns','BIC bs','BIC ns'))
+```
+
+Some takeaways here:
+
+- Around df=7 we stop seeing larger changes (there is still some moving around, e.g., B-splines do increase from df=7 to 8 before decreasing again). So, we might consider choosing df=7 even though it wasn't "optimal" based on the change in AIC or BIC from above.
+- We can see that BIC (solid points) is larger than the AIC (open points) values, where both natural cubic splines and B-splines seem to converge to very similar results at larger degrees of freedom.
+- In practice there are many ways we could justify the choice of different splines, degrees of freedom, or choice across other models.
+
+
+
+## Model Interpretation with Splines
+
+We've discussed the challenges of interpreting polynomial and spline models when our primary explanatory variable of interest is the one with the nonlinear trend. Here we will explore a model with both sex and age to see how interpretations may be affected.
+
+### MLR with Sex and Age
+
+Let's revisit our NHANES data example focusing on modeling testosterone, but this time in males and females and plot one multiple linear regression model with sex and age:
+
+```{r}
+dat <- read.csv('../../.data/nhanes1516_sexhormone.csv')
+
+# fit MLR
+mod1 <- lm( TESTOSTERONE ~ RIDAGEYR + MALE, data=dat )
+summary(mod1)
+```
+
+The interpretations of our beta coefficients here are easy to interpret:
+
+- Age: For a 1 year increase in age, testosterone increases by an average of 1.36 ng/dL after adjusting for sex.
+- Sex: Testosterone is an average of 337.68 ng/dL higher in males than females after adjusting for age.
+
+We can visualize, however, that this isn't likely the best fit:
+
+```{r}
+# create variable to change point type by sex
+dat$pch <- 1
+dat$pch[which(dat$MALE==FALSE)] <- 0
+
+# create plot
+plot(x=dat$RIDAGEYR, y=dat$TESTOSTERONE, xlab='Age (years)', ylab='Testosterone (ng/dL)', col='gray85', cex=0.5, pch=dat$pch)
+legend('topleft', bty='n', pch=c(0,1,NA,NA), lty=c(NA,NA,1,1), legend=c('Females','Males','Females: Fitted Line','Males: Fitted Line'), col=c('gray85','gray85','green3','purple'), cex=0.8)
+
+# add regression fits
+newdat_male <- data.frame( RIDAGEYR=6:80, MALE=TRUE)
+newdat_female <- data.frame( RIDAGEYR=6:80, MALE=FALSE)
+
+lines(x=6:80, y=predict(mod1, newdata=newdat_male), col='purple', lwd=2)
+lines(x=6:80, y=predict(mod1, newdata=newdat_female), col='green3', lwd=2)
+```
+
+Indeed, the fits are in both groups do not appear to be accurately reflecting the trend with age. Let's try fitting a model with a natural cubic spline used for age next.
+
+
+### Sex and Age with Natural Cubic Spline
+
+Here we will add a natural cubic spline to age with a degree of freedom of 8 (based on our other question evaluating spline calibration):
+
+```{r}
+library(splines)
+
+# fit MLR
+mod2 <- lm( TESTOSTERONE ~ ns(RIDAGEYR,df=8) + MALE, data=dat )
+summary(mod2)
+```
+
+The interpretations of our sex coefficient is still easy to interpret, but age not so much:
+
+- Age: Given the splines, the rate of change in testosterone values will depend on the age we are comparing to.
+- Sex: Testosterone is an average of 339.05 ng/dL higher in males than females after adjusting for age.
+
+Interestingly, we do have a similar sex difference estimated between our two models. Visually, this looks like:
+
+```{r}
+# create plot
+plot(x=dat$RIDAGEYR, y=dat$TESTOSTERONE, xlab='Age (years)', ylab='Testosterone (ng/dL)', col='gray85', cex=0.5, pch=dat$pch)
+legend('topleft', bty='n', pch=c(0,1,NA,NA), lty=c(NA,NA,1,1), legend=c('Females','Males','Females: Fitted Line','Males: Fitted Line'), col=c('gray85','gray85','green3','purple'), cex=0.8)
+
+
+# add regression fits
+lines(x=6:80, y=predict(mod2, newdata=newdat_male), col='purple', lwd=2)
+lines(x=6:80, y=predict(mod2, newdata=newdat_female), col='green3', lwd=2)
+```
+
+While a little better, there does appear to be an issue with assuming the the sex difference is constant across ages. We can try to account for this by including an interaction term in our next model.
+
+
+### Sex and Age with Natural Cubic Spline and Their Interaction
+
+Here we will add an interaction between sex and age (with a spline) from our previous model:
+
+```{r}
+library(splines)
+
+# fit MLR
+mod3 <- lm( TESTOSTERONE ~ ns(RIDAGEYR,df=8) * MALE, data=dat )
+summary(mod3)
+```
+
+While interactions can be challenging to interpret, when it is an interaction with a spline (or polynomial) we once again cannot have a simple interpretation since within each sex there is a difference in testosterone with age.
+
+Visually, this looks like:
+
+```{r}
+# create plot
+plot(x=dat$RIDAGEYR, y=dat$TESTOSTERONE, xlab='Age (years)', ylab='Testosterone (ng/dL)', col='gray85', cex=0.5, pch=dat$pch)
+legend('topleft', bty='n', pch=c(0,1,NA,NA), lty=c(NA,NA,1,1), legend=c('Females','Males','Females: Fitted Line','Males: Fitted Line'), col=c('gray85','gray85','green3','purple'), cex=0.8)
+
+
+# add regression fits
+lines(x=6:80, y=predict(mod3, newdata=newdat_male), col='purple', lwd=2)
+lines(x=6:80, y=predict(mod3, newdata=newdat_female), col='green3', lwd=2)
+```
+
+Here we have a great looking model! If we wanted to do a numerical check that this model is an improvement (even if hard to interpret), we could calculate something like the AIC or BIC:
+
+```{r}
+c(AIC(mod1),AIC(mod2),AIC(mod3))
+c(BIC(mod1),BIC(mod2),BIC(mod3))
+```
+
+Both AIC and BIC agree the most complex model is an improvement over any of the simpler models.
+

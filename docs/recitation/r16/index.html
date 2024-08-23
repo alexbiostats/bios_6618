@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alex Kaizer">
+
+<title>Alex Kaizer - Hypothesis Testing in Intercept-Only, Simple, and Multiple Linear Regression Models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/academicons-1.9.1/css/academicons.css" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="./files/favicon.ico">
+
+<script type="text/javascript">
+function setBrand() {
+document.getElementsByClassName("navbar-brand")[0].href="https://www.alexkaizer.com";
+}
+window.onload = setBrand;
+</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5PBG7BL207"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5PBG7BL207');
+</script>
+
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Alex Kaizer</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/research" rel="" target="">
+ <span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/publications" rel="" target="">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Teaching</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching">    
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/teaching" rel="" target="">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6618" rel="" target="">
+ <span class="dropdown-text">BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6611" rel="" target="">
+ <span class="dropdown-text">BIOS 6611</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/study_design_berd" rel="" target="">
+ <span class="dropdown-text">BERD Study Design Short Course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/adaptivetrials_sc" rel="" target="">
+ <span class="dropdown-text">WNAR Adaptive and Bayesian Clinical Trial Design Short Course</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bios-6618" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">BIOS 6618</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-bios-6618">    
+        <li>
+    <a class="dropdown-item" href="../../index.html" rel="" target="">
+ <span class="dropdown-text">Home</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../bios_6618_materials" rel="" target="">
+ <span class="dropdown-text">Materials</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../journal_of_bios_6618" rel="" target="">
+ <span class="dropdown-text">Journal of BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../recitation" rel="" target="">
+ <span class="dropdown-text">Recitation Questions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs" rel="" target="">
+ <span class="dropdown-text">Labs and Practice Problems</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:alex.kaizer@cuanschutz.edu" rel="" target=""><i class="bi bi-envelope" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=ICpH74EAAAAJ&amp;hl=en" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-google-scholar ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="http://github.com/alexbiostats" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/files/Alex_CV.pdf" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-cv ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/alex-kaizer/" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#hypothesis-testing-in-our-regression-models" id="toc-hypothesis-testing-in-our-regression-models" class="nav-link active" data-scroll-target="#hypothesis-testing-in-our-regression-models">Hypothesis Testing in Our Regression Models</a>
+  <ul class="collapse">
+  <li><a href="#the-intercept-only-model" id="toc-the-intercept-only-model" class="nav-link" data-scroll-target="#the-intercept-only-model">The Intercept Only Model</a>
+  <ul class="collapse">
+  <li><a href="#sample-mean-and-the-intercept-in-an-intercept-only-model" id="toc-sample-mean-and-the-intercept-in-an-intercept-only-model" class="nav-link" data-scroll-target="#sample-mean-and-the-intercept-in-an-intercept-only-model">Sample Mean and the Intercept (in an Intercept-Only Model)</a></li>
+  <li><a href="#where-is-my-overall-f-test-in-an-intercept-only-model" id="toc-where-is-my-overall-f-test-in-an-intercept-only-model" class="nav-link" data-scroll-target="#where-is-my-overall-f-test-in-an-intercept-only-model">Where is my Overall <span class="math inline">\(F\)</span>-test (in an Intercept-Only Model)?</a></li>
+  <li><a href="#hypothesis-testing-for-the-intercept" id="toc-hypothesis-testing-for-the-intercept" class="nav-link" data-scroll-target="#hypothesis-testing-for-the-intercept">Hypothesis Testing for the Intercept</a></li>
+  <li><a href="#hypothesis-testing-for-other-null-values" id="toc-hypothesis-testing-for-other-null-values" class="nav-link" data-scroll-target="#hypothesis-testing-for-other-null-values">Hypothesis Testing for Other Null Values</a></li>
+  </ul></li>
+  <li><a href="#the-simple-linear-regression-model" id="toc-the-simple-linear-regression-model" class="nav-link" data-scroll-target="#the-simple-linear-regression-model">The Simple Linear Regression Model</a>
+  <ul class="collapse">
+  <li><a href="#hypothesis-testing-for-the-intercept-1" id="toc-hypothesis-testing-for-the-intercept-1" class="nav-link" data-scroll-target="#hypothesis-testing-for-the-intercept-1">Hypothesis Testing for the Intercept</a></li>
+  <li><a href="#hypothesis-testing-for-the-slope" id="toc-hypothesis-testing-for-the-slope" class="nav-link" data-scroll-target="#hypothesis-testing-for-the-slope">Hypothesis Testing for the Slope</a></li>
+  <li><a href="#hypothesis-testing-for-the-overall-model-fit-the-overall-f-test" id="toc-hypothesis-testing-for-the-overall-model-fit-the-overall-f-test" class="nav-link" data-scroll-target="#hypothesis-testing-for-the-overall-model-fit-the-overall-f-test">Hypothesis Testing for the Overall Model Fit (the Overall <span class="math inline">\(F\)</span>-test)</a></li>
+  <li><a href="#what-about-slr-x_2-and-x_3" id="toc-what-about-slr-x_2-and-x_3" class="nav-link" data-scroll-target="#what-about-slr-x_2-and-x_3">What About SLR <span class="math inline">\(X_2\)</span> and <span class="math inline">\(X_3\)</span>?</a></li>
+  </ul></li>
+  <li><a href="#the-multiple-linear-regression-model" id="toc-the-multiple-linear-regression-model" class="nav-link" data-scroll-target="#the-multiple-linear-regression-model">The Multiple Linear Regression Model</a>
+  <ul class="collapse">
+  <li><a href="#testing-the-overall-model-fit-the-overall-f-test" id="toc-testing-the-overall-model-fit-the-overall-f-test" class="nav-link" data-scroll-target="#testing-the-overall-model-fit-the-overall-f-test">Testing the Overall Model Fit (the Overall <span class="math inline">\(F\)</span>-Test)</a></li>
+  <li><a href="#testing-a-subset-of-the-predictors-the-partial-f-test" id="toc-testing-a-subset-of-the-predictors-the-partial-f-test" class="nav-link" data-scroll-target="#testing-a-subset-of-the-predictors-the-partial-f-test">Testing a Subset of the Predictors (the Partial <span class="math inline">\(F\)</span>-Test)</a></li>
+  <li><a href="#testing-a-single-predictor-the-t-test" id="toc-testing-a-single-predictor-the-t-test" class="nav-link" data-scroll-target="#testing-a-single-predictor-the-t-test">Testing a Single Predictor (the <span class="math inline">\(t\)</span>-test)</a></li>
+  </ul></li>
+  <li><a href="#sanity-check-what-if-we-didnt-simulate-error" id="toc-sanity-check-what-if-we-didnt-simulate-error" class="nav-link" data-scroll-target="#sanity-check-what-if-we-didnt-simulate-error">Sanity Check: What If We Didn’t Simulate Error?</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Hypothesis Testing in Intercept-Only, Simple, and Multiple Linear Regression Models</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Alex Kaizer </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Colorado-Anschutz Medical Campus
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This page is part of the University of Colorado-Anschutz Medical Campus’ <a href="../../recitation/index.html">BIOS 6618 Recitation</a> collection. To view other questions, you can view the <a href="../../recitation/index.html">BIOS 6618 Recitation</a> collection page or use the search bar to look for keywords.</p>
+<section id="hypothesis-testing-in-our-regression-models" class="level1">
+<h1>Hypothesis Testing in Our Regression Models</h1>
+<p>There are tons of things we can conduct inference on for our regression models. We’ll start by simulating data and building our model up from the simplest (no predictors) to the most complete (all simulated predictors).</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1104</span>) <span class="co"># set seed for reproducibility</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate data to use for our true regression model</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">20</span>,<span class="at">mean=</span><span class="dv">10</span>,<span class="at">sd=</span><span class="dv">15</span>) <span class="co"># simulate a continuous predictor</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="at">n=</span><span class="dv">20</span>,<span class="at">rate=</span><span class="fl">0.25</span>) <span class="co"># simulate another continuous predictor</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n=</span><span class="dv">20</span>, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span><span class="fl">0.5</span>) <span class="co"># simulate a binary predictor</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate the error term for our regression model with SD=25</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">20</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">25</span>) </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the "true" model where x2 and x3 both have a slope of 0 (i.e., don't contribute to our prediction)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x1 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>x2 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>x3 <span class="sc">+</span> error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The “true regression model” we have simulated is <span class="math inline">\(Y = \beta_0 + \beta_1 X_1 + \epsilon\)</span> where <span class="math inline">\(\epsilon \sim N(\mu=0,\sigma=25)\)</span>. And here, since we are simulated, we also know that <span class="math inline">\(\beta_0=100\)</span> and <span class="math inline">\(\beta_1=2\)</span>, even though our sample will have its <em>error</em> in estimating this relationship and this won’t precisely hold.</p>
+<p>Let’s take a quick look at the simulated data for our outcome and 3 predictors in our sample of <span class="math inline">\(n=20\)</span>:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r fold-hide code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">5.1</span>,<span class="fl">4.1</span>,<span class="fl">1.1</span>,<span class="fl">1.1</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1,y)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x2,y)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x3,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Based on our simulation, even though we might envision some possible trend or relationship for <span class="math inline">\(X_2\)</span> and <span class="math inline">\(X_3\)</span>, we know these are simulated under the null hypothesis that their corresponding beta coefficient should equal 0.</p>
+<section id="the-intercept-only-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-intercept-only-model">The Intercept Only Model</h2>
+<p>The simplest model to predict what we expect the outcome to be based on our data is a linear regression model that <em>only contains the intercept</em>. This is equivalent to calculating the mean for our outcome, <span class="math inline">\(\bar{Y}\)</span>, as we will see below.</p>
+<p>The true regression model here is: <span class="math inline">\(Y = \beta_0 + \epsilon ; \; \epsilon \sim N(0,\sigma^{2}_{e})\)</span>.</p>
+<p>Let’s fit our intercept-only linear regression model and write our estimated/predicted regression equation. Then, we’ll highlight some points to consider with respect to the model and what we test.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mod_intonly <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">1</span>) <span class="co"># the "1" indicates that only an intercept should be fit (i.e., no predictors)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_intonly) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ 1)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-111.415  -13.067    4.244   34.839   83.965 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   111.08      11.58   9.592 1.02e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 51.79 on 19 degrees of freedom</code></pre>
+</div>
+</div>
+<p>Our estimated regression model based on our data is: <span class="math inline">\(\hat{Y} = \hat{\beta}_{0} = 111.08\)</span>.</p>
+<section id="sample-mean-and-the-intercept-in-an-intercept-only-model" class="level3">
+<h3 class="anchored" data-anchor-id="sample-mean-and-the-intercept-in-an-intercept-only-model">Sample Mean and the Intercept (in an Intercept-Only Model)</h3>
+<p>We can see that this is equal to our sample mean for <span class="math inline">\(\bar{Y}\)</span>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y) <span class="co"># compare to mean</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 111.0772</code></pre>
+</div>
+</div>
+</section>
+<section id="where-is-my-overall-f-test-in-an-intercept-only-model" class="level3">
+<h3 class="anchored" data-anchor-id="where-is-my-overall-f-test-in-an-intercept-only-model">Where is my Overall <span class="math inline">\(F\)</span>-test (in an Intercept-Only Model)?</h3>
+<p>Notice that the regression summary output <em>does not include the overall <span class="math inline">\(F\)</span>-test</em>. This is because the overall <span class="math inline">\(F\)</span>-test evaluates the hypothesis that the beta coefficients for <em>all</em> our predictors are equal to 0 (i.e., <span class="math inline">\(H_0 \colon \beta_1 = \beta_2 = \cdots = \beta_{p} = 0\)</span>). However, we have no predictors in this model! If we think back to the ANOVA table:</p>
+<div class="cell" data-filters="parse-latex">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r fold-hide code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>anova_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="st">'Source'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'Model'</span>,<span class="st">'Error'</span>,<span class="st">'Total'</span>),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'Sums of Squares'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'SS~Model~'</span>,<span class="st">'SS~Error~'</span>,<span class="st">'SS~Total~'</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'Degrees of Freedom'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'p'</span>,<span class="st">'n-p-1'</span>,<span class="st">'n-1'</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'Mean Square'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'MS~Model~'</span>,<span class="st">'MS~Error~'</span>,<span class="st">''</span>),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'F Value'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'MS~Model~/MS~Error~'</span>,<span class="st">''</span>,<span class="st">''</span>),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'p-value'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'Pr(F~p,n-p-1~ &gt; F)'</span>,<span class="st">''</span>,<span class="st">''</span>))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(anova_df, <span class="at">col.names=</span><span class="fu">c</span>(<span class="st">'Source'</span>,<span class="st">'Sums of Squares'</span>,<span class="st">'Degrees of Freedom'</span>,<span class="st">'Mean Square'</span>,<span class="st">'F-value'</span>,<span class="st">'p-value'</span>),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">align=</span><span class="st">'lccccc'</span>, <span class="at">escape=</span>F) <span class="sc">%&gt;%</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>, <span class="at">full_width =</span> F, <span class="at">position =</span> <span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+Source
+</th>
+<th style="text-align:center;">
+Sums of Squares
+</th>
+<th style="text-align:center;">
+Degrees of Freedom
+</th>
+<th style="text-align:center;">
+Mean Square
+</th>
+<th style="text-align:center;">
+F-value
+</th>
+<th style="text-align:center;">
+p-value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Model
+</td>
+<td style="text-align:center;">
+SS<sub>Model</sub>
+</td>
+<td style="text-align:center;">
+p
+</td>
+<td style="text-align:center;">
+MS<sub>Model</sub>
+</td>
+<td style="text-align:center;">
+MS<sub>Model</sub>/MS<sub>Error</sub>
+</td>
+<td style="text-align:center;">
+Pr(F<sub>p,n-p-1</sub> &gt; F)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Error
+</td>
+<td style="text-align:center;">
+SS<sub>Error</sub>
+</td>
+<td style="text-align:center;">
+n-p-1
+</td>
+<td style="text-align:center;">
+MS<sub>Error</sub>
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Total
+</td>
+<td style="text-align:center;">
+SS<sub>Total</sub>
+</td>
+<td style="text-align:center;">
+n-1
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+</tbody>
+
+</table>
+<p>We can see that we have no <strong>Model</strong> degrees of freedom since <span class="math inline">\(p=0\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="hypothesis-testing-for-the-intercept" class="level3">
+<h3 class="anchored" data-anchor-id="hypothesis-testing-for-the-intercept">Hypothesis Testing for the Intercept</h3>
+<p>We can still test the null hypothesis that the intercept is equal to 0. In other words, <span class="math inline">\(H_0\colon \beta_0=0\)</span> versus <span class="math inline">\(H_1\colon \beta_0 \neq 0\)</span>. While we can conduct these tests “by hand”, we can also leverage our regression output from above to note that <span class="math inline">\(t=\)</span> 9.592 and <span class="math inline">\(p=\)</span> 1.02e-08 <span class="math inline">\(&lt;0.001\)</span>.</p>
+<p>If we wanted to verify or calculate these values by hand, we see that <span class="math inline">\(t = \frac{111.08}{11.58} = 9.592\)</span> and we can compare this to a <span class="math inline">\(t_{n-p-1} = t_{n-1} = t_{19}\)</span> distribution to calculate our p-value: <code>2*pt(9.592, df=19, lower.tail=F)</code> = 1.0251487^{-8}. Recall, we double our p-value since we have a two-sided hypothesis test.</p>
+<p>In this case, since <span class="math inline">\(p&lt;0.001\)</span>, we reject our null hypothesis and conclude that the intercept is significantly different from 0.</p>
+</section>
+<section id="hypothesis-testing-for-other-null-values" class="level3">
+<h3 class="anchored" data-anchor-id="hypothesis-testing-for-other-null-values">Hypothesis Testing for Other Null Values</h3>
+<p>The default value we tend to use for our hypothesis test of the intercept and slope terms is against a null of 0. However, we can test whatever value we wish (and might be more biologically meaningful). For example, in our calculation above “by hand” we could test <span class="math inline">\(H_0\colon \beta_0=100\)</span> versus <span class="math inline">\(H_1\colon \beta_0 \neq 100\)</span>:</p>
+<p><span class="math display">\[ t = \frac{\hat{\beta}_{0} - \beta_{0}}{SE(\hat{\beta}_{0})} = \frac{111.08 - 100}{11.58} = \frac{11.08}{11.58} = 0.9568221 \]</span></p>
+<p>We can calculate our p-value similarly to our above example: <code>2*pt(0.9568221, df=19, lower.tail=F)</code> = 0.3506744. Since <span class="math inline">\(p&gt;0.05\)</span>, we fail to reject the null hypothesis that the intercept is <em>significantly different from 100</em>.</p>
+<p>This idea also extends to our simple and multiple linear regression models, where we can test any of our beta coefficients against any proposed null value of interest.</p>
+</section>
+</section>
+<section id="the-simple-linear-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-simple-linear-regression-model">The Simple Linear Regression Model</h2>
+<p>From our scatterplots above (and because we simulated the data), we know that there is additional information beyond just our outcome that is useful to incorporate. For example, <span class="math inline">\(X_1\)</span> in our simulation has <span class="math inline">\(\beta_1 = 2\)</span>, so the outcome should be better described by incorporating this information. This, in turn, provides a more accurate estimate of what an observation’s outcome should be than just naively using <span class="math inline">\(\bar{Y}\)</span> for everyone.</p>
+<p>The true regression model here is: <span class="math inline">\(Y = \beta_0 + \beta_1 X_{1} + \epsilon ; \; \epsilon \sim N(0,\sigma^{2}_{e})\)</span>.</p>
+<p>Let’s fit our simple linear regression model and write our estimated/predicted regression equation. Then, we’ll highlight some points to consider with respect to the model and what we test.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mod_slr <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x1)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_slr) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-23.181 -10.477  -2.215   9.139  31.422 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 104.6118     3.6339   28.79  &lt; 2e-16 ***
+x1            2.6131     0.1956   13.36 8.82e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 16.11 on 18 degrees of freedom
+Multiple R-squared:  0.9084,    Adjusted R-squared:  0.9033 
+F-statistic: 178.4 on 1 and 18 DF,  p-value: 8.824e-11</code></pre>
+</div>
+</div>
+<p>Our estimated regression model based on our data is: <span class="math inline">\(\hat{Y} = \hat{\beta}_{0} + \hat{\beta}_{1}X_{1} = 104.6118 + 2.6131 X_{1}\)</span>.</p>
+<p>We can add this line to earlier scatterplot before examining how to test various questions of interest:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1,y)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod_slr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="hypothesis-testing-for-the-intercept-1" class="level3">
+<h3 class="anchored" data-anchor-id="hypothesis-testing-for-the-intercept-1">Hypothesis Testing for the Intercept</h3>
+<p>Like in our intercept-only model, we can test a null hypothesis that the intercept is equal to 0:</p>
+<p><span class="math display">\[ H_0\colon \beta_0 = 0 \text{ vs. } H_1\colon \beta_0 \neq 0 \]</span></p>
+<p>This information can be easily extracted from our summary table output, where we see that <span class="math inline">\(t=28.79\)</span> and <span class="math inline">\(p&lt;0.001\)</span>. Therefore, we would reject the null hypothesis that the intercept is equal to 0. In other words, based on our sample and the simple linear regression model we fit, when the predictor <span class="math inline">\(X_1 = 0\)</span>, the predicted average value for our outcome is 104.6118.</p>
+<p>In many cases, the context implies that the intercept is nonsensical to interpret or it relies on <em>extrapolation</em> of our data. For example, if we had a sample of 30-60 year olds where we measured the amount of time they spent using a computer each week, the intercept would represent the average computer use for a 0 year old. This makes no sense given a 0 year old was literally just born and is highly unlikely to actively use a computer on their own. Further, our sample only included 30-60 year olds, so even if a 0 year old could use a computer, we would have to extrapolate our findings down to a 0 year old, which may not reflect their actual use pattern anyway.</p>
+</section>
+<section id="hypothesis-testing-for-the-slope" class="level3">
+<h3 class="anchored" data-anchor-id="hypothesis-testing-for-the-slope">Hypothesis Testing for the Slope</h3>
+<p>More often, we are interested in testing if the beta coefficient for our predictor (often called the slope) is significantly different from 0:</p>
+<p><span class="math display">\[ H_0\colon \beta_1 = 0 \text{ vs. } H_1\colon \beta_1 \neq 0 \]</span></p>
+<p>In the context of linear regression, a slope of 0 would indicate that there is no change in the outcome (<span class="math inline">\(Y\)</span>) across the range of the predictor (<span class="math inline">\(X_1\)</span>).</p>
+<p>For our SLR model, we can likewise extract the information from our summary table, where we see that <span class="math inline">\(t=13.36\)</span> and <span class="math inline">\(p&lt;0.001\)</span>. Therefore, we would reject the null hypothesis that the slope is 0.</p>
+<p>We can also compare the output p-value to one we calculate in R based on the <span class="math inline">\(t\)</span> statistic: <code>2*pt(summary(mod_slr)$coefficients['x1','t value'], df=18, lower.tail=F)</code>= 8.824259^{-11}. Recall, we are using a <span class="math inline">\(t_{n-p-1} = t_{20-1-1} = t_{18}\)</span> distribution as our reference.</p>
+</section>
+<section id="hypothesis-testing-for-the-overall-model-fit-the-overall-f-test" class="level3">
+<h3 class="anchored" data-anchor-id="hypothesis-testing-for-the-overall-model-fit-the-overall-f-test">Hypothesis Testing for the Overall Model Fit (the Overall <span class="math inline">\(F\)</span>-test)</h3>
+<p>A final question that may be of interest if is the <em>overall model with all predictors is better at predicting the outcome than just the sample mean of the outcome alone</em>. In other words, is it useful to include all the predictors I may have in my model? Or have I made something more complicated than just using <span class="math inline">\(\bar{Y}\)</span> that doesn’t give me any benefit?</p>
+<p>To address this question, we can conduct an overall <span class="math inline">\(F\)</span>-test. This examines the hypothesis for our simple linear regression that</p>
+<p><span class="math display">\[ H_0\colon \beta_1 = 0 \text{ vs. } H_1\colon \beta_1 \neq 0 \]</span></p>
+<p><strong>This should look familiar, since it is the same hypotheses we evaluated for hypothesis testing of the slope!</strong> For simple linear regression, we actually have a direct relationship between the <span class="math inline">\(t\)</span> and <span class="math inline">\(F\)</span> statistics, since they are evaluating identical hypotheses.</p>
+<p>From our summary output, we see that <span class="math inline">\(F=178.4\)</span>, which is equal (after considering the output has rounded to only 2 decimal places) to <span class="math inline">\(t^2 = (13.36)^2 = 178.4896\)</span>.</p>
+</section>
+<section id="what-about-slr-x_2-and-x_3" class="level3">
+<h3 class="anchored" data-anchor-id="what-about-slr-x_2-and-x_3">What About SLR <span class="math inline">\(X_2\)</span> and <span class="math inline">\(X_3\)</span>?</h3>
+<p>In our simulation, we set both <span class="math inline">\(X_2\)</span> and <span class="math inline">\(X_3\)</span> to have beta coefficients equal to 0. If we run a simple linear regression model and examine the summary output, we see:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-73.402 -41.576   2.492  37.701  70.352 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  150.273     20.925   7.182  1.1e-06 ***
+x2            -8.101      3.730  -2.172   0.0435 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 47.36 on 18 degrees of freedom
+Multiple R-squared:  0.2076,    Adjusted R-squared:  0.1636 
+F-statistic: 4.717 on 1 and 18 DF,  p-value: 0.04347</code></pre>
+</div>
+</div>
+<p>Since <span class="math inline">\(p=0.0435 &lt; 0.05\)</span> we would reject the null hypothesis that the slope is equal to 0. <strong>Since we simulated a null setting, this represents a type I error!</strong></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x3))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x3)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-93.839 -34.215   5.726  29.999 101.541 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    93.50      13.89    6.73 2.62e-06 ***
+x3             43.94      21.97    2.00   0.0608 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 48.12 on 18 degrees of freedom
+Multiple R-squared:  0.1819,    Adjusted R-squared:  0.1364 
+F-statistic: 4.002 on 1 and 18 DF,  p-value: 0.06077</code></pre>
+</div>
+</div>
+<p>Since <span class="math inline">\(p=0.0608 &gt; 0.05\)</span>, we would fail to reject the null hypothesis.</p>
+</section>
+</section>
+<section id="the-multiple-linear-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-multiple-linear-regression-model">The Multiple Linear Regression Model</h2>
+<p>Even though we know from our simulation that <span class="math inline">\(X_2\)</span> and <span class="math inline">\(X_3\)</span> are not used in the calculation of <span class="math inline">\(Y\)</span>, in the real world we would not know this information. Rather, we might want to fit a multiple linear regression model that includes all possible predictors. Under this model, we are assuming that the true regression model is: <span class="math inline">\(Y = \beta_0 + \beta_1 X_{1} + \beta_{2} X_{2} + \beta_{3} X_{3} + \epsilon ; \; \epsilon \sim N(0,\sigma^{2}_{e})\)</span>. <strong>NOTE: We know that this is technically the “wrong” true model based on our simulation, but it is the underlying model we are trying to estimate when fitting this multiple linear regression model.</strong></p>
+<p>Let’s fit our multiple linear regression model and write our estimated/predicted regression equation. Then, we’ll highlight some points to consider with respect to the model and what we test.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mod_mlr <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_mlr) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x1 + x2 + x3)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-20.392 -13.180   1.295   7.935  24.401 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  93.1351     9.7269   9.575 5.01e-08 ***
+x1            2.7714     0.2491  11.127 6.09e-09 ***
+x2            2.1181     1.5659   1.353    0.195    
+x3            2.0920     8.4005   0.249    0.807    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 16.18 on 16 degrees of freedom
+Multiple R-squared:  0.9178,    Adjusted R-squared:  0.9023 
+F-statistic: 59.52 on 3 and 16 DF,  p-value: 6.722e-09</code></pre>
+</div>
+</div>
+<p>Our estimated regression model based on our data is:</p>
+<p><span class="math display">\[ \hat{Y} = \hat{\beta}_{0} + \hat{\beta}_{1}X_{1} + \hat{\beta}_{2}X_{2} + \hat{\beta}_{3}X_{3}= 93.1351 + 2.7714 X_{1} + 2.1181 X_{2} + 2.0920 X_{3}. \]</span></p>
+<section id="testing-the-overall-model-fit-the-overall-f-test" class="level3">
+<h3 class="anchored" data-anchor-id="testing-the-overall-model-fit-the-overall-f-test">Testing the Overall Model Fit (the Overall <span class="math inline">\(F\)</span>-Test)</h3>
+<p>One question we might ask, is if any of our predictors contribute meaningfully to the prediction of <span class="math inline">\(Y\)</span> above and beyond just using <span class="math inline">\(\bar{Y}\)</span> alone. This is evaluated using our overall <span class="math inline">\(F\)</span>-test, where the hypotheses are</p>
+<p><span class="math display">\[ H_0\colon \beta_1 = \beta_2 = \beta_3 = 0 \text{ vs. } H_1\colon \text{ at least one } \beta_{k} \neq 0 \]</span></p>
+<p>We can directly extract this information from our output, where we see <span class="math inline">\(F=59.52\)</span> with <span class="math inline">\(p&lt;0.001\)</span>. Therefore, we reject <span class="math inline">\(H_0\)</span> and conclude that at least one of our beta coefficients is significantly different from 0. However, we have no idea <em>which</em> beta coefficient(s) are significantly different from 0 without further investigation.</p>
+<p>From the output, it is worth highlighting that we are making a comparison to an <span class="math inline">\(F_{k,n-k-1}\)</span> distribution, where <span class="math inline">\(k\)</span> is the number of predictors: <span class="math inline">\(F_{3,20-3-1} = F_{3,16}\)</span>.</p>
+</section>
+<section id="testing-a-subset-of-the-predictors-the-partial-f-test" class="level3">
+<h3 class="anchored" data-anchor-id="testing-a-subset-of-the-predictors-the-partial-f-test">Testing a Subset of the Predictors (the Partial <span class="math inline">\(F\)</span>-Test)</h3>
+<p>Another question we may be interested in answering in a multiple linear regression model, is if some subset of our predictors contribute meaningfully to the prediction of <span class="math inline">\(Y\)</span> above and beyond the reduced model that excludes those predictors. This can be tested with the partial <span class="math inline">\(F\)</span>-test. For example, we may want to test if adding <span class="math inline">\(X_{2}\)</span> and <span class="math inline">\(X_{3}\)</span> is meaningful above and beyond just including <span class="math inline">\(X_{1}\)</span> in our model:</p>
+<p><span class="math display">\[ H_0\colon \beta_2 = \beta_3 = 0 \text{ vs. } H_1\colon \text{ at least one } \beta_{k} \neq 0 \; (k \in 2,3) \]</span></p>
+<p>In our Week 10 Practice Problem Solutions, we have an example of implementing a partial F-test where you can generate the ANOVA tables for the full and reduced models and calculate the partial F-statistic by hand. For brevity, we’ll focus here on using the <code>anova</code> function to compare our models:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod_mlr, mod_slr, <span class="at">test=</span><span class="st">'F'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Model 1: y ~ x1 + x2 + x3
+Model 2: y ~ x1
+  Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+1     16 4190.3                           
+2     18 4669.5 -2   -479.19 0.9149 0.4205</code></pre>
+</div>
+</div>
+<p>Here we see that our partial <span class="math inline">\(F\)</span>-test has <span class="math inline">\(F=0.9149\)</span> and <span class="math inline">\(p=0.4205\)</span>. In other words, since <span class="math inline">\(p&gt;0.05\)</span> we fail to reject the null hypothesis that at least one of our beta coefficients for <span class="math inline">\(X_2\)</span> and <span class="math inline">\(X_3\)</span> is not equal to 0. This suggests that we could focus on the simple linear regression model with just <span class="math inline">\(X_1\)</span> for a simpler, more parsimonious model. (<em>The big potential caveat here for the real world is that variables may still be meaningful if they serve as a confounder, mediator, moderator, precision variable, etc. and your context may still suggest you keep a statistically insignificant predictor in your model!</em>)</p>
+</section>
+<section id="testing-a-single-predictor-the-t-test" class="level3">
+<h3 class="anchored" data-anchor-id="testing-a-single-predictor-the-t-test">Testing a Single Predictor (the <span class="math inline">\(t\)</span>-test)</h3>
+<p>The third question we may want to investigate is if a specific predictor is significantly adding to our model, above and beyond the information contributed by other variables in the model. Assuming we still have our full multiple linear regression model with 3 predictors, the major change here is our interpretation from a simple linear regression model.</p>
+<p>Focusing on <span class="math inline">\(X_1\)</span>, we see that <span class="math inline">\(t=11.127\)</span> and <span class="math inline">\(p&lt;0.001\)</span>, so we would reject the null hypothesis that the slope is 0 (i.e., that <span class="math inline">\(\beta_1 = 0\)</span>). This estimate of our estimate and standard error (and therefore the <span class="math inline">\(t\)</span>-value and p-value) are dependent upon the other predictors in our model. For example, our t-test here is based on <span class="math inline">\(t_{n-p-1} = t_{20-3-1} = t_{16}\)</span>, but in our SLR it was based on <span class="math inline">\(t_{18}\)</span>.</p>
+<p>With regards to interpretation, it is mostly similar with a small bit of added language:</p>
+<ul>
+<li><strong>SLR Interpretation of <span class="math inline">\(\beta_1\)</span></strong>: For a one unit increase in <span class="math inline">\(X_1\)</span>, the average change in <span class="math inline">\(Y\)</span> is <span class="math inline">\(\beta_{1}\)</span>.</li>
+<li><strong>MLR Interpretation of <span class="math inline">\(\beta_1\)</span></strong>: For a one unit increase in <span class="math inline">\(X_1\)</span>, the average change in <span class="math inline">\(Y\)</span> is <span class="math inline">\(\beta_{1}\)</span> after accounting for other variables in the model.</li>
+</ul>
+<p>For the MLR interpretation, other similar phrasings include <em>after adjusting for other variables in the model</em>, <em>after fixing our other predictors</em>, <em>after fixing <span class="math inline">\(X_{2}\)</span> and <span class="math inline">\(X_{3}\)</span></em>, etc. We need some form of language that notes the estimate is conditional on the other predictors included in our model.</p>
+</section>
+</section>
+<section id="sanity-check-what-if-we-didnt-simulate-error" class="level2">
+<h2 class="anchored" data-anchor-id="sanity-check-what-if-we-didnt-simulate-error">Sanity Check: What If We Didn’t Simulate Error?</h2>
+<p>As a final note, what would happen if we didn’t include the error term in our calculation of <code>y</code> above? Let’s see what our regression model would return for the SLR case:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>y_no_error <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x1 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>x2 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>x3 <span class="co">#exclude our earlier error term</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y_no_error <span class="sc">~</span> x1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in summary.lm(lm(y_no_error ~ x1)): essentially perfect fit: summary
+may be unreliable</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y_no_error ~ x1)
+
+Residuals:
+       Min         1Q     Median         3Q        Max 
+-2.275e-14 -1.142e-14 -6.265e-15 -4.132e-15  1.560e-13 
+
+Coefficients:
+             Estimate Std. Error   t value Pr(&gt;|t|)    
+(Intercept) 1.000e+02  8.609e-15 1.162e+16   &lt;2e-16 ***
+x1          2.000e+00  4.635e-16 4.315e+15   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.816e-14 on 18 degrees of freedom
+Multiple R-squared:      1, Adjusted R-squared:      1 
+F-statistic: 1.862e+31 on 1 and 18 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>There is a warning noting we have a perfect fit, so the summary may be unreliable. Indeed, we see that without the error term, we can perfectly predict our beta coefficients and have no variability around the estimates:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1, y_no_error)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(y_no_error <span class="sc">~</span> x1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>In reality, this is very rare (if not almost impossible). Not only is there usually natural variability in the data even if we had perfect measurement, there are other sources of error (e.g., <em>measurement error</em> in how we collect data that adds variability). If you do wind up with a solution with perfect prediction, it is worth thinking through the model, data, and results before too widely disseminating your findings.</p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb23" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Hypothesis Testing in Intercept-Only, Simple, and Multiple Linear Regression Models"</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>This page is part of the University of Colorado-Anschutz Medical Campus' <span class="co">[</span><span class="ot">BIOS 6618 Recitation</span><span class="co">](/recitation/index.qmd)</span> collection. To view other questions, you can view the <span class="co">[</span><span class="ot">BIOS 6618 Recitation</span><span class="co">](/recitation/index.qmd)</span> collection page or use the search bar to look for keywords.</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="fu"># Hypothesis Testing in Our Regression Models</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>There are tons of things we can conduct inference on for our regression models. We'll start by simulating data and building our model up from the simplest (no predictors) to the most complete (all simulated predictors).</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1104</span>) <span class="co"># set seed for reproducibility</span></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate data to use for our true regression model</span></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">20</span>,<span class="at">mean=</span><span class="dv">10</span>,<span class="at">sd=</span><span class="dv">15</span>) <span class="co"># simulate a continuous predictor</span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="at">n=</span><span class="dv">20</span>,<span class="at">rate=</span><span class="fl">0.25</span>) <span class="co"># simulate another continuous predictor</span></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n=</span><span class="dv">20</span>, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span><span class="fl">0.5</span>) <span class="co"># simulate a binary predictor</span></span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate the error term for our regression model with SD=25</span></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">20</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">25</span>) </span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the "true" model where x2 and x3 both have a slope of 0 (i.e., don't contribute to our prediction)</span></span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x1 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>x2 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>x3 <span class="sc">+</span> error</span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>The "true regression model" we have simulated is $Y = \beta_0 + \beta_1 X_1 + \epsilon$ where $\epsilon \sim N(\mu=0,\sigma=25)$. And here, since we are simulated, we also know that $\beta_0=100$ and $\beta_1=2$, even though our sample will have its *error* in estimating this relationship and this won't precisely hold.</span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>Let's take a quick look at the simulated data for our outcome and 3 predictors in our sample of $n=20$:</span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.source = 'fold-hide'}</span></span>
+<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">5.1</span>,<span class="fl">4.1</span>,<span class="fl">1.1</span>,<span class="fl">1.1</span>))</span>
+<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1,y)</span>
+<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x2,y)</span>
+<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x3,y)</span>
+<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-57"><a href="#cb23-57" aria-hidden="true" tabindex="-1"></a>Based on our simulation, even though we might envision some possible trend or relationship for $X_2$ and $X_3$, we know these are simulated under the null hypothesis that their corresponding beta coefficient should equal 0.</span>
+<span id="cb23-58"><a href="#cb23-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## The Intercept Only Model</span></span>
+<span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a>The simplest model to predict what we expect the outcome to be based on our data is a linear regression model that *only contains the intercept*. This is equivalent to calculating the mean for our outcome, $\bar{Y}$, as we will see below.</span>
+<span id="cb23-63"><a href="#cb23-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-64"><a href="#cb23-64" aria-hidden="true" tabindex="-1"></a>The true regression model here is: $Y = \beta_0 + \epsilon ; \; \epsilon \sim N(0,\sigma^{2}_{e})$.</span>
+<span id="cb23-65"><a href="#cb23-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-66"><a href="#cb23-66" aria-hidden="true" tabindex="-1"></a>Let's fit our intercept-only linear regression model and write our estimated/predicted regression equation. Then, we'll highlight some points to consider with respect to the model and what we test.</span>
+<span id="cb23-67"><a href="#cb23-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-70"><a href="#cb23-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-71"><a href="#cb23-71" aria-hidden="true" tabindex="-1"></a>mod_intonly <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">1</span>) <span class="co"># the "1" indicates that only an intercept should be fit (i.e., no predictors)</span></span>
+<span id="cb23-72"><a href="#cb23-72" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_intonly) </span>
+<span id="cb23-73"><a href="#cb23-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-74"><a href="#cb23-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-75"><a href="#cb23-75" aria-hidden="true" tabindex="-1"></a>Our estimated regression model based on our data is: $\hat{Y} = \hat{\beta}_{0} = 111.08$.</span>
+<span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-77"><a href="#cb23-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-78"><a href="#cb23-78" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sample Mean and the Intercept (in an Intercept-Only Model)</span></span>
+<span id="cb23-79"><a href="#cb23-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-80"><a href="#cb23-80" aria-hidden="true" tabindex="-1"></a>We can see that this is equal to our sample mean for $\bar{Y}$:</span>
+<span id="cb23-81"><a href="#cb23-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-84"><a href="#cb23-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-85"><a href="#cb23-85" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y) <span class="co"># compare to mean</span></span>
+<span id="cb23-86"><a href="#cb23-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-87"><a href="#cb23-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-88"><a href="#cb23-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-89"><a href="#cb23-89" aria-hidden="true" tabindex="-1"></a><span class="fu">### Where is my Overall $F$-test (in an Intercept-Only Model)?</span></span>
+<span id="cb23-90"><a href="#cb23-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-91"><a href="#cb23-91" aria-hidden="true" tabindex="-1"></a>Notice that the regression summary output *does not include the overall $F$-test*. This is because the overall $F$-test evaluates the hypothesis that the beta coefficients for *all* our predictors are equal to 0 (i.e., $H_0 \colon \beta_1 = \beta_2 = \cdots = \beta_{p} = 0$). However, we have no predictors in this model! If we think back to the ANOVA table:</span>
+<span id="cb23-92"><a href="#cb23-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-93"><a href="#cb23-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=F, class.source = 'fold-hide'}</span></span>
+<span id="cb23-94"><a href="#cb23-94" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb23-95"><a href="#cb23-95" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "We can see that we have no **Model** degrees of freedom since $p=0$."</span></span>
+<span id="cb23-96"><a href="#cb23-96" aria-hidden="true" tabindex="-1"></a><span class="co">#| filters:</span></span>
+<span id="cb23-97"><a href="#cb23-97" aria-hidden="true" tabindex="-1"></a><span class="co">#| - parse-latex</span></span>
+<span id="cb23-98"><a href="#cb23-98" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb23-99"><a href="#cb23-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-100"><a href="#cb23-100" aria-hidden="true" tabindex="-1"></a>anova_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="st">'Source'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'Model'</span>,<span class="st">'Error'</span>,<span class="st">'Total'</span>),</span>
+<span id="cb23-101"><a href="#cb23-101" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'Sums of Squares'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'SS~Model~'</span>,<span class="st">'SS~Error~'</span>,<span class="st">'SS~Total~'</span>),</span>
+<span id="cb23-102"><a href="#cb23-102" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'Degrees of Freedom'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'p'</span>,<span class="st">'n-p-1'</span>,<span class="st">'n-1'</span>),</span>
+<span id="cb23-103"><a href="#cb23-103" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'Mean Square'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'MS~Model~'</span>,<span class="st">'MS~Error~'</span>,<span class="st">''</span>),</span>
+<span id="cb23-104"><a href="#cb23-104" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'F Value'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'MS~Model~/MS~Error~'</span>,<span class="st">''</span>,<span class="st">''</span>),</span>
+<span id="cb23-105"><a href="#cb23-105" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'p-value'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'Pr(F~p,n-p-1~ &gt; F)'</span>,<span class="st">''</span>,<span class="st">''</span>))</span>
+<span id="cb23-106"><a href="#cb23-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-107"><a href="#cb23-107" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(anova_df, <span class="at">col.names=</span><span class="fu">c</span>(<span class="st">'Source'</span>,<span class="st">'Sums of Squares'</span>,<span class="st">'Degrees of Freedom'</span>,<span class="st">'Mean Square'</span>,<span class="st">'F-value'</span>,<span class="st">'p-value'</span>),</span>
+<span id="cb23-108"><a href="#cb23-108" aria-hidden="true" tabindex="-1"></a>    <span class="at">align=</span><span class="st">'lccccc'</span>, <span class="at">escape=</span>F) <span class="sc">%&gt;%</span></span>
+<span id="cb23-109"><a href="#cb23-109" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>, <span class="at">full_width =</span> F, <span class="at">position =</span> <span class="st">"left"</span>)</span>
+<span id="cb23-110"><a href="#cb23-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-111"><a href="#cb23-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-112"><a href="#cb23-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-113"><a href="#cb23-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-114"><a href="#cb23-114" aria-hidden="true" tabindex="-1"></a><span class="fu">### Hypothesis Testing for the Intercept </span></span>
+<span id="cb23-115"><a href="#cb23-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-116"><a href="#cb23-116" aria-hidden="true" tabindex="-1"></a>We can still test the null hypothesis that the intercept is equal to 0. In other words, $H_0\colon \beta_0=0$ versus $H_1\colon \beta_0 \neq 0$. While we can conduct these tests "by hand", we can also leverage our regression output from above to note that $t=$ <span class="in">`r round(summary(mod_intonly)$coefficients['(Intercept)','t value'],3)`</span> and $p=$ 1.02e-08 $&lt;0.001$.</span>
+<span id="cb23-117"><a href="#cb23-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-118"><a href="#cb23-118" aria-hidden="true" tabindex="-1"></a>If we wanted to verify or calculate these values by hand, we see that $t = \frac{111.08}{11.58} = 9.592$ and we can compare this to a $t_{n-p-1} = t_{n-1} = t_{19}$ distribution to calculate our p-value: <span class="in">`2*pt(9.592, df=19, lower.tail=F)`</span> = <span class="in">`r 2*pt(9.592, df=19, lower.tail=F)`</span>. Recall, we double our p-value since we have a two-sided hypothesis test.</span>
+<span id="cb23-119"><a href="#cb23-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-120"><a href="#cb23-120" aria-hidden="true" tabindex="-1"></a>In this case, since $p&lt;0.001$, we reject our null hypothesis and conclude that the intercept is significantly different from 0.</span>
+<span id="cb23-121"><a href="#cb23-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-122"><a href="#cb23-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-123"><a href="#cb23-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-124"><a href="#cb23-124" aria-hidden="true" tabindex="-1"></a><span class="fu">### Hypothesis Testing for Other Null Values</span></span>
+<span id="cb23-125"><a href="#cb23-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-126"><a href="#cb23-126" aria-hidden="true" tabindex="-1"></a>The default value we tend to use for our hypothesis test of the intercept and slope terms is against a null of 0. However, we can test whatever value we wish (and might be more biologically meaningful). For example, in our calculation above "by hand" we could test $H_0\colon \beta_0=100$ versus $H_1\colon \beta_0 \neq 100$:</span>
+<span id="cb23-127"><a href="#cb23-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-128"><a href="#cb23-128" aria-hidden="true" tabindex="-1"></a>$$ t = \frac{\hat{\beta}_{0} - \beta_{0}}{SE(\hat{\beta}_{0})} = \frac{111.08 - 100}{11.58} = \frac{11.08}{11.58} = 0.9568221 $$</span>
+<span id="cb23-129"><a href="#cb23-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-130"><a href="#cb23-130" aria-hidden="true" tabindex="-1"></a>We can calculate our p-value similarly to our above example: <span class="in">`2*pt(0.9568221, df=19, lower.tail=F)`</span> = <span class="in">`r 2*pt(0.9568221, df=19, lower.tail=F)`</span>. Since $p&gt;0.05$, we fail to reject the null hypothesis that the intercept is *significantly different from 100*.</span>
+<span id="cb23-131"><a href="#cb23-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-132"><a href="#cb23-132" aria-hidden="true" tabindex="-1"></a>This idea also extends to our simple and multiple linear regression models, where we can test any of our beta coefficients against any proposed null value of interest.</span>
+<span id="cb23-133"><a href="#cb23-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-134"><a href="#cb23-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-135"><a href="#cb23-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-136"><a href="#cb23-136" aria-hidden="true" tabindex="-1"></a><span class="fu">## The Simple Linear Regression Model</span></span>
+<span id="cb23-137"><a href="#cb23-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-138"><a href="#cb23-138" aria-hidden="true" tabindex="-1"></a>From our scatterplots above (and because we simulated the data), we know that there is additional information beyond just our outcome that is useful to incorporate. For example, $X_1$ in our simulation has $\beta_1 = 2$, so the outcome should be better described by incorporating this information. This, in turn, provides a more accurate estimate of what an observation's outcome should be than just naively using $\bar{Y}$ for everyone.</span>
+<span id="cb23-139"><a href="#cb23-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-140"><a href="#cb23-140" aria-hidden="true" tabindex="-1"></a>The true regression model here is: $Y = \beta_0 + \beta_1 X_{1} + \epsilon ; \; \epsilon \sim N(0,\sigma^{2}_{e})$.</span>
+<span id="cb23-141"><a href="#cb23-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-142"><a href="#cb23-142" aria-hidden="true" tabindex="-1"></a>Let's fit our simple linear regression model and write our estimated/predicted regression equation. Then, we'll highlight some points to consider with respect to the model and what we test.</span>
+<span id="cb23-143"><a href="#cb23-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-146"><a href="#cb23-146" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-147"><a href="#cb23-147" aria-hidden="true" tabindex="-1"></a>mod_slr <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x1)</span>
+<span id="cb23-148"><a href="#cb23-148" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_slr) </span>
+<span id="cb23-149"><a href="#cb23-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-150"><a href="#cb23-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-151"><a href="#cb23-151" aria-hidden="true" tabindex="-1"></a>Our estimated regression model based on our data is: $\hat{Y} = \hat{\beta}_{0} + \hat{\beta}_{1}X_{1} = 104.6118 + 2.6131 X_{1}$.</span>
+<span id="cb23-152"><a href="#cb23-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-153"><a href="#cb23-153" aria-hidden="true" tabindex="-1"></a>We can add this line to earlier scatterplot before examining how to test various questions of interest:</span>
+<span id="cb23-154"><a href="#cb23-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-157"><a href="#cb23-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-158"><a href="#cb23-158" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1,y)</span>
+<span id="cb23-159"><a href="#cb23-159" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod_slr)</span>
+<span id="cb23-160"><a href="#cb23-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-161"><a href="#cb23-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-162"><a href="#cb23-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-163"><a href="#cb23-163" aria-hidden="true" tabindex="-1"></a><span class="fu">### Hypothesis Testing for the Intercept </span></span>
+<span id="cb23-164"><a href="#cb23-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-165"><a href="#cb23-165" aria-hidden="true" tabindex="-1"></a>Like in our intercept-only model, we can test a null hypothesis that the intercept is equal to 0:</span>
+<span id="cb23-166"><a href="#cb23-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-167"><a href="#cb23-167" aria-hidden="true" tabindex="-1"></a>$$ H_0\colon \beta_0 = 0 \text{ vs. } H_1\colon \beta_0 \neq 0 $$</span>
+<span id="cb23-168"><a href="#cb23-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-169"><a href="#cb23-169" aria-hidden="true" tabindex="-1"></a>This information can be easily extracted from our summary table output, where we see that $t=28.79$ and $p&lt;0.001$. Therefore, we would reject the null hypothesis that the intercept is equal to 0. In other words, based on our sample and the simple linear regression model we fit, when the predictor $X_1 = 0$, the predicted average value for our outcome is 104.6118.</span>
+<span id="cb23-170"><a href="#cb23-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-171"><a href="#cb23-171" aria-hidden="true" tabindex="-1"></a>In many cases, the context implies that the intercept is nonsensical to interpret or it relies on *extrapolation* of our data. For example, if we had a sample of 30-60 year olds where we measured the amount of time they spent using a computer each week, the intercept would represent the average computer use for a 0 year old. This makes no sense given a 0 year old was literally just born and is highly unlikely to actively use a computer on their own. Further, our sample only included 30-60 year olds, so even if a 0 year old could use a computer, we would have to extrapolate our findings down to a 0 year old, which may not reflect their actual use pattern anyway.</span>
+<span id="cb23-172"><a href="#cb23-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-173"><a href="#cb23-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-174"><a href="#cb23-174" aria-hidden="true" tabindex="-1"></a><span class="fu">### Hypothesis Testing for the Slope</span></span>
+<span id="cb23-175"><a href="#cb23-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-176"><a href="#cb23-176" aria-hidden="true" tabindex="-1"></a>More often, we are interested in testing if the beta coefficient for our predictor (often called the slope) is significantly different from 0:</span>
+<span id="cb23-177"><a href="#cb23-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-178"><a href="#cb23-178" aria-hidden="true" tabindex="-1"></a>$$ H_0\colon \beta_1 = 0 \text{ vs. } H_1\colon \beta_1 \neq 0 $$</span>
+<span id="cb23-179"><a href="#cb23-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-180"><a href="#cb23-180" aria-hidden="true" tabindex="-1"></a>In the context of linear regression, a slope of 0 would indicate that there is no change in the outcome ($Y$) across the range of the predictor ($X_1$).</span>
+<span id="cb23-181"><a href="#cb23-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-182"><a href="#cb23-182" aria-hidden="true" tabindex="-1"></a>For our SLR model, we can likewise extract the information from our summary table, where we see that $t=13.36$ and $p&lt;0.001$. Therefore, we would reject the null hypothesis that the slope is 0.</span>
+<span id="cb23-183"><a href="#cb23-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-184"><a href="#cb23-184" aria-hidden="true" tabindex="-1"></a>We can also compare the output p-value to one we calculate in R based on the $t$ statistic: <span class="in">`2*pt(summary(mod_slr)$coefficients['x1','t value'], df=18, lower.tail=F)`</span>= <span class="in">`r 2*pt(summary(mod_slr)$coefficients['x1','t value'], df=18, lower.tail=F)`</span>. Recall, we are using a $t_{n-p-1} = t_{20-1-1} = t_{18}$ distribution as our reference.</span>
+<span id="cb23-185"><a href="#cb23-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-186"><a href="#cb23-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-187"><a href="#cb23-187" aria-hidden="true" tabindex="-1"></a><span class="fu">### Hypothesis Testing for the Overall Model Fit (the Overall $F$-test)</span></span>
+<span id="cb23-188"><a href="#cb23-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-189"><a href="#cb23-189" aria-hidden="true" tabindex="-1"></a>A final question that may be of interest if is the *overall model with all predictors is better at predicting the outcome than just the sample mean of the outcome alone*. In other words, is it useful to include all the predictors I may have in my model? Or have I made something more complicated than just using $\bar{Y}$ that doesn't give me any benefit?</span>
+<span id="cb23-190"><a href="#cb23-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-191"><a href="#cb23-191" aria-hidden="true" tabindex="-1"></a>To address this question, we can conduct an overall $F$-test. This examines the hypothesis for our simple linear regression that </span>
+<span id="cb23-192"><a href="#cb23-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-193"><a href="#cb23-193" aria-hidden="true" tabindex="-1"></a>$$ H_0\colon \beta_1 = 0 \text{ vs. } H_1\colon \beta_1 \neq 0 $$</span>
+<span id="cb23-194"><a href="#cb23-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-195"><a href="#cb23-195" aria-hidden="true" tabindex="-1"></a>**This should look familiar, since it is the same hypotheses we evaluated for hypothesis testing of the slope!** For simple linear regression, we actually have a direct relationship between the $t$ and $F$ statistics, since they are evaluating identical hypotheses.</span>
+<span id="cb23-196"><a href="#cb23-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-197"><a href="#cb23-197" aria-hidden="true" tabindex="-1"></a>From our summary output, we see that $F=178.4$, which is equal (after considering the output has rounded to only 2 decimal places) to $t^2 = (13.36)^2 = 178.4896$.</span>
+<span id="cb23-198"><a href="#cb23-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-199"><a href="#cb23-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-200"><a href="#cb23-200" aria-hidden="true" tabindex="-1"></a><span class="fu">### What About SLR $X_2$ and $X_3$?</span></span>
+<span id="cb23-201"><a href="#cb23-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-202"><a href="#cb23-202" aria-hidden="true" tabindex="-1"></a>In our simulation, we set both $X_2$ and $X_3$ to have beta coefficients equal to 0. If we run a simple linear regression model and examine the summary output, we see:</span>
+<span id="cb23-203"><a href="#cb23-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-206"><a href="#cb23-206" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-207"><a href="#cb23-207" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x2))</span>
+<span id="cb23-208"><a href="#cb23-208" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-209"><a href="#cb23-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-210"><a href="#cb23-210" aria-hidden="true" tabindex="-1"></a>Since $p=0.0435 &lt; 0.05$ we would reject the null hypothesis that the slope is equal to 0. **Since we simulated a null setting, this represents a type I error!**</span>
+<span id="cb23-211"><a href="#cb23-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-212"><a href="#cb23-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-215"><a href="#cb23-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-216"><a href="#cb23-216" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x3))</span>
+<span id="cb23-217"><a href="#cb23-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-218"><a href="#cb23-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-219"><a href="#cb23-219" aria-hidden="true" tabindex="-1"></a>Since $p=0.0608 &gt; 0.05$, we would fail to reject the null hypothesis. </span>
+<span id="cb23-220"><a href="#cb23-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-221"><a href="#cb23-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-222"><a href="#cb23-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-223"><a href="#cb23-223" aria-hidden="true" tabindex="-1"></a><span class="fu">## The Multiple Linear Regression Model</span></span>
+<span id="cb23-224"><a href="#cb23-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-225"><a href="#cb23-225" aria-hidden="true" tabindex="-1"></a>Even though we know from our simulation that $X_2$ and $X_3$ are not used in the calculation of $Y$, in the real world we would not know this information. Rather, we might want to fit a multiple linear regression model that includes all possible predictors. Under this model, we are assuming that the true regression model is: $Y = \beta_0 + \beta_1 X_{1} + \beta_{2} X_{2} +  \beta_{3} X_{3} + \epsilon ; \; \epsilon \sim N(0,\sigma^{2}_{e})$. **NOTE: We know that this is technically the "wrong" true model based on our simulation, but it is the underlying model we are trying to estimate when fitting this multiple linear regression model.**</span>
+<span id="cb23-226"><a href="#cb23-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-227"><a href="#cb23-227" aria-hidden="true" tabindex="-1"></a>Let's fit our multiple linear regression model and write our estimated/predicted regression equation. Then, we'll highlight some points to consider with respect to the model and what we test.</span>
+<span id="cb23-228"><a href="#cb23-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-231"><a href="#cb23-231" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-232"><a href="#cb23-232" aria-hidden="true" tabindex="-1"></a>mod_mlr <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3)</span>
+<span id="cb23-233"><a href="#cb23-233" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_mlr) </span>
+<span id="cb23-234"><a href="#cb23-234" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-235"><a href="#cb23-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-236"><a href="#cb23-236" aria-hidden="true" tabindex="-1"></a>Our estimated regression model based on our data is: </span>
+<span id="cb23-237"><a href="#cb23-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-238"><a href="#cb23-238" aria-hidden="true" tabindex="-1"></a>$$ \hat{Y} = \hat{\beta}_{0} + \hat{\beta}_{1}X_{1} + \hat{\beta}_{2}X_{2} + \hat{\beta}_{3}X_{3}= 93.1351 + 2.7714 X_{1} + 2.1181 X_{2} + 2.0920 X_{3}. $$</span>
+<span id="cb23-239"><a href="#cb23-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-240"><a href="#cb23-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-241"><a href="#cb23-241" aria-hidden="true" tabindex="-1"></a><span class="fu">### Testing the Overall Model Fit (the Overall $F$-Test)</span></span>
+<span id="cb23-242"><a href="#cb23-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-243"><a href="#cb23-243" aria-hidden="true" tabindex="-1"></a>One question we might ask, is if any of our predictors contribute meaningfully to the prediction of $Y$ above and beyond just using $\bar{Y}$ alone. This is evaluated using our overall $F$-test, where the hypotheses are </span>
+<span id="cb23-244"><a href="#cb23-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-245"><a href="#cb23-245" aria-hidden="true" tabindex="-1"></a>$$ H_0\colon \beta_1 = \beta_2 = \beta_3 = 0 \text{ vs. } H_1\colon \text{ at least one } \beta_{k} \neq 0 $$</span>
+<span id="cb23-246"><a href="#cb23-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-247"><a href="#cb23-247" aria-hidden="true" tabindex="-1"></a>We can directly extract this information from our output, where we see $F=59.52$ with $p&lt;0.001$. Therefore, we reject $H_0$ and conclude that at least one of our beta coefficients is significantly different from 0. However, we have no idea *which* beta coefficient(s) are significantly different from 0 without further investigation.</span>
+<span id="cb23-248"><a href="#cb23-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-249"><a href="#cb23-249" aria-hidden="true" tabindex="-1"></a>From the output, it is worth highlighting that we are making a comparison to an $F_{k,n-k-1}$ distribution, where $k$ is the number of predictors: $F_{3,20-3-1} = F_{3,16}$.</span>
+<span id="cb23-250"><a href="#cb23-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-251"><a href="#cb23-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-252"><a href="#cb23-252" aria-hidden="true" tabindex="-1"></a><span class="fu">### Testing a Subset of the Predictors (the Partial $F$-Test)</span></span>
+<span id="cb23-253"><a href="#cb23-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-254"><a href="#cb23-254" aria-hidden="true" tabindex="-1"></a>Another question we may be interested in answering in a multiple linear regression model, is if some subset of our predictors contribute meaningfully to the prediction of $Y$ above and beyond the reduced model that excludes those predictors. This can be tested with the partial $F$-test. For example, we may want to test if adding $X_{2}$ and $X_{3}$ is meaningful above and beyond just including $X_{1}$ in our model:</span>
+<span id="cb23-255"><a href="#cb23-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-256"><a href="#cb23-256" aria-hidden="true" tabindex="-1"></a>$$ H_0\colon \beta_2 = \beta_3 = 0 \text{ vs. } H_1\colon \text{ at least one } \beta_{k} \neq 0 \; (k \in 2,3) $$</span>
+<span id="cb23-257"><a href="#cb23-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-258"><a href="#cb23-258" aria-hidden="true" tabindex="-1"></a>In our Week 10 Practice Problem Solutions, we have an example of implementing a partial F-test where you can generate the ANOVA tables for the full and reduced models and calculate the partial F-statistic by hand. For brevity, we'll focus here on using the <span class="in">`anova`</span> function to compare our models:</span>
+<span id="cb23-259"><a href="#cb23-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-262"><a href="#cb23-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-263"><a href="#cb23-263" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod_mlr, mod_slr, <span class="at">test=</span><span class="st">'F'</span>)</span>
+<span id="cb23-264"><a href="#cb23-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-265"><a href="#cb23-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-266"><a href="#cb23-266" aria-hidden="true" tabindex="-1"></a>Here we see that our partial $F$-test has $F=0.9149$ and $p=0.4205$. In other words, since $p&gt;0.05$ we fail to reject the null hypothesis that at least one of our beta coefficients for $X_2$ and $X_3$ is not equal to 0. This suggests that we could focus on the simple linear regression model with just $X_1$ for a simpler, more parsimonious model. (*The big potential caveat here for the real world is that variables may still be meaningful if they serve as a confounder, mediator, moderator, precision variable, etc. and your context may still suggest you keep a statistically insignificant predictor in your model!*)</span>
+<span id="cb23-267"><a href="#cb23-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-268"><a href="#cb23-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-269"><a href="#cb23-269" aria-hidden="true" tabindex="-1"></a><span class="fu">### Testing a Single Predictor (the $t$-test)</span></span>
+<span id="cb23-270"><a href="#cb23-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-271"><a href="#cb23-271" aria-hidden="true" tabindex="-1"></a>The third question we may want to investigate is if a specific predictor is significantly adding to our model, above and beyond the information contributed by other variables in the model. Assuming we still have our full multiple linear regression model with 3 predictors, the major change here is our interpretation from a simple linear regression model.</span>
+<span id="cb23-272"><a href="#cb23-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-273"><a href="#cb23-273" aria-hidden="true" tabindex="-1"></a>Focusing on $X_1$, we see that $t=11.127$ and $p&lt;0.001$, so we would reject the null hypothesis that the slope is 0 (i.e., that $\beta_1 = 0$). This estimate of our estimate and standard error (and therefore the $t$-value and p-value) are dependent upon the other predictors in our model. For example, our t-test here is based on $t_{n-p-1} = t_{20-3-1} = t_{16}$, but in our SLR it was based on $t_{18}$.</span>
+<span id="cb23-274"><a href="#cb23-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-275"><a href="#cb23-275" aria-hidden="true" tabindex="-1"></a>With regards to interpretation, it is mostly similar with a small bit of added language:</span>
+<span id="cb23-276"><a href="#cb23-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-277"><a href="#cb23-277" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**SLR Interpretation of $\beta_1$**: For a one unit increase in $X_1$, the average change in $Y$ is $\beta_{1}$.</span>
+<span id="cb23-278"><a href="#cb23-278" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**MLR Interpretation of $\beta_1$**: For a one unit increase in $X_1$, the average change in $Y$ is $\beta_{1}$ after accounting for other variables in the model.</span>
+<span id="cb23-279"><a href="#cb23-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-280"><a href="#cb23-280" aria-hidden="true" tabindex="-1"></a>For the MLR interpretation, other similar phrasings include *after adjusting for other variables in the model*, *after fixing our other predictors*, *after fixing $X_{2}$ and $X_{3}$*, etc. We need some form of language that notes the estimate is conditional on the other predictors included in our model.</span>
+<span id="cb23-281"><a href="#cb23-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-282"><a href="#cb23-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-283"><a href="#cb23-283" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sanity Check: What If We Didn't Simulate Error?</span></span>
+<span id="cb23-284"><a href="#cb23-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-285"><a href="#cb23-285" aria-hidden="true" tabindex="-1"></a>As a final note, what would happen if we didn't include the error term in our calculation of <span class="in">`y`</span> above? Let's see what our regression model would return for the SLR case:</span>
+<span id="cb23-286"><a href="#cb23-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-289"><a href="#cb23-289" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-290"><a href="#cb23-290" aria-hidden="true" tabindex="-1"></a>y_no_error <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x1 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>x2 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>x3 <span class="co">#exclude our earlier error term</span></span>
+<span id="cb23-291"><a href="#cb23-291" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y_no_error <span class="sc">~</span> x1))</span>
+<span id="cb23-292"><a href="#cb23-292" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-293"><a href="#cb23-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-294"><a href="#cb23-294" aria-hidden="true" tabindex="-1"></a>There is a warning noting we have a perfect fit, so the summary may be unreliable. Indeed, we see that without the error term, we can perfectly predict our beta coefficients and have no variability around the estimates:</span>
+<span id="cb23-295"><a href="#cb23-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-298"><a href="#cb23-298" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-299"><a href="#cb23-299" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1, y_no_error)</span>
+<span id="cb23-300"><a href="#cb23-300" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(y_no_error <span class="sc">~</span> x1))</span>
+<span id="cb23-301"><a href="#cb23-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-302"><a href="#cb23-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-303"><a href="#cb23-303" aria-hidden="true" tabindex="-1"></a>In reality, this is very rare (if not almost impossible). Not only is there usually natural variability in the data even if we had perfect measurement, there are other sources of error  (e.g., *measurement error* in how we collect data that adds variability). If you do wind up with a solution with perfect prediction, it is worth thinking through the model, data, and results before too widely disseminating your findings.</span>
+<span id="cb23-304"><a href="#cb23-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-305"><a href="#cb23-305" aria-hidden="true" tabindex="-1"></a></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

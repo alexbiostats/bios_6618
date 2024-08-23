@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alex Kaizer">
+
+<title>Alex Kaizer - Diagnostic Testing: Likelihood Ratios, Odds, and Bayes’ Theorem</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/academicons-1.9.1/css/academicons.css" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="./files/favicon.ico">
+
+<script type="text/javascript">
+function setBrand() {
+document.getElementsByClassName("navbar-brand")[0].href="https://www.alexkaizer.com";
+}
+window.onload = setBrand;
+</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5PBG7BL207"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5PBG7BL207');
+</script>
+
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Alex Kaizer</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/research" rel="" target="">
+ <span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/publications" rel="" target="">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Teaching</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching">    
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/teaching" rel="" target="">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6618" rel="" target="">
+ <span class="dropdown-text">BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6611" rel="" target="">
+ <span class="dropdown-text">BIOS 6611</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/study_design_berd" rel="" target="">
+ <span class="dropdown-text">BERD Study Design Short Course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/adaptivetrials_sc" rel="" target="">
+ <span class="dropdown-text">WNAR Adaptive and Bayesian Clinical Trial Design Short Course</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bios-6618" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">BIOS 6618</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-bios-6618">    
+        <li>
+    <a class="dropdown-item" href="../../index.html" rel="" target="">
+ <span class="dropdown-text">Home</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../bios_6618_materials" rel="" target="">
+ <span class="dropdown-text">Materials</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../journal_of_bios_6618" rel="" target="">
+ <span class="dropdown-text">Journal of BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../recitation" rel="" target="">
+ <span class="dropdown-text">Recitation Questions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs" rel="" target="">
+ <span class="dropdown-text">Labs and Practice Problems</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:alex.kaizer@cuanschutz.edu" rel="" target=""><i class="bi bi-envelope" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=ICpH74EAAAAJ&amp;hl=en" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-google-scholar ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="http://github.com/alexbiostats" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/files/Alex_CV.pdf" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-cv ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/alex-kaizer/" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-conditional-probablity-merry-go-round" id="toc-the-conditional-probablity-merry-go-round" class="nav-link active" data-scroll-target="#the-conditional-probablity-merry-go-round">The Conditional Probablity Merry-Go-Round</a>
+  <ul class="collapse">
+  <li><a href="#positive-and-negative-likelihood-ratios" id="toc-positive-and-negative-likelihood-ratios" class="nav-link" data-scroll-target="#positive-and-negative-likelihood-ratios">Positive and Negative Likelihood Ratios</a></li>
+  <li><a href="#odds-versus-probabilities" id="toc-odds-versus-probabilities" class="nav-link" data-scroll-target="#odds-versus-probabilities">Odds versus Probabilities</a>
+  <ul class="collapse">
+  <li><a href="#bayes-theorem-and-our-connection-to-odds" id="toc-bayes-theorem-and-our-connection-to-odds" class="nav-link" data-scroll-target="#bayes-theorem-and-our-connection-to-odds">Bayes’ Theorem and Our Connection to Odds</a></li>
+  <li><a href="#odds-what-are-you" id="toc-odds-what-are-you" class="nav-link" data-scroll-target="#odds-what-are-you">Odds, What Are You?</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Diagnostic Testing: Likelihood Ratios, Odds, and Bayes’ Theorem</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Alex Kaizer </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Colorado-Anschutz Medical Campus
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This page is part of the University of Colorado-Anschutz Medical Campus’ <a href="../../recitation/index.html">BIOS 6618 Recitation</a> collection. To view other questions, you can view the <a href="../../recitation/index.html">BIOS 6618 Recitation</a> collection page or use the search bar to look for keywords.</p>
+<section id="the-conditional-probablity-merry-go-round" class="level1">
+<h1>The Conditional Probablity Merry-Go-Round</h1>
+<p>In our lectures on diagnostic testing (i.e., conditional probability), we covered numerous quantities one might use to summarize some aspect of the performance:</p>
+<ul>
+<li>Sensitivity and Specificity: characteristics of the test that are <strong>not</strong> influenced by the prevalence <em>(e.g., does the test correctly predict if someone does or does not have the outcome of interest)</em></li>
+<li>Positive and Negative Predictive Values: more reflective of clinical relevance of the test with values that are influenced by the prevalence <em>(e.g., if the test is positive [negative], how confident are we someone has [does not have] the outcome of interest)</em></li>
+<li>Positive and Negative Likelihood Ratios: additional metrics we can use to describe clinical relevance that do <strong>not</strong> depend on the prevalence</li>
+<li>Posterior Odds and Probabilities: additional metrics we can use to describe clinical relevance</li>
+</ul>
+<p>In practice, our <em>prior belief of someone having the condition of interest</em> often starts by assuming the population prevalence as our estimate: <span class="math inline">\(P(D) = p\)</span>. This makes intuitive sense, because if we know nothing else about a person (e.g., test results, socio-economic status, etc.) our best guess if someone has a condition is the general prevalence in the population. The results of a test can then be used to update this <em>prior</em> belief into a <em>posterior</em> estimate.</p>
+<p>One way we can summarize this information is by creating a confusion matrix, a 2x2 table which summarizes test performance relative to the true disease status or existing gold standard (if measuring true disease status is impossible, too expensive, too challenging, etc.):</p>
+<div class="cell" data-filters="parse-latex">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r fold-hide code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>con_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">c</span>(<span class="st">'Test'</span>,<span class="st">'Positive ($D$)'</span>,<span class="st">'Negative ($</span><span class="sc">\\</span><span class="st">bar{D}$)'</span>, </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'Positive ($T$)'</span>,<span class="st">'a (true positives)'</span>,<span class="st">'b (false positives)'</span>, </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'Negative ($</span><span class="sc">\\</span><span class="st">bar{T}$)'</span>,<span class="st">'c (false negatives)'</span>,<span class="st">'d (true negatives)'</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">byrow=</span>T )</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(con_mat, <span class="at">escape=</span>F, <span class="at">align=</span><span class="st">'ccc'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">'condensed'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">" "</span>, <span class="st">"Gold Standard/Disease Status"</span> <span class="ot">=</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<table class="table table-condensed" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Gold Standard/Disease Status
+</div>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Test
+</td>
+<td style="text-align:center;">
+Positive (<span class="math inline">\(D\)</span>)
+</td>
+<td style="text-align:center;">
+Negative (<span class="math inline">\(\bar{D}\)</span>)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Positive (<span class="math inline">\(T\)</span>)
+</td>
+<td style="text-align:center;">
+a (true positives)
+</td>
+<td style="text-align:center;">
+b (false positives)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Negative (<span class="math inline">\(\bar{T}\)</span>)
+</td>
+<td style="text-align:center;">
+c (false negatives)
+</td>
+<td style="text-align:center;">
+d (true negatives)
+</td>
+</tr>
+</tbody>
+
+</table>
+<p>In the following sections we’ll focus on some of the questions relating to the likelihood ratio and the odds/probability distinction from our lectures.</p>
+</div>
+</div>
+<section id="positive-and-negative-likelihood-ratios" class="level2">
+<h2 class="anchored" data-anchor-id="positive-and-negative-likelihood-ratios">Positive and Negative Likelihood Ratios</h2>
+<p>The positive and negative likelihood ratios (LR+ and LR-) reflect if our test is a “good” test to use in practice. Additionally, <em>these summaries do not depend on the prevalence.</em> The measures summarize ratios of true and false positive or negative results:</p>
+<ul>
+<li>LR+: the number of true positive results per false positive result (large ratios are better), reflects the “strength” of a positive test</li>
+<li>LR-: the number of false negative results per true negative result (small ratios are better), reflects the “strength” of a negative test</li>
+</ul>
+<p>In our lecture slides, we have the following calculation for LR+:</p>
+<p><span class="math display">\[ \text{LR+} = \; \frac{P(T|D)}{P(T|\bar{D})} = \frac{\text{sensitivity}}{1-\text{specificity}} = \frac{\text{TPR}}{\text{FPR}}  \]</span></p>
+<p>We see from this, that we indeed would prefer a large ratio since it indicates a larger rate of true positive predictions as compared to false positive predictions. Similarly, for LR- we have:</p>
+<p><span class="math display">\[ \text{LR-} = \; \frac{P(\bar{T}|D)}{P(\bar{T}|\bar{D})} = \frac{1-\text{sensitivity}}{\text{specificity}} = \frac{\text{FNR}}{\text{TNR}} \]</span></p>
+<p>Again, we can see that a smaller ratio is desired given the true negative rate is in the denominator, and a low false negative rate is preferred.</p>
+</section>
+<section id="odds-versus-probabilities" class="level2">
+<h2 class="anchored" data-anchor-id="odds-versus-probabilities">Odds versus Probabilities</h2>
+<p>In many cases we may still want to leverage the prevalence to calculate results reflective of a given population, especially if the prior test results had a special study design or were tested in a different population. We can leverage the likelihood ratios from above to incorporate our prior belief of the probability of having the outcome (i.e., the prevalence) through Bayes’ theorem.</p>
+<section id="bayes-theorem-and-our-connection-to-odds" class="level3">
+<h3 class="anchored" data-anchor-id="bayes-theorem-and-our-connection-to-odds">Bayes’ Theorem and Our Connection to Odds</h3>
+<p>In general, Bayes’ theorem states:</p>
+<p><span class="math display">\[ P(\theta|X) = \frac{P(X|\theta)P(\theta)}{P(X)} \to \text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Data}} \]</span></p>
+<p>In the context of testing a hypothesis (<span class="math inline">\(H\)</span>) for some data (<span class="math inline">\(X\)</span>) this reflects:</p>
+<p><span class="math display">\[ P(H|X) = \frac{P(X|H) P(H)}{P(X)} \]</span></p>
+<p>where we define each term as</p>
+<ul>
+<li><span class="math inline">\(P(H|X)\)</span> is the <strong>posterior (probability)</strong> that <span class="math inline">\(H\)</span> is true after the data has been considered</li>
+<li><span class="math inline">\(P(X|H)\)</span> is the <strong>likelihood</strong> and represents the evidence for <span class="math inline">\(H\)</span> provided by the observed data <span class="math inline">\(X\)</span> (i.e., the probability of observing our data under the given hypothesis)</li>
+<li><span class="math inline">\(P(H)\)</span> is the <strong>prior (probability)</strong> that <span class="math inline">\(H\)</span> is true <em>before</em> the data is considered</li>
+<li><span class="math inline">\(P(X)\)</span> is the <strong>total probability</strong> of the data which takes into account all possible hypotheses</li>
+</ul>
+<p>Bayes’ theorem can also be rewritten in terms of <em>odds</em> if we have two specific outcomes that are mutually exclusive, such as <span class="math inline">\(D\)</span> and <span class="math inline">\(\bar{D}\)</span> (i.e., either someone has or does not have the disease). This can be noted by writing out the ratio of the posteriors for having and not having the disease given our data:</p>
+<p><span class="math display">\[ \frac{P(D|X)}{P(\bar{D}|X)} = \frac{\frac{P(X|D) P(D)}{P(X)}}{\frac{P(X|\bar{D}) P(\bar{D})}{P(X)}} = \frac{P(X|D) P(D)}{P(X|\bar{D}) P(\bar{D})} \]</span></p>
+<p>Since each person either has or does not have the disease, we know that <span class="math inline">\(P(\bar{D}) = 1-P(D)\)</span>, further rewriting our equation to</p>
+<p><span class="math display">\[ \frac{P(D|X)}{P(\bar{D}|X)}  = \frac{P(X|D) P(D)}{P(X|\bar{D}) (1 - P(D))} = \frac{P(D)}{1-P(D)} \times \frac{P(X|D)}{P(X|\bar{D})} \]</span></p>
+<p>Our missing piece for our context of diagnostic testing is to identify what our data (<span class="math inline">\(X\)</span>) is. In our current context, it reflects the outcome of the diagnostic test (<span class="math inline">\(T\)</span> or <span class="math inline">\(\bar{T}\)</span> depending on the question we are trying to answer):</p>
+<p><span class="math display">\[ \frac{P(D|T)}{P(\bar{D}|T)} =  \frac{P(D)}{1-P(D)} \times \frac{P(T|D)}{P(T|\bar{D})} = \frac{P(D)}{1-P(D)} \times LR+  \]</span></p>
+<p><strong>We now see that we have the positive likelihood ratio!</strong> This is where we can draw a direct connection to the <em>odds</em> of an event, which are defined as</p>
+<p><span class="math display">\[ O(D) = \frac{P(D)}{1-P(D)} \]</span></p>
+<p>Since <span class="math inline">\(P(D)\)</span> is our <em>prior belief that someone has the outcome</em>, <span class="math inline">\(O(D)\)</span> represents the <strong>prior odds that someone has the outcome</strong>.</p>
+<p>If we were interested in the perspective of <em>not</em> having the outcome for those with a negative test, we similarly have a ratio of probabilities that lead to our calculation of the posterior odds of <span class="math inline">\(\bar{D}\)</span>:</p>
+<p><span class="math display">\[ \frac{P(\bar{D}|\bar{T})}{P(D|\bar{T})} = \frac{P(\bar{T}|\bar{D}) P(\bar{D})}{P(\bar{T}|D) P(D)} = \frac{P(\bar{D})}{P(D)} \times \frac{P(\bar{T}|\bar{D})}{P(\bar{T}|D)} = \frac{1-P(D)}{P(D)} \times \frac{1}{LR-}   \]</span></p>
+<p>Here we see the negative likelihood ratio, but we have to take its inverse based on the rewritten equation. Our relationship to the odds for not having the outcome of interest is similar to that above:</p>
+<p><span class="math display">\[ O(\bar{D}) = \frac{P(\bar{D})}{1 - P(\bar{D})} = \frac{1-P(D)}{P(D)} \]</span></p>
+</section>
+<section id="odds-what-are-you" class="level3">
+<h3 class="anchored" data-anchor-id="odds-what-are-you">Odds, What Are You?</h3>
+<p>As we just saw, odds and probabilities have a direct connection. I personally am not a huge fan of odds because I just do not naturally think in terms of odds. For example,</p>
+<ul>
+<li>Odds range from 0 to <span class="math inline">\(\infty\)</span> and represent a ratio of outcomes</li>
+<li>Probabilities range from 0 to 1 and tend to be more intuitively understood</li>
+</ul>
+<p>Fortunately, we can rework our odds and probability equations above to solve for the probabilities:</p>
+<p><span class="math display">\[ O(D) = \frac{P(D)}{1-P(D)} \to P(D) = \frac{O(D)}{1+O(D)} \]</span></p>
+<p>For example, if we are given the the posterior odds of having the outcome is 2 and the corresponding posterior probability is 67% with a 20% population prevalence, we have the following interpretations:</p>
+<ul>
+<li>After observing a positive test result, our odds in favor of having the outcome are 2:1.</li>
+<li>The posterior probability of having the outcome is 67% (a change from our prior probability (i.e., prevalence) of 20%).</li>
+</ul>
+<p>The odds of 2:1 indicate that out of three positive test outcomes, two of the three participants will actually have the outcome and one person will have been misclassified as having the outcome when they truly do not. In other words, the false positive will occur once for every two times we have a true positive. I personally think the posterior probability is easier to imagine, that if your test is positive you have a 67% probability of having the outcome of interest.</p>
+
+
+<!-- -->
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Diagnostic Testing: Likelihood Ratios, Odds, and Bayes' Theorem"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>This page is part of the University of Colorado-Anschutz Medical Campus' <span class="co">[</span><span class="ot">BIOS 6618 Recitation</span><span class="co">](/recitation/index.qmd)</span> collection. To view other questions, you can view the <span class="co">[</span><span class="ot">BIOS 6618 Recitation</span><span class="co">](/recitation/index.qmd)</span> collection page or use the search bar to look for keywords.</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu"># The Conditional Probablity Merry-Go-Round</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>In our lectures on diagnostic testing (i.e., conditional probability), we covered numerous quantities one might use to summarize some aspect of the performance:</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Sensitivity and Specificity: characteristics of the test that are **not** influenced by the prevalence *(e.g., does the test correctly predict if someone does or does not have the outcome of interest)*</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Positive and Negative Predictive Values: more reflective of clinical relevance of the test with values that are influenced by the prevalence *(e.g., if the test is positive [negative], how confident are we someone has [does not have] the outcome of interest)*</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Positive and Negative Likelihood Ratios: additional metrics we can use to describe clinical relevance that do **not** depend on the prevalence</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Posterior Odds and Probabilities: additional metrics we can use to describe clinical relevance</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>In practice, our *prior belief of someone having the condition of interest* often starts by assuming the population prevalence as our estimate: $P(D) = p$. This makes intuitive sense, because if we know nothing else about a person (e.g., test results, socio-economic status, etc.) our best guess if someone has a condition is the general prevalence in the population. The results of a test can then be used to update this *prior* belief into a *posterior* estimate.</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>One way we can summarize this information is by creating a confusion matrix, a 2x2 table which summarizes test performance relative to the true disease status or existing gold standard (if measuring true disease status is impossible, too expensive, too challenging, etc.):</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.source = 'fold-hide'}</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "In the following sections we'll focus on some of the questions relating to the likelihood ratio and the odds/probability distinction from our lectures."</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="co">#| filters:</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="co">#| - parse-latex</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>con_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">c</span>(<span class="st">'Test'</span>,<span class="st">'Positive ($D$)'</span>,<span class="st">'Negative ($</span><span class="sc">\\</span><span class="st">bar{D}$)'</span>, </span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'Positive ($T$)'</span>,<span class="st">'a (true positives)'</span>,<span class="st">'b (false positives)'</span>, </span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'Negative ($</span><span class="sc">\\</span><span class="st">bar{T}$)'</span>,<span class="st">'c (false negatives)'</span>,<span class="st">'d (true negatives)'</span>),</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">byrow=</span>T )</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(con_mat, <span class="at">escape=</span>F, <span class="at">align=</span><span class="st">'ccc'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">'condensed'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">" "</span>, <span class="st">"Gold Standard/Disease Status"</span> <span class="ot">=</span> <span class="dv">2</span>))</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## Positive and Negative Likelihood Ratios</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>The positive and negative likelihood ratios (LR+ and LR-) reflect if our test is a "good" test to use in practice. Additionally, *these summaries do not depend on the prevalence.* The measures summarize ratios of true and false positive or negative results:</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>LR+: the number of true positive results per false positive result (large ratios are better), reflects the "strength" of a positive test</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>LR-: the number of false negative results per true negative result (small ratios are better), reflects the "strength" of a negative test</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>In our lecture slides, we have the following calculation for LR+:</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>$$ \text{LR+} = \; \frac{P(T|D)}{P(T|\bar{D})} = \frac{\text{sensitivity}}{1-\text{specificity}} = \frac{\text{TPR}}{\text{FPR}}  $$</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>We see from this, that we indeed would prefer a large ratio since it indicates a larger rate of true positive predictions as compared to false positive predictions. Similarly, for LR- we have:</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>$$ \text{LR-} = \; \frac{P(\bar{T}|D)}{P(\bar{T}|\bar{D})} = \frac{1-\text{sensitivity}}{\text{specificity}} = \frac{\text{FNR}}{\text{TNR}} $$</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>Again, we can see that a smaller ratio is desired given the true negative rate is in the denominator, and a low false negative rate is preferred.</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="fu">## Odds versus Probabilities</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>In many cases we may still want to leverage the prevalence to calculate results reflective of a given population, especially if the prior test results had a special study design or were tested in a different population. We can leverage the likelihood ratios from above to incorporate our prior belief of the probability of having the outcome (i.e., the prevalence) through Bayes' theorem. </span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="fu">### Bayes' Theorem and Our Connection to Odds</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>In general, Bayes' theorem states:</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>$$ P(\theta|X) = \frac{P(X|\theta)P(\theta)}{P(X)} \to \text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Data}} $$</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>In the context of testing a hypothesis ($H$) for some data ($X$) this reflects:</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>$$ P(H|X) = \frac{P(X|H) P(H)}{P(X)} $$</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>where we define each term as</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$P(H|X)$ is the **posterior (probability)** that $H$ is true after the data has been considered</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$P(X|H)$ is the **likelihood** and represents the evidence for $H$ provided by the observed data $X$ (i.e., the probability of observing our data under the given hypothesis)</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$P(H)$ is the **prior (probability)** that $H$ is true *before* the data is considered</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$P(X)$ is the **total probability** of the data which takes into account all possible hypotheses</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>Bayes' theorem can also be rewritten in terms of *odds* if we have two specific outcomes that are mutually exclusive, such as $D$ and $\bar{D}$ (i.e., either someone has or does not have the disease). This can be noted by writing out the ratio of the posteriors for having and not having the disease given our data:</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>$$ \frac{P(D|X)}{P(\bar{D}|X)} = \frac{\frac{P(X|D) P(D)}{P(X)}}{\frac{P(X|\bar{D}) P(\bar{D})}{P(X)}} = \frac{P(X|D) P(D)}{P(X|\bar{D}) P(\bar{D})} $$</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>Since each person either has or does not have the disease, we know that $P(\bar{D}) = 1-P(D)$, further rewriting our equation to</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>$$ \frac{P(D|X)}{P(\bar{D}|X)}  = \frac{P(X|D) P(D)}{P(X|\bar{D}) (1 - P(D))} = \frac{P(D)}{1-P(D)} \times \frac{P(X|D)}{P(X|\bar{D})} $$</span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>Our missing piece for our context of diagnostic testing is to identify what our data ($X$) is. In our current context, it reflects the outcome of the diagnostic test ($T$ or $\bar{T}$ depending on the question we are trying to answer):</span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>$$ \frac{P(D|T)}{P(\bar{D}|T)} =  \frac{P(D)}{1-P(D)} \times \frac{P(T|D)}{P(T|\bar{D})} = \frac{P(D)}{1-P(D)} \times LR+  $$</span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>**We now see that we have the positive likelihood ratio!** This is where we can draw a direct connection to the *odds* of an event, which are defined as</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>$$ O(D) = \frac{P(D)}{1-P(D)} $$</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>Since $P(D)$ is our *prior belief that someone has the outcome*, $O(D)$ represents the **prior odds that someone has the outcome**. </span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>If we were interested in the perspective of *not* having the outcome for those with a negative test, we similarly have a ratio of probabilities that lead to our calculation of the posterior odds of $\bar{D}$:</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>$$ \frac{P(\bar{D}|\bar{T})}{P(D|\bar{T})} = \frac{P(\bar{T}|\bar{D}) P(\bar{D})}{P(\bar{T}|D) P(D)} = \frac{P(\bar{D})}{P(D)} \times \frac{P(\bar{T}|\bar{D})}{P(\bar{T}|D)} = \frac{1-P(D)}{P(D)} \times \frac{1}{LR-}   $$</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>Here we see the negative likelihood ratio, but we have to take its inverse based on the rewritten equation. Our relationship to the odds for not having the outcome of interest is similar to that above:</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>$$ O(\bar{D}) = \frac{P(\bar{D})}{1 - P(\bar{D})} = \frac{1-P(D)}{P(D)} $$</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a><span class="fu">### Odds, What Are You?</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>As we just saw, odds and probabilities have a direct connection. I personally am not a huge fan of odds because I just do not naturally think in terms of odds. For example,</span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Odds range from 0 to $\infty$ and represent a ratio of outcomes</span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Probabilities range from 0 to 1 and tend to be more intuitively understood</span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>Fortunately, we can rework our odds and probability equations above to solve for the probabilities:</span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>$$ O(D) = \frac{P(D)}{1-P(D)} \to P(D) = \frac{O(D)}{1+O(D)} $$</span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>For example, if we are given the the posterior odds of having the outcome is 2 and the corresponding posterior probability is 67% with a 20% population prevalence, we have the following interpretations:</span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>After observing a positive test result, our odds in favor of having the outcome are 2:1.</span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The posterior probability of having the outcome is 67% (a change from our prior probability (i.e., prevalence) of 20%).</span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>The odds of 2:1 indicate that out of three positive test outcomes, two of the three participants will actually have the outcome and one person will have been misclassified as having the outcome when they truly do not.  In other words, the false positive will occur once for every two times we have a true positive. I personally think the posterior probability is easier to imagine, that if your test is positive you have a 67% probability of having the outcome of interest.</span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

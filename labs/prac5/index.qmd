@@ -1,0 +1,78 @@
+---
+title: "Week 5 Practice Problems"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page includes optional practice problems, many of which are structured to assist you on the homework with [Solutions provided on a separate page](/labs/prac5s/index.qmd). Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.
+
+This week's extra practice exercises are focusing on implementing bootstrap resampling and permutation testing to evaluate the odds ratio of an estimate.
+
+# Data Background
+
+Complete the following exercises to conduct a bootstrap and a permutation test for a data set we first used in last week's lab.
+
+The following code can load the `Surgery_Timing.csv` file into R. The surgery time data is based on a retrospective observational study of 32,001 elective general surgical patients, but we will subset to arthroplasty knee procedures. We will create a new variable to specify morning vs. afternoon surgery time as our "exposure" and will examine in-hospital complication rate as our "outcome" of interest.
+
+```{r, cache=T, class.source = 'fold-show'}
+dat1 <- read.csv('../../.data/Surgery_Timing.csv')
+dat1s <- dat1[which(dat1$ahrq_ccs=='Arthroplasty knee'),]
+dat1s$AK_morning <- dat1s$hour < 12 # create new variable for morning observation, I use the "AK_" prefix to indicate variables I created
+```
+
+With this information we can calculate the odds ratio in a few ways (manually, with a function, etc.):
+
+```{r, message=FALSE, class.source = 'fold-show', warning=F}
+# calculate the OR from epi.2by2
+library(epiR)
+tab1 <- table(morning = factor(dat1s$AK_morning, levels=c(TRUE,FALSE)), complication = factor(dat1s$complication, levels=c(1,0)) )
+epi.2by2(tab1)
+
+# calculate the OR by hand where OR = ad/bc
+a <- sum( dat1s$AK_morning==T & dat1s$complication==1 )
+b <- sum( dat1s$AK_morning==T & dat1s$complication==0 )
+c <- sum( dat1s$AK_morning==F & dat1s$complication==1 )
+d <- sum( dat1s$AK_morning==F & dat1s$complication==0 )
+obs_or <- (a*d)/(b*c)
+obs_or
+```
+
+We see that in both approaches we arrive at an estimated odds ratio of 0.844, with a 95% CI from `epi.2by2` of (0.63, 1.13).
+
+## Exercise 1: Bootstrap Confidence Intervals
+
+Estimate the 95% normal percentile and bootstrap percentile confidence intervals with 10,000 bootstrap samples to describe the variability of our estimate and:
+
+**a.** compare the resulting CIs to the estimate from `epi.2by2`
+
+**b.** evaluate if the normal percentile CI has acceptable coverage
+
+**c.** evaluate if the bootstrap percentile CI has acceptable accuracy
+
+
+## Exercise 2: Permutation Test P-value
+
+Implement a permutation test with 10,000 resamples to estimate a p-value for if our observed OR is significantly different from its null value for:
+
+**a.** a two-sided p-value.
+
+**b.** a one-sided p-value where we hypothesize that mornings have a lower odds of complications compared to the afternoon.
+
+
+
+

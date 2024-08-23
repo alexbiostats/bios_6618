@@ -1,0 +1,112 @@
+---
+title: "Generalized Linear Models and Their Connection to Ordinary Least Squares Linear Regression"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Generalized Linear Models
+
+It turns out much of what we have done this semester with linear regression can be directly related to a larger family of models known as *generalized linear models*. These include a **family** and **link function**.
+
+Families refer to the type of outcome:
+
+- Gaussian (i.e., normal) for continuous outcomes
+- Gamma for continuous outcomes restricted to positive values (also often skewed)
+- Binomial for binary outcomes
+- Poisson for count outcomes
+- Quasi-models (binomial, Poisson) that relax the dispersion parameter of our exponential families (i.e., are a little more flexible)
+
+The link function connects how we estimate our outcome from our predictors and can vary by family. For Gaussian models there are three options for underlying models:
+
+- Identity: $Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2$
+- Inverse: $\frac{1}{Y} = \beta_0 + \beta_1 X_1 + \beta_2 X_2 \implies Y = \frac{1}{\beta_0 + \beta_1 X_1 + \beta_2 X_2}$
+- Log: $\log(Y) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 \implies Y = \exp(\beta_0 + \beta_1 X_1 + \beta_2 X_2) = \exp(\beta_0) \times \exp(\beta_1 X_1) \times \exp(\beta_2 X_2)$ (i.e., our multiplicative interpretation since the relationship between Y and $\mathbf{X}$ is no longer additive)
+
+Let's look at some examples of these and how they sometimes connect to other topics from the semester.
+
+## Gaussian, Identity Link
+
+Let's see some examples of how our models change with different approaches. We'll simulate a simple case of $n=50$ with a few predictors:
+
+```{r}
+set.seed(1207) # set seed for reproducibility
+
+n <- 50
+x1 <- rnorm(n=n, mean=10, sd=2)
+x2 <- rexp(n=n, rate=0.5)
+x3 <- rbinom(n=n, size=1, prob=0.6)
+error <- rnorm(n=n, mean=0, sd=3)
+y <- 150 + -2*x1 + 4*x2 - 5*x3 + error
+```
+
+```{r}
+# Gaussian, Identity link
+m_identity <- glm(y ~ x1 + x2 + x3, family=gaussian(link = "identity"))
+summary(m_identity)
+```
+
+This is our tried and true model, our linear regression with an additive interpretation. In this case, our simulation values are pretty darn close to what we set!
+
+## Gaussian, Inverse Link
+
+```{r}
+# Gaussian, Inverse link
+m_inverse <- glm(y ~ x1 + x2 + x3, family=gaussian(link = "inverse"))
+summary(m_inverse)
+```
+
+These estimates don't have as nice an interpretation and it is hard to tell if they seem "right" given our simulation setting. 
+
+However, if we change our values of Y to be estimated as the inverse of our $\mathbf{X}$ we will see a match of our simulation:
+
+```{r}
+y2 <- (1 / (150 + -2*x1 + 4*x2 - 5*x3 + error)) # inverse of 1/XB
+m_inverse2 <- glm(y2 ~ x1 + x2 + x3, family=gaussian(link = "inverse"))
+summary(m_inverse2)
+```
+
+This suggests that the relationship between Y and $\mathbf{X}$ is an inverse link (although note it isn't the exact same $\hat{\beta}$'s from the identity link). However, it still doesn't have a nice interpretation of the $\hat{\beta}$'s.
+
+
+## Gaussian, Log Link
+
+The idea behind this model is perhaps most similar to what we saw earlier this semester but with some different assumptions:
+
+```{r}
+# Gaussian, Log link
+m_log <- glm(y ~ x1 + x2 + x3, family=gaussian(link = "log"))
+summary(m_log)
+```
+
+Let's compare it to a Gaussian family with the identity link but with $\log(Y)$:
+
+```{r}
+# Gaussian, Identity Link with log(Y)
+m_identity_lnY <- glm(log(y) ~ x1 + x2 + x3, family=gaussian(link = "identity"))
+summary(m_identity_lnY)
+```
+
+In this case, our predictors are not identical (and, in fact, they happen to be quite similar). BUT, it turns out these two models are making very different assumptions:
+
+- The log link transforms the model itself (i.e., we have a log-likelihood of $l(\mu,\sigma^2;y) = \sum_{i=1}^{n} \left\{\frac{y_i \exp(\mathbf{X}'\boldsymbol{\beta}) - (\exp(\mathbf{X}'\boldsymbol{\beta}))^2 / 2}{\sigma^2} - \frac{y_i^2}{2 \sigma^2} - \frac{1}{2}\log(2\pi\sigma^2) \right\}$). The Gaussian errors are still on the natural scale, so the error variance is constant for all mean values of $Y$.
+- The $\log(Y)$ with identity link transforms the data itself. Here, if we retransform $\log(Y)$ back to $Y$ the variance will change with the mean.
+
+Why might we care? It turns out this removes the retransformation problem where $E[\log(Y)] = \mathbf{X}'\boldsymbol{\beta}$ but $E(\log(Y)|X) \neq \log(E(Y|X))$ 
+

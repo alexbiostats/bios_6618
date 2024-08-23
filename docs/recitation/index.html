@@ -80,6 +80,8 @@ window.onload = setBrand;
   gtag('config', 'G-5PBG7BL207');
 </script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -157,6 +159,10 @@ window.onload = setBrand;
     <a class="dropdown-item" href="../recitation" rel="" target="">
  <span class="dropdown-text">Recitation Questions</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../labs" rel="" target="">
+ <span class="dropdown-text">Labs and Practice Problems</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -199,7 +205,23 @@ window.onload = setBrand;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prerequisite-materials" id="toc-prerequisite-materials" class="nav-link active" data-scroll-target="#prerequisite-materials">Prerequisite Materials</a></li>
+  <li><a href="#r-related-questions" id="toc-r-related-questions" class="nav-link active" data-scroll-target="#r-related-questions">R-Related Questions</a></li>
+  <li><a href="#prerequisite-materials" id="toc-prerequisite-materials" class="nav-link" data-scroll-target="#prerequisite-materials">Prerequisite Materials</a></li>
+  <li><a href="#week-1-introduction-to-bios-6618-estimators" id="toc-week-1-introduction-to-bios-6618-estimators" class="nav-link" data-scroll-target="#week-1-introduction-to-bios-6618-estimators">Week 1: Introduction to BIOS 6618, Estimators</a></li>
+  <li><a href="#week-2-normal-distribution-and-the-clt" id="toc-week-2-normal-distribution-and-the-clt" class="nav-link" data-scroll-target="#week-2-normal-distribution-and-the-clt">Week 2: Normal Distribution and the CLT</a></li>
+  <li><a href="#week-3-hypothesis-testing-and-power" id="toc-week-3-hypothesis-testing-and-power" class="nav-link" data-scroll-target="#week-3-hypothesis-testing-and-power">Week 3: Hypothesis Testing and Power</a></li>
+  <li><a href="#week-4-conditional-probability-diagnostic-testing-2x2-tables" id="toc-week-4-conditional-probability-diagnostic-testing-2x2-tables" class="nav-link" data-scroll-target="#week-4-conditional-probability-diagnostic-testing-2x2-tables">Week 4: Conditional Probability, Diagnostic Testing, 2x2 Tables</a></li>
+  <li><a href="#week-5-bootstrap-sampling-and-nonparametric-tests" id="toc-week-5-bootstrap-sampling-and-nonparametric-tests" class="nav-link" data-scroll-target="#week-5-bootstrap-sampling-and-nonparametric-tests">Week 5: Bootstrap Sampling and Nonparametric Tests</a></li>
+  <li><a href="#week-6-simple-linear-regression-and-derivations" id="toc-week-6-simple-linear-regression-and-derivations" class="nav-link" data-scroll-target="#week-6-simple-linear-regression-and-derivations">Week 6: Simple Linear Regression and Derivations</a></li>
+  <li><a href="#week-7-slr-diagnostics-confidence-and-prediction-intervals-anova" id="toc-week-7-slr-diagnostics-confidence-and-prediction-intervals-anova" class="nav-link" data-scroll-target="#week-7-slr-diagnostics-confidence-and-prediction-intervals-anova">Week 7: SLR Diagnostics, Confidence and Prediction Intervals, ANOVA</a></li>
+  <li><a href="#week-8-slr-examples-logy-transformation" id="toc-week-8-slr-examples-logy-transformation" class="nav-link" data-scroll-target="#week-8-slr-examples-logy-transformation">Week 8: SLR Examples, Log(Y) Transformation</a></li>
+  <li><a href="#week-9-multiple-linear-regression-and-matrix-approaches-to-regression" id="toc-week-9-multiple-linear-regression-and-matrix-approaches-to-regression" class="nav-link" data-scroll-target="#week-9-multiple-linear-regression-and-matrix-approaches-to-regression">Week 9: Multiple Linear Regression and Matrix Approaches to Regression</a></li>
+  <li><a href="#week-10-categorical-predictors-and-anova" id="toc-week-10-categorical-predictors-and-anova" class="nav-link" data-scroll-target="#week-10-categorical-predictors-and-anova">Week 10: Categorical Predictors and ANOVA</a></li>
+  <li><a href="#week-11-confounding-mediation-interactions-and-polynomials" id="toc-week-11-confounding-mediation-interactions-and-polynomials" class="nav-link" data-scroll-target="#week-11-confounding-mediation-interactions-and-polynomials">Week 11: Confounding, Mediation, Interactions, and Polynomials</a></li>
+  <li><a href="#week-12-model-selection-variable-selection-outliersinfluential-points" id="toc-week-12-model-selection-variable-selection-outliersinfluential-points" class="nav-link" data-scroll-target="#week-12-model-selection-variable-selection-outliersinfluential-points">Week 12: Model Selection, Variable Selection, Outliers/Influential Points</a></li>
+  <li><a href="#week-13-segmented-regression-quantile-regression-splines-and-advanced-bootstrap-topics" id="toc-week-13-segmented-regression-quantile-regression-splines-and-advanced-bootstrap-topics" class="nav-link" data-scroll-target="#week-13-segmented-regression-quantile-regression-splines-and-advanced-bootstrap-topics">Week 13: Segmented Regression, Quantile Regression, Splines, and Advanced Bootstrap Topics</a></li>
+  <li><a href="#week-14-bayesian-linear-regression" id="toc-week-14-bayesian-linear-regression" class="nav-link" data-scroll-target="#week-14-bayesian-linear-regression">Week 14: Bayesian Linear Regression</a></li>
+  <li><a href="#week-15-exponential-families-and-generalized-linear-models" id="toc-week-15-exponential-families-and-generalized-linear-models" class="nav-link" data-scroll-target="#week-15-exponential-families-and-generalized-linear-models">Week 15: Exponential Families and Generalized Linear Models</a></li>
   </ul>
 </nav>
 </nav>
@@ -227,10 +249,148 @@ window.onload = setBrand;
 
 </header>
 
-<p>This page includes the responses to various recitation requests submitted over the semester. The questions are broadly broken down by theme with links provided to download materials or view the videos, but you may also use the Quarto search feature to try and find relevant pages throughout the course website. Responses often reinforce the content from <a href="bios_6618_materials/index.qmd">lecture slides</a> or extend the material to advanced topics. When possible, case studies or simulation studies are used to assist in answering the questions.</p>
+<p>This page includes the responses to various recitation requests submitted over various semesters of teaching BIOS 6618. These topics were covered during Thursday classes, so each request below may appear to come out of left field but related to topics worked on by students during the semester. The questions are broadly broken down by theme, but you may also use the Quarto search feature to try and find relevant pages throughout the course website. Responses often reinforce the content from <a href="../bios_6618_materials/index.html">lecture slides</a> or extend the material to advanced topics. When possible, case studies or simulation studies are used to assist in answering the questions. There is also a page with BIOS 6618 class labs and practice problems (with solutions) on our <a href="../labs/index.html">BIOS 6618 labs page</a> that provides additional examples corresponding to each week’s material.</p>
+<section id="r-related-questions" class="level2">
+<h2 class="anchored" data-anchor-id="r-related-questions">R-Related Questions</h2>
+<ul>
+<li><a href="../recitation/r26/index.html">Approaches to Generating Data for a Simulation: for loops and apply Functions</a></li>
+<li><a href="../recitation/r10/index.html">Creating Tables in Rmd Documents</a></li>
+<li><a href="../recitation/r25/index.html">Why Do We Set Seeds?</a></li>
+<li><a href="../recitation/r27/index.html">Ways to Enter Data for t.test</a></li>
+<li><a href="../recitation/r30/index.html">Distribution Functions in R (e.g., dnorm, qnorm, pnorm, rnorm)</a></li>
+</ul>
+</section>
 <section id="prerequisite-materials" class="level2">
 <h2 class="anchored" data-anchor-id="prerequisite-materials">Prerequisite Materials</h2>
-<p>Test</p>
+<ul>
+<li><a href="../recitation/r55/index.html">Z-Scores</a></li>
+<li><a href="../recitation/r29/index.html">Poisson Approximations to Exact Binomial Probabilities</a></li>
+</ul>
+</section>
+<section id="week-1-introduction-to-bios-6618-estimators" class="level2">
+<h2 class="anchored" data-anchor-id="week-1-introduction-to-bios-6618-estimators">Week 1: Introduction to BIOS 6618, Estimators</h2>
+<ul>
+<li><a href="../recitation/r1/index.html">Variance, Consistency, and Bias of Estimators</a></li>
+<li><a href="../recitation/r2/index.html">Mini-Simulation Study for Bias, Consistency, and Efficiency of the Sample Median versus the Sample Mean</a></li>
+<li><a href="../recitation/r3/index.html">Population Moments</a></li>
+<li><a href="../recitation/r28/index.html">Brief, but Complete, Interpretations: A t-test Example</a></li>
+<li><a href="../recitation/r43/index.html">Missing Data Considerations</a></li>
+</ul>
+</section>
+<section id="week-2-normal-distribution-and-the-clt" class="level2">
+<h2 class="anchored" data-anchor-id="week-2-normal-distribution-and-the-clt">Week 2: Normal Distribution and the CLT</h2>
+<ul>
+<li><a href="../recitation/r6/index.html">Is the CLT Only for the Mean?</a></li>
+<li><a href="../recitation/r31/index.html">Sampling Distributions of the Mean, Median, and Variance</a></li>
+<li><a href="../recitation/r32/index.html">Central Limit Theorem Example: Chi-Squared Distributed Data</a></li>
+</ul>
+</section>
+<section id="week-3-hypothesis-testing-and-power" class="level2">
+<h2 class="anchored" data-anchor-id="week-3-hypothesis-testing-and-power">Week 3: Hypothesis Testing and Power</h2>
+<ul>
+<li><a href="../recitation/r5/index.html">Long-Run Properties of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span></a></li>
+<li><a href="../recitation/r33/index.html">Power and Type I Error with Comparison of Known and Unknown One-Sample Mean Calculations</a></li>
+<li><a href="../recitation/r34/index.html">Power and Type I Error Rate Calculations via Simulation Studies</a></li>
+<li><a href="../recitation/r4/index.html">Multiple Testing Correction and Their Use in Randomized Trials</a></li>
+<li><a href="../recitation/r58/index.html">Multiple Testing Adjusting in R with p.adjust</a></li>
+<li><a href="../recitation/r7/index.html">What are Some Alternatives to p-values?</a></li>
+<li><a href="../recitation/r35/index.html">How Are t.test and power.t.test Different?</a></li>
+</ul>
+</section>
+<section id="week-4-conditional-probability-diagnostic-testing-2x2-tables" class="level2">
+<h2 class="anchored" data-anchor-id="week-4-conditional-probability-diagnostic-testing-2x2-tables">Week 4: Conditional Probability, Diagnostic Testing, 2x2 Tables</h2>
+<ul>
+<li><a href="../recitation/r8/index.html">McNemar’s Paired Test and Discordant Pairs</a></li>
+<li><a href="../recitation/r9/index.html">ROC Curves Under Different Strengths of Predictors</a></li>
+<li><a href="../recitation/r36/index.html">Creating ROC Curves from Tabular Data</a></li>
+<li><a href="../recitation/r37/index.html">Diagnostic Testing: Likelihood Ratios, Odds, and Bayes’ Theorem</a></li>
+<li><a href="../recitation/r38/index.html">Tests of Association for 2x2 Tables</a></li>
+<li><a href="../recitation/r39/index.html">What Are Some R Packages for Diagnostic Testing Calculations?</a></li>
+<li><a href="../recitation/r56/index.html">Study Designs and RD, RR, and OR Terminology</a></li>
+</ul>
+</section>
+<section id="week-5-bootstrap-sampling-and-nonparametric-tests" class="level2">
+<h2 class="anchored" data-anchor-id="week-5-bootstrap-sampling-and-nonparametric-tests">Week 5: Bootstrap Sampling and Nonparametric Tests</h2>
+<ul>
+<li><a href="../recitation/r11/index.html">Nonparametric Test Choices</a></li>
+<li><a href="../recitation/r12/index.html">Wilcoxon Rank Sum Examples and Using Vectorized Data in Functions</a></li>
+<li><a href="../recitation/r41/index.html">Bootstraps: the Normal Percentile Interval and Coverage, the Bootstrap Percentile Interval and Accuracy</a></li>
+<li><a href="../recitation/r42/index.html">Permuation Test p-values</a></li>
+<li><a href="../recitation/r40/index.html">Confidence Interval Interpretations and Calculations</a></li>
+<li><a href="../recitation/r51/index.html">Simulation vs.&nbsp;Bootstrap vs.&nbsp;Permutation</a></li>
+</ul>
+</section>
+<section id="week-6-simple-linear-regression-and-derivations" class="level2">
+<h2 class="anchored" data-anchor-id="week-6-simple-linear-regression-and-derivations">Week 6: Simple Linear Regression and Derivations</h2>
+<ul>
+<li><a href="../recitation/r44/index.html">Simple Linear Regression Assumptions</a></li>
+</ul>
+</section>
+<section id="week-7-slr-diagnostics-confidence-and-prediction-intervals-anova" class="level2">
+<h2 class="anchored" data-anchor-id="week-7-slr-diagnostics-confidence-and-prediction-intervals-anova">Week 7: SLR Diagnostics, Confidence and Prediction Intervals, ANOVA</h2>
+<ul>
+<li><a href="../recitation/r14/index.html">Confidence versus Prediction Intervals in Linear Regression</a></li>
+<li><a href="../recitation/r15/index.html">Confidence Interval Differences in <code>lm</code> and <code>glm</code></a></li>
+<li><a href="../recitation/r45/index.html">The ANOVA Table and the F-test in SLR</a></li>
+<li><a href="../recitation/r57/index.html">Post-Hoc Testing Justification for One-Way ANOVA</a></li>
+</ul>
+</section>
+<section id="week-8-slr-examples-logy-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="week-8-slr-examples-logy-transformation">Week 8: SLR Examples, Log(Y) Transformation</h2>
+<ul>
+<li><a href="../recitation/r46/index.html">Log Transformations and Interpretations in Linear Regression</a></li>
+</ul>
+</section>
+<section id="week-9-multiple-linear-regression-and-matrix-approaches-to-regression" class="level2">
+<h2 class="anchored" data-anchor-id="week-9-multiple-linear-regression-and-matrix-approaches-to-regression">Week 9: Multiple Linear Regression and Matrix Approaches to Regression</h2>
+<ul>
+<li><a href="../recitation/r13/index.html">Hat and Design Matrices in Linear Regression</a></li>
+</ul>
+</section>
+<section id="week-10-categorical-predictors-and-anova" class="level2">
+<h2 class="anchored" data-anchor-id="week-10-categorical-predictors-and-anova">Week 10: Categorical Predictors and ANOVA</h2>
+<ul>
+<li><a href="../recitation/r16/index.html">Hypothesis Testing in Intercept-Only, Simple, and Multiple Linear Regression Models</a></li>
+<li><a href="../recitation/r17/index.html">ANOVA versus Linear Regression</a></li>
+<li><a href="../recitation/r18/index.html">General Linear Hypothesis Testing (GLHT) and Matrices, Contrasts, and F-Tests</a></li>
+<li><a href="../recitation/r47/index.html">Categorical Predictors in Linear Regression</a></li>
+<li><a href="../recitation/r48/index.html">Hypothesis Testing for F-tests</a></li>
+</ul>
+</section>
+<section id="week-11-confounding-mediation-interactions-and-polynomials" class="level2">
+<h2 class="anchored" data-anchor-id="week-11-confounding-mediation-interactions-and-polynomials">Week 11: Confounding, Mediation, Interactions, and Polynomials</h2>
+<ul>
+<li><a href="../recitation/r19/index.html">Interpreting Polynomial Regression Models, Selecting Your Highest Order Polynomial Term, and Calculus in R</a></li>
+<li><a href="../recitation/r20/index.html">Classical Criteria of Confounding</a></li>
+<li><a href="../recitation/r21/index.html">Precision Variables</a></li>
+<li><a href="../recitation/r49/index.html">Degrees of Freedom with Interactions, Polynomials, and Categorical Variables</a></li>
+<li><a href="../recitation/r50/index.html">Estimating Pure Error (Polynomials)</a></li>
+<li><a href="../recitation/r52/index.html">The Three Models for Mediation and Confounding</a></li>
+<li><a href="../recitation/r53/index.html">Is It Possible to Tell The Role of a Variable (e.g., PEV, Confounder, etc.) From the Regression Model?</a></li>
+<li><a href="../recitation/r54/index.html">Mediation Modeling Example with Bootstrap CI Estimate</a></li>
+</ul>
+</section>
+<section id="week-12-model-selection-variable-selection-outliersinfluential-points" class="level2">
+<h2 class="anchored" data-anchor-id="week-12-model-selection-variable-selection-outliersinfluential-points">Week 12: Model Selection, Variable Selection, Outliers/Influential Points</h2>
+<ul>
+<li><a href="../recitation/r22/index.html">Collinearity in Regression</a></li>
+</ul>
+</section>
+<section id="week-13-segmented-regression-quantile-regression-splines-and-advanced-bootstrap-topics" class="level2">
+<h2 class="anchored" data-anchor-id="week-13-segmented-regression-quantile-regression-splines-and-advanced-bootstrap-topics">Week 13: Segmented Regression, Quantile Regression, Splines, and Advanced Bootstrap Topics</h2>
+<ul>
+<li><a href="../recitation/r23/index.html">Splines in Linear Regression</a></li>
+</ul>
+</section>
+<section id="week-14-bayesian-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="week-14-bayesian-linear-regression">Week 14: Bayesian Linear Regression</h2>
+<p>No current recitation topics.</p>
+</section>
+<section id="week-15-exponential-families-and-generalized-linear-models" class="level2">
+<h2 class="anchored" data-anchor-id="week-15-exponential-families-and-generalized-linear-models">Week 15: Exponential Families and Generalized Linear Models</h2>
+<ul>
+<li><a href="../recitation/r24/index.html">Generalized Linear Models and Their Connection to Ordinary Least Squares Linear Regression</a></li>
+</ul>
 
 
 </section>

@@ -1,0 +1,62 @@
+---
+title: Multiple Testing Adjusting in R with `p.adjust`
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Multiple Testing and `p.adjust`
+
+There are a host of multiple comparison correction strategies:
+
+* Bonferroni: the simplest strategy since we just adjust our significance threshold by dividing by the number of tests ($C$): $\frac{\alpha}{C}$
+* Holm-Bonferroni (or just Holm): a slightly more complex algorithm to the Bonferroni correction that is more powerful
+* Benjamini-Hochberg False Discovery Rate: another algorithm that attempts to limit the number of false positive results to a reasonable level
+
+While it is possible to implement these algorithms on your own, it may be easiest to use an existing function, like `p.adjust` in R. One major piece of this function to be aware of is that it presents the **adjusted p-values** as the output. For methods that already calculate adjusted p-values (e.g., FDR), this will not change our results. However, for methods that adjust the significance threshold (e.g., Bonferroni), the results with `p.adjust` will be converted so that you can still use your original $\alpha$ threshold.
+
+For example, let's consider the simple case with 3 p-values: 0.01, 0.04, 0.60. If we interpret these unadjusted p-values with $\alpha=0.05$, we would conclude that the first two would indicate a significant result (i.e., we would reject whatever $H_0$ we were testing).
+
+If we apply the Bonferroni correction by hand, we'd use $\frac{0.05}{3} = 0.0167$ as our new threshold. Therefore, we'd only consider the first unadjusted p-value to be significant. The limitations here are that (1) a person seeing the results needs to know the number of tests considered for the correction to calculate the threshold and (2) the new threshold is likely some seemingly random number (i.e., not our still arbitrarily chosen 0.05). 
+
+These limitations are addressed if we calculate the adjusted p-values to present instead, where a reader could simply use the original $\alpha$ threshold to determine significance. In `p.adjust`, we simply multiply by the number of tests conducted, and set a maximum p-value of 1.0:
+
+```{r}
+p_vec <- c(0.01, 0.04,0.60)
+p.adjust(p_vec, method='bonferroni')
+```
+
+Here we draw the same conclusion as our "by hand" calculation of the Bonferroni correction. However, we see that we might instead report $p_{adj}=0.03 < 0.05$. *[Note, in practice, I mostly see these still reported as $p=0.03$, but with a note in the methods section of the paper on how multiple testing was handled.]*
+
+We can see that for the FDR approach, we arrive at the same estimates. Our by-hand calculation, where $q = \frac{kp}{\text{rank}}$ and the FDR is the minimum value for $q$ at the given rank or higher, would look something like:
+
+| Test | p-value | Rank | q    | FDR  |
+|:-----|:--------|:-----|:-----|:-----|
+| 1    | 0.01    | 1    | 0.03 | 0.03 |
+| 2    | 0.04    | 2    | 0.06 | 0.06 |
+| 3    | 0.60    | 3    | 0.60 | 0.60 |
+
+
+Where we see the FDR adjusted p-values matches the output from `p.adjust`:
+
+```{r}
+p.adjust(p_vec, method='fdr')
+```
+
+

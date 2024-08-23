@@ -1,0 +1,136 @@
+---
+title: "McNemar's Paired Test and Discordant Pairs"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# McNemar's Paired Test and Discordant Pairs
+
+Paired categorical data is often analyzed using McNemar's test. This may look like pre/post data on the same person, a study design that matches cases/controls, etc. From our lecture notes we described how we (1) model the pairs instead of the individuals and (2) focus on the discordant pairs. 
+
+Why the focus on the discordant pairs? Let's consider the general set-up:
+
+```{r, class.source = 'fold-hide'}
+library(kableExtra)
+
+mytab1 <- data.frame( 'Yes Post' = c('a','c'), 'No Post' = c('b','d') , row.names = c('Yes Pre','No Pre'))
+
+kbl(mytab1, col.names = c('Yes Post','No Post'), align = c('c','c')) %>% 
+  kable_styling(bootstrap_options = "bordered", full_width = F) %>%
+  column_spec(1, bold = TRUE)
+```
+
+The *a* and *d* counts represent settings where the pre/post, case/control, etc. have no difference (either both a positive or negative). This suggests that our factor has no impact on changing the outcome. Instead, we are interested in compared the *b* and *c* counts where there does appear to be some sort of difference that may be attributed to the factor of interest.
+
+In lecture we defined $H_0 \colon \; p=\frac{1}{2}$ where $p$ can be defined as the probability that someone on the pre-test has a "Yes" given that the pre- and post-test have different outcomes. In other words: $p = \frac{b}{b+c}$, so $1-p = \frac{c}{b+c}$ and there is only "no difference" between discordant rates if both are equal to $\frac{1}{2}$.
+
+We could also define the null hypothesis as $H_0 \colon \; p_b = p_c$, which implies $H_0 \colon \; p_b - p_c = 0$. However, since $p_b + p_c = 1$ given we are only interested in the discordant pairs, this null is only true if $p_b = p_c = \frac{1}{2}$.
+
+Let's consider a few cases to see what may happen with McNemar's test:
+
+
+## No Discordant Pairs
+
+First let's consider a situation where there is absolute no effect observed for our factor between a pre- and post-test:
+
+```{r, class.source = 'fold-hide'}
+mytab2 <- data.frame( 'Yes Post' = c(70,0), 'No Post' = c(0,30) , row.names = c('Yes Pre','No Pre'))
+
+kbl(mytab2, col.names = c('Yes Post','No Post'), align = c('c','c')) %>% 
+  kable_styling(bootstrap_options = "bordered", full_width = F) %>%
+  column_spec(1, bold = TRUE)
+```
+
+This corresponds to a McNemar's test:
+
+```{r}
+mat2 <- matrix(c(70,0, 0,30), nrow=2, byrow=T) # create matrix to give McNemar's
+mcnemar.test(mat2)
+```
+Here we see we broke McNemar's! In this extreme, the test statistic ($\chi^2$) and p-value are not defined (i.e., $n_{D} = 0$ from our lecture notes). However, we can see the table and determine there is no difference between pre/post periods.
+
+
+## Post-Test Better
+
+Let's assume now we have an improvement in our post-test, but a few people may randomly do worse:
+
+```{r, class.source = 'fold-hide'}
+mytab3 <- data.frame( 'Yes Post' = c(55,15), 'No Post' = c(3,27) , row.names = c('Yes Pre','No Pre'))
+
+kbl(mytab3, col.names = c('Yes Post','No Post'), align = c('c','c')) %>% 
+  kable_styling(bootstrap_options = "bordered", full_width = F) %>%
+  column_spec(1, bold = TRUE)
+```
+
+This corresponds to a McNemar's test:
+
+```{r}
+mat3 <- matrix(c(55,15, 3,27), nrow=2, byrow=T) # create matrix to give McNemar's
+mcnemar.test(mat3)
+```
+
+In this case we have a clear difference between our discordant pairs ($p=$ `r round(mcnemar.test(mat3)$p.value,4)`), and our qualitative review of the table suggests it is because 15 cases that were "No" on the pre-test ultimately became a "Yes" on the post-test, but only 3 moved from "Yes" to "No" pre- to post-test.
+
+
+## Pre-Test Better
+
+Let's assume now we have an intervention that makes individuals do worse in the exact opposite way from before:
+
+```{r, class.source = 'fold-hide'}
+mytab4 <- data.frame( 'Yes Post' = c(67,3), 'No Post' = c(15,15) , row.names = c('Yes Pre','No Pre'))
+
+kbl(mytab4, col.names = c('Yes Post','No Post'), align = c('c','c')) %>% 
+  kable_styling(bootstrap_options = "bordered", full_width = F) %>%
+  column_spec(1, bold = TRUE)
+```
+
+This corresponds to a McNemar's test:
+
+```{r}
+mat4 <- matrix(c(67,3, 15,15), nrow=2, byrow=T) # create matrix to give McNemar's
+mcnemar.test(mat4)
+```
+
+We see that we have the same p-value ($p=$ `r round(mcnemar.test(mat4)$p.value,4)`), this is because the discordant pairs are what we focus on for the hypothesis test, even though the marginal (i.e., overall) rates of yes/no for the pre-test are different in each case.
+
+
+## Similar Discordant Rates
+
+For our final case, let's assume there is similar rates of change suggesting our intervention does not have an affect and performance may be somewhat random:
+
+```{r, class.source = 'fold-hide'}
+mytab5 <- data.frame( 'Yes Post' = c(45,25), 'No Post' = c(22,3) , row.names = c('Yes Pre','No Pre'))
+
+kbl(mytab5, col.names = c('Yes Post','No Post'), align = c('c','c')) %>% 
+  kable_styling(bootstrap_options = "bordered", full_width = F) %>%
+  column_spec(1, bold = TRUE)
+```
+
+This corresponds to a McNemar's test:
+
+```{r}
+mat5 <- matrix(c(42,25, 22,3), nrow=2, byrow=T) # create matrix to give McNemar's
+mcnemar.test(mat5)
+```
+
+In this case we do not have a significant difference ($p=$ `r round(mcnemar.test(mat5)$p.value,4)`), and our qualitative review of the table suggests it is because ultimately similar numbers of individuals switched between yes/no in both directions (i.e., yes to no, no to yes).
+
+
+

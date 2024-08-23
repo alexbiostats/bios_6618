@@ -1,0 +1,144 @@
+---
+title: "Diagnostic Testing: Likelihood Ratios, Odds, and Bayes' Theorem"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+
+# The Conditional Probablity Merry-Go-Round
+
+In our lectures on diagnostic testing (i.e., conditional probability), we covered numerous quantities one might use to summarize some aspect of the performance:
+
+* Sensitivity and Specificity: characteristics of the test that are **not** influenced by the prevalence *(e.g., does the test correctly predict if someone does or does not have the outcome of interest)*
+* Positive and Negative Predictive Values: more reflective of clinical relevance of the test with values that are influenced by the prevalence *(e.g., if the test is positive [negative], how confident are we someone has [does not have] the outcome of interest)*
+* Positive and Negative Likelihood Ratios: additional metrics we can use to describe clinical relevance that do **not** depend on the prevalence
+* Posterior Odds and Probabilities: additional metrics we can use to describe clinical relevance
+
+In practice, our *prior belief of someone having the condition of interest* often starts by assuming the population prevalence as our estimate: $P(D) = p$. This makes intuitive sense, because if we know nothing else about a person (e.g., test results, socio-economic status, etc.) our best guess if someone has a condition is the general prevalence in the population. The results of a test can then be used to update this *prior* belief into a *posterior* estimate.
+
+One way we can summarize this information is by creating a confusion matrix, a 2x2 table which summarizes test performance relative to the true disease status or existing gold standard (if measuring true disease status is impossible, too expensive, too challenging, etc.):
+
+```{r, class.source = 'fold-hide'}
+#| code-fold: true
+#| fig-cap: "In the following sections we'll focus on some of the questions relating to the likelihood ratio and the odds/probability distinction from our lectures."
+#| filters:
+#| - parse-latex
+library(kableExtra)
+
+con_mat <- matrix( c('Test','Positive ($D$)','Negative ($\\bar{D}$)', 
+                     'Positive ($T$)','a (true positives)','b (false positives)', 
+                     'Negative ($\\bar{T}$)','c (false negatives)','d (true negatives)'),
+                   nrow=3, byrow=T )
+  
+kbl(con_mat, escape=F, align='ccc') %>%
+  kable_styling(bootstrap_options = c('condensed')) %>%
+  add_header_above(c(" ", "Gold Standard/Disease Status" = 2))
+```
+
+
+## Positive and Negative Likelihood Ratios
+
+The positive and negative likelihood ratios (LR+ and LR-) reflect if our test is a "good" test to use in practice. Additionally, *these summaries do not depend on the prevalence.* The measures summarize ratios of true and false positive or negative results:
+
+* LR+: the number of true positive results per false positive result (large ratios are better), reflects the "strength" of a positive test
+* LR-: the number of false negative results per true negative result (small ratios are better), reflects the "strength" of a negative test
+
+In our lecture slides, we have the following calculation for LR+:
+
+$$ \text{LR+} = \; \frac{P(T|D)}{P(T|\bar{D})} = \frac{\text{sensitivity}}{1-\text{specificity}} = \frac{\text{TPR}}{\text{FPR}}  $$
+
+We see from this, that we indeed would prefer a large ratio since it indicates a larger rate of true positive predictions as compared to false positive predictions. Similarly, for LR- we have:
+
+$$ \text{LR-} = \; \frac{P(\bar{T}|D)}{P(\bar{T}|\bar{D})} = \frac{1-\text{sensitivity}}{\text{specificity}} = \frac{\text{FNR}}{\text{TNR}} $$
+
+Again, we can see that a smaller ratio is desired given the true negative rate is in the denominator, and a low false negative rate is preferred.
+
+
+## Odds versus Probabilities
+
+In many cases we may still want to leverage the prevalence to calculate results reflective of a given population, especially if the prior test results had a special study design or were tested in a different population. We can leverage the likelihood ratios from above to incorporate our prior belief of the probability of having the outcome (i.e., the prevalence) through Bayes' theorem. 
+
+
+### Bayes' Theorem and Our Connection to Odds
+
+In general, Bayes' theorem states:
+
+$$ P(\theta|X) = \frac{P(X|\theta)P(\theta)}{P(X)} \to \text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Data}} $$
+
+In the context of testing a hypothesis ($H$) for some data ($X$) this reflects:
+
+$$ P(H|X) = \frac{P(X|H) P(H)}{P(X)} $$
+
+where we define each term as
+
+* $P(H|X)$ is the **posterior (probability)** that $H$ is true after the data has been considered
+* $P(X|H)$ is the **likelihood** and represents the evidence for $H$ provided by the observed data $X$ (i.e., the probability of observing our data under the given hypothesis)
+* $P(H)$ is the **prior (probability)** that $H$ is true *before* the data is considered
+* $P(X)$ is the **total probability** of the data which takes into account all possible hypotheses
+
+Bayes' theorem can also be rewritten in terms of *odds* if we have two specific outcomes that are mutually exclusive, such as $D$ and $\bar{D}$ (i.e., either someone has or does not have the disease). This can be noted by writing out the ratio of the posteriors for having and not having the disease given our data:
+
+$$ \frac{P(D|X)}{P(\bar{D}|X)} = \frac{\frac{P(X|D) P(D)}{P(X)}}{\frac{P(X|\bar{D}) P(\bar{D})}{P(X)}} = \frac{P(X|D) P(D)}{P(X|\bar{D}) P(\bar{D})} $$
+
+Since each person either has or does not have the disease, we know that $P(\bar{D}) = 1-P(D)$, further rewriting our equation to
+
+$$ \frac{P(D|X)}{P(\bar{D}|X)}  = \frac{P(X|D) P(D)}{P(X|\bar{D}) (1 - P(D))} = \frac{P(D)}{1-P(D)} \times \frac{P(X|D)}{P(X|\bar{D})} $$
+
+Our missing piece for our context of diagnostic testing is to identify what our data ($X$) is. In our current context, it reflects the outcome of the diagnostic test ($T$ or $\bar{T}$ depending on the question we are trying to answer):
+
+$$ \frac{P(D|T)}{P(\bar{D}|T)} =  \frac{P(D)}{1-P(D)} \times \frac{P(T|D)}{P(T|\bar{D})} = \frac{P(D)}{1-P(D)} \times LR+  $$
+
+**We now see that we have the positive likelihood ratio!** This is where we can draw a direct connection to the *odds* of an event, which are defined as
+
+$$ O(D) = \frac{P(D)}{1-P(D)} $$
+
+Since $P(D)$ is our *prior belief that someone has the outcome*, $O(D)$ represents the **prior odds that someone has the outcome**. 
+
+
+If we were interested in the perspective of *not* having the outcome for those with a negative test, we similarly have a ratio of probabilities that lead to our calculation of the posterior odds of $\bar{D}$:
+
+$$ \frac{P(\bar{D}|\bar{T})}{P(D|\bar{T})} = \frac{P(\bar{T}|\bar{D}) P(\bar{D})}{P(\bar{T}|D) P(D)} = \frac{P(\bar{D})}{P(D)} \times \frac{P(\bar{T}|\bar{D})}{P(\bar{T}|D)} = \frac{1-P(D)}{P(D)} \times \frac{1}{LR-}   $$
+
+Here we see the negative likelihood ratio, but we have to take its inverse based on the rewritten equation. Our relationship to the odds for not having the outcome of interest is similar to that above:
+
+$$ O(\bar{D}) = \frac{P(\bar{D})}{1 - P(\bar{D})} = \frac{1-P(D)}{P(D)} $$
+
+
+
+### Odds, What Are You?
+
+As we just saw, odds and probabilities have a direct connection. I personally am not a huge fan of odds because I just do not naturally think in terms of odds. For example,
+
+* Odds range from 0 to $\infty$ and represent a ratio of outcomes
+* Probabilities range from 0 to 1 and tend to be more intuitively understood
+
+Fortunately, we can rework our odds and probability equations above to solve for the probabilities:
+
+$$ O(D) = \frac{P(D)}{1-P(D)} \to P(D) = \frac{O(D)}{1+O(D)} $$
+
+For example, if we are given the the posterior odds of having the outcome is 2 and the corresponding posterior probability is 67% with a 20% population prevalence, we have the following interpretations:
+
+* After observing a positive test result, our odds in favor of having the outcome are 2:1.
+* The posterior probability of having the outcome is 67% (a change from our prior probability (i.e., prevalence) of 20%).
+
+The odds of 2:1 indicate that out of three positive test outcomes, two of the three participants will actually have the outcome and one person will have been misclassified as having the outcome when they truly do not.  In other words, the false positive will occur once for every two times we have a true positive. I personally think the posterior probability is easier to imagine, that if your test is positive you have a 67% probability of having the outcome of interest.
+
+
+

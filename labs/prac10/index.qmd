@@ -1,0 +1,120 @@
+---
+title: "Week 10 Practice Problems"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page includes optional practice problems, many of which are structured to assist you on the homework with [Solutions provided on a separate page](/labs/prac10s/index.qmd). Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.
+
+This week's extra practice exercises focus on ANOVA and categorical variables.
+
+
+# Dataset Background
+
+The following code can load the `Licorice_Gargle.csv` file into R:
+
+```{r, class.source = 'fold-show'}
+dat <- read.csv('../../.data/Licorice_Gargle.csv')
+```
+
+The dataset represents a randomized control trial of 236 adult patients undergoing elective thoracic surgery requiring a double-lumen endotracheal tube comparing if licorice vs. sugar-water gargle prevents postoperative sore throat. For our exercises below we will focus on the following variables:
+
+* `preOp_age`: age (in years)
+* `preOp_asa`: ASA status (1=normal healthy patient, 2=patient with mild systemic disease, 3=patient with severe systemic disease)
+* `intraOp_surgerySize`: surgery size (1=small, 2=medium, 3=large)
+
+For this dataset, our summary of the mean age and SD by group is:
+
+```{r, class.source = 'fold-hide', warning=F, message=F}
+#| code-fold: true
+library(kableExtra)
+library(doBy)
+
+mean_sd <- function(x){ paste0(round(mean(x),1), ' (',round(sd(x),1),')') } # function to return mean (SD) for "x"
+
+t1 <- summaryBy( preOp_age ~ preOp_asa, data=dat, FUN=mean_sd)
+t2 <- summaryBy( preOp_age ~ intraOp_surgerySize, data=dat, FUN=mean_sd)
+
+mean_tab <- rbind(ASA = t1[,2], Size= t2[,2])
+
+kbl(mean_tab, col.names=c('1','2','3'), align='ccc', escape=F) %>%
+      kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```
+
+# Exercise 1: One-Way ANOVA
+
+For this exercise, we will compare age as our outcome against surgery size with a one-way ANOVA.
+
+## 1a: Testing Homogeneity of the Variances Assumption
+
+Use both Levene's test and Bartlett's test to evaluate if the variances are homogeneous (i.e., equal) across our three surgery size groups. Write the null and alternative hypothesis being tested.
+
+
+## 1b: One-Way ANOVA with Equal Variances
+
+Assume that the variances *are equal* across groups and test the hypothesis that the mean age between groups is equal across the three surgery size groups. State the null and alternative hypothesis being tested.
+
+
+## 1c: One-Way ANOVA with Unequal Variances
+
+Assume that the variances *are unequal* across groups and test the hypothesis that the mean age between groups is equal across the three surgery size groups. State the null and alternative hypothesis being tested.
+
+
+## 1d: Nonparametric Kruskal-Wallis ANOVA
+
+Assume that we think our normality assumption for one-way ANOVA is violated. Implement the nonparametric Kruskal-Wallis test and interpret our result. State the null and alternative hypothesis being tested.
+
+
+## 1e: Post-Hoc Testing
+
+Regardless of our earlier results in **1b**, compare the means of each pair of groups with the Tukey HSD method and summarize the results. Was post-hoc testing necessary in this case?
+
+
+# Exercise 2: Categorical Variables
+
+For this exercise, we will use age our continuous outcome and consider both ASA status and surgery size as predictors.
+
+## 2a: Reference Cell Model
+
+The reference cell model is our more common approach to regression modeling in many biostatistics applications. Write down the true regression equation and any assumptions for a model where ASA status 1 and surgery size small are the reference categories.
+
+
+## 2b: Partial $F$-test for ASA Status
+
+Evaluate if ASA status contributes significantly to the model from **2a**. Write the null and alternative hypotheses, test the null hypothesis, and state your conclusion.
+
+
+## 2c: Partial $F$-test for Surgery Size
+
+Evaluate if surgery size contributes significantly to the model from **2a**. Write the null and alternative hypotheses, test the null hypothesis, and state your conclusion.
+
+
+## 2d: Overall $F$-test
+
+Evaluate if ASA status and surgery size contribute significantly to the prediction of $Y$. Write the null and alternative hypotheses, test the null hypothesis, and state your conclusion.
+
+
+## 2e: ASA Status III Significance
+
+Evaluate the significance of an ASA status of III and provide an interpretation for the beta coefficient.
+
+
+## 2f: ASA Status III Removal
+
+Regardless of your conclusion in **2e**, if $p>0.05$ and we failed to reject the null hypothesis that our beta coefficient was equal to 0, should we consider removing just ASA III from our regression model and refitting (i.e., still have ASA II in the model)?
+

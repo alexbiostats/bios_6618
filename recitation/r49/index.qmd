@@ -1,0 +1,95 @@
+---
+title: "Degrees of Freedom with Interactions, Polynomials, and Categorical Variables"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+
+# Degrees of Freedom and Interactions/Polynomials
+
+As our models become increasingly complex (e.g., multiple category predictors, interaction terms, polynomial models, etc.), we may wonder what impacts this has on our calculation of the degrees of freedom for things like the $t$-test and $F$-tests in our models.
+
+The good news, there is no overly complex impact on our degrees of freedom! Let's consider a generic example of a regression model based on $n$ observations:
+
+$$ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \epsilon; \text{ where } \epsilon \sim N(0,\sigma^{2}_{e})  $$
+
+We know that the degrees of freedom we would use for the $t$-test in our regression coefficient table would be $n-p-1$, where $p$ is the number of predictors and the 1 represents the intercept (i.e., we reference a $t_{n-p-1}$ distribution to evaluate significance). In this generic example, we would have $t_{n-3-1} = t_{n-4}$.
+
+We also know that the degrees of freedom for an overall $F$-test would be $p,n-p-1$ (i.e., we reference an $F_{p,n-p-1}$ distribution to evaluate significance). In this generic example, we would have $F_{3,n-3-1} = F_{3,n-4}$.
+
+This similarly holds for the partial $F$-test the removes $k$ predictors, where we would have $k,n-(p-k)-k-1$ degrees of freedom. *Note: $(p-k)$ is written to not need to redefine $p$ from above, but in the lecture slides (MLR Inference on Independent Variables, slides 12-17) we have $p$ defined as the number of predictors remaining in the reduced model.*
+
+
+## Multiple Category Predictors
+
+Let's now place some context on the problem, where we have a categorical variable with 4 categories (A, B, C, and D). We'll consider this as a reference cell model with A as our reference group:
+
+$$ Y = \beta_0 + \beta_1 X_B + \beta_2 X_C + \beta_3 X_D + \epsilon; \text{ where } \epsilon \sim N(0,\sigma^{2}_{e})  $$
+
+Notice the only thing we've changed is the subscript for our $X$'s, which isn't necessary but helps us keep track of what each thing means. Depending on preference, since these are indicators, we also could have written them as $I_B$ instead of $X_B$.
+
+We see that in this model we still have $p=3$ since there are 3 predictors in the model, even though they technically are all part of the same variable! 
+
+Since we are estimating the $\hat{\beta}$'s for each predictor, it takes 1 degree of freedom for each one. Overall, we might consider the variable to actually use 3 total degrees of freedom for estimation, but for the sake of our statistical inference (i.e., $t$-test, $F$-test, etc.), estimating the $\hat{\beta}$ for each predictor contributes 1 DF.
+
+
+## Interaction Terms
+
+Let's change our context to consider an interaction between two variables:
+
+$$ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 (X_1)(X_2) + \epsilon; \text{ where } \epsilon \sim N(0,\sigma^{2}_{e})  $$
+
+I think this format is the most obvious that we have an interaction between $X_1$ and $X_2$, implying that as either one changes, its magnitude will vary based on the other. 
+
+However, this format can lead to confusion about the number of predictors (i.e., we only have 2 "unique" variables that appear throughout the model). So it might be easier when thinking about degrees of freedom to write is in our original format: 
+
+$$ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \epsilon; \text{ where } \epsilon \sim N(0,\sigma^{2}_{e})  $$
+
+and then define $X_3 = X_1 \times X_2$. In this model we see a more direct connection with $p=3$ as our number of predictors...just like in our generic example above!
+
+This is because we really are creating a new predictor with different information for $X_3$:
+
+* If we had age and BMI, a 50 year old with 25 kg/m^2^ would then have $X_3=50 \times 25 = 1250$
+* If we had age and sex (where female is reference), a 50 year old female would have $X_3 = 50 \times 0 = 0$ and a 50 year old male would have $X_3 = 50 \times 1 = 50$
+* If we had diabetes status (where no diabetes is reference) and sex (where female is reference), a diabetic male would have $X_3 = 1 \times 1 = 1$, a diabetic female would have $X_3 = 1 \times 0 = 0$, a non-diabetic male would have $X_3 = 0 \times 1 = 0$, and a non-diabetic female would have $X_3 = 0 \times 0 = 0$
+
+These are interaction terms are obviously quite different, but each introduces new information and flexibility to our regression model in what is essentially a new predictor. Therefore, we can think of any interaction terms as new predictors for the sake of degrees of freedom calculations (even though they do drastically alter how we *interpret* our estimated $\hat{\beta}$'s).
+
+
+## Polynomial Terms
+
+Let's change our context a final time to consider a polynomial regression model. This idea is similar to the interaction terms:
+
+$$ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_1^2 + \beta_3 X_1^3 + \epsilon; \text{ where } \epsilon \sim N(0,\sigma^{2}_{e})  $$
+
+Here we see that we have only one "unique" variable in our model as written. However, there are still 3 *predictors* (a linear, quadratic, and cubic term for $X_1$) included in the model (and therefore we need to estimate three separate $\hat{\beta}$'s for our predictors). We can see this be rewriting our model in equivalent ways:
+
+$$ Y = \beta_0 + \beta_1 X_1 + \beta_2 (X_1)(X_1) + \beta_3 (X_1)(X_1)(X_1) + \epsilon; \text{ where } \epsilon \sim N(0,\sigma^{2}_{e})  $$
+
+or as 
+
+$$ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \epsilon; \text{ where } \epsilon \sim N(0,\sigma^{2}_{e})  $$
+
+where $X_2 = X_1^2$ and $X_3 = X_1^3$.
+
+We see the same idea as before, that we are essentially transforming our variables to contribute new information and introduce different flexibility to our models.
+
+
+

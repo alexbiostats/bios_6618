@@ -1,0 +1,139 @@
+---
+title: "Collinearity in Regression"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Collinearity
+
+**Collinearity** is when we have two explanatory variables with a linear association. In a regression context, we often refer to this as **multicollinearity**, which is when we have two *or more* explanatory variables that are highly linearly related.
+
+Why might we be concerned about multicollinearity? There are two major reasons:
+
+1. It can lead to instability in our beta coefficient estimates based on what variable(s) are in the model.
+2. It can lead to reduced precision (i.e., increased variance of our beta coefficients).
+
+In our lecture on MLR diagnostics, we introduced the use of the variance inflation factor (VIF) as a way to evaluate multicollinearity. Our rule of thumb was that we should be concerned when VIF > 10 for any coefficient.
+
+Let's explore some different sources and issues with multicollinearity.
+
+
+## Structural Multicollinearity
+
+This form of multicollinearity is introduced by the inclusion of polynomial or interaction terms in the model. In both cases, we can imagine that there probably should be correlation between these related variables.
+
+### Polynomial Regression
+
+Let's first see an example of our polynomial regression with raw polynomials:
+
+```{r, warning=F, message=F}
+library(car) # load package for vif function
+dat <- read.csv('../../.data/nhanes1516_sexhormone.csv')
+dat <- dat[which(dat$MALE==T),]
+dat <- dat[!is.na(dat$SHBG),]
+
+dat[,c('age','age2','age3')] <- poly(dat$RIDAGEYR,3, raw=T)
+mod_raw3 <- lm(SHBG ~ age + age2 + age3, data=dat)
+vif(mod_raw3)
+```
+We see that our three age terms (i.e., $X_{age}$, $X_{age}^2$, and $X_{age}^{3}$) have VIF values >>10. This is expected since we simply squared and cubed our age term.
+
+If we fit orthogonal polynomial terms, we see that the multicollinearity is removed:
+
+```{r}
+dat[,c('orthage','orthage2','orthage3')] <- poly(dat$RIDAGEYR,3, raw=F)
+mod_orth3 <- lm(SHBG ~ orthage + orthage2 + orthage3, data=dat)
+vif(mod_orth3)
+```
+
+Now, all VIF values are less than 10, suggesting no concerns with multicollinearity.
+
+As a brief, aside, we can see how `poly()` created our raw and orthogonal $X_{age}$ terms:
+
+```{r}
+head(dat)
+```
+
+
+### Interaction Term
+
+Structural multicollinearity can also occur due to the presence of an interaction:
+
+```{r, message=F}
+mod_int_all <- lm(SHBG ~ RIDAGEYR + ESTRADIOL + TESTOSTERONE + RIDAGEYR*ESTRADIOL + RIDAGEYR*TESTOSTERONE + RIDAGEYR*ESTRADIOL*TESTOSTERONE, data=dat)
+mod_int_two <- lm(SHBG ~ RIDAGEYR + ESTRADIOL + TESTOSTERONE + RIDAGEYR*ESTRADIOL + RIDAGEYR*TESTOSTERONE, data=dat)
+mod_int_none <- lm(SHBG ~ RIDAGEYR + ESTRADIOL + TESTOSTERONE, data=dat)
+
+# compare VIFs from models with 3-way and 2-way interaction, only 2-way interaction, only main effects
+vif(mod_int_all)
+vif(mod_int_two)
+vif(mod_int_none)
+```
+
+We see the presence of multicollinearity in the models with interactions, but this is to be expected given the interaction term. Given the lack of multicollinearity in the model with only main effects, this is likely caused by the interactions and not underlying relationships.
+
+## Data Multicollinearity 
+
+Another type of multicollinearity is when two variables are closely related (e.g., they either measure similar constructs/phenomenon or are correlated by chance). This suggests that the variables may be attempting to explain the same or very similar aspects of the variability in our outcome $Y$.
+
+To examine this, let's explore a simulation where we simulate a multiple linear regression and add an extra variable that is highly related to one of our simulated predictors:
+
+```{r}
+set.seed(6618) # set seed for reproducibility
+n <- 100
+
+x1 <- rbinom(n=n, size=1, prob=0.3)
+x2 <- rnorm(n=n, mean=5, sd=2)
+x3 <- rnorm(n=n, mean=0, sd=3)
+x2_corr <- x2 + runif(n=n, -0.25, 0.25) # simulate highly correlated variable
+
+y <- 5 + 0.8*x1 + 2*x2 + -1*x3 + rnorm(n=n, mean=0, sd=2)
+
+# Fit true model, evaluate coefficients and VIF
+lm_true <- lm(y ~ x1 + x2 + x3)
+summary(lm_true)
+vif(lm_true)
+```
+
+Now let's add `x2_corr` and check its Pearson's linear correlation with `x2`:
+
+```{r}
+# Fit model with x2_corr, evaluate coefficients and VIF
+lm_mc <- lm(y ~ x1 + x2 + x3 + x2_corr)
+summary(lm_mc)
+vif(lm_mc)
+cor(x2, x2_corr) # check correlation
+```
+
+We see that our estimate of the effect of $X_2$ has been decreased and is no longer statistically significant. In evaluating the VIF, we see it is >>10! This is because our two variables have a Pearson's correlation of `r round(cor(x2,x2_corr),3)`.
+
+In practice, we'd need to decide whether to keep $X_2$ or the $X_{2,corr}$ in the model but we wouldn't have the benefit for simulating data to know the truth. Instead, we'd need to make a decision based on the context of the data and the problem we are investigating.
+
+If we did choose to keep $X_{2,corr}$ we would see the following results:
+
+```{r}
+# Fit model with x2_corr, evaluate coefficients and VIF
+lm_corr <- lm(y ~ x1 + x2_corr + x3)
+summary(lm_corr)
+vif(lm_corr)
+```
+
+In this case, given the high correlation, our findings look very similar to `lm_true`, even though technically x2_corr was not used to simulate the outcome values.
+

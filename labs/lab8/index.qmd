@@ -1,0 +1,227 @@
+---
+title: "Week 8 Lab"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Labs](/labs/index.qmd) collection, the mini-lecture content delivered at the start of class before breaking out into small groups to work on the homework assignment.
+
+# What's on the docket this week?
+
+This week we will walk through the steps to generating our own ANOVA table for the summary of linear regression models in `R`. SAS provides a nicely formatted tabled automatically with its `PROC REG` output, but it is a bit trickier to create in `R`.
+
+
+# The ANOVA Table
+
+We know the general set-up of the ANOVA looks something like the table below:
+
+```{r, message=F, class.source = 'fold-hide'}
+#| code-fold: true
+#| fig-cap: "where $p$ is the number of independent variables in the model ($p=1$ for simple linear regression) and $n$ is our total sample size."
+#| filters:
+#| - parse-latex
+library(kableExtra)
+
+anova_df <- data.frame( 'Source' = c('Model','Error','Total'),
+                        'Sums of Squares' = c('SS~Model~','SS~Error~','SS~Total~'),
+                        'Degrees of Freedom' = c('p','n-p-1','n-1'),
+                        'Mean Square' = c('MS~Model~','MS~Error~',''),
+                        'F Value' = c('MS~Model~/MS~Error~','',''),
+                        'p-value' = c('Pr(F~p,n-p-1~ > F)','',''))
+
+kbl(anova_df, col.names=c('Source','Sums of Squares','Degrees of Freedom','Mean Square','F-value','p-value'),
+    align='lccccc', escape=F) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```
+
+
+
+It is also possible to represent the table in terms of the relevant equations to calculate each component:
+
+```{r, message=F, class.source = 'fold-hide'}
+#| code-fold: true
+#| fig-cap: "Unfortunately, `R` doesn't provide the information of the ANOVA table in a nice easy-to-use format. Instead we have to use specific functions to extract relevant pieces of information. However, we can calculate these all piece-by-piece and combine into an ANOVA table."
+#| filters:
+#| - parse-latex
+anova_df <- data.frame( 'Source' = c('Model','Error','Total'),
+                        'Sums of Squares' = c('$\\sum_{i=1}^{n} (\\hat{Y}_{i} - \\bar{Y})^{2}$','$\\sum_{i=1}^{n} (Y_{i} - \\hat{Y}_{i})^{2}$','$\\sum_{i=1}^{n} (Y_{i} - \\bar{Y})^{2}$'),
+                        'Degrees of Freedom' = c('$p$','$n-p-1$','$n-1$'),
+                        'Mean Square' = c('$\\frac{\\sum_{i=1}^{n} (\\hat{Y}_{i} - \\bar{Y})^{2}}{p}$','$\\frac{\\sum_{i=1}^{n} (Y_{i} - \\hat{Y}_{i})^{2}}{n-p-1}$',''),
+                        'F Value' = c('$F = \\frac{\\text{MS}_{\\text{Model}}}{\\text{MS}_{\\text{Error}}}$','',''),
+                        'p-value' = c('$Pr(F_{p,n-p-1} > F)$','',''))
+
+kbl(anova_df, col.names=c('Source','Sums of Squares','Degrees of Freedom','Mean Square','F-value','p-value'),
+    align='lccccc', escape=F) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```
+
+
+
+To illustrate this, let's first simulate some data to fit our linear regression model to:
+
+```{r,echo=T}
+set.seed(515)
+x <- rnorm(n=100, mean=10, sd=3) # simulate a single continuous predictor with mean=10 and SD=3
+reg <- 10 + 3 * x # set the regression equation so the intercept=10 and the slope=3
+y <- rnorm(n=100, mean=reg, sd=8) # simulate the outcome based on the conditional mean
+
+mod1 <- glm(y ~ x) # fit linear regression model
+summary(mod1)
+```
+
+For example, using the following functions we can extract the corresponding pieces of information:
+
+```{r,message=F, class.source = 'fold-hide'}
+#| code-fold: true
+#| fig-cap: "With this information we can apply the various equations from our ANOVA table above:"
+#| filters:
+#| - parse-latex
+info_df <- data.frame( 'Term' = c('$Y_{i}$','$\\bar{Y}$','$\\hat{Y}_{i}$','$p$','$n$'),
+                       'Code' = c('`y`','`mean(y)`','`predict(mod1)`','`length(mod1$coefficients)-1`','`length(y)`'))
+kbl(info_df, escape=F) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```
+
+
+
+```{r}
+ybar <- mean(y)
+yhat <- predict(mod1)
+p <- length(mod1$coefficients)-1
+n <- length(y)
+
+ssm <- sum( (yhat-ybar)^2 )
+sse <- sum( (y-yhat)^2 )
+sst <- sum( (y-ybar)^2 )
+
+msm <- ssm/p
+mse <- sse/(n-p-1)
+
+f_val <- msm/mse
+p_val <- pf(f_val, df1=p, df2=n-p-1, lower.tail=FALSE)
+
+# Create an ANOVA table to summarize all our results:
+p_val_tab <- if(p_val<0.001){'<0.001'}else{round(p_val,3)}
+
+anova_table <- data.frame( 'Source' = c('Model','Error','Total'),
+                        'Sums of Squares' = c(round(ssm,2), round(sse,2), round(sst,2)),
+                        'Degrees of Freedom' = c(p, n-p-1, n-1),
+                        'Mean Square' = c(round(msm,2), round(mse,2),''),
+                        'F Value' = c(round(f_val,2),'',''),
+                        'p-value' = c(p_val_tab,'',''))
+
+kbl(anova_table, col.names=c('Source','Sums of Squares','Degrees of Freedom','Mean Square','F-value','p-value'), align='lccccc', escape=F) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```
+
+## Make an ANOVA Function
+
+Better than having to recreate the same code manually each time, let's write a function to generate a `kable` table of the ANOVA table for any `glm` or `lm` object we provide:
+
+```{r, class.source = 'fold-show'}
+linreg_anova_func <- function(mod, ndigits=2, p_ndigits=3, format='kable'){
+### Function to create an ANOVA table linear regression results from lm or glm
+# mod: an object with the fitted model results
+# ndigits: number of digits to round to for most values, default is 2
+# p_digits: number of digits to round the p-value to, default is 3
+# format: desired format output (default is kable):
+## "kable" for kable table
+## "df" for data frame as table
+
+  # extract outcome from the object produced by the glm or lm function
+  if( class(mod)[1] == 'glm' ){
+    y <- mod$y
+  }
+  if( class(mod)[1] == 'lm' ){
+    y <- mod$model[,1] # first column contains outcome data
+  }  
+  
+  ybar <- mean(y)
+  yhat <- predict(mod)
+  p <- length(mod$coefficients)-1
+  n <- length(y)
+
+  ssm <- sum( (yhat-ybar)^2 )
+  sse <- sum( (y-yhat)^2 )
+  sst <- sum( (y-ybar)^2 )
+  
+  msm <- ssm/p
+  mse <- sse/(n-p-1)
+  
+  f_val <- msm/mse
+  p_val <- pf(f_val, df1=p, df2=n-p-1, lower.tail=FALSE)
+  
+  # Create an ANOVA table to summarize all our results:
+  p_digits <- (10^(-p_ndigits))
+  p_val_tab <- if(p_val<p_digits){paste0('<',p_digits)}else{round(p_val,p_ndigits)}
+  
+  anova_table <- data.frame( 'Source' = c('Model','Error','Total'),
+                          'Sums of Squares' = c(round(ssm,ndigits), round(sse,ndigits), round(sst,ndigits)),
+                          'Degrees of Freedom' = c(p, n-p-1, n-1),
+                          'Mean Square' = c(round(msm,ndigits), round(mse,ndigits),''),
+                          'F Value' = c(round(f_val,ndigits),'',''),
+                          'p-value' = c(p_val_tab,'',''))
+
+  if( format == 'kable' ){  
+    library(kableExtra)
+    kbl(anova_table, col.names=c('Source','Sums of Squares','Degrees of Freedom','Mean Square','F-value','p-value'), align='lccccc', escape=F) %>%
+      kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+  }else{
+    anova_table
+  }
+}
+```
+
+Now let's try applying the function to two data sets (our previous one, and one null), with both `glm` and `lm`:
+
+```{r, class.source = 'fold-show'}
+set.seed(515)
+x <- rnorm(n=100, mean=10, sd=3) # simulate a single continuous predictor with mean=10 and SD=3
+reg <- 10 + 3 * x # set the regression equation so the intercept=10 and the slope=3
+y <- rnorm(n=100, mean=reg, sd=8) # simulate the outcome based on the conditional mean
+mod1 <- glm(y ~ x) # fit linear regression model with glm
+lm1 <- lm(y ~ x) # fit linear regression model with lm
+
+set.seed(303)
+x0 <- rnorm(n=100, mean=10, sd=3) # simulate a single continuous predictor with mean=10 and SD=3
+reg0 <- 10 + 0 * x0 # set the regression equation so the intercept=10 and the slope=0 (i.e., null)
+y0 <- rnorm(n=100, mean=reg0, sd=8) # simulate the outcome based on the conditional mean
+mod0 <- glm(y0 ~ x0) # fit linear regression model with glm
+lm0 <- lm(y0 ~ x0) # fit linear regression model with lm
+```
+
+First let's check out our non-null scenario:
+
+```{r, class.source = 'fold-show'}
+linreg_anova_func(mod=mod1)
+linreg_anova_func(mod=lm1)
+```
+
+Now let's check out the null scenario and tweak our number of digits (both as a raw and formatted output version):
+
+```{r, class.source = 'fold-show'}
+linreg_anova_func(mod=mod0, ndigits=3, p_ndigits=4, format='df')
+linreg_anova_func(mod=lm0, ndigits=3, p_ndigits=4, format='kable')
+```
+
+And as a final check, let's compare the `summary(lm)` to our $F$-test result above:
+
+```{r, class.source = 'fold-show'}
+summary(lm0)
+```
+

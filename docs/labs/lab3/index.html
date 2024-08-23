@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alex Kaizer">
+
+<title>Alex Kaizer - Week 3 Lab</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/academicons-1.9.1/css/academicons.css" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="./files/favicon.ico">
+
+<script type="text/javascript">
+function setBrand() {
+document.getElementsByClassName("navbar-brand")[0].href="https://www.alexkaizer.com";
+}
+window.onload = setBrand;
+</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5PBG7BL207"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5PBG7BL207');
+</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Alex Kaizer</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/research" rel="" target="">
+ <span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/publications" rel="" target="">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Teaching</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching">    
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/teaching" rel="" target="">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6618" rel="" target="">
+ <span class="dropdown-text">BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6611" rel="" target="">
+ <span class="dropdown-text">BIOS 6611</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/study_design_berd" rel="" target="">
+ <span class="dropdown-text">BERD Study Design Short Course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/adaptivetrials_sc" rel="" target="">
+ <span class="dropdown-text">WNAR Adaptive and Bayesian Clinical Trial Design Short Course</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bios-6618" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">BIOS 6618</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-bios-6618">    
+        <li>
+    <a class="dropdown-item" href="../../index.html" rel="" target="">
+ <span class="dropdown-text">Home</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../bios_6618_materials" rel="" target="">
+ <span class="dropdown-text">Materials</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../journal_of_bios_6618" rel="" target="">
+ <span class="dropdown-text">Journal of BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../recitation" rel="" target="">
+ <span class="dropdown-text">Recitation Questions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs" rel="" target="">
+ <span class="dropdown-text">Labs and Practice Problems</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:alex.kaizer@cuanschutz.edu" rel="" target=""><i class="bi bi-envelope" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=ICpH74EAAAAJ&amp;hl=en" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-google-scholar ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="http://github.com/alexbiostats" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/files/Alex_CV.pdf" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-cv ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/alex-kaizer/" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#whats-on-the-docket-this-week" id="toc-whats-on-the-docket-this-week" class="nav-link active" data-scroll-target="#whats-on-the-docket-this-week">What’s on the docket this week?</a></li>
+  <li><a href="#writing-functions" id="toc-writing-functions" class="nav-link" data-scroll-target="#writing-functions">Writing Functions</a>
+  <ul class="collapse">
+  <li><a href="#make-our-own-meanaverage-function" id="toc-make-our-own-meanaverage-function" class="nav-link" data-scroll-target="#make-our-own-meanaverage-function">Make Our Own Mean/Average Function</a></li>
+  <li><a href="#additional-function-notes" id="toc-additional-function-notes" class="nav-link" data-scroll-target="#additional-function-notes">Additional Function Notes</a></li>
+  </ul></li>
+  <li><a href="#the-apply-family" id="toc-the-apply-family" class="nav-link" data-scroll-target="#the-apply-family">The Apply Family</a>
+  <ul class="collapse">
+  <li><a href="#the-apply-function" id="toc-the-apply-function" class="nav-link" data-scroll-target="#the-apply-function">The <code>apply()</code> function</a>
+  <ul class="collapse">
+  <li><a href="#for-real-what-good-is-marginc12" id="toc-for-real-what-good-is-marginc12" class="nav-link" data-scroll-target="#for-real-what-good-is-marginc12">For Real, What Good is <code>MARGIN=c(1,2)</code></a></li>
+  </ul></li>
+  <li><a href="#the-lapply-and-sapply-functions" id="toc-the-lapply-and-sapply-functions" class="nav-link" data-scroll-target="#the-lapply-and-sapply-functions">The <code>lapply()</code> and <code>sapply()</code> Functions</a></li>
+  </ul></li>
+  <li><a href="#combining-loops-and-apply-functions" id="toc-combining-loops-and-apply-functions" class="nav-link" data-scroll-target="#combining-loops-and-apply-functions">Combining loops and <code>apply</code> functions?</a>
+  <ul class="collapse">
+  <li><a href="#for-loops-solution" id="toc-for-loops-solution" class="nav-link" data-scroll-target="#for-loops-solution"><code>for</code> loops solution</a></li>
+  <li><a href="#sapply-solution" id="toc-sapply-solution" class="nav-link" data-scroll-target="#sapply-solution"><code>sapply</code> Solution</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Week 3 Lab</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Alex Kaizer </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Colorado-Anschutz Medical Campus
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This page is part of the University of Colorado-Anschutz Medical Campus’ <a href="../../labs/index.html">BIOS 6618 Labs</a> collection, the mini-lecture content delivered at the start of class before breaking out into small groups to work on the homework assignment.</p>
+<section id="whats-on-the-docket-this-week" class="level1">
+<h1>What’s on the docket this week?</h1>
+<p>In Week 3 we are introducing the basics of building our own functions in R by starting with the basic set-up. We will also introduce the <code>apply</code> family of functions which are similar to loops, but allow for the potential of faster code that may also be more compact.</p>
+</section>
+<section id="writing-functions" class="level1">
+<h1>Writing Functions</h1>
+<p><a href="https://rstudio-education.github.io/hopr/basics.html#write-functions">Chapter 2.4 of our R textbook</a> introduces functions in the R context and how to write your own. The end of <a href="https://rstudio-education.github.io/hopr/basics.html#arguments">Chapter 2.5</a> also includes a nice graphic that breaks down what our textbook considers the 5 components of a function.</p>
+<p>In brief, a function has a simple set-up:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>my_function <span class="ot">&lt;-</span> <span class="cf">function</span>(arguments) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  the body of your <span class="cf">function</span> that will do stuff</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>In the above code chunk we are creating a function called <code>my_function</code> that will ultimately do whatever we want in the body of our function. Functions can have additional information passed into the function environment by the arguments.</p>
+<p>While not universally true, functions generally operate in their own <em>environment</em>. When using R Studio we can look at what objects are stored in our “Global Environment”. So specifying a value, such as</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_value <span class="ot">&lt;-</span> <span class="st">'stats_is_great'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>will then appear in our Global Environment until we either remove it or replace it (e.g., using <code>rm(my_value)</code> or <code>remove(my_value)</code>). However, specifying something within a function will generally <em>not</em> appear in the Global Environment. For example, let’s define a function whose sole purpose is to return <code>stats_is_great</code>, which is saved in an object within the function:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>grrreat <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  my_value_fnx <span class="ot">&lt;-</span> <span class="st">'stats_is_great'</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>( my_value_fnx ) <span class="co">#this will return whatever is stored in my_value_fnx for the output of our function</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">grrreat</span>() <span class="co">#let's check out our function</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "stats_is_great"</code></pre>
+</div>
+</div>
+<p>If you try running the two snippets of code in R Studio, you should see <code>my_value</code> appear in the Global Environment, but <code>my_value_fnx</code> does not since it is housed within the function <code>grrreat()</code>.</p>
+<section id="make-our-own-meanaverage-function" class="level2">
+<h2 class="anchored" data-anchor-id="make-our-own-meanaverage-function">Make Our Own Mean/Average Function</h2>
+<p>To get some practice at making functions, I think it is nice to start with things where we can directly check our work with existing functions or where we know what the answer should be. For this example we will write a function to calculate the mean, and then check our work with the actual <code>mean</code> function.</p>
+<p>Let’s start by writing our function to calculate a sample mean. I like to start my functions with a little commented header to (1) describe what the function does and (2) define what the argument are. This helps me whenever I come back to functions after some time has passed:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sample_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(dat){</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">### This is a function to calculate the sample mean</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># dat: a vector of values to calculate the mean for</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(dat) <span class="co"># calculate the sample size</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  sum_x <span class="ot">&lt;-</span> <span class="fu">sum</span>(dat) <span class="co"># sum up all values in dat</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  sample_mean <span class="ot">&lt;-</span> sum_x <span class="sc">/</span> n <span class="co"># calculate the sample mean</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>( sample_mean ) <span class="co"># this isn't necessary here since R should return the last line of code, but I like to include it to be explicit about what I want returned</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Now that we’ve written a function, let’s generate a sample of data to compare our calculation to the existing <code>mean</code> function:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">515</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>samp_dat <span class="ot">&lt;-</span> <span class="fu">rnorm</span>( <span class="at">n=</span><span class="dv">50</span>, <span class="at">mean=</span><span class="dv">14</span>, <span class="at">sd=</span><span class="dv">10</span> )</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_mean</span>( <span class="at">dat =</span> samp_dat )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15.64743</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>( samp_dat )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15.64743</code></pre>
+</div>
+</div>
+<p>Thankfully, the results match! In future weeks we will discuss some more advanced pieces of building a function (e.g., returning multiple pieces of output), but for now we can use this as a foundation for writing functions.</p>
+</section>
+<section id="additional-function-notes" class="level2">
+<h2 class="anchored" data-anchor-id="additional-function-notes">Additional Function Notes</h2>
+<p>Our function for the mean above was pretty simple in that we only had one argument (<code>dat</code>) and one piece of information returned (<code>sample_mean</code>). We can write functions that have multiple arguments for a given task and/or return multiple objects. Further, you can also return objects including more than just a vector of information, such as a list object where multiple types of objects can be stored (<em>more on this in a few weeks</em>).</p>
+</section>
+</section>
+<section id="the-apply-family" class="level1">
+<h1>The Apply Family</h1>
+<p>One area our R Textbook is a bit lacking is a discussion of the apply family of functions in R. <a href="https://www.datacamp.com/community/tutorials/r-tutorial-apply-family">DataCamp</a> has a nice tutorial that delves into some of the specifics, of which we’ll highlight a few pieces below.</p>
+<p>There are multiple functions that exist in this family: <code>apply</code>, <code>sapply</code>, <code>lapply</code>, <code>mapply</code>, etc. The choice of the <code>apply</code> function to use generally depends on the structure of the data you are working with, and also the format of the output you’d like (e.g., a vector versus a list).</p>
+<section id="the-apply-function" class="level2">
+<h2 class="anchored" data-anchor-id="the-apply-function">The <code>apply()</code> function</h2>
+<p>The <code>apply</code> function operates on arrays, which for our purposes will generally mean 2-dimension matrices. It has three major arguments you can review in the help documentation for greater detail, but they include:</p>
+<ul>
+<li><code>X</code>: the array to do some calculation on</li>
+<li><code>MARGIN</code>: either <code>1</code> to indicate applying the function to each row, <code>2</code> to indicate applying the function to each column, or <code>c(1,2)</code> to indicate applying the function to both rows and columns (i.e., each element of the array)</li>
+<li><code>FUN</code>: the function you wish to apply the rows and/or columns in your array</li>
+</ul>
+<p>For example, let’s simulate 50 observations from a random exponential distribution and place them into a matrix with 10 rows and 5 columns:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">515</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>my_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rexp</span>(<span class="at">n=</span><span class="dv">50</span>, <span class="at">rate=</span><span class="fl">0.2</span>), <span class="at">nrow=</span><span class="dv">10</span>, <span class="at">ncol=</span><span class="dv">5</span>) <span class="co"># here we are simulating the data using the "rexp" function within the "matrix" function itself so that we can include this as one line of code</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>my_mat <span class="co"># let's see what our data looks like</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]       [,2]        [,3]       [,4]        [,5]
+ [1,] 12.217353 17.2375973  0.14967508  1.4993488  1.49949970
+ [2,]  8.658003  4.7737718  1.18769738  3.3486665  9.63063688
+ [3,] 19.308967  0.5294249  0.08559512  2.2290962 10.03797446
+ [4,]  3.589007  1.8239578  2.38238175  2.4613284  0.05722932
+ [5,]  3.008182  2.5826566  0.79034221  3.5895691  0.90203442
+ [6,]  5.557042  1.4607429  3.96179643  0.9797761  0.38814744
+ [7,]  1.783477  3.7350945  3.17351118 20.2186521  6.46094538
+ [8,]  5.765822  4.0633058  4.18369018  3.3436216  6.23468792
+ [9,]  2.993530  0.4073399  7.43696442  1.0924128  5.81720596
+[10,]  3.288153  2.0768742 23.82502088  9.3102057  2.14733849</code></pre>
+</div>
+</div>
+<p>Now let’s calculate the mean value of each row (<code>MARGIN=1</code>) and column (<code>MARGIN=2</code>):</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>( <span class="at">X=</span>my_mat, <span class="at">MARGIN=</span><span class="dv">1</span>, <span class="at">FUN=</span>mean) <span class="co"># calculate the mean for each row</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 6.520695 5.519755 6.438212 2.062781 2.174557 2.469501 7.074336 4.718225
+ [9] 3.549491 8.129518</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>( <span class="at">X=</span>my_mat, <span class="at">MARGIN=</span><span class="dv">2</span>, <span class="at">FUN=</span>mean) <span class="co"># calculate the mean for each column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.616954 3.869077 4.717667 4.807268 4.317570</code></pre>
+</div>
+</div>
+<p>We see that we have 10 means for the 10 rows, and 5 means for the 5 columns.</p>
+<section id="for-real-what-good-is-marginc12" class="level3">
+<h3 class="anchored" data-anchor-id="for-real-what-good-is-marginc12">For Real, What Good is <code>MARGIN=c(1,2)</code></h3>
+<p>For <code>MARGIN=c(1,2)</code> there admittedly may not be as many uses with a 2-dimensional array. But if we wanted to concatenate some string to each value we could consider using the function.</p>
+<p>As an example, let’s say we wanted to concatenate a “$” as though these were prices. To do this we may want to consider using the <code>paste0()</code> function, but we have to remember that it needs to be written in a way that can apply to each element of <code>my_mat</code> separately. To do this, we may first want to write a function that concatenates a dollar sign to whatever string or number is given, then use the <code>apply()</code> function:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>money_money_money <span class="ot">&lt;-</span> <span class="cf">function</span>(x){ <span class="fu">paste0</span>(<span class="st">'$'</span>,x) }</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>( <span class="at">X=</span>my_mat, <span class="at">MARGIN=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">FUN =</span> money_money_money)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      [,1]                [,2]                 [,3]                 
+ [1,] "$12.2173525666105" "$17.2375972560587"  "$0.149675077271274" 
+ [2,] "$8.65800315572815" "$4.77377176263785"  "$1.1876973762149"   
+ [3,] "$19.308967021175"  "$0.529424920678139" "$0.0855951215619483"
+ [4,] "$3.58900716041631" "$1.82395784649998"  "$2.38238175399601"  
+ [5,] "$3.00818230491132" "$2.58265662286664"  "$0.790342205933128" 
+ [6,] "$5.55704173116321" "$1.46074291623291"  "$3.96179643438614"  
+ [7,] "$1.78347686072811" "$3.73509448742561"  "$3.17351118428633"  
+ [8,] "$5.76582155635065" "$4.0633058367693"   "$4.18369018451726"  
+ [9,] "$2.9935301374644"  "$0.40733985370025"  "$7.43696442082858"  
+[10,] "$3.28815302578732" "$2.07687421934679"  "$23.8250208819721"  
+      [,4]                 [,5]                 
+ [1,] "$1.49934881060734"  "$1.49949970077926"  
+ [2,] "$3.34866651333869"  "$9.63063687975419"  
+ [3,] "$2.22909616772085"  "$10.0379744633557"  
+ [4,] "$2.46132835591099"  "$0.0572293228469789"
+ [5,] "$3.58956913397824"  "$0.902034419123083" 
+ [6,] "$0.979776070453227" "$0.388147439807653" 
+ [7,] "$20.2186521411616"  "$6.46094538250423"  
+ [8,] "$3.34362160181627"  "$6.23468791579312"  
+ [9,] "$1.09241279074922"  "$5.81720596158362"  
+[10,] "$9.31020567151618"  "$2.14733849463794"  </code></pre>
+</div>
+</div>
+<p>We could also define the function directly within the apply statement, or consider rounding each value to 2 decimal places before adding the dollar sign, or do both!</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the function within the apply statement:</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(  <span class="at">X=</span>my_mat, <span class="at">MARGIN=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">FUN =</span> <span class="cf">function</span>(x){ <span class="fu">paste0</span>(<span class="st">'$'</span>,x) })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      [,1]                [,2]                 [,3]                 
+ [1,] "$12.2173525666105" "$17.2375972560587"  "$0.149675077271274" 
+ [2,] "$8.65800315572815" "$4.77377176263785"  "$1.1876973762149"   
+ [3,] "$19.308967021175"  "$0.529424920678139" "$0.0855951215619483"
+ [4,] "$3.58900716041631" "$1.82395784649998"  "$2.38238175399601"  
+ [5,] "$3.00818230491132" "$2.58265662286664"  "$0.790342205933128" 
+ [6,] "$5.55704173116321" "$1.46074291623291"  "$3.96179643438614"  
+ [7,] "$1.78347686072811" "$3.73509448742561"  "$3.17351118428633"  
+ [8,] "$5.76582155635065" "$4.0633058367693"   "$4.18369018451726"  
+ [9,] "$2.9935301374644"  "$0.40733985370025"  "$7.43696442082858"  
+[10,] "$3.28815302578732" "$2.07687421934679"  "$23.8250208819721"  
+      [,4]                 [,5]                 
+ [1,] "$1.49934881060734"  "$1.49949970077926"  
+ [2,] "$3.34866651333869"  "$9.63063687975419"  
+ [3,] "$2.22909616772085"  "$10.0379744633557"  
+ [4,] "$2.46132835591099"  "$0.0572293228469789"
+ [5,] "$3.58956913397824"  "$0.902034419123083" 
+ [6,] "$0.979776070453227" "$0.388147439807653" 
+ [7,] "$20.2186521411616"  "$6.46094538250423"  
+ [8,] "$3.34362160181627"  "$6.23468791579312"  
+ [9,] "$1.09241279074922"  "$5.81720596158362"  
+[10,] "$9.31020567151618"  "$2.14733849463794"  </code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's add some rounding to the mix:</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(  <span class="at">X=</span>my_mat, <span class="at">MARGIN=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">FUN =</span> <span class="cf">function</span>(x){ <span class="fu">paste0</span>(<span class="st">'$'</span>, <span class="fu">round</span>(x,<span class="at">digits=</span><span class="dv">2</span>) ) })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      [,1]     [,2]     [,3]     [,4]     [,5]    
+ [1,] "$12.22" "$17.24" "$0.15"  "$1.5"   "$1.5"  
+ [2,] "$8.66"  "$4.77"  "$1.19"  "$3.35"  "$9.63" 
+ [3,] "$19.31" "$0.53"  "$0.09"  "$2.23"  "$10.04"
+ [4,] "$3.59"  "$1.82"  "$2.38"  "$2.46"  "$0.06" 
+ [5,] "$3.01"  "$2.58"  "$0.79"  "$3.59"  "$0.9"  
+ [6,] "$5.56"  "$1.46"  "$3.96"  "$0.98"  "$0.39" 
+ [7,] "$1.78"  "$3.74"  "$3.17"  "$20.22" "$6.46" 
+ [8,] "$5.77"  "$4.06"  "$4.18"  "$3.34"  "$6.23" 
+ [9,] "$2.99"  "$0.41"  "$7.44"  "$1.09"  "$5.82" 
+[10,] "$3.29"  "$2.08"  "$23.83" "$9.31"  "$2.15" </code></pre>
+</div>
+</div>
+<p>We see from the above output, that the first statement recreates our result with the function defined within <code>apply</code>. In the second result we see we successfully rounded to 2 decimal places (although R has this nasty default habit of rounding <em>up to</em> the desired number of digits, so extra steps are needed if we want exactly 2 decimal places).</p>
+</section>
+</section>
+<section id="the-lapply-and-sapply-functions" class="level2">
+<h2 class="anchored" data-anchor-id="the-lapply-and-sapply-functions">The <code>lapply()</code> and <code>sapply()</code> Functions</h2>
+<p>The <code>lapply</code> function applies a given function to every element of a list (or vector or data frame, etc.) and returns a list as a result. The <code>sapply</code> function is a wrapper to the <code>lapply</code> function that is a “user-friendly version” (see the help documentation for this quote) that attempts to return a vector or matrix. The “right” function to use will depend on what format you desire the output to be in (potentially to help complete some next step for plotting, summarizing, etc.). Or, in other words, there is no one right function…just different ones that are more useful in certain situations!</p>
+<p>A lot of the set-up for loops that we discussed in the lab for last week can be similarly set-up for <code>sapply</code>. For example, we could use an index approach and recreate our column-specific means from <code>apply</code> in the previous section:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>( <span class="at">X=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>( my_mat[,x]) ) <span class="co"># notice how we define the function within sapply here to keep it on one line</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.616954 3.869077 4.717667 4.807268 4.317570</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>( <span class="at">X=</span>my_mat, <span class="at">MARGIN=</span><span class="dv">2</span>, <span class="at">FUN=</span>mean) <span class="co"># check our results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.616954 3.869077 4.717667 4.807268 4.317570</code></pre>
+</div>
+</div>
+<p>And, for completeness, we can see that <code>lapply</code> returns the means in a list:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>( <span class="at">X=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>( my_mat[,x]) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 6.616954
+
+[[2]]
+[1] 3.869077
+
+[[3]]
+[1] 4.717667
+
+[[4]]
+[1] 4.807268
+
+[[5]]
+[1] 4.31757</code></pre>
+</div>
+</div>
+<p>We can also define <code>X</code> as values to be entered into a function. For example, perhaps we want to simulate sample sizes of 5, 10, and 15 from an F-distribution. Here we will use <code>lapply</code> so we can see the results are actually 5, 10, and 15 in length:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>( <span class="at">X=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>), <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">rf</span>(<span class="at">n=</span>x, <span class="at">df1=</span><span class="dv">15</span>, <span class="at">df2=</span><span class="dv">45</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1.4579813 1.0352903 1.3878726 0.9470038 0.9811442
+
+[[2]]
+ [1] 0.8471400 1.3279725 1.1581030 0.7450090 0.8182207 1.4929248 0.2743359
+ [8] 0.3669082 0.7668954 1.1297963
+
+[[3]]
+ [1] 1.3295476 0.9085403 0.5368008 0.9059368 1.0249046 1.1086250 0.4956291
+ [8] 1.1187265 0.7603356 0.5230847 1.6806868 1.1895109 0.7753558 1.0400509
+[15] 0.9721089</code></pre>
+</div>
+</div>
+<p>In fact, if we tried using <code>sapply</code> we’d see the results are also returned as a list since this is R’s best guess as to the most appropriate object type!</p>
+</section>
+</section>
+<section id="combining-loops-and-apply-functions" class="level1">
+<h1>Combining loops and <code>apply</code> functions?</h1>
+<p>Hopefully by now we’ve caught on that R is verrrry flexible. In fact, we can combine different approaches or the same approach multiple times. For example, we can nest <code>for</code> loops, nest <code>apply</code> statements, or loop through some <code>apply</code> statements!</p>
+<p>For example, Homework 3, Exercise 4, asks us to examine the central limit theorem at play with the mean from binomially simulated data increasing from <span class="math inline">\(n=10\)</span> up to <span class="math inline">\(n=50\)</span> in increments of 10 over 500 simulations.</p>
+<p>For this lab, let’s examine a related problem where we simulate from Poisson distributed data with <span class="math inline">\(\lambda=3\)</span> at sample sizes of <span class="math inline">\(n=10\)</span>, <span class="math inline">\(n=30\)</span>, and <span class="math inline">\(n=50\)</span> with 500 simulations. We’ll calculate the mean for each simulation, store the results, and then calculate the mean and standard deviation of <span class="math inline">\(\bar{x}\)</span> across all 500 simulations using an <code>apply</code> statement. We’ll explore 2 different approaches based on nested loops or using <code>sapply()</code>.</p>
+<section id="for-loops-solution" class="level2">
+<h2 class="anchored" data-anchor-id="for-loops-solution"><code>for</code> loops solution</h2>
+<p>If we wish to use <code>for</code> loops, we will likely need to consider nesting two of the loops so we can (1) go through our 3 sample sizes and (2) go through the 500 simulations. For the sample sizes we will need to define a vector to reference, and also index the simulation so we can more easily store the results in a matrix we initialize for the results:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">515</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>sizeVec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">30</span>,<span class="dv">50</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>meanMatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow=</span>nsim, <span class="at">ncol=</span><span class="fu">length</span>(sizeVec))</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>( j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(sizeVec) ){ <span class="co"># our outer loop will go through the sample sizes</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){ <span class="co"># our inner loop will go through the number of sims we desire</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    poisData <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n=</span>sizeVec[j], <span class="at">lambda=</span><span class="dv">3</span>) <span class="co"># simulate the data</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    meanMatrix[i,j] <span class="ot">&lt;-</span> <span class="fu">mean</span>(poisData) <span class="co"># save the sample mean in the ith row (1 to 500) and jth column (1 to 3)</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Let’s first take a peek at the first few rows of our matrix using the <code>head()</code> function, then use the <code>apply()</code> function to calculate the column mean for each sample size:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(meanMatrix) <span class="co"># see the top few rows of our matrix</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]     [,2] [,3]
+[1,]  2.6 3.033333 3.54
+[2,]  3.6 2.833333 2.98
+[3,]  3.6 2.666667 2.90
+[4,]  3.1 3.166667 2.92
+[5,]  2.7 2.500000 2.94
+[6,]  3.0 2.733333 2.90</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X=</span>meanMatrix, <span class="at">MARGIN=</span><span class="dv">2</span>, <span class="at">FUN=</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.982200 2.975933 3.010560</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X=</span>meanMatrix, <span class="at">MARGIN=</span><span class="dv">2</span>, <span class="at">FUN=</span>sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5317788 0.3067211 0.2472593</code></pre>
+</div>
+</div>
+<p>We see that the average of the sample means is pretty close to the true mean of <span class="math inline">\(\lambda=3\)</span> across all sample sizes, but that as the sample size increases the standard deviation of the sample mean (also known as the <em>standard error</em>) decreases. In other words, there is less variability among all estimated means when we have a larger sample size.</p>
+</section>
+<section id="sapply-solution" class="level2">
+<h2 class="anchored" data-anchor-id="sapply-solution"><code>sapply</code> Solution</h2>
+<p>We can also nest our <code>sapply</code> functions within one another, and it will automatically create a matrix with 3 columns and 500 rows to store the results in. WARNING, this gets a bit nesty… (get it, nasty…but with nesting…I’ll show myself out):</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">515</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>sizeVec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">30</span>,<span class="dv">50</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>meanMatrix_sapply <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="at">X=</span>sizeVec, <span class="at">FUN=</span> <span class="cf">function</span>(x) <span class="fu">sapply</span>(<span class="at">X=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">500</span>, <span class="at">FUN=</span><span class="cf">function</span>(y) <span class="fu">mean</span>(<span class="fu">rpois</span>(<span class="at">n=</span>x,<span class="at">lambda=</span><span class="dv">3</span>)) ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Before we look at the first few rows and check that the mean and SD are the same as above, let’s break down what the heck is happening here:</p>
+<p><span style="color: red;">sapply( X=sizeVec, FUN= function(x) <span style="color: blue;">sapply(X=1:500, FUN=function(y) <span style="color: green;">mean(rpois(n=x,lambda=3)) </span>) </span>)</span></p>
+<p>The red text is our “outer” <code>sapply</code> statement, which is essentially going through our sample size vector. It is applying its <code>function(x)</code> to the blue “inner” <code>sapply</code> statement. This inner statement is then going through our vector <code>1:500</code> to generate 500 samples where is it applying the <code>function(y)</code> (note the use of <code>y</code> instead of <code>x</code> as our function’s argument to differentiate it) to the actual generation of the Poisson sample of size <code>x</code> (i.e., <span class="math inline">\(n\)</span>) and calculate its mean.</p>
+<p><strong>PHEW!!</strong> That is…a lot. In cases like this, it may just be easier (and potentially more intuitive) to use two loops (or a different approach you’ve stumbled upon that involves neither!).</p>
+<p>Let’s now double check our results to see they match the above <code>for</code> loop results:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(meanMatrix_sapply)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]     [,2] [,3]
+[1,]  2.6 3.033333 3.54
+[2,]  3.6 2.833333 2.98
+[3,]  3.6 2.666667 2.90
+[4,]  3.1 3.166667 2.92
+[5,]  2.7 2.500000 2.94
+[6,]  3.0 2.733333 2.90</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X=</span>meanMatrix_sapply, <span class="at">MARGIN=</span><span class="dv">2</span>, <span class="at">FUN=</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.982200 2.975933 3.010560</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X=</span>meanMatrix_sapply, <span class="at">MARGIN=</span><span class="dv">2</span>, <span class="at">FUN=</span>sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5317788 0.3067211 0.2472593</code></pre>
+</div>
+</div>
+<p>Cha-ching! They do match, so even this more potentially chaotic approach worked out.</p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb44" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 3 Lab"</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a>This page is part of the University of Colorado-Anschutz Medical Campus' <span class="co">[</span><span class="ot">BIOS 6618 Labs</span><span class="co">](/labs/index.qmd)</span> collection, the mini-lecture content delivered at the start of class before breaking out into small groups to work on the homework assignment.</span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a><span class="fu"># What's on the docket this week?</span></span>
+<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-26"><a href="#cb44-26" aria-hidden="true" tabindex="-1"></a>In Week 3 we are introducing the basics of building our own functions in R by starting with the basic set-up. We will also introduce the <span class="in">`apply`</span> family of functions which are similar to loops, but allow for the potential of faster code that may also be more compact. </span>
+<span id="cb44-27"><a href="#cb44-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-28"><a href="#cb44-28" aria-hidden="true" tabindex="-1"></a><span class="fu"># Writing Functions</span></span>
+<span id="cb44-29"><a href="#cb44-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-30"><a href="#cb44-30" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Chapter 2.4 of our R textbook</span><span class="co">](https://rstudio-education.github.io/hopr/basics.html#write-functions)</span> introduces functions in the R context and how to write your own. The end of <span class="co">[</span><span class="ot">Chapter 2.5</span><span class="co">](https://rstudio-education.github.io/hopr/basics.html#arguments)</span> also includes a nice graphic that breaks down what our textbook considers the 5 components of a function.</span>
+<span id="cb44-31"><a href="#cb44-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-32"><a href="#cb44-32" aria-hidden="true" tabindex="-1"></a>In brief, a function has a simple set-up:</span>
+<span id="cb44-33"><a href="#cb44-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-34"><a href="#cb44-34" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=F}</span></span>
+<span id="cb44-35"><a href="#cb44-35" aria-hidden="true" tabindex="-1"></a>my_function <span class="ot">&lt;-</span> <span class="cf">function</span>(arguments) {</span>
+<span id="cb44-36"><a href="#cb44-36" aria-hidden="true" tabindex="-1"></a>  the body of your <span class="cf">function</span> that will do stuff</span>
+<span id="cb44-37"><a href="#cb44-37" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-38"><a href="#cb44-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-39"><a href="#cb44-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-40"><a href="#cb44-40" aria-hidden="true" tabindex="-1"></a>In the above code chunk we are creating a function called <span class="in">`my_function`</span> that will ultimately do whatever we want in the body of our function. Functions can have additional information passed into the function environment by the arguments.</span>
+<span id="cb44-41"><a href="#cb44-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-42"><a href="#cb44-42" aria-hidden="true" tabindex="-1"></a>While not universally true, functions generally operate in their own *environment*. When using R Studio we can look at what objects are stored in our "Global Environment". So specifying a value, such as </span>
+<span id="cb44-43"><a href="#cb44-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-46"><a href="#cb44-46" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-47"><a href="#cb44-47" aria-hidden="true" tabindex="-1"></a>my_value <span class="ot">&lt;-</span> <span class="st">'stats_is_great'</span></span>
+<span id="cb44-48"><a href="#cb44-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-49"><a href="#cb44-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-50"><a href="#cb44-50" aria-hidden="true" tabindex="-1"></a>will then appear in our Global Environment until we either remove it or replace it (e.g., using <span class="in">`rm(my_value)`</span> or <span class="in">`remove(my_value)`</span>). However, specifying something within a function will generally *not* appear in the Global Environment. For example, let's define a function whose sole purpose is to return <span class="in">`stats_is_great`</span>, which is saved in an object within the function:</span>
+<span id="cb44-51"><a href="#cb44-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-54"><a href="#cb44-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-55"><a href="#cb44-55" aria-hidden="true" tabindex="-1"></a>grrreat <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
+<span id="cb44-56"><a href="#cb44-56" aria-hidden="true" tabindex="-1"></a>  my_value_fnx <span class="ot">&lt;-</span> <span class="st">'stats_is_great'</span></span>
+<span id="cb44-57"><a href="#cb44-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>( my_value_fnx ) <span class="co">#this will return whatever is stored in my_value_fnx for the output of our function</span></span>
+<span id="cb44-58"><a href="#cb44-58" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-59"><a href="#cb44-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-60"><a href="#cb44-60" aria-hidden="true" tabindex="-1"></a><span class="fu">grrreat</span>() <span class="co">#let's check out our function</span></span>
+<span id="cb44-61"><a href="#cb44-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-62"><a href="#cb44-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-63"><a href="#cb44-63" aria-hidden="true" tabindex="-1"></a>If you try running the two snippets of code in R Studio, you should see <span class="in">`my_value`</span> appear in the Global Environment, but <span class="in">`my_value_fnx`</span> does not since it is housed within the function <span class="in">`grrreat()`</span>.</span>
+<span id="cb44-64"><a href="#cb44-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-65"><a href="#cb44-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## Make Our Own Mean/Average Function</span></span>
+<span id="cb44-66"><a href="#cb44-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-67"><a href="#cb44-67" aria-hidden="true" tabindex="-1"></a>To get some practice at making functions, I think it is nice to start with things where we can directly check our work with existing functions or where we know what the answer should be. For this example we will write a function to calculate the mean, and then check our work with the actual <span class="in">`mean`</span> function.</span>
+<span id="cb44-68"><a href="#cb44-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-69"><a href="#cb44-69" aria-hidden="true" tabindex="-1"></a>Let's start by writing our function to calculate a sample mean. I like to start my functions with a little commented header to (1) describe what the function does and (2) define what the argument are. This helps me whenever I come back to functions after some time has passed:</span>
+<span id="cb44-70"><a href="#cb44-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-73"><a href="#cb44-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-74"><a href="#cb44-74" aria-hidden="true" tabindex="-1"></a>sample_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(dat){</span>
+<span id="cb44-75"><a href="#cb44-75" aria-hidden="true" tabindex="-1"></a><span class="do">### This is a function to calculate the sample mean</span></span>
+<span id="cb44-76"><a href="#cb44-76" aria-hidden="true" tabindex="-1"></a><span class="co"># dat: a vector of values to calculate the mean for</span></span>
+<span id="cb44-77"><a href="#cb44-77" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(dat) <span class="co"># calculate the sample size</span></span>
+<span id="cb44-78"><a href="#cb44-78" aria-hidden="true" tabindex="-1"></a>  sum_x <span class="ot">&lt;-</span> <span class="fu">sum</span>(dat) <span class="co"># sum up all values in dat</span></span>
+<span id="cb44-79"><a href="#cb44-79" aria-hidden="true" tabindex="-1"></a>  sample_mean <span class="ot">&lt;-</span> sum_x <span class="sc">/</span> n <span class="co"># calculate the sample mean</span></span>
+<span id="cb44-80"><a href="#cb44-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>( sample_mean ) <span class="co"># this isn't necessary here since R should return the last line of code, but I like to include it to be explicit about what I want returned</span></span>
+<span id="cb44-81"><a href="#cb44-81" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-82"><a href="#cb44-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-83"><a href="#cb44-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-84"><a href="#cb44-84" aria-hidden="true" tabindex="-1"></a>Now that we've written a function, let's generate a sample of data to compare our calculation to the existing <span class="in">`mean`</span> function:</span>
+<span id="cb44-85"><a href="#cb44-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-88"><a href="#cb44-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-89"><a href="#cb44-89" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">515</span>)</span>
+<span id="cb44-90"><a href="#cb44-90" aria-hidden="true" tabindex="-1"></a>samp_dat <span class="ot">&lt;-</span> <span class="fu">rnorm</span>( <span class="at">n=</span><span class="dv">50</span>, <span class="at">mean=</span><span class="dv">14</span>, <span class="at">sd=</span><span class="dv">10</span> )</span>
+<span id="cb44-91"><a href="#cb44-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-92"><a href="#cb44-92" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_mean</span>( <span class="at">dat =</span> samp_dat )</span>
+<span id="cb44-93"><a href="#cb44-93" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>( samp_dat )</span>
+<span id="cb44-94"><a href="#cb44-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-95"><a href="#cb44-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-96"><a href="#cb44-96" aria-hidden="true" tabindex="-1"></a>Thankfully, the results match! In future weeks we will discuss some more advanced pieces of building a function (e.g., returning multiple pieces of output), but for now we can use this as a foundation for writing functions.</span>
+<span id="cb44-97"><a href="#cb44-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-98"><a href="#cb44-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-99"><a href="#cb44-99" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional Function Notes</span></span>
+<span id="cb44-100"><a href="#cb44-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-101"><a href="#cb44-101" aria-hidden="true" tabindex="-1"></a>Our function for the mean above was pretty simple in that we only had one argument (<span class="in">`dat`</span>) and one piece of information returned (<span class="in">`sample_mean`</span>). We can write functions that have multiple arguments for a given task and/or return multiple objects. Further, you can also return objects including more than just a vector of information, such as a list object where multiple types of objects can be stored (*more on this in a few weeks*).</span>
+<span id="cb44-102"><a href="#cb44-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-103"><a href="#cb44-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-104"><a href="#cb44-104" aria-hidden="true" tabindex="-1"></a><span class="fu"># The Apply Family</span></span>
+<span id="cb44-105"><a href="#cb44-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-106"><a href="#cb44-106" aria-hidden="true" tabindex="-1"></a>One area our R Textbook is a bit lacking is a discussion of the apply family of functions in R. <span class="co">[</span><span class="ot">DataCamp</span><span class="co">](https://www.datacamp.com/community/tutorials/r-tutorial-apply-family)</span> has a nice tutorial that delves into some of the specifics, of which we'll highlight a few pieces below.</span>
+<span id="cb44-107"><a href="#cb44-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-108"><a href="#cb44-108" aria-hidden="true" tabindex="-1"></a>There are multiple functions that exist in this family:  <span class="in">`apply`</span>, <span class="in">`sapply`</span>, <span class="in">`lapply`</span>, <span class="in">`mapply`</span>, etc. The choice of the <span class="in">`apply`</span> function to use generally depends on the structure of the data you are working with, and also the format of the output you'd like (e.g., a vector versus a list).</span>
+<span id="cb44-109"><a href="#cb44-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-110"><a href="#cb44-110" aria-hidden="true" tabindex="-1"></a><span class="fu">## The `apply()` function</span></span>
+<span id="cb44-111"><a href="#cb44-111" aria-hidden="true" tabindex="-1"></a>The <span class="in">`apply`</span> function operates on arrays, which for our purposes will generally mean 2-dimension matrices. It has three major arguments you can review in the help documentation for greater detail, but they include:</span>
+<span id="cb44-112"><a href="#cb44-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-113"><a href="#cb44-113" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`X`</span>: the array to do some calculation on</span>
+<span id="cb44-114"><a href="#cb44-114" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`MARGIN`</span>: either <span class="in">`1`</span> to indicate applying the function to each row, <span class="in">`2`</span> to indicate applying the function to each column, or <span class="in">`c(1,2)`</span> to indicate applying the function to both rows and columns (i.e., each element of the array)</span>
+<span id="cb44-115"><a href="#cb44-115" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`FUN`</span>: the function you wish to apply the rows and/or columns in your array</span>
+<span id="cb44-116"><a href="#cb44-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-117"><a href="#cb44-117" aria-hidden="true" tabindex="-1"></a>For example, let's simulate 50 observations from a random exponential distribution and place them into a matrix with 10 rows and 5 columns:</span>
+<span id="cb44-118"><a href="#cb44-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-121"><a href="#cb44-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-122"><a href="#cb44-122" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">515</span>)</span>
+<span id="cb44-123"><a href="#cb44-123" aria-hidden="true" tabindex="-1"></a>my_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rexp</span>(<span class="at">n=</span><span class="dv">50</span>, <span class="at">rate=</span><span class="fl">0.2</span>), <span class="at">nrow=</span><span class="dv">10</span>, <span class="at">ncol=</span><span class="dv">5</span>) <span class="co"># here we are simulating the data using the "rexp" function within the "matrix" function itself so that we can include this as one line of code</span></span>
+<span id="cb44-124"><a href="#cb44-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-125"><a href="#cb44-125" aria-hidden="true" tabindex="-1"></a>my_mat <span class="co"># let's see what our data looks like</span></span>
+<span id="cb44-126"><a href="#cb44-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-127"><a href="#cb44-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-128"><a href="#cb44-128" aria-hidden="true" tabindex="-1"></a>Now let's calculate the mean value of each row (<span class="in">`MARGIN=1`</span>) and column (<span class="in">`MARGIN=2`</span>):</span>
+<span id="cb44-129"><a href="#cb44-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-132"><a href="#cb44-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-133"><a href="#cb44-133" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>( <span class="at">X=</span>my_mat, <span class="at">MARGIN=</span><span class="dv">1</span>, <span class="at">FUN=</span>mean) <span class="co"># calculate the mean for each row</span></span>
+<span id="cb44-134"><a href="#cb44-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-135"><a href="#cb44-135" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>( <span class="at">X=</span>my_mat, <span class="at">MARGIN=</span><span class="dv">2</span>, <span class="at">FUN=</span>mean) <span class="co"># calculate the mean for each column</span></span>
+<span id="cb44-136"><a href="#cb44-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-137"><a href="#cb44-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-138"><a href="#cb44-138" aria-hidden="true" tabindex="-1"></a>We see that we have 10 means for the 10 rows, and 5 means for the 5 columns.</span>
+<span id="cb44-139"><a href="#cb44-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-140"><a href="#cb44-140" aria-hidden="true" tabindex="-1"></a><span class="fu">### For Real, What Good is `MARGIN=c(1,2)`</span></span>
+<span id="cb44-141"><a href="#cb44-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-142"><a href="#cb44-142" aria-hidden="true" tabindex="-1"></a>For <span class="in">`MARGIN=c(1,2)`</span> there admittedly may not be as many uses with a 2-dimensional array. But if we wanted to concatenate some string to each value we could consider using the function. </span>
+<span id="cb44-143"><a href="#cb44-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-144"><a href="#cb44-144" aria-hidden="true" tabindex="-1"></a>As an example, let's say we wanted to concatenate a "\$" as though these were prices. To do this we may want to consider using the <span class="in">`paste0()`</span> function, but we have to remember that it needs to be written in a way that can apply to each element of <span class="in">`my_mat`</span> separately. To do this, we may first want to write a function that concatenates a dollar sign to whatever string or number is given, then use the <span class="in">`apply()`</span> function:</span>
+<span id="cb44-145"><a href="#cb44-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-148"><a href="#cb44-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-149"><a href="#cb44-149" aria-hidden="true" tabindex="-1"></a>money_money_money <span class="ot">&lt;-</span> <span class="cf">function</span>(x){ <span class="fu">paste0</span>(<span class="st">'$'</span>,x) }</span>
+<span id="cb44-150"><a href="#cb44-150" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>( <span class="at">X=</span>my_mat, <span class="at">MARGIN=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">FUN =</span> money_money_money)</span>
+<span id="cb44-151"><a href="#cb44-151" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-152"><a href="#cb44-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-153"><a href="#cb44-153" aria-hidden="true" tabindex="-1"></a>We could also define the function directly within the apply statement, or consider rounding each value to 2 decimal places before adding the dollar sign, or do both!</span>
+<span id="cb44-154"><a href="#cb44-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-157"><a href="#cb44-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-158"><a href="#cb44-158" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the function within the apply statement:</span></span>
+<span id="cb44-159"><a href="#cb44-159" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(  <span class="at">X=</span>my_mat, <span class="at">MARGIN=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">FUN =</span> <span class="cf">function</span>(x){ <span class="fu">paste0</span>(<span class="st">'$'</span>,x) })</span>
+<span id="cb44-160"><a href="#cb44-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-161"><a href="#cb44-161" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's add some rounding to the mix:</span></span>
+<span id="cb44-162"><a href="#cb44-162" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(  <span class="at">X=</span>my_mat, <span class="at">MARGIN=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">FUN =</span> <span class="cf">function</span>(x){ <span class="fu">paste0</span>(<span class="st">'$'</span>, <span class="fu">round</span>(x,<span class="at">digits=</span><span class="dv">2</span>) ) })</span>
+<span id="cb44-163"><a href="#cb44-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-164"><a href="#cb44-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-165"><a href="#cb44-165" aria-hidden="true" tabindex="-1"></a>We see from the above output, that the first statement recreates our result with the function defined within <span class="in">`apply`</span>. In the second result we see we successfully rounded to 2 decimal places (although R has this nasty default habit of rounding *up to* the desired number of digits, so extra steps are needed if we want exactly 2 decimal places).</span>
+<span id="cb44-166"><a href="#cb44-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-167"><a href="#cb44-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-168"><a href="#cb44-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## The `lapply()` and `sapply()` Functions</span></span>
+<span id="cb44-169"><a href="#cb44-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-170"><a href="#cb44-170" aria-hidden="true" tabindex="-1"></a>The <span class="in">`lapply`</span> function applies a given function to every element of a list (or vector or data frame, etc.) and returns a list as a result. The <span class="in">`sapply`</span> function is a wrapper to the <span class="in">`lapply`</span> function that is a "user-friendly version" (see the help documentation for this quote) that attempts to return a vector or matrix. The "right" function to use will depend on what format you desire the output to be in (potentially to help complete some next step for plotting, summarizing, etc.). Or, in other words, there is no one right function...just different ones that are more useful in certain situations!</span>
+<span id="cb44-171"><a href="#cb44-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-172"><a href="#cb44-172" aria-hidden="true" tabindex="-1"></a>A lot of the set-up for loops that we discussed in the lab for last week can be similarly set-up for <span class="in">`sapply`</span>. For example, we could use an index approach and recreate our column-specific means from <span class="in">`apply`</span> in the previous section:</span>
+<span id="cb44-173"><a href="#cb44-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-176"><a href="#cb44-176" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-177"><a href="#cb44-177" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>( <span class="at">X=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>( my_mat[,x]) ) <span class="co"># notice how we define the function within sapply here to keep it on one line</span></span>
+<span id="cb44-178"><a href="#cb44-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-179"><a href="#cb44-179" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>( <span class="at">X=</span>my_mat, <span class="at">MARGIN=</span><span class="dv">2</span>, <span class="at">FUN=</span>mean) <span class="co"># check our results</span></span>
+<span id="cb44-180"><a href="#cb44-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-181"><a href="#cb44-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-182"><a href="#cb44-182" aria-hidden="true" tabindex="-1"></a>And, for completeness, we can see that <span class="in">`lapply`</span> returns the means in a list:</span>
+<span id="cb44-183"><a href="#cb44-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-186"><a href="#cb44-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-187"><a href="#cb44-187" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>( <span class="at">X=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>( my_mat[,x]) )</span>
+<span id="cb44-188"><a href="#cb44-188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-189"><a href="#cb44-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-190"><a href="#cb44-190" aria-hidden="true" tabindex="-1"></a>We can also define <span class="in">`X`</span> as values to be entered into a function. For example, perhaps we want to simulate sample sizes of 5, 10, and 15 from an F-distribution. Here we will use <span class="in">`lapply`</span> so we can see the results are actually 5, 10, and 15 in length:</span>
+<span id="cb44-191"><a href="#cb44-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-194"><a href="#cb44-194" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-195"><a href="#cb44-195" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>( <span class="at">X=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>), <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">rf</span>(<span class="at">n=</span>x, <span class="at">df1=</span><span class="dv">15</span>, <span class="at">df2=</span><span class="dv">45</span>) )</span>
+<span id="cb44-196"><a href="#cb44-196" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-197"><a href="#cb44-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-198"><a href="#cb44-198" aria-hidden="true" tabindex="-1"></a>In fact, if we tried using <span class="in">`sapply`</span> we'd see the results are also returned as a list since this is R's best guess as to the most appropriate object type!</span>
+<span id="cb44-199"><a href="#cb44-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-200"><a href="#cb44-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-201"><a href="#cb44-201" aria-hidden="true" tabindex="-1"></a><span class="fu"># Combining loops and `apply` functions?</span></span>
+<span id="cb44-202"><a href="#cb44-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-203"><a href="#cb44-203" aria-hidden="true" tabindex="-1"></a>Hopefully by now we've caught on that R is verrrry flexible. In fact, we can combine different approaches or the same approach multiple times. For example, we can nest <span class="in">`for`</span> loops, nest <span class="in">`apply`</span> statements, or loop through some <span class="in">`apply`</span> statements!</span>
+<span id="cb44-204"><a href="#cb44-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-205"><a href="#cb44-205" aria-hidden="true" tabindex="-1"></a>For example, Homework 3, Exercise 4, asks us to examine the central limit theorem at play with the mean from binomially simulated data increasing from $n=10$ up to $n=50$ in increments of 10 over 500 simulations. </span>
+<span id="cb44-206"><a href="#cb44-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-207"><a href="#cb44-207" aria-hidden="true" tabindex="-1"></a>For this lab, let's examine a related problem where we simulate from Poisson distributed data with $\lambda=3$ at sample sizes of $n=10$, $n=30$, and $n=50$ with 500 simulations. We'll calculate the mean for each simulation, store the results, and then calculate the mean and standard deviation of $\bar{x}$ across all 500 simulations using an <span class="in">`apply`</span> statement. We'll explore 2 different approaches based on nested loops or using <span class="in">`sapply()`</span>.</span>
+<span id="cb44-208"><a href="#cb44-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-209"><a href="#cb44-209" aria-hidden="true" tabindex="-1"></a><span class="fu">## `for` loops solution</span></span>
+<span id="cb44-210"><a href="#cb44-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-211"><a href="#cb44-211" aria-hidden="true" tabindex="-1"></a>If we wish to use <span class="in">`for`</span> loops, we will likely need to consider nesting two of the loops so we can (1) go through our 3 sample sizes and (2) go through the 500 simulations. For the sample sizes we will need to define a vector to reference, and also index the simulation so we can more easily store the results in a matrix we initialize for the results:</span>
+<span id="cb44-212"><a href="#cb44-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-215"><a href="#cb44-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-216"><a href="#cb44-216" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">515</span>)</span>
+<span id="cb44-217"><a href="#cb44-217" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb44-218"><a href="#cb44-218" aria-hidden="true" tabindex="-1"></a>sizeVec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">30</span>,<span class="dv">50</span>)</span>
+<span id="cb44-219"><a href="#cb44-219" aria-hidden="true" tabindex="-1"></a>meanMatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow=</span>nsim, <span class="at">ncol=</span><span class="fu">length</span>(sizeVec))</span>
+<span id="cb44-220"><a href="#cb44-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-221"><a href="#cb44-221" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>( j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(sizeVec) ){ <span class="co"># our outer loop will go through the sample sizes</span></span>
+<span id="cb44-222"><a href="#cb44-222" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){ <span class="co"># our inner loop will go through the number of sims we desire</span></span>
+<span id="cb44-223"><a href="#cb44-223" aria-hidden="true" tabindex="-1"></a>    poisData <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n=</span>sizeVec[j], <span class="at">lambda=</span><span class="dv">3</span>) <span class="co"># simulate the data</span></span>
+<span id="cb44-224"><a href="#cb44-224" aria-hidden="true" tabindex="-1"></a>    meanMatrix[i,j] <span class="ot">&lt;-</span> <span class="fu">mean</span>(poisData) <span class="co"># save the sample mean in the ith row (1 to 500) and jth column (1 to 3)</span></span>
+<span id="cb44-225"><a href="#cb44-225" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb44-226"><a href="#cb44-226" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-227"><a href="#cb44-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-228"><a href="#cb44-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-229"><a href="#cb44-229" aria-hidden="true" tabindex="-1"></a>Let's first take a peek at the first few rows of our matrix using the <span class="in">`head()`</span> function, then use the <span class="in">`apply()`</span> function to calculate the column mean for each sample size:</span>
+<span id="cb44-230"><a href="#cb44-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-233"><a href="#cb44-233" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-234"><a href="#cb44-234" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(meanMatrix) <span class="co"># see the top few rows of our matrix</span></span>
+<span id="cb44-235"><a href="#cb44-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-236"><a href="#cb44-236" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X=</span>meanMatrix, <span class="at">MARGIN=</span><span class="dv">2</span>, <span class="at">FUN=</span>mean)</span>
+<span id="cb44-237"><a href="#cb44-237" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X=</span>meanMatrix, <span class="at">MARGIN=</span><span class="dv">2</span>, <span class="at">FUN=</span>sd)</span>
+<span id="cb44-238"><a href="#cb44-238" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-239"><a href="#cb44-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-240"><a href="#cb44-240" aria-hidden="true" tabindex="-1"></a>We see that the average of the sample means is pretty close to the true mean of $\lambda=3$ across all sample sizes, but that as the sample size increases the standard deviation of the sample mean (also known as the *standard error*) decreases. In other words, there is less variability among all estimated means when we have a larger sample size.</span>
+<span id="cb44-241"><a href="#cb44-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-242"><a href="#cb44-242" aria-hidden="true" tabindex="-1"></a><span class="fu">## `sapply` Solution</span></span>
+<span id="cb44-243"><a href="#cb44-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-244"><a href="#cb44-244" aria-hidden="true" tabindex="-1"></a>We can also nest our <span class="in">`sapply`</span> functions within one another, and it will automatically create a matrix with 3 columns and 500 rows to store the results in. WARNING, this gets a bit nesty... (get it, nasty...but with nesting...I'll show myself out):</span>
+<span id="cb44-245"><a href="#cb44-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-248"><a href="#cb44-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-249"><a href="#cb44-249" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">515</span>)</span>
+<span id="cb44-250"><a href="#cb44-250" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb44-251"><a href="#cb44-251" aria-hidden="true" tabindex="-1"></a>sizeVec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">30</span>,<span class="dv">50</span>)</span>
+<span id="cb44-252"><a href="#cb44-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-253"><a href="#cb44-253" aria-hidden="true" tabindex="-1"></a>meanMatrix_sapply <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="at">X=</span>sizeVec, <span class="at">FUN=</span> <span class="cf">function</span>(x) <span class="fu">sapply</span>(<span class="at">X=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">500</span>, <span class="at">FUN=</span><span class="cf">function</span>(y) <span class="fu">mean</span>(<span class="fu">rpois</span>(<span class="at">n=</span>x,<span class="at">lambda=</span><span class="dv">3</span>)) ) )</span>
+<span id="cb44-254"><a href="#cb44-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-255"><a href="#cb44-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-256"><a href="#cb44-256" aria-hidden="true" tabindex="-1"></a>Before we look at the first few rows and check that the mean and SD are the same as above, let's break down what the heck is happening here:</span>
+<span id="cb44-257"><a href="#cb44-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-258"><a href="#cb44-258" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;span</span> <span class="er">style</span><span class="ot">=</span><span class="st">"color: red;"</span><span class="kw">&gt;</span>sapply( X=sizeVec, FUN= function(x) <span class="kw">&lt;span</span> <span class="er">style</span><span class="ot">=</span><span class="st">"color: blue;"</span><span class="kw">&gt;</span>sapply(X=1:500, FUN=function(y) <span class="kw">&lt;span</span> <span class="er">style</span><span class="ot">=</span><span class="st">"color: green;"</span><span class="kw">&gt;</span>mean(rpois(n=x,lambda=3)) <span class="kw">&lt;/span&gt;</span>) <span class="kw">&lt;/span&gt;</span>)<span class="kw">&lt;/span&gt;</span></span>
+<span id="cb44-259"><a href="#cb44-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-260"><a href="#cb44-260" aria-hidden="true" tabindex="-1"></a>The red text is our "outer" <span class="in">`sapply`</span> statement, which is essentially going through our sample size vector. It is applying its <span class="in">`function(x)`</span> to the blue "inner" <span class="in">`sapply`</span> statement. This inner statement is then going through our vector <span class="in">`1:500`</span> to generate 500 samples where is it applying the <span class="in">`function(y)`</span> (note the use of <span class="in">`y`</span> instead of <span class="in">`x`</span> as our function's argument to differentiate it) to the actual generation of the Poisson sample of size <span class="in">`x`</span> (i.e., $n$) and calculate its mean.</span>
+<span id="cb44-261"><a href="#cb44-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-262"><a href="#cb44-262" aria-hidden="true" tabindex="-1"></a>**PHEW!!** That is...a lot. In cases like this, it may just be easier (and potentially more intuitive) to use two loops (or a different approach you've stumbled upon that involves neither!).</span>
+<span id="cb44-263"><a href="#cb44-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-264"><a href="#cb44-264" aria-hidden="true" tabindex="-1"></a>Let's now double check our results to see they match the above <span class="in">`for`</span> loop results:</span>
+<span id="cb44-265"><a href="#cb44-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-268"><a href="#cb44-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-269"><a href="#cb44-269" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(meanMatrix_sapply)</span>
+<span id="cb44-270"><a href="#cb44-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-271"><a href="#cb44-271" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X=</span>meanMatrix_sapply, <span class="at">MARGIN=</span><span class="dv">2</span>, <span class="at">FUN=</span>mean)</span>
+<span id="cb44-272"><a href="#cb44-272" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X=</span>meanMatrix_sapply, <span class="at">MARGIN=</span><span class="dv">2</span>, <span class="at">FUN=</span>sd)</span>
+<span id="cb44-273"><a href="#cb44-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-274"><a href="#cb44-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-275"><a href="#cb44-275" aria-hidden="true" tabindex="-1"></a>Cha-ching! They do match, so even this more potentially chaotic approach worked out.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

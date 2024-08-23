@@ -1,0 +1,246 @@
+---
+title: "Week 3 Lab"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Labs](/labs/index.qmd) collection, the mini-lecture content delivered at the start of class before breaking out into small groups to work on the homework assignment.
+
+# What's on the docket this week?
+
+In Week 3 we are introducing the basics of building our own functions in R by starting with the basic set-up. We will also introduce the `apply` family of functions which are similar to loops, but allow for the potential of faster code that may also be more compact. 
+
+# Writing Functions
+
+[Chapter 2.4 of our R textbook](https://rstudio-education.github.io/hopr/basics.html#write-functions) introduces functions in the R context and how to write your own. The end of [Chapter 2.5](https://rstudio-education.github.io/hopr/basics.html#arguments) also includes a nice graphic that breaks down what our textbook considers the 5 components of a function.
+
+In brief, a function has a simple set-up:
+
+```{r, eval=F}
+my_function <- function(arguments) {
+  the body of your function that will do stuff
+}
+```
+
+In the above code chunk we are creating a function called `my_function` that will ultimately do whatever we want in the body of our function. Functions can have additional information passed into the function environment by the arguments.
+
+While not universally true, functions generally operate in their own *environment*. When using R Studio we can look at what objects are stored in our "Global Environment". So specifying a value, such as 
+
+```{r}
+my_value <- 'stats_is_great'
+```
+
+will then appear in our Global Environment until we either remove it or replace it (e.g., using `rm(my_value)` or `remove(my_value)`). However, specifying something within a function will generally *not* appear in the Global Environment. For example, let's define a function whose sole purpose is to return `stats_is_great`, which is saved in an object within the function:
+
+```{r}
+grrreat <- function(){
+  my_value_fnx <- 'stats_is_great'
+  return( my_value_fnx ) #this will return whatever is stored in my_value_fnx for the output of our function
+}
+
+grrreat() #let's check out our function
+```
+
+If you try running the two snippets of code in R Studio, you should see `my_value` appear in the Global Environment, but `my_value_fnx` does not since it is housed within the function `grrreat()`.
+
+## Make Our Own Mean/Average Function
+
+To get some practice at making functions, I think it is nice to start with things where we can directly check our work with existing functions or where we know what the answer should be. For this example we will write a function to calculate the mean, and then check our work with the actual `mean` function.
+
+Let's start by writing our function to calculate a sample mean. I like to start my functions with a little commented header to (1) describe what the function does and (2) define what the argument are. This helps me whenever I come back to functions after some time has passed:
+
+```{r}
+sample_mean <- function(dat){
+### This is a function to calculate the sample mean
+# dat: a vector of values to calculate the mean for
+  n <- length(dat) # calculate the sample size
+  sum_x <- sum(dat) # sum up all values in dat
+  sample_mean <- sum_x / n # calculate the sample mean
+  return( sample_mean ) # this isn't necessary here since R should return the last line of code, but I like to include it to be explicit about what I want returned
+}
+```
+
+Now that we've written a function, let's generate a sample of data to compare our calculation to the existing `mean` function:
+
+```{r}
+set.seed(515)
+samp_dat <- rnorm( n=50, mean=14, sd=10 )
+
+sample_mean( dat = samp_dat )
+mean( samp_dat )
+```
+
+Thankfully, the results match! In future weeks we will discuss some more advanced pieces of building a function (e.g., returning multiple pieces of output), but for now we can use this as a foundation for writing functions.
+
+
+## Additional Function Notes
+
+Our function for the mean above was pretty simple in that we only had one argument (`dat`) and one piece of information returned (`sample_mean`). We can write functions that have multiple arguments for a given task and/or return multiple objects. Further, you can also return objects including more than just a vector of information, such as a list object where multiple types of objects can be stored (*more on this in a few weeks*).
+
+
+# The Apply Family
+
+One area our R Textbook is a bit lacking is a discussion of the apply family of functions in R. [DataCamp](https://www.datacamp.com/community/tutorials/r-tutorial-apply-family) has a nice tutorial that delves into some of the specifics, of which we'll highlight a few pieces below.
+
+There are multiple functions that exist in this family:  `apply`, `sapply`, `lapply`, `mapply`, etc. The choice of the `apply` function to use generally depends on the structure of the data you are working with, and also the format of the output you'd like (e.g., a vector versus a list).
+
+## The `apply()` function
+The `apply` function operates on arrays, which for our purposes will generally mean 2-dimension matrices. It has three major arguments you can review in the help documentation for greater detail, but they include:
+
+* `X`: the array to do some calculation on
+* `MARGIN`: either `1` to indicate applying the function to each row, `2` to indicate applying the function to each column, or `c(1,2)` to indicate applying the function to both rows and columns (i.e., each element of the array)
+* `FUN`: the function you wish to apply the rows and/or columns in your array
+
+For example, let's simulate 50 observations from a random exponential distribution and place them into a matrix with 10 rows and 5 columns:
+
+```{r}
+set.seed(515)
+my_mat <- matrix( rexp(n=50, rate=0.2), nrow=10, ncol=5) # here we are simulating the data using the "rexp" function within the "matrix" function itself so that we can include this as one line of code
+
+my_mat # let's see what our data looks like
+```
+
+Now let's calculate the mean value of each row (`MARGIN=1`) and column (`MARGIN=2`):
+
+```{r}
+apply( X=my_mat, MARGIN=1, FUN=mean) # calculate the mean for each row
+
+apply( X=my_mat, MARGIN=2, FUN=mean) # calculate the mean for each column
+```
+
+We see that we have 10 means for the 10 rows, and 5 means for the 5 columns.
+
+### For Real, What Good is `MARGIN=c(1,2)`
+
+For `MARGIN=c(1,2)` there admittedly may not be as many uses with a 2-dimensional array. But if we wanted to concatenate some string to each value we could consider using the function. 
+
+As an example, let's say we wanted to concatenate a "\$" as though these were prices. To do this we may want to consider using the `paste0()` function, but we have to remember that it needs to be written in a way that can apply to each element of `my_mat` separately. To do this, we may first want to write a function that concatenates a dollar sign to whatever string or number is given, then use the `apply()` function:
+
+```{r}
+money_money_money <- function(x){ paste0('$',x) }
+apply( X=my_mat, MARGIN=c(1,2), FUN = money_money_money)
+```
+
+We could also define the function directly within the apply statement, or consider rounding each value to 2 decimal places before adding the dollar sign, or do both!
+
+```{r}
+# Define the function within the apply statement:
+apply(  X=my_mat, MARGIN=c(1,2), FUN = function(x){ paste0('$',x) })
+
+# Let's add some rounding to the mix:
+apply(  X=my_mat, MARGIN=c(1,2), FUN = function(x){ paste0('$', round(x,digits=2) ) })
+```
+
+We see from the above output, that the first statement recreates our result with the function defined within `apply`. In the second result we see we successfully rounded to 2 decimal places (although R has this nasty default habit of rounding *up to* the desired number of digits, so extra steps are needed if we want exactly 2 decimal places).
+
+
+## The `lapply()` and `sapply()` Functions
+
+The `lapply` function applies a given function to every element of a list (or vector or data frame, etc.) and returns a list as a result. The `sapply` function is a wrapper to the `lapply` function that is a "user-friendly version" (see the help documentation for this quote) that attempts to return a vector or matrix. The "right" function to use will depend on what format you desire the output to be in (potentially to help complete some next step for plotting, summarizing, etc.). Or, in other words, there is no one right function...just different ones that are more useful in certain situations!
+
+A lot of the set-up for loops that we discussed in the lab for last week can be similarly set-up for `sapply`. For example, we could use an index approach and recreate our column-specific means from `apply` in the previous section:
+
+```{r}
+sapply( X=1:5, FUN = function(x) mean( my_mat[,x]) ) # notice how we define the function within sapply here to keep it on one line
+
+apply( X=my_mat, MARGIN=2, FUN=mean) # check our results
+```
+
+And, for completeness, we can see that `lapply` returns the means in a list:
+
+```{r}
+lapply( X=1:5, FUN = function(x) mean( my_mat[,x]) )
+```
+
+We can also define `X` as values to be entered into a function. For example, perhaps we want to simulate sample sizes of 5, 10, and 15 from an F-distribution. Here we will use `lapply` so we can see the results are actually 5, 10, and 15 in length:
+
+```{r}
+lapply( X=c(5,10,15), FUN = function(x) rf(n=x, df1=15, df2=45) )
+```
+
+In fact, if we tried using `sapply` we'd see the results are also returned as a list since this is R's best guess as to the most appropriate object type!
+
+
+# Combining loops and `apply` functions?
+
+Hopefully by now we've caught on that R is verrrry flexible. In fact, we can combine different approaches or the same approach multiple times. For example, we can nest `for` loops, nest `apply` statements, or loop through some `apply` statements!
+
+For example, Homework 3, Exercise 4, asks us to examine the central limit theorem at play with the mean from binomially simulated data increasing from $n=10$ up to $n=50$ in increments of 10 over 500 simulations. 
+
+For this lab, let's examine a related problem where we simulate from Poisson distributed data with $\lambda=3$ at sample sizes of $n=10$, $n=30$, and $n=50$ with 500 simulations. We'll calculate the mean for each simulation, store the results, and then calculate the mean and standard deviation of $\bar{x}$ across all 500 simulations using an `apply` statement. We'll explore 2 different approaches based on nested loops or using `sapply()`.
+
+## `for` loops solution
+
+If we wish to use `for` loops, we will likely need to consider nesting two of the loops so we can (1) go through our 3 sample sizes and (2) go through the 500 simulations. For the sample sizes we will need to define a vector to reference, and also index the simulation so we can more easily store the results in a matrix we initialize for the results:
+
+```{r}
+set.seed(515)
+nsim <- 500
+sizeVec <- c(10,30,50)
+meanMatrix <- matrix(NA, nrow=nsim, ncol=length(sizeVec))
+
+for( j in 1:length(sizeVec) ){ # our outer loop will go through the sample sizes
+  for( i in 1:nsim){ # our inner loop will go through the number of sims we desire
+    poisData <- rpois(n=sizeVec[j], lambda=3) # simulate the data
+    meanMatrix[i,j] <- mean(poisData) # save the sample mean in the ith row (1 to 500) and jth column (1 to 3)
+  }
+}
+```
+
+Let's first take a peek at the first few rows of our matrix using the `head()` function, then use the `apply()` function to calculate the column mean for each sample size:
+
+```{r}
+head(meanMatrix) # see the top few rows of our matrix
+
+apply(X=meanMatrix, MARGIN=2, FUN=mean)
+apply(X=meanMatrix, MARGIN=2, FUN=sd)
+```
+
+We see that the average of the sample means is pretty close to the true mean of $\lambda=3$ across all sample sizes, but that as the sample size increases the standard deviation of the sample mean (also known as the *standard error*) decreases. In other words, there is less variability among all estimated means when we have a larger sample size.
+
+## `sapply` Solution
+
+We can also nest our `sapply` functions within one another, and it will automatically create a matrix with 3 columns and 500 rows to store the results in. WARNING, this gets a bit nesty... (get it, nasty...but with nesting...I'll show myself out):
+
+```{r}
+set.seed(515)
+nsim <- 500
+sizeVec <- c(10,30,50)
+
+meanMatrix_sapply <- sapply( X=sizeVec, FUN= function(x) sapply(X=1:500, FUN=function(y) mean(rpois(n=x,lambda=3)) ) )
+```
+
+Before we look at the first few rows and check that the mean and SD are the same as above, let's break down what the heck is happening here:
+
+<span style="color: red;">sapply( X=sizeVec, FUN= function(x) <span style="color: blue;">sapply(X=1:500, FUN=function(y) <span style="color: green;">mean(rpois(n=x,lambda=3)) </span>) </span>)</span>
+
+The red text is our "outer" `sapply` statement, which is essentially going through our sample size vector. It is applying its `function(x)` to the blue "inner" `sapply` statement. This inner statement is then going through our vector `1:500` to generate 500 samples where is it applying the `function(y)` (note the use of `y` instead of `x` as our function's argument to differentiate it) to the actual generation of the Poisson sample of size `x` (i.e., $n$) and calculate its mean.
+
+**PHEW!!** That is...a lot. In cases like this, it may just be easier (and potentially more intuitive) to use two loops (or a different approach you've stumbled upon that involves neither!).
+
+Let's now double check our results to see they match the above `for` loop results:
+
+```{r}
+head(meanMatrix_sapply)
+
+apply(X=meanMatrix_sapply, MARGIN=2, FUN=mean)
+apply(X=meanMatrix_sapply, MARGIN=2, FUN=sd)
+```
+
+Cha-ching! They do match, so even this more potentially chaotic approach worked out.
+

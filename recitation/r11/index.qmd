@@ -1,0 +1,46 @@
+---
+title: "Nonparametric Test Choices"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Nonparametric Test Choices
+
+Our lectures on nonparametric tests had lots of options to consider. The table below is meant to help summarize these tests and consider what one is the most appropriate for a given problem:
+
+| Test                 | Samples                                                                          | Null Hypothesis                                                                                                                                                                                     |
+|:---------------------|:---------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Wilcoxon Rank Sum    | One or two (we only covered two, which is also known as the Mann-Whitney U test) | The mean ranks are equal between groups. <br>Equivalently, the distributions are identical between groups. <br>With strong assumptions about identical shape, the medians are equal between groups. |
+| Wilcoxon Signed Rank | Paired data                                                                      | The population of the differences of paired values is symmetric around zero.                                                                                                                        |
+| Sign Test            | Paired data                                                                      | For a random pair of observations, it is equally likely for either to be larger than the other.                                                                                                     |
+| Sign Test            | One sample                                                                       | The median is equal to some value.                                                                                                                                                                  |
+
+There are even more varieties of these tests, and others that we mentioned but did not dig into (e.g., Mood's test of medians, quantile regression). Bootstraps and permutation tests can also be thought of as nonparametric tests that we've discuss, and we dive into some examples below.
+
+
+## Choice of Parametric versus Non-Parametric Test
+
+There are multiple things to consider when selecting which test to use for inference, and they may vary by priority and context:
+
+1. *Are the assumptions met?* Generally, we feel most comfortable running a test if its assumptions are met. If the assumptions are not met, it may still be a valid test if we can figure out the limitations (e.g., lower power, increased bias, etc.).
+2. *What interpretation is desired?* In addition to meeting our assumptions, we may wish to consider what the interpretation may be. For example, if we have ordinal data we most likely will use some form of categorical data methods (e.g., chi-squared test, ordinal logistic regression, etc.). However, we might wish to use means or medians (e.g., t-tests, Mann-Whitey U-test (i.e., Wilcoxon rank sum), linear regression, quantile regression, etc.). If we have a binary outcome, depending on the study design we may wish to interpret the risk difference, risk ratio, or odds ratio. In certain circumstances, we may sacrifice the model that meets the most assumptions for something that is more interpretable.
+3. *Are there serious consequences?* If we are analyzing the primary outcome of a Phase III trial, we'll do our best to make sure we have the best method to properly measure our estimand. However, an exploratory study may not be as concerned about getting every single statistical test "right" based on assumptions. We can also employ simulation studies to evaluate how poorly a model may be (e.g., how much worse would my power be with my given sample size, effect size, etc.).
+
+

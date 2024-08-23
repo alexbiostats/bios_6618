@@ -1,11 +1,11 @@
 ---
-title: "Question 1"
+title: "Variance, Consistency, and Bias of Estimators"
 author: 
   name: Alex Kaizer
   roles: "Instructor"
   affiliation: University of Colorado-Anschutz Medical Campus
 toc: true
-toc_float: true
+toc_float: true3
 toc-location: left
 format:
   html:

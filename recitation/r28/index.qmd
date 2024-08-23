@@ -1,0 +1,85 @@
+---
+title: "Brief, but Complete, Interpretations: A t-test Example"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Brief, but Complete, t-test Interpretations
+
+From Homework 1, we had a short section on "Reporting Results: Brief, but Complete Summaries" which focused on the t-test. Let's briefly revisit the four elements before seeing an example of the interpretation in both an independent and paired two-sample t-test.
+
+The four elements of a brief, but complete, summary include:
+
+1. A point estimate (e.g., observed magnitude of effect)
+2. An interval estimate (e.g., range of true values that are consistent with the experimental results)
+3. A measure of uncertainty in the decision (e.g., p-value)
+4. A decision (e.g., fail to reject/ reject the null hypothesis)
+
+In general, we should try to aim for these four elements of a brief, but complete, interpretation for any statistical results so that the audience (e.g., reader, collaborator, etc.) understands the data and resulting decisions from the statistical test. These approaches are especially relevant when we discuss linear regression modeling later in the semester. 
+
+
+## Independent Two-Samples t-test
+
+```{r}
+control_group <- c(1.0,0.5,0.3,0.0,-0.2,-1.2)
+treatment_group <- c(0.2,-0.4,-1.4,-1.6,-2.6,-3.2)
+  
+t.test( x=treatment_group, y=control_group, 
+        alternative='two.sided',  #can also choose one-sided
+        paired=FALSE, #if set to TRUE, does a paired t-test
+        var.equal=FALSE ) #if TRUE, assumes equal variances
+```
+
+Based on these results, the four elements of our brief, but complete, interpretation may include:
+
+1. A point estimate: $-1.5 - (0.067) = -1.567 = -1.57$
+2. An interval estimate: $(-2.96, -0.17)$
+3. A measure of uncertainty in the decision: $p=0.032$
+4. A decision: We reject the null hypothesis since p<0.05 and the 95% confidence interval does not include 0 (i.e., our null)
+
+The mean weight loss over six weeks in the treatment group was 1.57 kg {**point estimate**} (95% CI: 0.17 to 2.96 kg) {**interval estimate**} greater than in the control group, representing a significant difference {**decision**} (p=0.032) {**uncertainty**}.
+
+
+## Paired t-test
+
+Let's use the same data, but assume that we designed our study to match each control and treatment participant so we could conduct a *paired* analysis. In this case, we can simply change the `paired=FALSE` argument in our `t.test()` function to `paired=TRUE`:
+
+```{r}
+control_group <- c(1.0,0.5,0.3,0.0,-0.2,-1.2)
+treatment_group <- c(0.2,-0.4,-1.4,-1.6,-2.6,-3.2)
+  
+t.test( x=treatment_group, y=control_group, 
+        alternative='two.sided',  #can also choose one-sided
+        paired=TRUE, #set equal to TRUE, assuming each person's measurement is 
+        var.equal=FALSE ) #if TRUE, assumes equal variances
+```
+
+Based on these results, the four elements of our brief, but complete, interpretation may include:
+
+1. A point estimate: $-1.567 = -1.57$
+2. An interval estimate: $(-2.22, -0.91)$
+3. A measure of uncertainty in the decision: $p=0.002$ *(rounding to 3 decimal places)*
+4. A decision: We reject the null hypothesis since p<0.05 and the 95% confidence interval does not include 0 (i.e., our null)
+
+The mean weight loss in our paired sample over six weeks in the treatment group was 1.57 kg {**point estimate**} (95% CI: 0.91 to 2.22 kg) {**interval estimate**} greater than in the control group, representing a significant difference {**decision**} (p=0.002) {**uncertainty**}.
+
+*NOTE: We are assuming, based on our data entry, that the 1st, 2nd, etc. element is our desired match between the vectors.*
+
+

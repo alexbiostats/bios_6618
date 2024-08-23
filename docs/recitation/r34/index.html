@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alex Kaizer">
+
+<title>Alex Kaizer - Power and Type I Error Rate Calculations via Simulation Studies</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/academicons-1.9.1/css/academicons.css" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="./files/favicon.ico">
+
+<script type="text/javascript">
+function setBrand() {
+document.getElementsByClassName("navbar-brand")[0].href="https://www.alexkaizer.com";
+}
+window.onload = setBrand;
+</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5PBG7BL207"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5PBG7BL207');
+</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Alex Kaizer</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/research" rel="" target="">
+ <span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/publications" rel="" target="">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Teaching</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching">    
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/teaching" rel="" target="">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6618" rel="" target="">
+ <span class="dropdown-text">BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6611" rel="" target="">
+ <span class="dropdown-text">BIOS 6611</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/study_design_berd" rel="" target="">
+ <span class="dropdown-text">BERD Study Design Short Course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/adaptivetrials_sc" rel="" target="">
+ <span class="dropdown-text">WNAR Adaptive and Bayesian Clinical Trial Design Short Course</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bios-6618" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">BIOS 6618</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-bios-6618">    
+        <li>
+    <a class="dropdown-item" href="../../index.html" rel="" target="">
+ <span class="dropdown-text">Home</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../bios_6618_materials" rel="" target="">
+ <span class="dropdown-text">Materials</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../journal_of_bios_6618" rel="" target="">
+ <span class="dropdown-text">Journal of BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../recitation" rel="" target="">
+ <span class="dropdown-text">Recitation Questions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs" rel="" target="">
+ <span class="dropdown-text">Labs and Practice Problems</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:alex.kaizer@cuanschutz.edu" rel="" target=""><i class="bi bi-envelope" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=ICpH74EAAAAJ&amp;hl=en" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-google-scholar ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="http://github.com/alexbiostats" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/files/Alex_CV.pdf" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-cv ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/alex-kaizer/" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#power-calculations-for-known-and-unknown-standard-deviations" id="toc-power-calculations-for-known-and-unknown-standard-deviations" class="nav-link active" data-scroll-target="#power-calculations-for-known-and-unknown-standard-deviations">Power Calculations for Known and Unknown Standard Deviations</a></li>
+  <li><a href="#simulation-studies-to-estimate-power" id="toc-simulation-studies-to-estimate-power" class="nav-link" data-scroll-target="#simulation-studies-to-estimate-power">Simulation Studies to Estimate Power</a>
+  <ul class="collapse">
+  <li><a href="#scenario-1-type-i-error-via-simulation" id="toc-scenario-1-type-i-error-via-simulation" class="nav-link" data-scroll-target="#scenario-1-type-i-error-via-simulation">Scenario 1: Type I Error via Simulation</a>
+  <ul class="collapse">
+  <li><a href="#strategy-1-the-counter-set-up" id="toc-strategy-1-the-counter-set-up" class="nav-link" data-scroll-target="#strategy-1-the-counter-set-up">Strategy 1: The “Counter” Set-up</a></li>
+  <li><a href="#strategy-2-the-counter-set-up-but-lets-calculate-our-own-p-value-by-hand" id="toc-strategy-2-the-counter-set-up-but-lets-calculate-our-own-p-value-by-hand" class="nav-link" data-scroll-target="#strategy-2-the-counter-set-up-but-lets-calculate-our-own-p-value-by-hand">Strategy 2: The “Counter” Set-up, but Let’s Calculate our Own p-value by “Hand”!</a></li>
+  <li><a href="#strategy-3-track-each-simulation-p-value" id="toc-strategy-3-track-each-simulation-p-value" class="nav-link" data-scroll-target="#strategy-3-track-each-simulation-p-value">Strategy 3: Track Each Simulation p-value</a></li>
+  </ul></li>
+  <li><a href="#scenario-2-power-via-simulation-i.e.-the-alternative-hypothesis-cases" id="toc-scenario-2-power-via-simulation-i.e.-the-alternative-hypothesis-cases" class="nav-link" data-scroll-target="#scenario-2-power-via-simulation-i.e.-the-alternative-hypothesis-cases">Scenario 2: Power via Simulation (i.e., The Alternative Hypothesis Case(s))</a></li>
+  <li><a href="#comparison-of-calculating-type-i-error-rates-and-power-from-simulation-studies" id="toc-comparison-of-calculating-type-i-error-rates-and-power-from-simulation-studies" class="nav-link" data-scroll-target="#comparison-of-calculating-type-i-error-rates-and-power-from-simulation-studies">Comparison of Calculating Type I Error Rates and Power from Simulation Studies</a></li>
+  </ul></li>
+  <li><a href="#writing-a-function-instead-of-a-for-loop" id="toc-writing-a-function-instead-of-a-for-loop" class="nav-link" data-scroll-target="#writing-a-function-instead-of-a-for-loop">Writing a Function Instead of a for Loop</a>
+  <ul class="collapse">
+  <li><a href="#the-hw-hint" id="toc-the-hw-hint" class="nav-link" data-scroll-target="#the-hw-hint">The HW Hint</a></li>
+  </ul></li>
+  <li><a href="#using-p-values-instead-of-test-statistics" id="toc-using-p-values-instead-of-test-statistics" class="nav-link" data-scroll-target="#using-p-values-instead-of-test-statistics">Using p-values Instead of test statistics</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Power and Type I Error Rate Calculations via Simulation Studies</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Alex Kaizer </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Colorado-Anschutz Medical Campus
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This page is part of the University of Colorado-Anschutz Medical Campus’ <a href="../../recitation/index.html">BIOS 6618 Recitation</a> collection. To view other questions, you can view the <a href="../../recitation/index.html">BIOS 6618 Recitation</a> collection page or use the search bar to look for keywords.</p>
+<p>For this problem, we initially present power calculations via formulas/functions in R, before transitioning to how we could use simulation studies to estimate our statistical power. This is a great approach to starting to play around with simulation studies, where we have “known” solutions with existing functions or formulas, but want to see how close we can get via simulation. If we can structure these simulations correctly, we may be more confident for future problems where we don’t have an answer to necessarily compare to.</p>
+<section id="power-calculations-for-known-and-unknown-standard-deviations" class="level1">
+<h1>Power Calculations for Known and Unknown Standard Deviations</h1>
+<p>A clinical trial is planned to examine the bioavailability of twice per day beta carotene supplementation. Measurements are to be taken at baseline and 12 weeks later. Write out results by hand (i.e., show equations and work) for known s.d. and use functions in R for unknown s.d. Turn in your hand calculations/derivations, R code, and relevant output.</p>
+<p>For the null hypothesis that the mean change in beta carotene is 0 mcg/dL and the alternative hypothesis that the mean change in beta carotene is 100 mcg/dL, with <span class="math inline">\(\sigma_{\text{change}} = 75\)</span> mcg/dL, using <span class="math inline">\(\alpha = 0.05\)</span> (two-sided) and 90% power, how many subjects would be needed? Assume two cases: known s.d. and unknown s.d.</p>
+<p><strong>Solution:</strong></p>
+<p><em>For the known standard deviation:</em></p>
+<p><span class="math inline">\(\begin{aligned} n =&amp; \; \frac{\sigma^2 \left( Z_{1-\beta} + Z_{1-\frac{\alpha}{2}} \right)^2}{(\mu_0 - \mu_1)^2} \\ =&amp; \; \frac{75^2(Z_{1-0.1} + Z_{1-\frac{0.05}{2}})^2}{(0-100)^2} \\ =&amp; \; \frac{75^2 (1.282 + 1.96)^2}{(100)^2} \\ =&amp; \; 5.91219 \end{aligned}\)</span></p>
+<p>A sample size of 6 would be needed to have 90% power with known SD.</p>
+<p>Note that we can calculate <span class="math inline">\(Z_{1-0.1}=Z_{0.9}\)</span> using <code>qnorm(0.9)</code> and <span class="math inline">\(Z_{0.975}\)</span> using <code>qnorm(0.975)</code> (i.e., what is the value of <span class="math inline">\(Z\)</span>, our standard normal statistic, so that 90% and 97.5%, respectively, of the area under our PDF lies below it).</p>
+<p><em>For the unknown standard deviation:</em></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">n=</span><span class="cn">NULL</span>, <span class="at">delta=</span><span class="dv">100</span>, <span class="at">sd=</span><span class="dv">75</span>, <span class="at">sig.level=</span><span class="fl">0.05</span>, <span class="at">power=</span><span class="fl">0.90</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">type=</span><span class="st">"one.sample"</span>, <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     One-sample t test power calculation 
+
+              n = 8.072323
+          delta = 100
+             sd = 75
+      sig.level = 0.05
+          power = 0.9
+    alternative = two.sided</code></pre>
+</div>
+</div>
+<p>A sample size of 9 would be needed to have 90% power when the SD is unknown.</p>
+</section>
+<section id="simulation-studies-to-estimate-power" class="level1">
+<h1>Simulation Studies to Estimate Power</h1>
+<p>In some cases the test statistic you need to apply to a set of data is not of a standard form and so is not included as an option in R (or other sample size and power analysis software), or perhaps an exact formula does not exist for doing the power calculation. In these cases, simulation in R (or other software) can be used to estimate the power.</p>
+<p>Assume normally distributed data for the change in beta carotene with <span class="math inline">\(\sigma_{\text{change}} = 75\)</span> mcg/dL, <span class="math inline">\(n=5\)</span>, and significance level <span class="math inline">\(\alpha= 0.05\)</span>, with a one-sample two-sided t-test.</p>
+<section id="scenario-1-type-i-error-via-simulation" class="level2">
+<h2 class="anchored" data-anchor-id="scenario-1-type-i-error-via-simulation">Scenario 1: Type I Error via Simulation</h2>
+<p><strong>Scenario 1:</strong> Use simulation to show that the one-sample t-test has the correct significance level, that is that under the null hypothesis the test rejects about 5% of the time. Use 10,000 iterations and the seed value 2345.</p>
+<p>Using a loop in R, carry out Scenario 1. Summarize your results in a brief paragraph.</p>
+<p>We’ll explore a few strategies below to structuring simulations.</p>
+<section id="strategy-1-the-counter-set-up" class="level3">
+<h3 class="anchored" data-anchor-id="strategy-1-the-counter-set-up">Strategy 1: The “Counter” Set-up</h3>
+<p>One strategy to estimate the power is to just keep track of how many times our p-value is less than <span class="math inline">\(\alpha\)</span> by increasing a “counter” by 1 for each case.</p>
+<p>Here we will loop through 10,000 simulated trials where <span class="math inline">\(n=5\)</span>, <span class="math inline">\(\sigma_{\text{change}} = 75\)</span> mcg/dL, <span class="math inline">\(\alpha= 0.05\)</span>, and our difference is 0 with a one-sample, two-sided t-test. Since we are using a counter, the index <code>i</code> does not appear anywhere within our loop:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed and define our known/desired values</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For this for loop, we will "count" the number of times we have p&lt;0.05 for a t-test </span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>count<span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numTrials){</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,mean,sd) <span class="co"># simulate the data for the i-th simulation</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="co"># conduct a one-sample, two-sided t-test</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(t<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>){ count <span class="ot">&lt;-</span> count <span class="sc">+</span> <span class="dv">1</span> }<span class="cf">else</span>{ count <span class="ot">&lt;-</span> count }</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the type I error rate (i.e., the proportion of simulations where we reject H0 incorrectly since we are simulating the null)</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 498</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rejectionRate <span class="ot">&lt;-</span> count<span class="sc">/</span>numTrials </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>rejectionRate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0498</code></pre>
+</div>
+</div>
+<p>Our summary should detail the context of our simulation and denote the result:</p>
+<p>The simulation results using 10,000 simulated data sets under the null hypothesis that the mean is 0, with a sample size of 5 and <span class="math inline">\(\sigma_{\text{change}}\)</span> assumed to be 75 mcg/dL, indicate that we will reject the null hypothesis 4.98% of the time. This is very close to our desired type I error rate of 5%.</p>
+</section>
+<section id="strategy-2-the-counter-set-up-but-lets-calculate-our-own-p-value-by-hand" class="level3">
+<h3 class="anchored" data-anchor-id="strategy-2-the-counter-set-up-but-lets-calculate-our-own-p-value-by-hand">Strategy 2: The “Counter” Set-up, but Let’s Calculate our Own p-value by “Hand”!</h3>
+<p>If we really wanted to, we could also calculate our t-test p-value by hand by comparing our calculated t-score (<span class="math inline">\(t=\frac{\bar{x}-\mu_0}{s/\sqrt{n}}\)</span>) to its corresponding distribution of <span class="math inline">\(t_{n-1}\)</span>. In R we can accomplish this with the <code>pt(q=tscore, df=n-1)</code> function (i.e., the CDF of the t-distribution at the given t-score).</p>
+<p>When calculating the p-value from the t-score for a <em>two-sided</em> hypothesis test, we need to take the p-value and multiply by 2. However, if we have a positive t-score, then our calculated area under the curve (AUC) (i.e., our CDF from <code>pt()</code>) will be &gt;0.5, and lead to a p-value &gt;1 (i.e., impossible!). To account for this in our code example below, we can take the absolute value of our t-score calculation and multiply it by -1 to ensure we are estimating the AUC <em>below</em> and there have an estimate of the probability &lt;0.5. Then we can multiply by 2 to account for the two sided nature of our test.</p>
+<p>As a brief check:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">5</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">75</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>tstat <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">abs</span>( (<span class="fu">mean</span>(y)<span class="sc">-</span><span class="dv">0</span>) <span class="sc">/</span> (<span class="fu">sd</span>(y)<span class="sc">/</span><span class="fu">sqrt</span>(n)) ) <span class="co"># t-statistic is (sample mean - null mean) / SE(sample mean)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>( tstat, <span class="at">df=</span>n<span class="dv">-1</span>) <span class="co"># our p-value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.673227</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare to the t-test</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(y, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.673227</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed and define our known/desired values</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For this for loop, we will "count" the number of times we have p&lt;0.05 for a t-test </span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>count<span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numTrials){</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,mean,sd) <span class="co"># simulate the data for the i-th simulation</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  tstat <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">abs</span>( (<span class="fu">mean</span>(y)<span class="sc">-</span><span class="dv">0</span>) <span class="sc">/</span> (<span class="fu">sd</span>(y)<span class="sc">/</span><span class="fu">sqrt</span>(n)) )</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  tpval <span class="ot">&lt;-</span> <span class="fu">pt</span>( tstat, <span class="at">df=</span>n<span class="dv">-1</span>) <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(tpval <span class="sc">&lt;</span> <span class="fl">0.05</span>){ count <span class="ot">&lt;-</span> count <span class="sc">+</span> <span class="dv">1</span> }<span class="cf">else</span>{ count <span class="ot">&lt;-</span> count }</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the type I error rate (i.e., the proportion of simulations where we reject H0 incorrectly since we are simulating the null)</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 498</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>rejectionRate <span class="ot">&lt;-</span> count<span class="sc">/</span>numTrials </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>rejectionRate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0498</code></pre>
+</div>
+</div>
+</section>
+<section id="strategy-3-track-each-simulation-p-value" class="level3">
+<h3 class="anchored" data-anchor-id="strategy-3-track-each-simulation-p-value">Strategy 3: Track Each Simulation p-value</h3>
+<p>We could also use the index, <code>i</code>, if we wanted to keep track of each p-value:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed and define our known/desired values</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For this for loop, we will save the p-value from each t.test result </span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>pvec <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, numTrials)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numTrials){</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,mean,sd) <span class="co"># simulate the data for the i-th simulation</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="co"># conduct a one-sample, two-sided t-test</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  pvec[i] <span class="ot">&lt;-</span> t<span class="sc">$</span>p.value</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co"># check pvec</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pvec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6732270 0.3553252 0.1288888 0.5903654 0.7167337 0.5639400</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the type I error rate (i.e., the proportion of simulations where we reject H0 incorrectly since we are simulating the null)</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>( pvec <span class="sc">&lt;</span> <span class="fl">0.05</span> ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0498</code></pre>
+</div>
+</div>
+<p>We see here we have the same estimated “power” (really the type I error rate since we’re simulating the assumed null mean value of 0).</p>
+<p>We can also visualize in this approach the distribution of our p-values under the null:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>( pvec, <span class="at">xlab=</span><span class="st">'p-value'</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can note it is pretty uniform under the null.</p>
+</section>
+</section>
+<section id="scenario-2-power-via-simulation-i.e.-the-alternative-hypothesis-cases" class="level2">
+<h2 class="anchored" data-anchor-id="scenario-2-power-via-simulation-i.e.-the-alternative-hypothesis-cases">Scenario 2: Power via Simulation (i.e., The Alternative Hypothesis Case(s))</h2>
+<p>To calculate the results under the alternative we can just modify the above code for either strategy to replace <code>mean &lt;- 0</code> with <code>mean &lt;- 100</code>.</p>
+<p>One interesting thing to note, is that the distribution of the p-values will no longer be uniform:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed and define our known/desired values</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># CHANGED TO 100 FROM 0</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For this for loop, we will save the p-value from each t.test result </span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>pvec <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, numTrials)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numTrials){</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,mean,sd) <span class="co"># simulate the data for the i-th simulation</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="co"># conduct a one-sample, two-sided t-test</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  pvec[i] <span class="ot">&lt;-</span> t<span class="sc">$</span>p.value</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>( pvec, <span class="at">xlab=</span><span class="st">'p-value'</span>, <span class="at">main=</span><span class="st">'H1: Mean of 100'</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We could also use our “counter” approach above:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed and define our known/desired values</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># CHANGED TO 100 FROM 0</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For this for loop, we will "count" the number of times we have p&lt;0.05 for a t-test </span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>count<span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numTrials){</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,mean,sd) <span class="co"># simulate the data for the i-th simulation</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="co"># conduct a one-sample, two-sided t-test</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(t<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>){ count <span class="ot">&lt;-</span> count <span class="sc">+</span> <span class="dv">1</span> }<span class="cf">else</span>{ count <span class="ot">&lt;-</span> count }</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the power (since we aren't simulating the null)</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6087</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>rejectionRate <span class="ot">&lt;-</span> count<span class="sc">/</span>numTrials </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>rejectionRate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6087</code></pre>
+</div>
+</div>
+</section>
+<section id="comparison-of-calculating-type-i-error-rates-and-power-from-simulation-studies" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-of-calculating-type-i-error-rates-and-power-from-simulation-studies">Comparison of Calculating Type I Error Rates and Power from Simulation Studies</h2>
+<p>You may be wondering, how could we use nearly identical code with the exception of changing <code>mean &lt;- 0</code> to <code>mean &lt;- 100</code> to estimate both the type I error rate and the statistical power? Let’s return to the four possible outcomes for our NHST (null hypothesis significance testing) case, but change the set-up a bit:</p>
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Reality (what we simulate)</th>
+<th style="text-align: left;">Sample Result (the observed data analysis)</th>
+<th style="text-align: left;">Connection to rejection rate (RR): <span class="math inline">\(p \le \alpha\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Null Scenario (<span class="math inline">\(H_0\)</span> true)</td>
+<td style="text-align: left;">Fail to reject <span class="math inline">\(H_0\)</span> (<em>correct</em>)</td>
+<td style="text-align: left;">1 - RR</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Null Scenario (<span class="math inline">\(H_0\)</span> true)</td>
+<td style="text-align: left;">Reject <span class="math inline">\(H_0\)</span> (<em>Type I Error</em>)</td>
+<td style="text-align: left;">RR</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Alternative Scenario (<span class="math inline">\(H_0\)</span> false)</td>
+<td style="text-align: left;">Fail to reject <span class="math inline">\(H_0\)</span> (<em>Type II Error</em>)</td>
+<td style="text-align: left;">1 - RR</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Alternative Scenario (<span class="math inline">\(H_0\)</span> false)</td>
+<td style="text-align: left;">Reject <span class="math inline">\(H_0\)</span> (<em>correct</em>)</td>
+<td style="text-align: left;">RR</td>
+</tr>
+</tbody>
+</table>
+<p>We can see from the table above, that the rejection rate from your simulation can represent our type I error <em>if you are simulating data assuming the null hypothesis is true</em> <strong>OR</strong> our power <em>if we are simulating data where the null hypothesis is false</em>.</p>
+<p>Strictly speaking, there is only one null value, but potentially infinite alternative hypotheses. For example, in a one-sample t-test we might assume <span class="math inline">\(H_0 \colon \; \mu_0 = 0\)</span>. In this case, anything we simulate where our population mean isn’t equal to 0 (i.e., <span class="math inline">\(\mu \neq 0\)</span>) is an alternative scenario!</p>
+<p>The power will increase as our difference gets farther from the <span class="math inline">\(H_0\)</span> (assuming we keep the same <span class="math inline">\(n\)</span>, effect size, and standard deviation):</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="do">### SIMULATE DIFFERENCE OF ONLY 25, INSTEAD OF DESIRED 100 FROM PROBLEM</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed and define our known/desired values</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">25</span> <span class="co"># CHANGED TO 10 FROM 0</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co"># For this for loop, we will "count" the number of times we have p&lt;0.05 for a t-test </span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>count<span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numTrials){</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,mean,sd) <span class="co"># simulate the data for the i-th simulation</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="co"># conduct a one-sample, two-sided t-test</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(t<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>){ count <span class="ot">&lt;-</span> count <span class="sc">+</span> <span class="dv">1</span> }<span class="cf">else</span>{ count <span class="ot">&lt;-</span> count }</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>rejectionRate25 <span class="ot">&lt;-</span> count<span class="sc">/</span>numTrials </span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>rejectionRate25</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.09</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="do">### SIMULATE DIFFERENCE OF 250, INSTEAD OF DESIRED 100 FROM PROBLEM</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed and define our known/desired values</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">250</span> <span class="co"># CHANGED TO 10 FROM 0</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co"># For this for loop, we will "count" the number of times we have p&lt;0.05 for a t-test </span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>count<span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numTrials){</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,mean,sd) <span class="co"># simulate the data for the i-th simulation</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="co"># conduct a one-sample, two-sided t-test</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(t<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>){ count <span class="ot">&lt;-</span> count <span class="sc">+</span> <span class="dv">1</span> }<span class="cf">else</span>{ count <span class="ot">&lt;-</span> count }</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>rejectionRate250 <span class="ot">&lt;-</span> count<span class="sc">/</span>numTrials </span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>rejectionRate250</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9999</code></pre>
+</div>
+</div>
+<p>In these cases, we that an expected response of only 25 mcg/dL has 9% power, 100 mcg/dL has 60.87% power, and 250 mcg/dL has 99.99% power.</p>
+</section>
+</section>
+<section id="writing-a-function-instead-of-a-for-loop" class="level1">
+<h1>Writing a Function Instead of a for Loop</h1>
+<p>We can also write a function instead of using a for loop. There are a host of ways we could accomplish this, so we’ll break down a few approaches.</p>
+<section id="the-hw-hint" class="level2">
+<h2 class="anchored" data-anchor-id="the-hw-hint">The HW Hint</h2>
+<p>The homework hint from which this recitation problem comes gives one approach which completely would avoid using loops or apply statements to generate the data. Its skeleton looks like:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="do">#### Using a function in R ####</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>compute_power <span class="ot">=</span> <span class="cf">function</span>(n, mean, sigma, numTrials, alpha){</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Generate a matrix with each column being 1 simulated data set</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  sample <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rdist</span>(n<span class="sc">*</span>numTrials, mean, sigma), <span class="at">ncol=</span>numTrials)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rdist should be replaced with desired distribution</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Now, write out elements of the test statistic, e.g.</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># xbar &lt;- apply(sample, 2, mean) #find mean of each column of matrix</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># variance &lt;- apply(sample, 2, var) #find variance each column of matrix</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># df.num = n-1 #e.g. degrees of freedom might be needed</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># .</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># combine elements of test statistic, e.g. numerator, denominator</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># .</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>  test.stat <span class="ot">=</span> <span class="co">#test statistic formula based on elements above</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Result of the function is the proportion of rejected hypothesis tests over all of the trials</span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span> (<span class="fu">mean</span>(<span class="fu">abs</span>(test.stat) <span class="sc">&gt;=</span> <span class="fu">qdist</span>((<span class="dv">1</span><span class="sc">-</span>(alpha<span class="sc">/</span><span class="dv">2</span>)), parameter of dist))) </span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># qdist should be replaced with the quantile function for the sampling dist. of the test statistic </span></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, call the function with the arguments it needs - e.g. n, mean,</span></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a><span class="co"># sd, number of trials, alpha</span></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a><span class="fu">compute_power</span>(n, mean, sd, trials, alpha)</span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a><span class="co">#power value will show here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Let’s see one way we could utilize this function shell:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>compute_rejectionrate_v1 <span class="ot">&lt;-</span> <span class="cf">function</span>(n, mean, sigma, numTrials, alpha){</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Calculate the rejection rate for simulated data from a normal distribution using a one-sample t-test</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># n: sample size for each simulated data set</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># mean: mean to simulate from (0 = null hyp/type I error, anything else = alternative hyp/power)</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># sigma: standard deviation to simulate from</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># numTrials: number of simulated trials with n individuals to complete</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha: the desired level of significance, type I error rate</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First, simulate n times the number of trials worth of participants</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  sim_dat <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n<span class="sc">*</span>numTrials, <span class="at">mean =</span> mean, <span class="at">sd =</span> sigma)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Second, place the simulated data into a matrix with a column for each participant</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span><span class="al">NOTE</span><span class="co">: to reproduce our for loop, we want the data to be entered by column (i.e., fill column 1 with the first "n" observations, then column 2 with the next "n", etc.)</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  sample <span class="ot">&lt;-</span> <span class="fu">matrix</span>( sim_dat, <span class="at">ncol=</span>numTrials )</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Third, calculate the test statistic "by hand"</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span><span class="al">NOTE</span><span class="co">: since each column in sample is a simulated dataset, we need to somehow calculate the mean and variance for each column (here we use apply)</span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  xbar <span class="ot">&lt;-</span> <span class="fu">apply</span>(sample, <span class="dv">2</span>, mean)</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>  variance <span class="ot">&lt;-</span> <span class="fu">apply</span>(sample, <span class="dv">2</span>, var)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>  df.num <span class="ot">=</span> n<span class="dv">-1</span></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>  test.stat <span class="ot">&lt;-</span> (xbar<span class="dv">-0</span>)<span class="sc">/</span><span class="fu">sqrt</span>(variance<span class="sc">/</span>n)</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Finally, calculate the number of our test statistic exceeds the critical value</span></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">mean</span>(<span class="fu">abs</span>(test.stat) <span class="sc">&gt;=</span> <span class="fu">qt</span>((<span class="dv">1</span><span class="sc">-</span>(alpha<span class="sc">/</span><span class="dv">2</span>)), df.num))) </span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare that our type I error matches before</span></span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a><span class="fu">compute_rejectionrate_v1</span>(<span class="at">n=</span><span class="dv">5</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sigma=</span><span class="dv">75</span>, <span class="at">numTrials=</span><span class="dv">10000</span>, <span class="at">alpha=</span><span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0498</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that power matches prior estimate</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">compute_rejectionrate_v1</span>(<span class="at">n=</span><span class="dv">5</span>, <span class="at">mean=</span><span class="dv">100</span>, <span class="at">sigma=</span><span class="dv">75</span>, <span class="at">numTrials=</span><span class="dv">10000</span>, <span class="at">alpha=</span><span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6087</code></pre>
+</div>
+</div>
+<p>This, in and of itself, is somewhat opaque since we define our arguments and then have to see what happens. We can check our code by running it outside the function:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co"># First, simulate n times the number of trials worth of participants</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>sim_dat <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n<span class="sc">*</span>numTrials, <span class="at">mean =</span> mean, <span class="at">sd =</span> sigma)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(sim_dat); <span class="fu">head</span>(sim_dat) <span class="co"># check length and first few values of data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 50000</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -89.356848  41.197541  -4.680386  19.908113 -17.594813 -74.795370</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Second, place the simulated data into a matrix with a column for each participant</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: to reproduce our for loop, we want the data to be entered by column (i.e., fill column 1 with the first "n" observations, then column 2 with the next "n", etc.)</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">matrix</span>( sim_dat, <span class="at">ncol=</span>numTrials )</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>sample[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>] <span class="co"># see first 10 columns, i.e., trials</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]       [,2]      [,3]       [,4]       [,5]         [,6]
+[1,] -89.356848  -74.79537 154.15116  -72.09673  55.399446  -0.09609167
+[2,]  41.197541 -104.84739  68.26773  136.62011   3.887565  21.15608141
+[3,]  -4.680386  -16.97116 -28.79828 -114.18995 -37.435229  18.99210972
+[4,]  19.908113   21.73614  93.07556   12.54086  61.471853 -29.74726039
+[5,] -17.594813   34.07838  14.80340  -98.47009 -40.738694  20.50154995
+           [,7]     [,8]      [,9]     [,10]
+[1,]  -30.15872 60.55207  84.51153  13.61654
+[2,]   20.21886 20.47390  16.76241 -89.90383
+[3,] -103.08042 91.25193 -54.58619  12.73391
+[4,]  -74.07684 12.92561 -20.76861 -20.98467
+[5,]  -25.85880 93.79314 -26.96530 -77.98343</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Third, calculate the test statistic "by hand"</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: since each column in sample is a simulated dataset, we need to somehow calculate the mean and variance for each column (here we use apply)</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fu">apply</span>(sample, <span class="dv">2</span>, mean)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(xbar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -10.105279 -28.159882  60.299915 -27.119160   8.516988   6.161278</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>variance <span class="ot">&lt;-</span> <span class="fu">apply</span>(sample, <span class="dv">2</span>, var)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(variance) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  2474.7792  3636.0611  4988.5517 10769.6817  2390.3356   480.9239</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>df.num <span class="ot">=</span> n<span class="dv">-1</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>test.stat <span class="ot">&lt;-</span> (xbar<span class="dv">-0</span>)<span class="sc">/</span><span class="fu">sqrt</span>(variance<span class="sc">/</span>n)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(test.stat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.4542188 -1.0442398  1.9090375 -0.5843322  0.3895306  0.6282285</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finally, calculate the number of our test statistic exceeds the critical value</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>((<span class="dv">1</span><span class="sc">-</span>(alpha<span class="sc">/</span><span class="dv">2</span>)), df.num)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.776445</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>( <span class="fu">abs</span>(test.stat) <span class="sc">&gt;=</span> <span class="fu">qt</span>((<span class="dv">1</span><span class="sc">-</span>(alpha<span class="sc">/</span><span class="dv">2</span>)), df.num) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0498</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="using-p-values-instead-of-test-statistics" class="level1">
+<h1>Using p-values Instead of test statistics</h1>
+<p>We could also apply the t-test to each simulated data set and save the p-value (instead of saving or calculating the t-statistic) and calculate the proportion less than alpha:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>compute_rejectionrate_v2 <span class="ot">&lt;-</span> <span class="cf">function</span>(n, mean, sigma, numTrials, alpha){</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Calculate the rejection rate for simulated data from a normal distribution using a one-sample t-test</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># n: sample size for each simulated data set</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co"># mean: mean to simulate from (0 = null hyp/type I error, anything else = alternative hyp/power)</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="co"># sigma: standard deviation to simulate from</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="co"># numTrials: number of simulated trials with n individuals to complete</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha: the desired level of significance, type I error rate</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First, simulate n times the number of trials worth of participants</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  sim_dat <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n<span class="sc">*</span>numTrials, <span class="at">mean =</span> mean, <span class="at">sd =</span> sigma)</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Second, place the simulated data into a matrix with a column for each participant</span></span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span><span class="al">NOTE</span><span class="co">: to reproduce our for loop, we want the data to be entered by column (i.e., fill column 1 with the first "n" observations, then column 2 with the next "n", etc.)</span></span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>  sample <span class="ot">&lt;-</span> <span class="fu">matrix</span>( sim_dat, <span class="at">ncol=</span>numTrials )</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Third, calculate the t-test p-value for each column</span></span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span><span class="al">NOTE</span><span class="co">: since each column in sample is a simulated dataset, we need to somehow calculate the mean and variance for each column (here we use sapply)</span></span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>  pvec <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>numTrials, <span class="cf">function</span>(x) <span class="fu">t.test</span>( sample[,x])<span class="sc">$</span>p.value ) </span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Finally, calculate the number of our p-values less than alpha</span></span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>( <span class="fu">mean</span>( pvec <span class="sc">&lt;=</span> alpha ) ) </span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare that our type I error matches before</span></span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a><span class="fu">compute_rejectionrate_v2</span>(<span class="at">n=</span><span class="dv">5</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sigma=</span><span class="dv">75</span>, <span class="at">numTrials=</span><span class="dv">10000</span>, <span class="at">alpha=</span><span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0498</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that power matches prior estimate</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">compute_rejectionrate_v2</span>(<span class="at">n=</span><span class="dv">5</span>, <span class="at">mean=</span><span class="dv">100</span>, <span class="at">sigma=</span><span class="dv">75</span>, <span class="at">numTrials=</span><span class="dv">10000</span>, <span class="at">alpha=</span><span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6087</code></pre>
+</div>
+</div>
+<p>Here we see that this approach matches our earlier approaches.</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb53" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Power and Type I Error Rate Calculations via Simulation Studies"</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
+<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a>This page is part of the University of Colorado-Anschutz Medical Campus' <span class="co">[</span><span class="ot">BIOS 6618 Recitation</span><span class="co">](/recitation/index.qmd)</span> collection. To view other questions, you can view the <span class="co">[</span><span class="ot">BIOS 6618 Recitation</span><span class="co">](/recitation/index.qmd)</span> collection page or use the search bar to look for keywords.</span>
+<span id="cb53-23"><a href="#cb53-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-24"><a href="#cb53-24" aria-hidden="true" tabindex="-1"></a>For this problem, we initially present power calculations via formulas/functions in R, before transitioning to how we could use simulation studies to estimate our statistical power. This is a great approach to starting to play around with simulation studies, where we have "known" solutions with existing functions or formulas, but want to see how close we can get via simulation. If we can structure these simulations correctly, we may be more confident for future problems where we don't have an answer to necessarily compare to.</span>
+<span id="cb53-25"><a href="#cb53-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-26"><a href="#cb53-26" aria-hidden="true" tabindex="-1"></a><span class="fu"># Power Calculations for Known and Unknown Standard Deviations</span></span>
+<span id="cb53-27"><a href="#cb53-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-28"><a href="#cb53-28" aria-hidden="true" tabindex="-1"></a>A clinical trial is planned to examine the bioavailability of twice per day beta carotene supplementation.  Measurements are to be taken at baseline and 12 weeks later.  Write out results by hand (i.e., show equations and work) for known s.d. and use functions in R for unknown s.d.  Turn in your hand calculations/derivations, R code, and relevant output.</span>
+<span id="cb53-29"><a href="#cb53-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-30"><a href="#cb53-30" aria-hidden="true" tabindex="-1"></a>For the null hypothesis that the mean change in beta carotene is 0 mcg/dL and the alternative hypothesis that the mean change in beta carotene is 100 mcg/dL, with $\sigma_{\text{change}} = 75$ mcg/dL, using $\alpha = 0.05$ (two-sided) and 90% power, how many subjects would be needed? Assume two cases: known s.d. and unknown s.d. </span>
+<span id="cb53-31"><a href="#cb53-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-32"><a href="#cb53-32" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb53-33"><a href="#cb53-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-34"><a href="#cb53-34" aria-hidden="true" tabindex="-1"></a>*For the known standard deviation:*</span>
+<span id="cb53-35"><a href="#cb53-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-36"><a href="#cb53-36" aria-hidden="true" tabindex="-1"></a>$\begin{aligned}</span>
+<span id="cb53-37"><a href="#cb53-37" aria-hidden="true" tabindex="-1"></a>n =&amp; \; \frac{\sigma^2 \left( Z_{1-\beta} + Z_{1-\frac{\alpha}{2}} \right)^2}{(\mu_0 - \mu_1)^2} <span class="sc">\\</span></span>
+<span id="cb53-38"><a href="#cb53-38" aria-hidden="true" tabindex="-1"></a>=&amp; \; \frac{75^2(Z_{1-0.1} + Z_{1-\frac{0.05}{2}})^2}{(0-100)^2} <span class="sc">\\</span></span>
+<span id="cb53-39"><a href="#cb53-39" aria-hidden="true" tabindex="-1"></a>=&amp; \; \frac{75^2 (1.282 + 1.96)^2}{(100)^2} <span class="sc">\\</span></span>
+<span id="cb53-40"><a href="#cb53-40" aria-hidden="true" tabindex="-1"></a>=&amp; \; 5.91219</span>
+<span id="cb53-41"><a href="#cb53-41" aria-hidden="true" tabindex="-1"></a>\end{aligned}$</span>
+<span id="cb53-42"><a href="#cb53-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-43"><a href="#cb53-43" aria-hidden="true" tabindex="-1"></a>A sample size of 6 would be needed to have 90% power with known SD.</span>
+<span id="cb53-44"><a href="#cb53-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-45"><a href="#cb53-45" aria-hidden="true" tabindex="-1"></a>Note that we can calculate $Z_{1-0.1}=Z_{0.9}$ using <span class="in">`qnorm(0.9)`</span> and $Z_{0.975}$ using <span class="in">`qnorm(0.975)`</span> (i.e., what is the value of $Z$, our standard normal statistic, so that 90% and 97.5%, respectively, of the area under our PDF lies below it).</span>
+<span id="cb53-46"><a href="#cb53-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-47"><a href="#cb53-47" aria-hidden="true" tabindex="-1"></a>*For the unknown standard deviation:*</span>
+<span id="cb53-48"><a href="#cb53-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-51"><a href="#cb53-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb53-52"><a href="#cb53-52" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">n=</span><span class="cn">NULL</span>, <span class="at">delta=</span><span class="dv">100</span>, <span class="at">sd=</span><span class="dv">75</span>, <span class="at">sig.level=</span><span class="fl">0.05</span>, <span class="at">power=</span><span class="fl">0.90</span>,</span>
+<span id="cb53-53"><a href="#cb53-53" aria-hidden="true" tabindex="-1"></a>             <span class="at">type=</span><span class="st">"one.sample"</span>, <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span>
+<span id="cb53-54"><a href="#cb53-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb53-55"><a href="#cb53-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-56"><a href="#cb53-56" aria-hidden="true" tabindex="-1"></a>A sample size of 9 would be needed to have 90\% power when the SD is unknown.</span>
+<span id="cb53-57"><a href="#cb53-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-58"><a href="#cb53-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-59"><a href="#cb53-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-60"><a href="#cb53-60" aria-hidden="true" tabindex="-1"></a><span class="fu"># Simulation Studies to Estimate Power</span></span>
+<span id="cb53-61"><a href="#cb53-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-62"><a href="#cb53-62" aria-hidden="true" tabindex="-1"></a>In some cases the test statistic you need to apply to a set of data is not of a standard form and so is not included as an option in R (or other sample size and power analysis software), or perhaps an exact formula does not exist for doing the power calculation. In these cases, simulation in R (or other software) can be used to estimate the power. </span>
+<span id="cb53-63"><a href="#cb53-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-64"><a href="#cb53-64" aria-hidden="true" tabindex="-1"></a>Assume normally distributed data for the change in beta carotene with $\sigma_{\text{change}} = 75$ mcg/dL, $n=5$, and significance level $\alpha= 0.05$, with a one-sample two-sided t-test.</span>
+<span id="cb53-65"><a href="#cb53-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-66"><a href="#cb53-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## Scenario 1: Type I Error via Simulation</span></span>
+<span id="cb53-67"><a href="#cb53-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-68"><a href="#cb53-68" aria-hidden="true" tabindex="-1"></a>**Scenario 1:** Use simulation to show that the one-sample t-test has the correct significance level, that is that under the null hypothesis the test rejects about 5% of the time.  Use 10,000 iterations and the seed value 2345. </span>
+<span id="cb53-69"><a href="#cb53-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-70"><a href="#cb53-70" aria-hidden="true" tabindex="-1"></a>Using a loop in R, carry out Scenario 1. Summarize your results in a brief paragraph. </span>
+<span id="cb53-71"><a href="#cb53-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-72"><a href="#cb53-72" aria-hidden="true" tabindex="-1"></a>We'll explore a few strategies below to structuring simulations.</span>
+<span id="cb53-73"><a href="#cb53-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-74"><a href="#cb53-74" aria-hidden="true" tabindex="-1"></a><span class="fu">### Strategy 1: The "Counter" Set-up</span></span>
+<span id="cb53-75"><a href="#cb53-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-76"><a href="#cb53-76" aria-hidden="true" tabindex="-1"></a>One strategy to estimate the power is to just keep track of how many times our p-value is less than $\alpha$ by increasing a "counter" by 1 for each case.</span>
+<span id="cb53-77"><a href="#cb53-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-78"><a href="#cb53-78" aria-hidden="true" tabindex="-1"></a>Here we will loop through 10,000 simulated trials where $n=5$, $\sigma_{\text{change}} = 75$ mcg/dL, $\alpha= 0.05$, and our difference is 0 with a one-sample, two-sided t-test. Since we are using a counter, the index <span class="in">`i`</span> does not appear anywhere within our loop:</span>
+<span id="cb53-79"><a href="#cb53-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-82"><a href="#cb53-82" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb53-83"><a href="#cb53-83" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed and define our known/desired values</span></span>
+<span id="cb53-84"><a href="#cb53-84" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb53-85"><a href="#cb53-85" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb53-86"><a href="#cb53-86" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb53-87"><a href="#cb53-87" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb53-88"><a href="#cb53-88" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb53-89"><a href="#cb53-89" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb53-90"><a href="#cb53-90" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-91"><a href="#cb53-91" aria-hidden="true" tabindex="-1"></a><span class="co"># For this for loop, we will "count" the number of times we have p&lt;0.05 for a t-test </span></span>
+<span id="cb53-92"><a href="#cb53-92" aria-hidden="true" tabindex="-1"></a>count<span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb53-93"><a href="#cb53-93" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numTrials){</span>
+<span id="cb53-94"><a href="#cb53-94" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,mean,sd) <span class="co"># simulate the data for the i-th simulation</span></span>
+<span id="cb53-95"><a href="#cb53-95" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="co"># conduct a one-sample, two-sided t-test</span></span>
+<span id="cb53-96"><a href="#cb53-96" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(t<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>){ count <span class="ot">&lt;-</span> count <span class="sc">+</span> <span class="dv">1</span> }<span class="cf">else</span>{ count <span class="ot">&lt;-</span> count }</span>
+<span id="cb53-97"><a href="#cb53-97" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-98"><a href="#cb53-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-99"><a href="#cb53-99" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the type I error rate (i.e., the proportion of simulations where we reject H0 incorrectly since we are simulating the null)</span></span>
+<span id="cb53-100"><a href="#cb53-100" aria-hidden="true" tabindex="-1"></a>count</span>
+<span id="cb53-101"><a href="#cb53-101" aria-hidden="true" tabindex="-1"></a>rejectionRate <span class="ot">&lt;-</span> count<span class="sc">/</span>numTrials </span>
+<span id="cb53-102"><a href="#cb53-102" aria-hidden="true" tabindex="-1"></a>rejectionRate</span>
+<span id="cb53-103"><a href="#cb53-103" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb53-104"><a href="#cb53-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-105"><a href="#cb53-105" aria-hidden="true" tabindex="-1"></a>Our summary should detail the context of our simulation and denote the result:</span>
+<span id="cb53-106"><a href="#cb53-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-107"><a href="#cb53-107" aria-hidden="true" tabindex="-1"></a>The simulation results using 10,000 simulated data sets under the null hypothesis that the mean is 0, with a sample size of 5 and $\sigma_{\text{change}}$ assumed to be 75 mcg/dL, indicate that we will reject the null hypothesis <span class="in">`r 100*rejectionRate`</span>% of the time. This is very close to our desired type I error rate of 5%.</span>
+<span id="cb53-108"><a href="#cb53-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-109"><a href="#cb53-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-110"><a href="#cb53-110" aria-hidden="true" tabindex="-1"></a><span class="fu">### Strategy 2: The "Counter" Set-up, but Let's Calculate our Own p-value by "Hand"!</span></span>
+<span id="cb53-111"><a href="#cb53-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-112"><a href="#cb53-112" aria-hidden="true" tabindex="-1"></a>If we really wanted to, we could also calculate our t-test p-value by hand by comparing our calculated t-score ($t=\frac{\bar{x}-\mu_0}{s/\sqrt{n}}$) to its corresponding distribution of $t_{n-1}$. In R we can accomplish this with the <span class="in">`pt(q=tscore, df=n-1)`</span> function (i.e., the CDF of the t-distribution at the given t-score).</span>
+<span id="cb53-113"><a href="#cb53-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-114"><a href="#cb53-114" aria-hidden="true" tabindex="-1"></a>When calculating the p-value from the t-score for a *two-sided* hypothesis test, we need to take the p-value and multiply by 2. However, if we have a positive t-score, then our calculated area under the curve (AUC) (i.e., our CDF from `pt()`) will be &gt;0.5, and lead to a p-value &gt;1 (i.e., impossible!). To account for this in our code example below, we can take the absolute value of our t-score calculation and multiply it by -1 to ensure we are estimating the AUC *below* and there have an estimate of the probability &lt;0.5. Then we can multiply by 2 to account for the two sided nature of our test.</span>
+<span id="cb53-115"><a href="#cb53-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-116"><a href="#cb53-116" aria-hidden="true" tabindex="-1"></a>As a brief check:</span>
+<span id="cb53-117"><a href="#cb53-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-120"><a href="#cb53-120" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb53-121"><a href="#cb53-121" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb53-122"><a href="#cb53-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-123"><a href="#cb53-123" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">5</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">75</span>)</span>
+<span id="cb53-124"><a href="#cb53-124" aria-hidden="true" tabindex="-1"></a>tstat <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">abs</span>( (<span class="fu">mean</span>(y)<span class="sc">-</span><span class="dv">0</span>) <span class="sc">/</span> (<span class="fu">sd</span>(y)<span class="sc">/</span><span class="fu">sqrt</span>(n)) ) <span class="co"># t-statistic is (sample mean - null mean) / SE(sample mean)</span></span>
+<span id="cb53-125"><a href="#cb53-125" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>( tstat, <span class="at">df=</span>n<span class="dv">-1</span>) <span class="co"># our p-value</span></span>
+<span id="cb53-126"><a href="#cb53-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-127"><a href="#cb53-127" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare to the t-test</span></span>
+<span id="cb53-128"><a href="#cb53-128" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(y, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)<span class="sc">$</span>p.value</span>
+<span id="cb53-129"><a href="#cb53-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-130"><a href="#cb53-130" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb53-131"><a href="#cb53-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-134"><a href="#cb53-134" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb53-135"><a href="#cb53-135" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed and define our known/desired values</span></span>
+<span id="cb53-136"><a href="#cb53-136" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb53-137"><a href="#cb53-137" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb53-138"><a href="#cb53-138" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb53-139"><a href="#cb53-139" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb53-140"><a href="#cb53-140" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb53-141"><a href="#cb53-141" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb53-142"><a href="#cb53-142" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-143"><a href="#cb53-143" aria-hidden="true" tabindex="-1"></a><span class="co"># For this for loop, we will "count" the number of times we have p&lt;0.05 for a t-test </span></span>
+<span id="cb53-144"><a href="#cb53-144" aria-hidden="true" tabindex="-1"></a>count<span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb53-145"><a href="#cb53-145" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numTrials){</span>
+<span id="cb53-146"><a href="#cb53-146" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,mean,sd) <span class="co"># simulate the data for the i-th simulation</span></span>
+<span id="cb53-147"><a href="#cb53-147" aria-hidden="true" tabindex="-1"></a>  tstat <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">abs</span>( (<span class="fu">mean</span>(y)<span class="sc">-</span><span class="dv">0</span>) <span class="sc">/</span> (<span class="fu">sd</span>(y)<span class="sc">/</span><span class="fu">sqrt</span>(n)) )</span>
+<span id="cb53-148"><a href="#cb53-148" aria-hidden="true" tabindex="-1"></a>  tpval <span class="ot">&lt;-</span> <span class="fu">pt</span>( tstat, <span class="at">df=</span>n<span class="dv">-1</span>) <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb53-149"><a href="#cb53-149" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(tpval <span class="sc">&lt;</span> <span class="fl">0.05</span>){ count <span class="ot">&lt;-</span> count <span class="sc">+</span> <span class="dv">1</span> }<span class="cf">else</span>{ count <span class="ot">&lt;-</span> count }</span>
+<span id="cb53-150"><a href="#cb53-150" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-151"><a href="#cb53-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-152"><a href="#cb53-152" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the type I error rate (i.e., the proportion of simulations where we reject H0 incorrectly since we are simulating the null)</span></span>
+<span id="cb53-153"><a href="#cb53-153" aria-hidden="true" tabindex="-1"></a>count</span>
+<span id="cb53-154"><a href="#cb53-154" aria-hidden="true" tabindex="-1"></a>rejectionRate <span class="ot">&lt;-</span> count<span class="sc">/</span>numTrials </span>
+<span id="cb53-155"><a href="#cb53-155" aria-hidden="true" tabindex="-1"></a>rejectionRate</span>
+<span id="cb53-156"><a href="#cb53-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb53-157"><a href="#cb53-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-158"><a href="#cb53-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-159"><a href="#cb53-159" aria-hidden="true" tabindex="-1"></a><span class="fu">### Strategy 3: Track Each Simulation p-value</span></span>
+<span id="cb53-160"><a href="#cb53-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-161"><a href="#cb53-161" aria-hidden="true" tabindex="-1"></a>We could also use the index, <span class="in">`i`</span>, if we wanted to keep track of each p-value:</span>
+<span id="cb53-162"><a href="#cb53-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-165"><a href="#cb53-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb53-166"><a href="#cb53-166" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed and define our known/desired values</span></span>
+<span id="cb53-167"><a href="#cb53-167" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb53-168"><a href="#cb53-168" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb53-169"><a href="#cb53-169" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb53-170"><a href="#cb53-170" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb53-171"><a href="#cb53-171" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb53-172"><a href="#cb53-172" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb53-173"><a href="#cb53-173" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-174"><a href="#cb53-174" aria-hidden="true" tabindex="-1"></a><span class="co"># For this for loop, we will save the p-value from each t.test result </span></span>
+<span id="cb53-175"><a href="#cb53-175" aria-hidden="true" tabindex="-1"></a>pvec <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, numTrials)</span>
+<span id="cb53-176"><a href="#cb53-176" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numTrials){</span>
+<span id="cb53-177"><a href="#cb53-177" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,mean,sd) <span class="co"># simulate the data for the i-th simulation</span></span>
+<span id="cb53-178"><a href="#cb53-178" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="co"># conduct a one-sample, two-sided t-test</span></span>
+<span id="cb53-179"><a href="#cb53-179" aria-hidden="true" tabindex="-1"></a>  pvec[i] <span class="ot">&lt;-</span> t<span class="sc">$</span>p.value</span>
+<span id="cb53-180"><a href="#cb53-180" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-181"><a href="#cb53-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-182"><a href="#cb53-182" aria-hidden="true" tabindex="-1"></a><span class="co"># check pvec</span></span>
+<span id="cb53-183"><a href="#cb53-183" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pvec)</span>
+<span id="cb53-184"><a href="#cb53-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-185"><a href="#cb53-185" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the type I error rate (i.e., the proportion of simulations where we reject H0 incorrectly since we are simulating the null)</span></span>
+<span id="cb53-186"><a href="#cb53-186" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>( pvec <span class="sc">&lt;</span> <span class="fl">0.05</span> ) </span>
+<span id="cb53-187"><a href="#cb53-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb53-188"><a href="#cb53-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-189"><a href="#cb53-189" aria-hidden="true" tabindex="-1"></a>We see here we have the same estimated "power" (really the type I error rate since we're simulating the assumed null mean value of 0).</span>
+<span id="cb53-190"><a href="#cb53-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-191"><a href="#cb53-191" aria-hidden="true" tabindex="-1"></a>We can also visualize in this approach the distribution of our p-values under the null:</span>
+<span id="cb53-192"><a href="#cb53-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-195"><a href="#cb53-195" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb53-196"><a href="#cb53-196" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>( pvec, <span class="at">xlab=</span><span class="st">'p-value'</span> )</span>
+<span id="cb53-197"><a href="#cb53-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb53-198"><a href="#cb53-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-199"><a href="#cb53-199" aria-hidden="true" tabindex="-1"></a>We can note it is pretty uniform under the null.</span>
+<span id="cb53-200"><a href="#cb53-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-201"><a href="#cb53-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-202"><a href="#cb53-202" aria-hidden="true" tabindex="-1"></a><span class="fu">## Scenario 2: Power via Simulation (i.e., The Alternative Hypothesis Case(s))</span></span>
+<span id="cb53-203"><a href="#cb53-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-204"><a href="#cb53-204" aria-hidden="true" tabindex="-1"></a>To calculate the results under the alternative we can just modify the above code for either strategy to replace <span class="in">`mean &lt;- 0`</span> with <span class="in">`mean &lt;- 100`</span>.</span>
+<span id="cb53-205"><a href="#cb53-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-206"><a href="#cb53-206" aria-hidden="true" tabindex="-1"></a>One interesting thing to note, is that the distribution of the p-values will no longer be uniform:</span>
+<span id="cb53-207"><a href="#cb53-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-210"><a href="#cb53-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb53-211"><a href="#cb53-211" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed and define our known/desired values</span></span>
+<span id="cb53-212"><a href="#cb53-212" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb53-213"><a href="#cb53-213" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb53-214"><a href="#cb53-214" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># CHANGED TO 100 FROM 0</span></span>
+<span id="cb53-215"><a href="#cb53-215" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb53-216"><a href="#cb53-216" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb53-217"><a href="#cb53-217" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb53-218"><a href="#cb53-218" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-219"><a href="#cb53-219" aria-hidden="true" tabindex="-1"></a><span class="co"># For this for loop, we will save the p-value from each t.test result </span></span>
+<span id="cb53-220"><a href="#cb53-220" aria-hidden="true" tabindex="-1"></a>pvec <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, numTrials)</span>
+<span id="cb53-221"><a href="#cb53-221" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numTrials){</span>
+<span id="cb53-222"><a href="#cb53-222" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,mean,sd) <span class="co"># simulate the data for the i-th simulation</span></span>
+<span id="cb53-223"><a href="#cb53-223" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="co"># conduct a one-sample, two-sided t-test</span></span>
+<span id="cb53-224"><a href="#cb53-224" aria-hidden="true" tabindex="-1"></a>  pvec[i] <span class="ot">&lt;-</span> t<span class="sc">$</span>p.value</span>
+<span id="cb53-225"><a href="#cb53-225" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-226"><a href="#cb53-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-227"><a href="#cb53-227" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>( pvec, <span class="at">xlab=</span><span class="st">'p-value'</span>, <span class="at">main=</span><span class="st">'H1: Mean of 100'</span> )</span>
+<span id="cb53-228"><a href="#cb53-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb53-229"><a href="#cb53-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-230"><a href="#cb53-230" aria-hidden="true" tabindex="-1"></a>We could also use our "counter" approach above:</span>
+<span id="cb53-231"><a href="#cb53-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-234"><a href="#cb53-234" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb53-235"><a href="#cb53-235" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed and define our known/desired values</span></span>
+<span id="cb53-236"><a href="#cb53-236" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb53-237"><a href="#cb53-237" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb53-238"><a href="#cb53-238" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># CHANGED TO 100 FROM 0</span></span>
+<span id="cb53-239"><a href="#cb53-239" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb53-240"><a href="#cb53-240" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb53-241"><a href="#cb53-241" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb53-242"><a href="#cb53-242" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-243"><a href="#cb53-243" aria-hidden="true" tabindex="-1"></a><span class="co"># For this for loop, we will "count" the number of times we have p&lt;0.05 for a t-test </span></span>
+<span id="cb53-244"><a href="#cb53-244" aria-hidden="true" tabindex="-1"></a>count<span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb53-245"><a href="#cb53-245" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numTrials){</span>
+<span id="cb53-246"><a href="#cb53-246" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,mean,sd) <span class="co"># simulate the data for the i-th simulation</span></span>
+<span id="cb53-247"><a href="#cb53-247" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="co"># conduct a one-sample, two-sided t-test</span></span>
+<span id="cb53-248"><a href="#cb53-248" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(t<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>){ count <span class="ot">&lt;-</span> count <span class="sc">+</span> <span class="dv">1</span> }<span class="cf">else</span>{ count <span class="ot">&lt;-</span> count }</span>
+<span id="cb53-249"><a href="#cb53-249" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-250"><a href="#cb53-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-251"><a href="#cb53-251" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the power (since we aren't simulating the null)</span></span>
+<span id="cb53-252"><a href="#cb53-252" aria-hidden="true" tabindex="-1"></a>count</span>
+<span id="cb53-253"><a href="#cb53-253" aria-hidden="true" tabindex="-1"></a>rejectionRate <span class="ot">&lt;-</span> count<span class="sc">/</span>numTrials </span>
+<span id="cb53-254"><a href="#cb53-254" aria-hidden="true" tabindex="-1"></a>rejectionRate</span>
+<span id="cb53-255"><a href="#cb53-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb53-256"><a href="#cb53-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-257"><a href="#cb53-257" aria-hidden="true" tabindex="-1"></a><span class="fu">## Comparison of Calculating Type I Error Rates and Power from Simulation Studies</span></span>
+<span id="cb53-258"><a href="#cb53-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-259"><a href="#cb53-259" aria-hidden="true" tabindex="-1"></a>You may be wondering, how could we use nearly identical code with the exception of changing <span class="in">`mean &lt;- 0`</span> to <span class="in">`mean &lt;- 100`</span> to estimate both the type I error rate and the statistical power? Let's return to the four possible outcomes for our NHST (null hypothesis significance testing) case, but change the set-up a bit:</span>
+<span id="cb53-260"><a href="#cb53-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-261"><a href="#cb53-261" aria-hidden="true" tabindex="-1"></a>| Reality (what we simulate) | Sample Result (the observed data analysis) | Connection to rejection rate (RR): $p \le \alpha$ |</span>
+<span id="cb53-262"><a href="#cb53-262" aria-hidden="true" tabindex="-1"></a>|:--------|:--------|:--------|</span>
+<span id="cb53-263"><a href="#cb53-263" aria-hidden="true" tabindex="-1"></a>| Null Scenario ($H_0$ true) | Fail to reject $H_0$ (*correct*) | 1 - RR |</span>
+<span id="cb53-264"><a href="#cb53-264" aria-hidden="true" tabindex="-1"></a>| Null Scenario ($H_0$ true) | Reject $H_0$ (*Type I Error*) | RR       |</span>
+<span id="cb53-265"><a href="#cb53-265" aria-hidden="true" tabindex="-1"></a>| Alternative Scenario ($H_0$ false) | Fail to reject $H_0$ (*Type II Error*) | 1 - RR       |</span>
+<span id="cb53-266"><a href="#cb53-266" aria-hidden="true" tabindex="-1"></a>| Alternative Scenario ($H_0$ false) | Reject $H_0$ (*correct*) | RR       |</span>
+<span id="cb53-267"><a href="#cb53-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-268"><a href="#cb53-268" aria-hidden="true" tabindex="-1"></a>We can see from the table above, that the rejection rate from your simulation can represent our type I error *if you are simulating data assuming the null hypothesis is true* **OR** our power *if we are simulating data where the null hypothesis is false*.</span>
+<span id="cb53-269"><a href="#cb53-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-270"><a href="#cb53-270" aria-hidden="true" tabindex="-1"></a>Strictly speaking, there is only one null value, but potentially infinite alternative hypotheses. For example, in a one-sample t-test we might assume $H_0 \colon \; \mu_0 = 0$. In this case, anything we simulate where our population mean isn't equal to 0 (i.e., $\mu \neq 0$) is an alternative scenario! </span>
+<span id="cb53-271"><a href="#cb53-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-272"><a href="#cb53-272" aria-hidden="true" tabindex="-1"></a>The power will increase as our difference gets farther from the $H_0$ (assuming we keep the same $n$, effect size, and standard deviation):</span>
+<span id="cb53-273"><a href="#cb53-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-276"><a href="#cb53-276" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb53-277"><a href="#cb53-277" aria-hidden="true" tabindex="-1"></a><span class="do">### SIMULATE DIFFERENCE OF ONLY 25, INSTEAD OF DESIRED 100 FROM PROBLEM</span></span>
+<span id="cb53-278"><a href="#cb53-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-279"><a href="#cb53-279" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed and define our known/desired values</span></span>
+<span id="cb53-280"><a href="#cb53-280" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb53-281"><a href="#cb53-281" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb53-282"><a href="#cb53-282" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">25</span> <span class="co"># CHANGED TO 10 FROM 0</span></span>
+<span id="cb53-283"><a href="#cb53-283" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb53-284"><a href="#cb53-284" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb53-285"><a href="#cb53-285" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb53-286"><a href="#cb53-286" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-287"><a href="#cb53-287" aria-hidden="true" tabindex="-1"></a><span class="co"># For this for loop, we will "count" the number of times we have p&lt;0.05 for a t-test </span></span>
+<span id="cb53-288"><a href="#cb53-288" aria-hidden="true" tabindex="-1"></a>count<span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb53-289"><a href="#cb53-289" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numTrials){</span>
+<span id="cb53-290"><a href="#cb53-290" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,mean,sd) <span class="co"># simulate the data for the i-th simulation</span></span>
+<span id="cb53-291"><a href="#cb53-291" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="co"># conduct a one-sample, two-sided t-test</span></span>
+<span id="cb53-292"><a href="#cb53-292" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(t<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>){ count <span class="ot">&lt;-</span> count <span class="sc">+</span> <span class="dv">1</span> }<span class="cf">else</span>{ count <span class="ot">&lt;-</span> count }</span>
+<span id="cb53-293"><a href="#cb53-293" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-294"><a href="#cb53-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-295"><a href="#cb53-295" aria-hidden="true" tabindex="-1"></a>rejectionRate25 <span class="ot">&lt;-</span> count<span class="sc">/</span>numTrials </span>
+<span id="cb53-296"><a href="#cb53-296" aria-hidden="true" tabindex="-1"></a>rejectionRate25</span>
+<span id="cb53-297"><a href="#cb53-297" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb53-298"><a href="#cb53-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-301"><a href="#cb53-301" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb53-302"><a href="#cb53-302" aria-hidden="true" tabindex="-1"></a><span class="do">### SIMULATE DIFFERENCE OF 250, INSTEAD OF DESIRED 100 FROM PROBLEM</span></span>
+<span id="cb53-303"><a href="#cb53-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-304"><a href="#cb53-304" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed and define our known/desired values</span></span>
+<span id="cb53-305"><a href="#cb53-305" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb53-306"><a href="#cb53-306" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb53-307"><a href="#cb53-307" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">250</span> <span class="co"># CHANGED TO 10 FROM 0</span></span>
+<span id="cb53-308"><a href="#cb53-308" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb53-309"><a href="#cb53-309" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb53-310"><a href="#cb53-310" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb53-311"><a href="#cb53-311" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-312"><a href="#cb53-312" aria-hidden="true" tabindex="-1"></a><span class="co"># For this for loop, we will "count" the number of times we have p&lt;0.05 for a t-test </span></span>
+<span id="cb53-313"><a href="#cb53-313" aria-hidden="true" tabindex="-1"></a>count<span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb53-314"><a href="#cb53-314" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numTrials){</span>
+<span id="cb53-315"><a href="#cb53-315" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,mean,sd) <span class="co"># simulate the data for the i-th simulation</span></span>
+<span id="cb53-316"><a href="#cb53-316" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="co"># conduct a one-sample, two-sided t-test</span></span>
+<span id="cb53-317"><a href="#cb53-317" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(t<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>){ count <span class="ot">&lt;-</span> count <span class="sc">+</span> <span class="dv">1</span> }<span class="cf">else</span>{ count <span class="ot">&lt;-</span> count }</span>
+<span id="cb53-318"><a href="#cb53-318" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-319"><a href="#cb53-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-320"><a href="#cb53-320" aria-hidden="true" tabindex="-1"></a>rejectionRate250 <span class="ot">&lt;-</span> count<span class="sc">/</span>numTrials </span>
+<span id="cb53-321"><a href="#cb53-321" aria-hidden="true" tabindex="-1"></a>rejectionRate250</span>
+<span id="cb53-322"><a href="#cb53-322" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb53-323"><a href="#cb53-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-324"><a href="#cb53-324" aria-hidden="true" tabindex="-1"></a>In these cases, we that an expected response of only 25 mcg/dL has <span class="in">`r 100 * rejectionRate25`</span>% power, 100 mcg/dL has <span class="in">`r 100 * rejectionRate`</span>% power, and 250 mcg/dL has <span class="in">`r 100 * rejectionRate250`</span>% power.</span>
+<span id="cb53-325"><a href="#cb53-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-326"><a href="#cb53-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-327"><a href="#cb53-327" aria-hidden="true" tabindex="-1"></a><span class="fu"># Writing a Function Instead of a for Loop</span></span>
+<span id="cb53-328"><a href="#cb53-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-329"><a href="#cb53-329" aria-hidden="true" tabindex="-1"></a>We can also write a function instead of using a for loop. There are a host of ways we could accomplish this, so we'll break down a few approaches.</span>
+<span id="cb53-330"><a href="#cb53-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-331"><a href="#cb53-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-332"><a href="#cb53-332" aria-hidden="true" tabindex="-1"></a><span class="fu">## The HW Hint</span></span>
+<span id="cb53-333"><a href="#cb53-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-334"><a href="#cb53-334" aria-hidden="true" tabindex="-1"></a>The homework hint from which this recitation problem comes gives one approach which completely would avoid using loops or apply statements to generate the data. Its skeleton looks like:</span>
+<span id="cb53-335"><a href="#cb53-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-336"><a href="#cb53-336" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=F}</span></span>
+<span id="cb53-337"><a href="#cb53-337" aria-hidden="true" tabindex="-1"></a><span class="do">#### Using a function in R ####</span></span>
+<span id="cb53-338"><a href="#cb53-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-339"><a href="#cb53-339" aria-hidden="true" tabindex="-1"></a>compute_power <span class="ot">=</span> <span class="cf">function</span>(n, mean, sigma, numTrials, alpha){</span>
+<span id="cb53-340"><a href="#cb53-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-341"><a href="#cb53-341" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Generate a matrix with each column being 1 simulated data set</span></span>
+<span id="cb53-342"><a href="#cb53-342" aria-hidden="true" tabindex="-1"></a>  sample <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rdist</span>(n<span class="sc">*</span>numTrials, mean, sigma), <span class="at">ncol=</span>numTrials)</span>
+<span id="cb53-343"><a href="#cb53-343" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rdist should be replaced with desired distribution</span></span>
+<span id="cb53-344"><a href="#cb53-344" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-345"><a href="#cb53-345" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Now, write out elements of the test statistic, e.g.</span></span>
+<span id="cb53-346"><a href="#cb53-346" aria-hidden="true" tabindex="-1"></a>  <span class="co"># xbar &lt;- apply(sample, 2, mean) #find mean of each column of matrix</span></span>
+<span id="cb53-347"><a href="#cb53-347" aria-hidden="true" tabindex="-1"></a>  <span class="co"># variance &lt;- apply(sample, 2, var) #find variance each column of matrix</span></span>
+<span id="cb53-348"><a href="#cb53-348" aria-hidden="true" tabindex="-1"></a>  <span class="co"># df.num = n-1 #e.g. degrees of freedom might be needed</span></span>
+<span id="cb53-349"><a href="#cb53-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-350"><a href="#cb53-350" aria-hidden="true" tabindex="-1"></a>  <span class="co"># .</span></span>
+<span id="cb53-351"><a href="#cb53-351" aria-hidden="true" tabindex="-1"></a>  <span class="co"># combine elements of test statistic, e.g. numerator, denominator</span></span>
+<span id="cb53-352"><a href="#cb53-352" aria-hidden="true" tabindex="-1"></a>  <span class="co"># .</span></span>
+<span id="cb53-353"><a href="#cb53-353" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-354"><a href="#cb53-354" aria-hidden="true" tabindex="-1"></a>  test.stat <span class="ot">=</span> <span class="co">#test statistic formula based on elements above</span></span>
+<span id="cb53-355"><a href="#cb53-355" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-356"><a href="#cb53-356" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Result of the function is the proportion of rejected hypothesis tests over all of the trials</span></span>
+<span id="cb53-357"><a href="#cb53-357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span> (<span class="fu">mean</span>(<span class="fu">abs</span>(test.stat) <span class="sc">&gt;=</span> <span class="fu">qdist</span>((<span class="dv">1</span><span class="sc">-</span>(alpha<span class="sc">/</span><span class="dv">2</span>)), parameter of dist))) </span>
+<span id="cb53-358"><a href="#cb53-358" aria-hidden="true" tabindex="-1"></a>  <span class="co"># qdist should be replaced with the quantile function for the sampling dist. of the test statistic </span></span>
+<span id="cb53-359"><a href="#cb53-359" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-360"><a href="#cb53-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-361"><a href="#cb53-361" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, call the function with the arguments it needs - e.g. n, mean,</span></span>
+<span id="cb53-362"><a href="#cb53-362" aria-hidden="true" tabindex="-1"></a><span class="co"># sd, number of trials, alpha</span></span>
+<span id="cb53-363"><a href="#cb53-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-364"><a href="#cb53-364" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb53-365"><a href="#cb53-365" aria-hidden="true" tabindex="-1"></a><span class="fu">compute_power</span>(n, mean, sd, trials, alpha)</span>
+<span id="cb53-366"><a href="#cb53-366" aria-hidden="true" tabindex="-1"></a><span class="co">#power value will show here</span></span>
+<span id="cb53-367"><a href="#cb53-367" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb53-368"><a href="#cb53-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-369"><a href="#cb53-369" aria-hidden="true" tabindex="-1"></a>Let's see one way we could utilize this function shell:</span>
+<span id="cb53-370"><a href="#cb53-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-373"><a href="#cb53-373" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb53-374"><a href="#cb53-374" aria-hidden="true" tabindex="-1"></a>compute_rejectionrate_v1 <span class="ot">&lt;-</span> <span class="cf">function</span>(n, mean, sigma, numTrials, alpha){</span>
+<span id="cb53-375"><a href="#cb53-375" aria-hidden="true" tabindex="-1"></a><span class="do">### Calculate the rejection rate for simulated data from a normal distribution using a one-sample t-test</span></span>
+<span id="cb53-376"><a href="#cb53-376" aria-hidden="true" tabindex="-1"></a><span class="co"># n: sample size for each simulated data set</span></span>
+<span id="cb53-377"><a href="#cb53-377" aria-hidden="true" tabindex="-1"></a><span class="co"># mean: mean to simulate from (0 = null hyp/type I error, anything else = alternative hyp/power)</span></span>
+<span id="cb53-378"><a href="#cb53-378" aria-hidden="true" tabindex="-1"></a><span class="co"># sigma: standard deviation to simulate from</span></span>
+<span id="cb53-379"><a href="#cb53-379" aria-hidden="true" tabindex="-1"></a><span class="co"># numTrials: number of simulated trials with n individuals to complete</span></span>
+<span id="cb53-380"><a href="#cb53-380" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha: the desired level of significance, type I error rate</span></span>
+<span id="cb53-381"><a href="#cb53-381" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-382"><a href="#cb53-382" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First, simulate n times the number of trials worth of participants</span></span>
+<span id="cb53-383"><a href="#cb53-383" aria-hidden="true" tabindex="-1"></a>  sim_dat <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n<span class="sc">*</span>numTrials, <span class="at">mean =</span> mean, <span class="at">sd =</span> sigma)</span>
+<span id="cb53-384"><a href="#cb53-384" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-385"><a href="#cb53-385" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Second, place the simulated data into a matrix with a column for each participant</span></span>
+<span id="cb53-386"><a href="#cb53-386" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span><span class="al">NOTE</span><span class="co">: to reproduce our for loop, we want the data to be entered by column (i.e., fill column 1 with the first "n" observations, then column 2 with the next "n", etc.)</span></span>
+<span id="cb53-387"><a href="#cb53-387" aria-hidden="true" tabindex="-1"></a>  sample <span class="ot">&lt;-</span> <span class="fu">matrix</span>( sim_dat, <span class="at">ncol=</span>numTrials )</span>
+<span id="cb53-388"><a href="#cb53-388" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-389"><a href="#cb53-389" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Third, calculate the test statistic "by hand"</span></span>
+<span id="cb53-390"><a href="#cb53-390" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span><span class="al">NOTE</span><span class="co">: since each column in sample is a simulated dataset, we need to somehow calculate the mean and variance for each column (here we use apply)</span></span>
+<span id="cb53-391"><a href="#cb53-391" aria-hidden="true" tabindex="-1"></a>  xbar <span class="ot">&lt;-</span> <span class="fu">apply</span>(sample, <span class="dv">2</span>, mean)</span>
+<span id="cb53-392"><a href="#cb53-392" aria-hidden="true" tabindex="-1"></a>  variance <span class="ot">&lt;-</span> <span class="fu">apply</span>(sample, <span class="dv">2</span>, var)</span>
+<span id="cb53-393"><a href="#cb53-393" aria-hidden="true" tabindex="-1"></a>  df.num <span class="ot">=</span> n<span class="dv">-1</span></span>
+<span id="cb53-394"><a href="#cb53-394" aria-hidden="true" tabindex="-1"></a>  test.stat <span class="ot">&lt;-</span> (xbar<span class="dv">-0</span>)<span class="sc">/</span><span class="fu">sqrt</span>(variance<span class="sc">/</span>n)</span>
+<span id="cb53-395"><a href="#cb53-395" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-396"><a href="#cb53-396" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Finally, calculate the number of our test statistic exceeds the critical value</span></span>
+<span id="cb53-397"><a href="#cb53-397" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">mean</span>(<span class="fu">abs</span>(test.stat) <span class="sc">&gt;=</span> <span class="fu">qt</span>((<span class="dv">1</span><span class="sc">-</span>(alpha<span class="sc">/</span><span class="dv">2</span>)), df.num))) </span>
+<span id="cb53-398"><a href="#cb53-398" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-399"><a href="#cb53-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-400"><a href="#cb53-400" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare that our type I error matches before</span></span>
+<span id="cb53-401"><a href="#cb53-401" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb53-402"><a href="#cb53-402" aria-hidden="true" tabindex="-1"></a><span class="fu">compute_rejectionrate_v1</span>(<span class="at">n=</span><span class="dv">5</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sigma=</span><span class="dv">75</span>, <span class="at">numTrials=</span><span class="dv">10000</span>, <span class="at">alpha=</span><span class="fl">0.05</span>)</span>
+<span id="cb53-403"><a href="#cb53-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-404"><a href="#cb53-404" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that power matches prior estimate</span></span>
+<span id="cb53-405"><a href="#cb53-405" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb53-406"><a href="#cb53-406" aria-hidden="true" tabindex="-1"></a><span class="fu">compute_rejectionrate_v1</span>(<span class="at">n=</span><span class="dv">5</span>, <span class="at">mean=</span><span class="dv">100</span>, <span class="at">sigma=</span><span class="dv">75</span>, <span class="at">numTrials=</span><span class="dv">10000</span>, <span class="at">alpha=</span><span class="fl">0.05</span>)</span>
+<span id="cb53-407"><a href="#cb53-407" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb53-408"><a href="#cb53-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-409"><a href="#cb53-409" aria-hidden="true" tabindex="-1"></a>This, in and of itself, is somewhat opaque since we define our arguments and then have to see what happens. We can check our code by running it outside the function:</span>
+<span id="cb53-410"><a href="#cb53-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-413"><a href="#cb53-413" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb53-414"><a href="#cb53-414" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb53-415"><a href="#cb53-415" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb53-416"><a href="#cb53-416" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb53-417"><a href="#cb53-417" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb53-418"><a href="#cb53-418" aria-hidden="true" tabindex="-1"></a>numTrials <span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb53-419"><a href="#cb53-419" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> </span>
+<span id="cb53-420"><a href="#cb53-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-421"><a href="#cb53-421" aria-hidden="true" tabindex="-1"></a><span class="co"># First, simulate n times the number of trials worth of participants</span></span>
+<span id="cb53-422"><a href="#cb53-422" aria-hidden="true" tabindex="-1"></a>sim_dat <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n<span class="sc">*</span>numTrials, <span class="at">mean =</span> mean, <span class="at">sd =</span> sigma)</span>
+<span id="cb53-423"><a href="#cb53-423" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(sim_dat); <span class="fu">head</span>(sim_dat) <span class="co"># check length and first few values of data</span></span>
+<span id="cb53-424"><a href="#cb53-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-425"><a href="#cb53-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-426"><a href="#cb53-426" aria-hidden="true" tabindex="-1"></a><span class="co"># Second, place the simulated data into a matrix with a column for each participant</span></span>
+<span id="cb53-427"><a href="#cb53-427" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: to reproduce our for loop, we want the data to be entered by column (i.e., fill column 1 with the first "n" observations, then column 2 with the next "n", etc.)</span></span>
+<span id="cb53-428"><a href="#cb53-428" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">matrix</span>( sim_dat, <span class="at">ncol=</span>numTrials )</span>
+<span id="cb53-429"><a href="#cb53-429" aria-hidden="true" tabindex="-1"></a>sample[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>] <span class="co"># see first 10 columns, i.e., trials</span></span>
+<span id="cb53-430"><a href="#cb53-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-431"><a href="#cb53-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-432"><a href="#cb53-432" aria-hidden="true" tabindex="-1"></a><span class="co"># Third, calculate the test statistic "by hand"</span></span>
+<span id="cb53-433"><a href="#cb53-433" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: since each column in sample is a simulated dataset, we need to somehow calculate the mean and variance for each column (here we use apply)</span></span>
+<span id="cb53-434"><a href="#cb53-434" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fu">apply</span>(sample, <span class="dv">2</span>, mean)</span>
+<span id="cb53-435"><a href="#cb53-435" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(xbar)</span>
+<span id="cb53-436"><a href="#cb53-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-437"><a href="#cb53-437" aria-hidden="true" tabindex="-1"></a>variance <span class="ot">&lt;-</span> <span class="fu">apply</span>(sample, <span class="dv">2</span>, var)</span>
+<span id="cb53-438"><a href="#cb53-438" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(variance) </span>
+<span id="cb53-439"><a href="#cb53-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-440"><a href="#cb53-440" aria-hidden="true" tabindex="-1"></a>df.num <span class="ot">=</span> n<span class="dv">-1</span></span>
+<span id="cb53-441"><a href="#cb53-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-442"><a href="#cb53-442" aria-hidden="true" tabindex="-1"></a>test.stat <span class="ot">&lt;-</span> (xbar<span class="dv">-0</span>)<span class="sc">/</span><span class="fu">sqrt</span>(variance<span class="sc">/</span>n)</span>
+<span id="cb53-443"><a href="#cb53-443" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(test.stat)</span>
+<span id="cb53-444"><a href="#cb53-444" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-445"><a href="#cb53-445" aria-hidden="true" tabindex="-1"></a><span class="co"># Finally, calculate the number of our test statistic exceeds the critical value</span></span>
+<span id="cb53-446"><a href="#cb53-446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-447"><a href="#cb53-447" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>((<span class="dv">1</span><span class="sc">-</span>(alpha<span class="sc">/</span><span class="dv">2</span>)), df.num)</span>
+<span id="cb53-448"><a href="#cb53-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-449"><a href="#cb53-449" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>( <span class="fu">abs</span>(test.stat) <span class="sc">&gt;=</span> <span class="fu">qt</span>((<span class="dv">1</span><span class="sc">-</span>(alpha<span class="sc">/</span><span class="dv">2</span>)), df.num) )</span>
+<span id="cb53-450"><a href="#cb53-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-451"><a href="#cb53-451" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb53-452"><a href="#cb53-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-453"><a href="#cb53-453" aria-hidden="true" tabindex="-1"></a><span class="fu"># Using p-values Instead of test statistics</span></span>
+<span id="cb53-454"><a href="#cb53-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-455"><a href="#cb53-455" aria-hidden="true" tabindex="-1"></a>We could also apply the t-test to each simulated data set and save the p-value (instead of saving or calculating the t-statistic) and calculate the proportion less than alpha:</span>
+<span id="cb53-456"><a href="#cb53-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-459"><a href="#cb53-459" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb53-460"><a href="#cb53-460" aria-hidden="true" tabindex="-1"></a>compute_rejectionrate_v2 <span class="ot">&lt;-</span> <span class="cf">function</span>(n, mean, sigma, numTrials, alpha){</span>
+<span id="cb53-461"><a href="#cb53-461" aria-hidden="true" tabindex="-1"></a><span class="do">### Calculate the rejection rate for simulated data from a normal distribution using a one-sample t-test</span></span>
+<span id="cb53-462"><a href="#cb53-462" aria-hidden="true" tabindex="-1"></a><span class="co"># n: sample size for each simulated data set</span></span>
+<span id="cb53-463"><a href="#cb53-463" aria-hidden="true" tabindex="-1"></a><span class="co"># mean: mean to simulate from (0 = null hyp/type I error, anything else = alternative hyp/power)</span></span>
+<span id="cb53-464"><a href="#cb53-464" aria-hidden="true" tabindex="-1"></a><span class="co"># sigma: standard deviation to simulate from</span></span>
+<span id="cb53-465"><a href="#cb53-465" aria-hidden="true" tabindex="-1"></a><span class="co"># numTrials: number of simulated trials with n individuals to complete</span></span>
+<span id="cb53-466"><a href="#cb53-466" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha: the desired level of significance, type I error rate</span></span>
+<span id="cb53-467"><a href="#cb53-467" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-468"><a href="#cb53-468" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First, simulate n times the number of trials worth of participants</span></span>
+<span id="cb53-469"><a href="#cb53-469" aria-hidden="true" tabindex="-1"></a>  sim_dat <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n<span class="sc">*</span>numTrials, <span class="at">mean =</span> mean, <span class="at">sd =</span> sigma)</span>
+<span id="cb53-470"><a href="#cb53-470" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-471"><a href="#cb53-471" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Second, place the simulated data into a matrix with a column for each participant</span></span>
+<span id="cb53-472"><a href="#cb53-472" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span><span class="al">NOTE</span><span class="co">: to reproduce our for loop, we want the data to be entered by column (i.e., fill column 1 with the first "n" observations, then column 2 with the next "n", etc.)</span></span>
+<span id="cb53-473"><a href="#cb53-473" aria-hidden="true" tabindex="-1"></a>  sample <span class="ot">&lt;-</span> <span class="fu">matrix</span>( sim_dat, <span class="at">ncol=</span>numTrials )</span>
+<span id="cb53-474"><a href="#cb53-474" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-475"><a href="#cb53-475" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Third, calculate the t-test p-value for each column</span></span>
+<span id="cb53-476"><a href="#cb53-476" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span><span class="al">NOTE</span><span class="co">: since each column in sample is a simulated dataset, we need to somehow calculate the mean and variance for each column (here we use sapply)</span></span>
+<span id="cb53-477"><a href="#cb53-477" aria-hidden="true" tabindex="-1"></a>  pvec <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>numTrials, <span class="cf">function</span>(x) <span class="fu">t.test</span>( sample[,x])<span class="sc">$</span>p.value ) </span>
+<span id="cb53-478"><a href="#cb53-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-479"><a href="#cb53-479" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Finally, calculate the number of our p-values less than alpha</span></span>
+<span id="cb53-480"><a href="#cb53-480" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>( <span class="fu">mean</span>( pvec <span class="sc">&lt;=</span> alpha ) ) </span>
+<span id="cb53-481"><a href="#cb53-481" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-482"><a href="#cb53-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-483"><a href="#cb53-483" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare that our type I error matches before</span></span>
+<span id="cb53-484"><a href="#cb53-484" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb53-485"><a href="#cb53-485" aria-hidden="true" tabindex="-1"></a><span class="fu">compute_rejectionrate_v2</span>(<span class="at">n=</span><span class="dv">5</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sigma=</span><span class="dv">75</span>, <span class="at">numTrials=</span><span class="dv">10000</span>, <span class="at">alpha=</span><span class="fl">0.05</span>)</span>
+<span id="cb53-486"><a href="#cb53-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-487"><a href="#cb53-487" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that power matches prior estimate</span></span>
+<span id="cb53-488"><a href="#cb53-488" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb53-489"><a href="#cb53-489" aria-hidden="true" tabindex="-1"></a><span class="fu">compute_rejectionrate_v2</span>(<span class="at">n=</span><span class="dv">5</span>, <span class="at">mean=</span><span class="dv">100</span>, <span class="at">sigma=</span><span class="dv">75</span>, <span class="at">numTrials=</span><span class="dv">10000</span>, <span class="at">alpha=</span><span class="fl">0.05</span>)</span>
+<span id="cb53-490"><a href="#cb53-490" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb53-491"><a href="#cb53-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-492"><a href="#cb53-492" aria-hidden="true" tabindex="-1"></a>Here we see that this approach matches our earlier approaches.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

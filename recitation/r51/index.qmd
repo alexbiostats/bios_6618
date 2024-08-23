@@ -1,0 +1,31 @@
+---
+title: "Simulation vs. Bootstrap vs. Permutation"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Simulation vs. Bootstrap vs. Permutation
+
+While each of these three concepts involve some element of randomness, they have some major differences:
+
+* A **simulation** uses randomness to generate a set of data where you are able to set the known truth. Since the data generated is random, any single simulation could be extremely different from the set truth by chance. Therefore, simulation studies rely on 1000s of simulated data sets to draw conclusions and summarize performance.
+* A **bootstrap** uses randomness to resample observations *with replacement* from a single data set. For a simulation study, you would apply a bootstrap to each simulated data set. In practice, we just apply the bootstrap to our collected sample of real-world data (i.e., where we don't know the "truth"). Bootstraps summarize the variability of our estimator (usually in the form of a confidence interval, but we could also use its standard error).
+* A **permutation** uses randomness to resample the group label *without replacement* while keeping other information constant (i.e., it shuffles the group labels). For a simulation study, you'd apply your permutation test to each simulated data set to summarize. In practice, we'd apply it once to our real world data. Permutation tests are used to generate a null distribution, even if we don't know the theoretical properties of our estimator, and to calculate a p-value.
+

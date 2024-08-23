@@ -1,0 +1,67 @@
+---
+title: "Study Designs and RD, RR, and OR Terminology"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Study Designs and RD, RR, and OR Terminology
+
+In our lecture on study designs we discussed three general types of observational study designs:
+
+* Cohort studies: usually prospective studies identify a group of disease free individuals then follow them to identify if they develop the disease
+* Case-control studies: usually retrospective studies that identify groups that have and lack a disease (i.e., cases and controls) and look for prior exposures
+* Cross-sectional studies: a design that looks at the study population at a single point in time to ask about current disease status and current exposure status, also called *prevalence* studies since we can only examine the current prevalence of a disease instead of incidence
+
+In the lecture slides we noted that we can calculate the following summaries for each study type:
+
+|                 | Cohort | Case-Control | Cross-Sectional |
+|-----------------|:------:|:------------:|:---------------:|
+| Risk Difference |   Yes  |      No      |       Yes*      |
+| Risk Ratio      |   Yes  |      No      |       Yes*      |
+| Odds Ratio      |   Yes  |      Yes     |       Yes*      |
+
+There are a few important points to make here, some of which involve being a little cavalier with our language (i.e., for cross-sectional studies).
+
+## Case-Control Studies
+
+We cannot measure *incidence* in a case-control study since the design intentionally starts with cases and controls. Because of this, we have no way of knowing how many exposed individuals it would take to see the number of cases (since we selected the cases specifically because they had the condition). Similarly, we don't know how many unexposed people it would take to observe the number of cases we selected. Sampling controls can then give us a reference group to compare to, but we will never know the total number exposed or not:
+
+|             | Case | Control |  Total  |
+|-------------|:----:|:-------:|:-------:|
+| Exposed     |   a  |    b    | Unknown |
+| Non-Exposed |   c  |    d    | Unknown |
+
+
+## Cross-Sectional Studies
+
+You may notice the asterisks in our RD, RR, and OR table above for the cross-sectional studies. While our slides noted we can calculate all of these summaries, we were being a bit cavalier since a cross-sectional study cannot measure incidence and can only measure the prevalence of an outcome. What we are really measuring is the, *prevalence difference* (instead of risk difference), *prevalence ratio* (instead of risk ratio), and *prevalence odds ratio* (instead of just odds ratio).
+
+The reason we tend to still call these summaries the RD, RR, and OR is that they have the exact same formulas and approach to calculate them (e.g., those included in the slides, logistic regression for OR, log-binomial regression for RR, etc.). The important thing is that we correctly interpret the context (and likely I, and many others, should be a little more careful with our terminology).
+
+There are some cases where the prevalence can be used to approximate the risk:
+
+* Average duration of disease is the same in groups (if curative)
+* The disease is rare (e.g., risk less than 5%)
+* The disease does not influence the presence of the exposure
+
+In these contexts, we can imagine if we mapped out a hypothetical longitudinal study we could take cross-sectional looks at the data and have very similar estimates to a cohort study that does observe exposures and outcomes over time.
+
+
+

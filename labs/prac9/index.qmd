@@ -1,0 +1,128 @@
+---
+title: "Week 9 Practice Problems"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page includes optional practice problems, many of which are structured to assist you on the homework with [Solutions provided on a separate page](/labs/prac9s/index.qmd). Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.
+
+This week's extra practice exercises are focusing on implementing and interpreting a multiple linear regression (MLR) model, both using existing functions and by coding our own matrices.
+
+
+# Dataset Background
+
+The following code can load the `Licorice_Gargle.csv` file into R:
+
+```{r, class.source = 'fold-show'}
+dat_all <- read.csv('../../.data/Licorice_Gargle.csv')
+
+# remove records with missing data for the outcome or any predictors:
+complete_case_vec <- complete.cases(dat_all[,c('pacu30min_throatPain','preOp_gender','preOp_age','treat')]) # creates a vector of TRUE or FALSE for each row if the cases are complete (i.e., no NA values)
+dat <- dat_all[complete_case_vec,]
+```
+
+The dataset represents a randomized control trial of 236 adult patients undergoing elective thoracic surgery requiring a double-lumen endotracheal tube comparing if licorice vs. sugar-water gargle prevents postoperative sore throat. For our exercises below we will focus on the following variables:
+
+* `pacu30min_throatPain`: sore throat pain score at rest 30 minutes after arriving in the post-anesthesia care unit (PACU) measured on an 11 point Likert scale (0=no pain to 10=worst pain)
+* `preOp_gender`: an indicator variable for gender (0=Male, 1=Female)
+* `preOp_age`: age (in years)
+* `treat`: the randomized treatment in the trial where 0=sugar 5g and 1=licorice 0.5g
+
+# Exercise 1: Multiple Linear Regression Example
+
+## 1a: The True Regression Equation
+
+Write the the multiple linear regression model for the outcome of throat pain (i.e., dependent variable) and independent variables for ASA score, gender, age, and treatment status. Be sure to define all terms.
+
+
+## 1b: Fitting the Model
+
+Fit the multiple linear regression model for the outcome of throat pain (i.e., dependent variable) and independent variables for ASA score, gender, age, and treatment status. Print the summary table output for reference in the following questions.
+
+
+## 1c: Predicted Regression Equation
+
+Write down the predicted regression equation that describes the relationship between throat pain and your predictors based on the output.
+
+
+## 1d: Intercept Interpretation and Hypothesis Test
+
+Write the hypothesis being tested in the regression output for this coefficient. What is the estimated intercept and how would you interpret it (provide a brief, but complete, interpretation)?
+
+
+## 1e: Coefficient Interpretation and Hypothesis Test for Binary Predictor
+
+Write the hypothesis being tested in the regression output for this coefficient. What is the estimated effect of treatment and how would you interpret it (provide a brief, but complete, interpretation)?
+
+## 1f: Coefficient Interpretation and Hypothesis Test for Continuous Predictor
+
+Write the hypothesis being tested in the regression output for this coefficient. What is the estimated effect of age and how would you interpret it (provide a brief, but complete, interpretation)?
+
+
+## 1g: The Partial F-test
+
+Evaluate if the addition of age and gender contribute significantly to the prediction of throat pain over and above that achieved by treatment group alone. Write out the null and alternative hypotheses being tested and your conclusion.
+
+
+## 1h: The Overall F-test
+
+Evaluate if the the entire set of independent variables (i.e., predictors) contribute significantly to the prediction of throat pain. Write out the null and alternative hypotheses being tested and your conclusion.
+
+
+## 1i: Multicollinearity
+
+Calculate the variance inflation factors (VIFs) for the independent variables in the model. Does it appear that multicollinearity may be a concern?
+
+
+## 1j: Diagnostic Plots
+
+Evaluate the assumptions of our multiple linear regression model by creating diagnostic plots.
+
+
+
+
+# Exercise 2: But Now With Matrices!
+
+Using your results in Exercise 1 to check your answers, complete the following parts using matrices you code yourself.
+
+
+## 2a: The Design Matrix
+
+Create the design matrix that we will use for our regression calculations.
+
+
+## 2b: Beta Coefficients
+
+Calculate the estimated beta coefficients via matrix algebra.
+
+
+## 2c: Standard Error of Beta Coefficients
+
+Calculate the standard error of the beta coefficients via matrix algebra.
+
+
+## 2d: Test Statistics and p-values
+
+Calculate the $t$-statistic and associated p-value based on the previous estimates from **1b** and **1c**.
+
+
+## 2e: Confidence and Prediction Interval
+
+Calculate the 95% confidence and prediction interval for a male in the treatment group who is 50 years old. Compare this result to the calculation provided by `R` when using the `predict` function.
+
+

@@ -1,0 +1,144 @@
+---
+title: "Week 3 Practice Problems: Solutions"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page includes the solutions to the optional practice problems for the given week. If you want to see a version [without solutions please click here](/labs/prac3/index.qmd). Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.
+
+This week's extra practice exercises focus on subsetting data objects and identifying relationships between the various assumptions in power calculations. 
+
+
+# Exercise 1
+
+## 1a 
+
+Run the following code to combine a few state-related data sets that are part of R's available data sets:
+```{r}
+states <- data.frame(state.x77, state.region, state.abb)
+```
+
+
+## 1b 
+
+Calculate the mean (SD) life expectancy by state region.
+
+**Solution:**
+
+```{r}
+region_vec <- unique( states$state.region ) # create vector of unique regions in our data
+
+region_sum <- matrix( nrow=length(region_vec), ncol=2, dimnames=list(region_vec, c('mean','sd')))
+
+for( i in region_vec ){
+  region_sum[i, 'mean'] <- mean(states[ which(states$state.region==i), 'Life.Exp'])
+  region_sum[i, 'sd'] <- sd(states[ which(states$state.region==i), 'Life.Exp'])  
+}
+
+region_sum
+```
+
+
+## 1c
+
+Subset the four corner states (Utah, Colorado, Arizona, and New Mexico) **by row name**. Which state has the largest population? Which state has the lowest high school graduation rate?
+
+**Solution:**
+
+```{r}
+states[c('Utah','Colorado','Arizona','New Mexico'),]
+```
+
+Colorado has the largest population, whereas New Mexico has the lowest high school graduation rate.
+
+
+## 1d
+
+Subset states that either have an area greater than 90,000 miles$^2$ *or* a percent of high school graduates below 50\%. How many states meet this criteria?
+
+**Solution:**
+
+```{r}
+states_sub1 <- states[which(states$Area>90000 | states$HS.Grad<50),]
+dim( states_sub1 ) # check the number of rows and columns
+```
+
+23 states meet this criteria.
+
+
+## 1e
+
+Subset states that have an area greater than 90,000 miles$^2$ *and* a percent of high school graduates below 50\%. How many states meet this criteria?
+
+**Solution:**
+
+```{r}
+states_sub2 <- states[which(states$Area>90000 & states$HS.Grad<50),]
+dim( states_sub2 ) # check the number of rows and columns
+states_sub2
+```
+
+1 state (Texas) meets this criteria.
+
+
+## 1f
+
+Are there any states where the mean number of days with a minimum temperature below freezing is above 100, the murder rate is greater than 10 per 100,000 population, and the rate of illiteracy is below 1\%?
+
+**Solution:**
+
+```{r}
+states[ which(states$Frost>100 & states$Murder>10 & states$Illiteracy<1),]
+```
+
+Yes, Illinois, Michigan, and Nevada all meet the criteria.
+
+
+# Exercise 2
+
+This exercise focuses on evaluating the relationship of what happens as we change different parts of a power calculation for the case of the **known standard deviation**. You may find the website <https://rpsychologist.com/d3/nhst/> helpful to visualize the different scenarios.
+
+For each of these scenarios, assume that all parameters not discussed are fixed at some value, then identify what happens to the different quantities.
+
+**As sample size $n$ increases:**
+
+1. Power: *increases*
+2. Detectable Difference $|\mu_0 - \mu_1|$: *decreases*
+
+**As the difference to be detected, $|\mu_0 - \mu_1|$, increases:**
+
+1. Power: *increases*
+2. Required Sample Size: *decreases*
+
+**As desired power increases:**
+
+1. Required Sample Size: *increases*
+2. Detectable Difference $|\mu_0 - \mu_1|$: *increases*
+
+**As $\sigma$, the population SD, increases:**
+
+1. Power: *decreases*
+2. Detectable Difference $|\mu_0 - \mu_1|$: *increases*
+3. Required Sample Size: *increases*
+
+**As $\alpha$, the significance level of the test, increases:**
+
+1. Power: *increases*
+2. Detectable Difference $|\mu_0 - \mu_1|$: *decreases*
+3. Required Sample Size: *decreases*
+

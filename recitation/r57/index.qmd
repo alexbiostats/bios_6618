@@ -1,0 +1,32 @@
+---
+title: "Post-Hoc Testing Justification for One-Way ANOVA"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Post Hoc Testing Justification
+
+For our ANOVA examples, we discussed various post hoc (i.e., after the fact) testing strategies (e.g., least significant difference, Bonferroni adjustment, Tukey's honestly significant difference, Dunnett's test). The question may arise, when should we actually conduct post hoc testing? There are two general camps:
+
+1. Post hoc testing is only justified if the global hypothesis test (i.e., our overall $F$-test from the ANOVA) is statistically significant (e.g., $p < 0.05$ if our study has set $\alpha=0.05$).
+2. If you were actually interested in the pairwise comparisons from the get-go, don't both with fitting the ANOVA model. Instead, design your analytic strategy to directly address the question(s) of interest! *In other words, we have no post hoc testing since we planned and intended to evaluate the pairwise comparisons of interest all along!*
+
+For our homework, since we don't have background information on planning for pairwise comparisons, we should treat the approach as post hoc and only conduct the follow-up tests if the the overall ANOVA suggests it is warranted.
+

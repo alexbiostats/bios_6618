@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alex Kaizer">
+
+<title>Alex Kaizer - Week 7 Practice Problems: Solutions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/academicons-1.9.1/css/academicons.css" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="./files/favicon.ico">
+
+<script type="text/javascript">
+function setBrand() {
+document.getElementsByClassName("navbar-brand")[0].href="https://www.alexkaizer.com";
+}
+window.onload = setBrand;
+</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5PBG7BL207"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5PBG7BL207');
+</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Alex Kaizer</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/research" rel="" target="">
+ <span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/publications" rel="" target="">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Teaching</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching">    
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/teaching" rel="" target="">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6618" rel="" target="">
+ <span class="dropdown-text">BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6611" rel="" target="">
+ <span class="dropdown-text">BIOS 6611</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/study_design_berd" rel="" target="">
+ <span class="dropdown-text">BERD Study Design Short Course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/adaptivetrials_sc" rel="" target="">
+ <span class="dropdown-text">WNAR Adaptive and Bayesian Clinical Trial Design Short Course</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bios-6618" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">BIOS 6618</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-bios-6618">    
+        <li>
+    <a class="dropdown-item" href="../../index.html" rel="" target="">
+ <span class="dropdown-text">Home</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../bios_6618_materials" rel="" target="">
+ <span class="dropdown-text">Materials</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../journal_of_bios_6618" rel="" target="">
+ <span class="dropdown-text">Journal of BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../recitation" rel="" target="">
+ <span class="dropdown-text">Recitation Questions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs" rel="" target="">
+ <span class="dropdown-text">Labs and Practice Problems</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:alex.kaizer@cuanschutz.edu" rel="" target=""><i class="bi bi-envelope" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=ICpH74EAAAAJ&amp;hl=en" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-google-scholar ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="http://github.com/alexbiostats" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/files/Alex_CV.pdf" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-cv ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/alex-kaizer/" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#dataset-background" id="toc-dataset-background" class="nav-link active" data-scroll-target="#dataset-background">Dataset Background</a></li>
+  <li><a href="#exercise-1-simple-linear-regression" id="toc-exercise-1-simple-linear-regression" class="nav-link" data-scroll-target="#exercise-1-simple-linear-regression">Exercise 1: Simple Linear Regression</a>
+  <ul class="collapse">
+  <li><a href="#a-fitting-the-model" id="toc-a-fitting-the-model" class="nav-link" data-scroll-target="#a-fitting-the-model">1a: Fitting the Model</a></li>
+  <li><a href="#b-fitted-least-squares-regression-equation" id="toc-b-fitted-least-squares-regression-equation" class="nav-link" data-scroll-target="#b-fitted-least-squares-regression-equation">1b: Fitted Least-Squares Regression Equation</a></li>
+  <li><a href="#c-intercept-interpretation" id="toc-c-intercept-interpretation" class="nav-link" data-scroll-target="#c-intercept-interpretation">1c: Intercept Interpretation</a></li>
+  <li><a href="#d-slope-interpretation" id="toc-d-slope-interpretation" class="nav-link" data-scroll-target="#d-slope-interpretation">1d: Slope Interpretation</a></li>
+  <li><a href="#e-slope-hypothesis-test" id="toc-e-slope-hypothesis-test" class="nav-link" data-scroll-target="#e-slope-hypothesis-test">1e: Slope Hypothesis Test</a></li>
+  <li><a href="#f-ci-for-slope-with-t" id="toc-f-ci-for-slope-with-t" class="nav-link" data-scroll-target="#f-ci-for-slope-with-t">1f: CI for Slope with <span class="math inline">\(t\)</span></a></li>
+  <li><a href="#g-ci-for-slope-with-z" id="toc-g-ci-for-slope-with-z" class="nav-link" data-scroll-target="#g-ci-for-slope-with-z">1g: CI for Slope with <span class="math inline">\(Z\)</span></a></li>
+  <li><a href="#h-ci-for-slope-in-r" id="toc-h-ci-for-slope-in-r" class="nav-link" data-scroll-target="#h-ci-for-slope-in-r">1h: CI for Slope in R</a></li>
+  <li><a href="#i-summary-for-slope" id="toc-i-summary-for-slope" class="nav-link" data-scroll-target="#i-summary-for-slope">1i: Summary for Slope</a></li>
+  <li><a href="#j-prediction" id="toc-j-prediction" class="nav-link" data-scroll-target="#j-prediction">1j: Prediction</a></li>
+  <li><a href="#k-confidence-interval-around-prediction" id="toc-k-confidence-interval-around-prediction" class="nav-link" data-scroll-target="#k-confidence-interval-around-prediction">1k: Confidence Interval Around Prediction</a></li>
+  <li><a href="#l-prediction-interval-around-prediction" id="toc-l-prediction-interval-around-prediction" class="nav-link" data-scroll-target="#l-prediction-interval-around-prediction">1l: Prediction Interval Around Prediction</a></li>
+  <li><a href="#m-scattplot-and-fitted-line" id="toc-m-scattplot-and-fitted-line" class="nav-link" data-scroll-target="#m-scattplot-and-fitted-line">1m: Scattplot and Fitted Line</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Week 7 Practice Problems: Solutions</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Alex Kaizer </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Colorado-Anschutz Medical Campus
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This page includes the solutions to the optional practice problems for the given week. If you want to see a version <a href="../../labs/prac7/index.html">without solutions please click here</a>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</p>
+<section id="dataset-background" class="level1">
+<h1>Dataset Background</h1>
+<p>The following code can load the <code>Seasonal_Effect.csv</code> file into R. The seasonal effect data set contains 2,919 adults who underwent colorectal surgery. For our simple linear regression model, we wish to examine if there is an association between the outcome of how long surgery lasted (<code>DurationSurgery</code> in hours) and the body mass index (<code>BMI</code> in kg/m<sup>2</sup>).</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r fold-show code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../../.data/Seasonal_Effect.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="exercise-1-simple-linear-regression" class="level1">
+<h1>Exercise 1: Simple Linear Regression</h1>
+<section id="a-fitting-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="a-fitting-the-model">1a: Fitting the Model</h2>
+<p>Fit the simple linear regression model for an outcome of surgery duration with a single predictor for BMI. Print the summary table output for reference in the following questions.</p>
+<p><strong>Solution:</strong></p>
+<p>We can fit our simple linear regression model using either the <code>lm</code> or <code>glm</code> functions (notice the output is very similar):</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit using lm</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(DurationSurgery <span class="sc">~</span> BMI, <span class="at">data=</span>dat)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = DurationSurgery ~ BMI, data = dat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.2213 -1.3396 -0.1916  1.1093 11.0863 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 2.705949   0.153718  17.603  &lt; 2e-16 ***
+BMI         0.032403   0.005537   5.853 5.38e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.935 on 2917 degrees of freedom
+Multiple R-squared:  0.01161,   Adjusted R-squared:  0.01127 
+F-statistic: 34.25 on 1 and 2917 DF,  p-value: 5.378e-09</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit using glm</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>glm1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(DurationSurgery <span class="sc">~</span> BMI, <span class="at">data=</span>dat)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = DurationSurgery ~ BMI, data = dat)
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 2.705949   0.153718  17.603  &lt; 2e-16 ***
+BMI         0.032403   0.005537   5.853 5.38e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 3.743385)
+
+    Null deviance: 11048  on 2918  degrees of freedom
+Residual deviance: 10919  on 2917  degrees of freedom
+AIC: 12141
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+</section>
+<section id="b-fitted-least-squares-regression-equation" class="level2">
+<h2 class="anchored" data-anchor-id="b-fitted-least-squares-regression-equation">1b: Fitted Least-Squares Regression Equation</h2>
+<p>Write down the least-squares regression equation that describes the relationship between surgery duration and BMI based on your output.</p>
+<p><strong>Solution:</strong></p>
+<p>From our regression output, we can write this in a few ways:</p>
+<p><span class="math display">\[ \hat{Y} = 2.71 + 0.03 \times X_{1}, \]</span></p>
+<p>where <span class="math inline">\(\hat{Y}\)</span> is our outcome of surgery duration in hours and <span class="math inline">\(X_1\)</span> is BMI in kg/m<sup>2</sup>. Or:</p>
+<p><span class="math display">\[ \text{Surgery Duration} = 2.71 + 0.03 \times \text{BMI}, \]</span></p>
+<p>where we are still aware that the proper notation would have a hat over our outcome.</p>
+</section>
+<section id="c-intercept-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="c-intercept-interpretation">1c: Intercept Interpretation</h2>
+<p>What is the estimated intercept and how would you interpret it?</p>
+<p><strong>Solution:</strong></p>
+<p>Our estimated intercept is 2.71. It represents that the predicted surgery duration for an individual with a BMI of 0 kg/m<sup>2</sup> is 2.71 hours. <em>Note, this interpretation is not meaningful because one cannot plausibly have a BMI of 0, and even if they could it would be extrapolating outside our observed data.</em></p>
+</section>
+<section id="d-slope-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="d-slope-interpretation">1d: Slope Interpretation</h2>
+<p>What is the estimated slope and how would you interpret it?</p>
+<p><strong>Solution:</strong></p>
+<p>Our estimated slope if 0.03. For every 1 kg/m<sup>2</sup> increase in BMI, surgery duration increases, on average, by 0.03 hours (i.e., about 1.8 minutes).</p>
+</section>
+<section id="e-slope-hypothesis-test" class="level2">
+<h2 class="anchored" data-anchor-id="e-slope-hypothesis-test">1e: Slope Hypothesis Test</h2>
+<p>Test the hypothesis that the true slope is 0.</p>
+<p><strong>Solution:</strong></p>
+<p>From our output we see that <span class="math inline">\(t=5.853\)</span> and <span class="math inline">\(p&lt;0.001\)</span> for our slope term (i.e., the <code>BMI</code> row). Since <span class="math inline">\(p&lt;0.05\)</span>, we reject our null hypothesis that the true slope is 0.</p>
+</section>
+<section id="f-ci-for-slope-with-t" class="level2">
+<h2 class="anchored" data-anchor-id="f-ci-for-slope-with-t">1f: CI for Slope with <span class="math inline">\(t\)</span></h2>
+<p>For the estimated slope, calculate a 95% confidence interval <em>by hand</em> based on the output with the <span class="math inline">\(t\)</span>-distribution (i.e., the “correct” calculation).</p>
+<p><strong>Solution:</strong></p>
+<p>The 95% confidence interval for our slope is</p>
+<p><span class="math display">\[ \hat{\beta}_{1} \pm t_{n-2,1-\alpha/2} SE(\hat{\beta}_{1}) = 0.03 \]</span></p>
+<p>In our case we can calculate the <span class="math inline">\(t\)</span>-statistic using <code>qt(p=0.975, df=2919-2)</code> to be 1.9607776:</p>
+<p><span class="math display">\[ 0.032403 \pm 1.960778 \times 0.005537 = (0.02154617, 0.04325983) \]</span></p>
+<p>Our interpretation of this confidence interval is: We are 95% confident that surgery duration increases, on average, between 0.022 and 0.043 hours for a 1 kg/m<sup>2</sup> increase in BMI.</p>
+</section>
+<section id="g-ci-for-slope-with-z" class="level2">
+<h2 class="anchored" data-anchor-id="g-ci-for-slope-with-z">1g: CI for Slope with <span class="math inline">\(Z\)</span></h2>
+<p>For the estimated slope, calculate a 95% confidence interval <em>by hand</em> based on the output with the <span class="math inline">\(Z\)</span>-distribution (i.e., pretend we forgot to use the <span class="math inline">\(t\)</span>-distribution and went with the simpler standard normal distribution). How different is your estimated interval and why might it be more similar (or more different) for our given context?</p>
+<p><strong>Solution:</strong></p>
+<p>If we replace <span class="math inline">\(t_{n-2,1-\alpha/2}\)</span> with <span class="math inline">\(Z_{1-\alpha/2}\)</span> we will use <code>qnorm(0.975)</code>=1.959964:</p>
+<p><span class="math display">\[ 0.032403 \pm 1.959964 \times 0.005537 = (0.02155068, 0.04325532) \]</span></p>
+<p>In this case, our intervals are <em>extremely</em> similar since the <span class="math inline">\(t\)</span>-distribution with 2917 degrees of freedom looks extremely like the normal distribution. The 95% confidence interval is slightly wider for <strong>1f</strong>, which would be more pronounced if we had a much smaller sample size.</p>
+</section>
+<section id="h-ci-for-slope-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="h-ci-for-slope-in-r">1h: CI for Slope in R</h2>
+<p>For the estimated slope, calculate a 95% confidence interval using a function in R. Which approach (in <strong>f</strong> or <strong>g</strong>) is this confidence interval most like?</p>
+<p><strong>Solution:</strong></p>
+<p>Using <code>confint</code> we can calculate the 95% confidence interval for our model fit in <strong>1a</strong>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the confidence interval for lm first</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 2.5 %     97.5 %
+(Intercept) 2.40454149 3.00735660
+BMI         0.02154707 0.04325881</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the confidence interval for glm second</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(glm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Waiting for profiling to be done...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 2.5 %    97.5 %
+(Intercept) 2.40466655 3.0072315
+BMI         0.02155158 0.0432543</code></pre>
+</div>
+</div>
+<p><strong>Woah!</strong> Shouldn’t our two simple linear regression models have the <em>same</em> confidence intervals regardless of using <code>lm</code> or <code>glm</code>?</p>
+<p>It turns out that the <code>lm</code> function is specific to linear (regression) models. For this reason, it uses the <span class="math inline">\(t\)</span>-distribution to correctly calculate the confidence interval.</p>
+<p>The <code>glm</code> function is more general since it fits generalized linear models (e.g., next semester you will learn about logistic regression, Poisson regression, etc. that are all fit with this function). Due to this generality, it assumes the standard normal distribution for its calculation of the confidence interval.</p>
+<p>Which is right? Technically, both! In large samples, like we have here, the difference is fairly trivial. However, if we have small samples the approach using the <span class="math inline">\(t\)</span>-distribution would technically be most appropriate.</p>
+</section>
+<section id="i-summary-for-slope" class="level2">
+<h2 class="anchored" data-anchor-id="i-summary-for-slope">1i: Summary for Slope</h2>
+<p>Write a brief, but complete, summary of the effect of BMI on surgery duration.</p>
+<p><strong>Solution:</strong></p>
+<p>There is a significant association between BMI and surgery duration (p&lt;0.001). On average, surgery duration increases 0.03 hours per every 1 kg/m<sup>2</sup> increase in BMI (95% CI: 0.022, 0.043 hours).</p>
+</section>
+<section id="j-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="j-prediction">1j: Prediction</h2>
+<p>What is the estimated surgery duration for someone with a BMI of 27.5?</p>
+<p><strong>Solution:</strong></p>
+<p>We can simply plug in <span class="math inline">\(X_{1}=27.5\)</span> to our fitted least-squares regression equation from <strong>1b</strong>:</p>
+<p><span class="math display">\[ \hat{Y} = 2.71 + 0.03 \times 27.5 = 3.535 \text{ hours} \]</span></p>
+<p>Since we rounded to fewer digits, our answers would differ from using the <code>predict</code> function:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1, <span class="co"># specify model to predict from</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">BMI=</span><span class="fl">27.5</span>)) <span class="co"># create new data frame of data to predict, here it is only 1 observation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      1 
+3.59703 </code></pre>
+</div>
+</div>
+</section>
+<section id="k-confidence-interval-around-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="k-confidence-interval-around-prediction">1k: Confidence Interval Around Prediction</h2>
+<p>Calculate the 95% confidence interval around the mean surgery duration for the population with a BMI of 27.5.</p>
+<p><strong>Solution:</strong></p>
+<p>One approach is to leverage the <code>predict</code> function in R and specify <code>interval='confidence'</code>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prediction with 95% CI from model for BMI=27.5</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1, <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">BMI=</span><span class="fl">27.5</span>), <span class="at">interval=</span><span class="st">'confidence'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      fit      lwr      upr
+1 3.59703 3.526604 3.667456</code></pre>
+</div>
+</div>
+<p>We are 95% confident that the mean surgery duration is between 3.53 and 3.67 hours, on average, for someone with a BMI of 27.5.</p>
+<p>Another approach is to estimate the mean squared error (MSE) from our model and calculate the interval “by hand”:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate our mean squared error</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>( lm1<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> (<span class="fu">nrow</span>(dat) <span class="sc">-</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.743385</code></pre>
+</div>
+</div>
+<p>We must also calculate the mean and variance for BMI in our sample:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate mean; variance BMI</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>( dat<span class="sc">$</span>BMI ); <span class="fu">var</span>(dat<span class="sc">$</span>BMI)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 27.00055</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 41.85108</code></pre>
+</div>
+</div>
+<p>Now we can use our formula to calculate the standard error of our mean surgery duration for someone with a BMI of 27.5:</p>
+<p><span class="math inline">\(\begin{aligned} SE\left({\hat{\mu}}_{Y|X=27.5}\right) =&amp; \sqrt{\frac{\hat{\sigma}_{Y|X}^{2}}{n} + \frac{\hat{\sigma}_{Y|X}^{2}}{n-1} \left( \frac{(X_0 - \bar{X})^2}{\hat{\sigma}_{X}^{2}} \right)} \\ =&amp; \sqrt{\frac{3.743385}{2919} + \frac{3.743385}{2918} \left( \frac{(27.5-27.00055)^2}{41.85108} \right)} \\ \approx&amp; 0.0359175 \end{aligned}\)</span></p>
+<p>Then we can calculate our 95% confidence interval, considering <span class="math inline">\(t_{2919-2,0.975}=1.960778\)</span>, our 95% CI is</p>
+<p><span class="math display">\[ 3.535 \pm 1.960778(0.0359175) = (3.465, 3.606) \]</span></p>
+<p><em>Note, rounding at various steps leads to the similar, but different, interval from what R precisely returns.</em></p>
+</section>
+<section id="l-prediction-interval-around-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="l-prediction-interval-around-prediction">1l: Prediction Interval Around Prediction</h2>
+<p>Calculate the 95% prediction interval around the mean surgery duration for a single individual with a BMI of 27.5.</p>
+<p><strong>Solution:</strong></p>
+<p>One approach is to leverage the <code>predict</code> function in R and specify <code>interval='predict'</code>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prediction with 95% CI from model for BMI=27.5</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1, <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">BMI=</span><span class="fl">27.5</span>), <span class="at">interval=</span><span class="st">'predict'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      fit        lwr      upr
+1 3.59703 -0.1973025 7.391362</code></pre>
+</div>
+</div>
+<p>We are 95% confident that the surgery duration for an individual with a BMI of 27.5 is between -0.20 and 7.39 hours.</p>
+<p>This prediction interval must have the assumption or normality met (i.e., we are not leveraging the central limit theorem like we are for the 95% confidence interval estimating the mean). And given the greater variability involved, we see here that we also have a non-nonsensical negative surgery duration.</p>
+</section>
+<section id="m-scattplot-and-fitted-line" class="level2">
+<h2 class="anchored" data-anchor-id="m-scattplot-and-fitted-line">1m: Scattplot and Fitted Line</h2>
+<p>Create a scatterplot with the fitted linear regression line.</p>
+<p><strong>Solution:</strong></p>
+<p>One option is to create this with base R graphics and use <code>abline</code> to automatically add the fitted regression line:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create scatterplot</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat<span class="sc">$</span>BMI, <span class="at">y=</span>dat<span class="sc">$</span>DurationSurgery, <span class="at">xlab=</span><span class="fu">expression</span>(BMI<span class="sc">~</span>(kg<span class="sc">/</span>m<span class="sc">^</span><span class="dv">2</span>)), <span class="at">ylab=</span><span class="st">'Surgery Duration (hours)'</span> )</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Add regression fit</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(lm1, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'orangered2'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can see from our scatterplot and fitted regression line that there does appear to be a slight positive trend as BMI increases with respect to surgery duration. Additionally, there are some potential observations that seem very different from much of the data (which we will discuss how to handle more towards the end of the semester).</p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb23" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 7 Practice Problems: Solutions"</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>This page includes the solutions to the optional practice problems for the given week. If you want to see a version <span class="co">[</span><span class="ot">without solutions please click here</span><span class="co">](/labs/prac7/index.qmd)</span>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="fu"># Dataset Background</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>The following code can load the <span class="in">`Seasonal_Effect.csv`</span> file into R. The seasonal effect data set contains 2,919 adults who underwent colorectal surgery. For our simple linear regression model, we wish to examine if there is an association between the outcome of how long surgery lasted (<span class="in">`DurationSurgery`</span> in hours) and the body mass index (<span class="in">`BMI`</span> in kg/m^2^).</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.source = 'fold-show'}</span></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../../.data/Seasonal_Effect.csv'</span>)</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise 1: Simple Linear Regression</span></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1a: Fitting the Model</span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>Fit the simple linear regression model for an outcome of surgery duration with a single predictor for BMI. Print the summary table output for reference in the following questions.</span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>We can fit our simple linear regression model using either the <span class="in">`lm`</span> or <span class="in">`glm`</span> functions (notice the output is very similar):</span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit using lm</span></span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(DurationSurgery <span class="sc">~</span> BMI, <span class="at">data=</span>dat)</span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1)</span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit using glm</span></span>
+<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a>glm1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(DurationSurgery <span class="sc">~</span> BMI, <span class="at">data=</span>dat)</span>
+<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm1)</span>
+<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1b: Fitted Least-Squares Regression Equation</span></span>
+<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-57"><a href="#cb23-57" aria-hidden="true" tabindex="-1"></a>Write down the least-squares regression equation that describes the relationship between surgery duration and BMI based on your output.</span>
+<span id="cb23-58"><a href="#cb23-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a>From our regression output, we can write this in a few ways:</span>
+<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-63"><a href="#cb23-63" aria-hidden="true" tabindex="-1"></a>$$ \hat{Y} = 2.71 + 0.03 \times X_{1}, $$</span>
+<span id="cb23-64"><a href="#cb23-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-65"><a href="#cb23-65" aria-hidden="true" tabindex="-1"></a>where $\hat{Y}$ is our outcome of surgery duration in hours and $X_1$ is BMI in kg/m^2^. Or:</span>
+<span id="cb23-66"><a href="#cb23-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-67"><a href="#cb23-67" aria-hidden="true" tabindex="-1"></a>$$ \text{Surgery Duration} = 2.71 + 0.03 \times \text{BMI}, $$</span>
+<span id="cb23-68"><a href="#cb23-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-69"><a href="#cb23-69" aria-hidden="true" tabindex="-1"></a>where we are still aware that the proper notation would have a hat over our outcome.</span>
+<span id="cb23-70"><a href="#cb23-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-71"><a href="#cb23-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-72"><a href="#cb23-72" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1c: Intercept Interpretation</span></span>
+<span id="cb23-73"><a href="#cb23-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-74"><a href="#cb23-74" aria-hidden="true" tabindex="-1"></a>What is the estimated intercept and how would you interpret it?</span>
+<span id="cb23-75"><a href="#cb23-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-77"><a href="#cb23-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-78"><a href="#cb23-78" aria-hidden="true" tabindex="-1"></a>Our estimated intercept is 2.71. It represents that the predicted surgery duration for an individual with a BMI of 0 kg/m^2^ is 2.71 hours. *Note, this interpretation is not meaningful because one cannot plausibly have a BMI of 0, and even if they could it would be extrapolating outside our observed data.*</span>
+<span id="cb23-79"><a href="#cb23-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-80"><a href="#cb23-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-81"><a href="#cb23-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1d: Slope Interpretation</span></span>
+<span id="cb23-82"><a href="#cb23-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-83"><a href="#cb23-83" aria-hidden="true" tabindex="-1"></a>What is the estimated slope and how would you interpret it?</span>
+<span id="cb23-84"><a href="#cb23-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-85"><a href="#cb23-85" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-86"><a href="#cb23-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-87"><a href="#cb23-87" aria-hidden="true" tabindex="-1"></a>Our estimated slope if 0.03. For every 1 kg/m^2^ increase in BMI, surgery duration increases, on average, by 0.03 hours (i.e., about 1.8 minutes).</span>
+<span id="cb23-88"><a href="#cb23-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-89"><a href="#cb23-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-90"><a href="#cb23-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1e: Slope Hypothesis Test</span></span>
+<span id="cb23-91"><a href="#cb23-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-92"><a href="#cb23-92" aria-hidden="true" tabindex="-1"></a>Test the hypothesis that the true slope is 0.</span>
+<span id="cb23-93"><a href="#cb23-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-94"><a href="#cb23-94" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-95"><a href="#cb23-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-96"><a href="#cb23-96" aria-hidden="true" tabindex="-1"></a>From our output we see that $t=5.853$ and $p&lt;0.001$ for our slope term (i.e., the <span class="in">`BMI`</span> row). Since $p&lt;0.05$, we reject our null hypothesis that the true slope is 0.</span>
+<span id="cb23-97"><a href="#cb23-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-98"><a href="#cb23-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-99"><a href="#cb23-99" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1f: CI for Slope with $t$</span></span>
+<span id="cb23-100"><a href="#cb23-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-101"><a href="#cb23-101" aria-hidden="true" tabindex="-1"></a>For the estimated slope, calculate a 95% confidence interval *by hand* based on the output with the $t$-distribution (i.e., the "correct" calculation).</span>
+<span id="cb23-102"><a href="#cb23-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-103"><a href="#cb23-103" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-104"><a href="#cb23-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-105"><a href="#cb23-105" aria-hidden="true" tabindex="-1"></a>The 95% confidence interval for our slope is</span>
+<span id="cb23-106"><a href="#cb23-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-107"><a href="#cb23-107" aria-hidden="true" tabindex="-1"></a>$$ \hat{\beta}_{1} \pm t_{n-2,1-\alpha/2} SE(\hat{\beta}_{1}) = 0.03 $$</span>
+<span id="cb23-108"><a href="#cb23-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-109"><a href="#cb23-109" aria-hidden="true" tabindex="-1"></a>In our case we can calculate the $t$-statistic using <span class="in">`qt(p=0.975, df=2919-2)`</span> to be <span class="in">`r qt(p=0.975, df=2919-2)`</span>:</span>
+<span id="cb23-110"><a href="#cb23-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-111"><a href="#cb23-111" aria-hidden="true" tabindex="-1"></a>$$ 0.032403 \pm 1.960778 \times 0.005537 = (0.02154617, 0.04325983) $$</span>
+<span id="cb23-112"><a href="#cb23-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-113"><a href="#cb23-113" aria-hidden="true" tabindex="-1"></a>Our interpretation of this confidence interval is: We are 95% confident that surgery duration increases, on average, between 0.022 and 0.043 hours for a 1 kg/m^2^ increase in BMI.</span>
+<span id="cb23-114"><a href="#cb23-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-115"><a href="#cb23-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-116"><a href="#cb23-116" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1g: CI for Slope with $Z$</span></span>
+<span id="cb23-117"><a href="#cb23-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-118"><a href="#cb23-118" aria-hidden="true" tabindex="-1"></a>For the estimated slope, calculate a 95% confidence interval *by hand* based on the output with the $Z$-distribution (i.e., pretend we forgot to use the $t$-distribution and went with the simpler standard normal distribution). How different is your estimated interval and why might it be more similar (or more different) for our given context?</span>
+<span id="cb23-119"><a href="#cb23-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-120"><a href="#cb23-120" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-121"><a href="#cb23-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-122"><a href="#cb23-122" aria-hidden="true" tabindex="-1"></a>If we replace $t_{n-2,1-\alpha/2}$ with $Z_{1-\alpha/2}$ we will use <span class="in">`qnorm(0.975)`</span>=<span class="in">`r qnorm(0.975)`</span>:</span>
+<span id="cb23-123"><a href="#cb23-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-124"><a href="#cb23-124" aria-hidden="true" tabindex="-1"></a>$$ 0.032403 \pm 1.959964 \times 0.005537 = (0.02155068, 0.04325532) $$</span>
+<span id="cb23-125"><a href="#cb23-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-126"><a href="#cb23-126" aria-hidden="true" tabindex="-1"></a>In this case, our intervals are *extremely* similar since the $t$-distribution with 2917 degrees of freedom looks extremely like the normal distribution. The 95% confidence interval is slightly wider for **1f**, which would be more pronounced if we had a much smaller sample size.</span>
+<span id="cb23-127"><a href="#cb23-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-128"><a href="#cb23-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-129"><a href="#cb23-129" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1h: CI for Slope in R</span></span>
+<span id="cb23-130"><a href="#cb23-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-131"><a href="#cb23-131" aria-hidden="true" tabindex="-1"></a>For the estimated slope, calculate a 95% confidence interval using a function in R. Which approach (in **f** or **g**) is this confidence interval most like?</span>
+<span id="cb23-132"><a href="#cb23-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-133"><a href="#cb23-133" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-134"><a href="#cb23-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-135"><a href="#cb23-135" aria-hidden="true" tabindex="-1"></a>Using <span class="in">`confint`</span> we can calculate the 95% confidence interval for our model fit in **1a**:</span>
+<span id="cb23-136"><a href="#cb23-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-139"><a href="#cb23-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-140"><a href="#cb23-140" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the confidence interval for lm first</span></span>
+<span id="cb23-141"><a href="#cb23-141" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm1)</span>
+<span id="cb23-142"><a href="#cb23-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-143"><a href="#cb23-143" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the confidence interval for glm second</span></span>
+<span id="cb23-144"><a href="#cb23-144" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(glm1)</span>
+<span id="cb23-145"><a href="#cb23-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-146"><a href="#cb23-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-147"><a href="#cb23-147" aria-hidden="true" tabindex="-1"></a>**Woah!** Shouldn't our two simple linear regression models have the *same* confidence intervals regardless of using <span class="in">`lm`</span> or <span class="in">`glm`</span>?</span>
+<span id="cb23-148"><a href="#cb23-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-149"><a href="#cb23-149" aria-hidden="true" tabindex="-1"></a>It turns out that the <span class="in">`lm`</span> function is specific to linear (regression) models. For this reason, it uses the $t$-distribution to correctly calculate the confidence interval.</span>
+<span id="cb23-150"><a href="#cb23-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-151"><a href="#cb23-151" aria-hidden="true" tabindex="-1"></a>The <span class="in">`glm`</span> function is more general since it fits generalized linear models (e.g., next semester you will learn about logistic regression, Poisson regression, etc. that are all fit with this function). Due to this generality, it assumes the standard normal distribution for its calculation of the confidence interval.</span>
+<span id="cb23-152"><a href="#cb23-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-153"><a href="#cb23-153" aria-hidden="true" tabindex="-1"></a>Which is right? Technically, both! In large samples, like we have here, the difference is fairly trivial. However, if we have small samples the approach using the $t$-distribution would technically be most appropriate.</span>
+<span id="cb23-154"><a href="#cb23-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-155"><a href="#cb23-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-156"><a href="#cb23-156" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1i: Summary for Slope</span></span>
+<span id="cb23-157"><a href="#cb23-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-158"><a href="#cb23-158" aria-hidden="true" tabindex="-1"></a>Write a brief, but complete, summary of the effect of BMI on surgery duration.</span>
+<span id="cb23-159"><a href="#cb23-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-160"><a href="#cb23-160" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-161"><a href="#cb23-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-162"><a href="#cb23-162" aria-hidden="true" tabindex="-1"></a>There is a significant association between BMI and surgery duration (p&lt;0.001). On average, surgery duration increases 0.03 hours per every 1 kg/m^2^ increase in BMI (95% CI: 0.022, 0.043 hours).</span>
+<span id="cb23-163"><a href="#cb23-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-164"><a href="#cb23-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-165"><a href="#cb23-165" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1j: Prediction</span></span>
+<span id="cb23-166"><a href="#cb23-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-167"><a href="#cb23-167" aria-hidden="true" tabindex="-1"></a>What is the estimated surgery duration for someone with a BMI of 27.5?</span>
+<span id="cb23-168"><a href="#cb23-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-169"><a href="#cb23-169" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-170"><a href="#cb23-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-171"><a href="#cb23-171" aria-hidden="true" tabindex="-1"></a>We can simply plug in $X_{1}=27.5$ to our fitted least-squares regression equation from **1b**:</span>
+<span id="cb23-172"><a href="#cb23-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-173"><a href="#cb23-173" aria-hidden="true" tabindex="-1"></a>$$ \hat{Y} = 2.71 + 0.03 \times 27.5 = 3.535 \text{ hours} $$</span>
+<span id="cb23-174"><a href="#cb23-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-175"><a href="#cb23-175" aria-hidden="true" tabindex="-1"></a>Since we rounded to fewer digits, our answers would differ from using the <span class="in">`predict`</span> function:</span>
+<span id="cb23-176"><a href="#cb23-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-179"><a href="#cb23-179" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-180"><a href="#cb23-180" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1, <span class="co"># specify model to predict from</span></span>
+<span id="cb23-181"><a href="#cb23-181" aria-hidden="true" tabindex="-1"></a>        <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">BMI=</span><span class="fl">27.5</span>)) <span class="co"># create new data frame of data to predict, here it is only 1 observation</span></span>
+<span id="cb23-182"><a href="#cb23-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-183"><a href="#cb23-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-184"><a href="#cb23-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-185"><a href="#cb23-185" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1k: Confidence Interval Around Prediction</span></span>
+<span id="cb23-186"><a href="#cb23-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-187"><a href="#cb23-187" aria-hidden="true" tabindex="-1"></a>Calculate the 95% confidence interval around the mean surgery duration for the population with a BMI of 27.5.</span>
+<span id="cb23-188"><a href="#cb23-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-189"><a href="#cb23-189" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-190"><a href="#cb23-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-191"><a href="#cb23-191" aria-hidden="true" tabindex="-1"></a>One approach is to leverage the <span class="in">`predict`</span> function in R and specify <span class="in">`interval='confidence'`</span>:</span>
+<span id="cb23-192"><a href="#cb23-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-195"><a href="#cb23-195" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-196"><a href="#cb23-196" aria-hidden="true" tabindex="-1"></a><span class="co"># prediction with 95% CI from model for BMI=27.5</span></span>
+<span id="cb23-197"><a href="#cb23-197" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1, <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">BMI=</span><span class="fl">27.5</span>), <span class="at">interval=</span><span class="st">'confidence'</span>)</span>
+<span id="cb23-198"><a href="#cb23-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-199"><a href="#cb23-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-200"><a href="#cb23-200" aria-hidden="true" tabindex="-1"></a>We are 95% confident that the mean surgery duration is between 3.53 and 3.67 hours, on average, for someone with a BMI of 27.5.</span>
+<span id="cb23-201"><a href="#cb23-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-202"><a href="#cb23-202" aria-hidden="true" tabindex="-1"></a>Another approach is to estimate the mean squared error (MSE) from our model and calculate the interval "by hand":</span>
+<span id="cb23-203"><a href="#cb23-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-206"><a href="#cb23-206" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-207"><a href="#cb23-207" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate our mean squared error</span></span>
+<span id="cb23-208"><a href="#cb23-208" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>( lm1<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> (<span class="fu">nrow</span>(dat) <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb23-209"><a href="#cb23-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-210"><a href="#cb23-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-211"><a href="#cb23-211" aria-hidden="true" tabindex="-1"></a>We must also calculate the mean and variance for BMI in our sample:</span>
+<span id="cb23-212"><a href="#cb23-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-215"><a href="#cb23-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-216"><a href="#cb23-216" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate mean; variance BMI</span></span>
+<span id="cb23-217"><a href="#cb23-217" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>( dat<span class="sc">$</span>BMI ); <span class="fu">var</span>(dat<span class="sc">$</span>BMI)</span>
+<span id="cb23-218"><a href="#cb23-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-219"><a href="#cb23-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-220"><a href="#cb23-220" aria-hidden="true" tabindex="-1"></a>Now we can use our formula to calculate the standard error of our mean surgery duration for someone with a BMI of 27.5:</span>
+<span id="cb23-221"><a href="#cb23-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-222"><a href="#cb23-222" aria-hidden="true" tabindex="-1"></a>$\begin{aligned}</span>
+<span id="cb23-223"><a href="#cb23-223" aria-hidden="true" tabindex="-1"></a>SE\left({\hat{\mu}}_{Y|X=27.5}\right) =&amp; \sqrt{\frac{\hat{\sigma}_{Y|X}^{2}}{n} + \frac{\hat{\sigma}_{Y|X}^{2}}{n-1} \left( \frac{(X_0 - \bar{X})^2}{\hat{\sigma}_{X}^{2}} \right)} <span class="sc">\\</span></span>
+<span id="cb23-224"><a href="#cb23-224" aria-hidden="true" tabindex="-1"></a>=&amp; \sqrt{\frac{3.743385}{2919} + \frac{3.743385}{2918} \left( \frac{(27.5-27.00055)^2}{41.85108} \right)} <span class="sc">\\</span></span>
+<span id="cb23-225"><a href="#cb23-225" aria-hidden="true" tabindex="-1"></a>\approx&amp; 0.0359175</span>
+<span id="cb23-226"><a href="#cb23-226" aria-hidden="true" tabindex="-1"></a>\end{aligned}$</span>
+<span id="cb23-227"><a href="#cb23-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-228"><a href="#cb23-228" aria-hidden="true" tabindex="-1"></a>Then we can calculate our 95% confidence interval, considering $t_{2919-2,0.975}=1.960778$, our 95% CI is</span>
+<span id="cb23-229"><a href="#cb23-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-230"><a href="#cb23-230" aria-hidden="true" tabindex="-1"></a>$$ 3.535 \pm 1.960778(0.0359175) = (3.465, 3.606) $$</span>
+<span id="cb23-231"><a href="#cb23-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-232"><a href="#cb23-232" aria-hidden="true" tabindex="-1"></a>*Note, rounding at various steps leads to the similar, but different, interval from what R precisely returns.*</span>
+<span id="cb23-233"><a href="#cb23-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-234"><a href="#cb23-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-235"><a href="#cb23-235" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1l: Prediction Interval Around Prediction</span></span>
+<span id="cb23-236"><a href="#cb23-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-237"><a href="#cb23-237" aria-hidden="true" tabindex="-1"></a>Calculate the 95% prediction interval around the mean surgery duration for a single individual with a BMI of 27.5.</span>
+<span id="cb23-238"><a href="#cb23-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-239"><a href="#cb23-239" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-240"><a href="#cb23-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-241"><a href="#cb23-241" aria-hidden="true" tabindex="-1"></a>One approach is to leverage the <span class="in">`predict`</span> function in R and specify <span class="in">`interval='predict'`</span>:</span>
+<span id="cb23-242"><a href="#cb23-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-245"><a href="#cb23-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-246"><a href="#cb23-246" aria-hidden="true" tabindex="-1"></a><span class="co"># prediction with 95% CI from model for BMI=27.5</span></span>
+<span id="cb23-247"><a href="#cb23-247" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1, <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">BMI=</span><span class="fl">27.5</span>), <span class="at">interval=</span><span class="st">'predict'</span>)</span>
+<span id="cb23-248"><a href="#cb23-248" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-249"><a href="#cb23-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-250"><a href="#cb23-250" aria-hidden="true" tabindex="-1"></a>We are 95% confident that the surgery duration for an individual with a BMI of 27.5 is between -0.20 and 7.39 hours.</span>
+<span id="cb23-251"><a href="#cb23-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-252"><a href="#cb23-252" aria-hidden="true" tabindex="-1"></a>This prediction interval must have the assumption or normality met (i.e., we are not leveraging the central limit theorem like we are for the 95% confidence interval estimating the mean). And given the greater variability involved, we see here that we also have a non-nonsensical negative surgery duration.</span>
+<span id="cb23-253"><a href="#cb23-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-254"><a href="#cb23-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-255"><a href="#cb23-255" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1m: Scattplot and Fitted Line</span></span>
+<span id="cb23-256"><a href="#cb23-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-257"><a href="#cb23-257" aria-hidden="true" tabindex="-1"></a>Create a scatterplot with the fitted linear regression line.</span>
+<span id="cb23-258"><a href="#cb23-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-259"><a href="#cb23-259" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-260"><a href="#cb23-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-261"><a href="#cb23-261" aria-hidden="true" tabindex="-1"></a>One option is to create this with base R graphics and use <span class="in">`abline`</span> to automatically add the fitted regression line:</span>
+<span id="cb23-262"><a href="#cb23-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-265"><a href="#cb23-265" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-266"><a href="#cb23-266" aria-hidden="true" tabindex="-1"></a><span class="co"># Create scatterplot</span></span>
+<span id="cb23-267"><a href="#cb23-267" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat<span class="sc">$</span>BMI, <span class="at">y=</span>dat<span class="sc">$</span>DurationSurgery, <span class="at">xlab=</span><span class="fu">expression</span>(BMI<span class="sc">~</span>(kg<span class="sc">/</span>m<span class="sc">^</span><span class="dv">2</span>)), <span class="at">ylab=</span><span class="st">'Surgery Duration (hours)'</span> )</span>
+<span id="cb23-268"><a href="#cb23-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-269"><a href="#cb23-269" aria-hidden="true" tabindex="-1"></a><span class="co"># Add regression fit</span></span>
+<span id="cb23-270"><a href="#cb23-270" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(lm1, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'orangered2'</span>)</span>
+<span id="cb23-271"><a href="#cb23-271" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-272"><a href="#cb23-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-273"><a href="#cb23-273" aria-hidden="true" tabindex="-1"></a>We can see from our scatterplot and fitted regression line that there does appear to be a slight positive trend as BMI increases with respect to surgery duration. Additionally, there are some potential observations that seem very different from much of the data (which we will discuss how to handle more towards the end of the semester).</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

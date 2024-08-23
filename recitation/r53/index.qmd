@@ -1,0 +1,35 @@
+---
+title: "Is It Possible to Tell The Role of a Variable (e.g., PEV, Confounder, etc.) From the Regression Model?"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# The Role of a Variable
+
+Is it possible to determine the role a variable might be used for by simply looking at a single regression model (either the model written out, its line of code, the corresponding output, etc.)?
+
+**Short answer: no.** Unfortunately, if we are only given a single model with no context, we have no way of knowing what role each variable plays. Is it the primary explanatory variable, a confounder, a mediator, a precision variable, or some other special type of role we haven't even touched on yet?
+
+Part of this challenge is because the mathematics/code behind the scene for any given model do not take into account if something is serving a specific role. Rather, the formulas we've derived simply take the data and work to provide our estimates for the beta coefficients, their standard errors, etc.
+
+If we are given a little more context or multiple models to work with, we may be able to infer certain questions that are being asked or that a certain variable appears in every single one, but even then we know the specific question(s) being asked may be ambiguous (e.g., the models used for confounding and mediation are the same).
+
+Truly, this touches more on statistics as an art than a strict scientific or mathematical application.
+

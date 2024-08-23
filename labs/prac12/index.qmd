@@ -1,0 +1,118 @@
+---
+title: "Week 12 Practice Problems"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page includes optional practice problems, many of which are structured to assist you on the homework with [Solutions provided on a separate page](/labs/prac12s/index.qmd). Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.
+
+This week's extra practice exercises focus on model/variable selection and examining the potential for influential points.
+
+
+# Exercise 1: Influential Points/Outliers
+
+In our [lecture on influential points/outliers](https://www.youtube.com/watch?v=3XUo2b38e6E) we had an example called `oildat` with 21 observations. The last slide had practice problems that we will examine in further detail here. We can create the data set with the following code:
+
+```{r}
+oildat <- data.frame(
+  X = c(150,112.26,125.2,105.31,113.35,114.08,115.68,107.8,97.27,102.35,111.44,120.34,98.4,119.52,116.84,106.52,124.16,124.04,130.47,104.86,133.61),
+  Y = c(90,90.01,99.47,76.76,75.36,93.7,88.72,80.41,68.96,79.33,92.79,93.98,82.51,88.31,92.95,86.93,92.31,105.15,107.19,88.75,97.54)
+)
+```
+
+For each scenario, complete the following:
+
+1. Create a scatterplot of the data with the linear regression fit
+2. Calculate the leverage, jackknife residual, DFFITS, DFBETAS, and Cook's distance with the corresponding figures from lecture (e.g., using the `olsrr` package)
+
+## 1a: Replicating the Lecture Results
+
+Using the observed data, recreate the results from our slides.
+
+## 1b: Modification 1
+
+Replace first row of data with (X,Y)=(150, 115). Confirm the first observation is not an outlier, has little influence, and has high leverage.
+
+
+## 1c: Modification 2
+
+Replace first row of data with (X,Y)=(114, 115). Confirm the first observation is an outlier, has little influence, and has low leverage.
+
+
+## 1d: Modification 3
+
+Remove the first row of data. Confirm there are no outliers, influential points or leverage points.
+
+
+
+# Exercise 2: Model and Variable Selection for a Real Dataset
+
+We will explore the various model selection and variable selection approaches with the blood storage data set loaded into R using:
+
+```{r}
+dat <- read.csv('../../.data/Blood_Storage.csv')
+```
+
+For our example, we will consider the outcome of preoperative prostate specific antigen (PSA) (`PreopPSA`) with predictors for age (`Age`), prostate volume in grams (`Pvol`), tumor volume (`Tvol` as 1=low, 2=medium, 3=extensive), and biopsy Gleason score (`bGS` as 1=score 0-6, 2=score 7, 3=score 8-10).
+
+## 2a: Model Selection Approaches
+
+Using all subsets regression, calculate the AIC, AICc, BIC, adjusted R^2^, and Mallows' C~p~. Identify the optimal model for each approach. *Hint: you may need to use `expand.grid`, `for` loops, or other manual coding to generate all possible models and calculate each summary.*
+
+## 2b: Variable Selection Approaches
+
+Identify the best model using forward selection, backward selection, and stepwise selection based on BIC.
+
+## 2c: Picking a Model
+
+Based on your results from the prior questions, what model would you propose to use in modeling PSA?
+
+
+
+# Exercise 3: A Simulation Study for Model Selection Approaches
+
+With our real dataset in Exercise 2 we cannot be sure what the "true" model would be. While we were fortunate most approaches were agreement for the "optimal" model, it rarely works this nicely. One way we can evaluate the performance of each of these methods is to simulate a scenario with a mixture of null and non-null predictors and see how often each variable is chosen for the model.
+
+While we can simulate increasingly complex models (e.g., interactions, polynomial terms, etc.), we will simulate a data set of $n=200$ with 20 independent predictors (i.e., no true correlation between any two predictors):
+
+* 5 continuous simulated from $N(0,1)$, where 2 are null and 3 have effect sizes of 2, 1, and 0.5
+* 5 binary simulated with $p=0.5$, where 2 are null and 3 have effect sizes of 2, 1, and 0.5
+
+Via simulation, we will be able to draw conclusions about (1) whether the strength of the effect matters or (2) if continuous or binary predictors have differences.
+
+Use the following code to generate the data for each simulation iteration assuming an intercept of -2 and $\epsilon \sim N(0,5)$ (you'll have to incorporate a seed, etc. in your own simulations):
+
+```{r, eval=F}
+n <- 200
+Xc <- matrix( rnorm(n=200*5, mean=0, sd=1), ncol=5) # simulate continuous predictors
+Xb <- matrix( rbinom(n=200*5, size=1, prob=0.5), ncol=5) # simulate binary predictors
+simdat <- as.data.frame( cbind(Xc, Xb) ) # create data frame of predictors to add outcome to
+simdat$Y <- -2 + 2*simdat$V1 + 1*simdat$V2 + 0.5*simdat$V3 + 2*simdat$V6 + 1*simdat$V7 + 0.5*simdat$V8 + rnorm(n=n, mean=0, sd=5)
+```
+
+## 3a: Power
+
+Simulate the data set and fit the full model 1,000 times using `set.seed(12521)`. Summarize the power/type I error for each variable.
+
+## 3b: The "Best" Model
+
+Simulate the data set 1,000 times using `set.seed(12521)`. For each data set identify the variables included in the optimal model for AIC, AICc, BIC, adjusted R^2^, backward selection, forward selection, stepwise selection from the null model, and stepwise selection from the full model. For model selection criteria, select the model that minimizes the criterion (i.e., we will ignore if other models might have fewer predictors but only a slightly larger criterion for sake of automating the simulation). For automatic selection models use BIC.
+
+Summarize both how often the "true" model is selected from each approach (i.e., with the 3 continuous and 3 categorical predictors that are non-null), as well as how often each variable was selected more generally. Does one approach seem better overall? On average? 
+
+

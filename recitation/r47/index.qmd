@@ -1,0 +1,164 @@
+---
+title: "Categorical Predictors in Linear Regression"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Considerations with Categorical Predictors
+
+When working with categorical variables, we have a host of options for how to incorporate them into a statistical model (i.e., how to code them up for their prime time debut in the model):
+
+* Indicator variables (also known as dummy coding): levels of 0 or 1 for each variable (reference group is generally all 0's) *[What I generally use in practice]*
+* Effect coding: levels of -1, 0, or 1 for each variable (reference group is represented by all -1's) *[I have never used this myself in practice]*
+* Continuous modeling: treating the "categories" as a continuous predictor (no reference group) *[This makes a strong assumption that the difference between levels are "equal", but sometimes it can be useful for Likert-type variables]*
+
+Indicator variables then have a few formulations, two of the more common ones are:
+
+* Reference Cell Models
+* Cell Means Models
+
+We'll walk through a few questions and considerations for each of these.
+
+
+## How is the reference group accounted for?
+
+For this question we will assume we are working with the *reference cell model* formulation. Let's use our carotenoids example from HW9 to illustrate how this works for the model with only smoking status.
+
+First, let's remind ourselves of the mean plasma beta-carotene levels:
+
+```{r, warning=FALSE, message=F}
+library(doBy)
+carotenoids <- read.table('../../.data/carotenoids.dat')
+colnames(carotenoids) <- c('age','sex','smoke','bmi','vitamins','calories','fat',
+                    'fiber','alcohol','chol','betadiet','retdiet','betaplas','retplas')
+
+carotenoids$smoke_factor <- factor(carotenoids$smoke, levels=c(1,2,3),
+                            labels=c('Never','Former','Current'))
+
+summaryBy( betaplas ~ smoke_factor, data=carotenoids )
+```
+
+For the reference cell model, we select one of our smoking groups to be the reference, which all other groups are compared to. Let's use never smokers, like before, as our reference group. The indicator variables in this case would be
+
+| Group   | $I_N$ | $I_F$ | $I_C$ |
+|---------|:--:|:--:|:--:|
+| Never   |  1 |  0 |  0 |
+| Former  |  0 |  1 |  0 |
+| Current |  0 |  0 |  1 |
+
+The *expected* regression model is then
+
+$$ E[Y] = \beta_0 + \beta_1 I_{F} + \beta_{2} I_{C} $$
+
+where $I_F$ and $I_C$ are indicator variables for being a former smoker or current smoker, respectively. If $I_F = I_C = 0$, then someone must be in the reference group and is a never smoker.
+
+If we fit the model and look at the coefficients we can make a direct connection to our mean levels within each group:
+
+```{r}
+summary(lm(betaplas ~ smoke_factor, data=carotenoids))$coefficients
+```
+
+1. We see that $\hat{\beta}_0=206.05096$ is our group mean! This makes sense given our interpretation of the intercept as the expected mean outcome when all predictors are equal to 0.
+2. Our estimated slope coefficients, $\hat{\beta}_{1}$ and $\hat{\beta}_{2}$, then represent the *difference* in the mean plasma beta-carotene from the reference category. For example, $\hat{\beta}_0 + \hat{\beta}_1 = 206.05096 + (-12.58139) = 193.4696$, our estimated mean plasma beta-carotene levels for former smokers! Likewise, $\hat{\beta}_0 + \hat{\beta}_2 = 206.05096 + (-84.72537) = 121.3256$, the estimated mean for current smokers.
+
+
+## What category should be my reference?
+
+This question comes up often when working with collaborators, and we may ourselves wonder what makes the most sense. The good news, mathematically we have the same information included regardless of the choice of reference category! Essentially, the *perspective* of our results is what changes (i.e., beta coefficients, p-values, etc. will change to reflect whatever the reference category is), but changing a reference category won't affect the actual significance (e.g., if never versus former smokers was not significant in the original model, it won't be in a subsequent model either).
+
+Let's fit all the possible combinations, and see the equivalence firsthand:
+
+```{r}
+carotenoids$smoke_factor2 <- factor(carotenoids$smoke, levels=c(2,3,1),
+                            labels=c('Former','Current','Never'))
+carotenoids$smoke_factor3 <- factor(carotenoids$smoke, levels=c(3,2,1),
+                            labels=c('Current','Former','Never'))
+
+c1 <- round(summary(lm(betaplas ~ smoke_factor, data=carotenoids))$coefficients,4)
+c2 <- round(summary(lm(betaplas ~ smoke_factor2, data=carotenoids))$coefficients,4)
+c3 <- round(summary(lm(betaplas ~ smoke_factor3, data=carotenoids))$coefficients,4)
+
+c_tab <- rbind('',c1, '', c2, '', c3)
+rownames(c_tab) <- c('Reference Group: Never', rownames(c1), 'Reference Group: Former', rownames(c2), 'Reference Group: Current', rownames(c3))
+
+library(kableExtra)
+kbl(c_tab, col.names=c('Estimate','SE','t','p-value'), align='cccc', escape=F) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")# print a formatted table
+```
+
+Notice how the point estimates are the the same number (but differ by + or -) across models depending on the reference category. Similarly, the p-values are the same as well for any similar pairwise comparison.
+
+For *nominal* variables (i.e., categorical with no ordering) and *ordinal* variables (i.e., categorical with an ordering), your choice of reference will be driven by the question at hand. For ordinal variables, it can be helpful to choose the lowest or highest category since there is (hopefully) a linear trend across categories that will be evident from the regression results.
+
+In future weeks we will also discuss **contrasts** as a method we can use to calculate different summaries, but one nice workaround can be to refit the model with different reference categories to better align with the perspective expected or desired.
+
+
+## Can I reduce the number of groups?
+
+When we start with a data analysis, we might initially have $G$ groups. With our reference cell model, assuming we include all the initial groups, we would have a regression model including only the group variable with $G-1$ predictors: $\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 I_{g=1} + \hat{\beta}_2 I_{g=2} + ... + \hat{\beta}_{G-1} I_{g=G-1}$. 
+
+But the question remains, do I *need* all these groups? Here are a few things to consider:
+
+1. First, is it reasonable clinically/biologically/contextually to collapse *any* of the groups together? For example, with smoking it might sense to collapse "Former" smokers with either group depending on if we are interested in (1) history of any smoking (Never vs. Former/Current) or (2) current behavior (Never/Former vs. Current). If we think the history of smoking, even without being a current smoker, is important we **should not** combine those groups unless there is a very compelling reason.
+2. Do we have "enough" data to use for inference? If a group has a very small sample size, we might need to combine it with a different group to successfully fit certain models or have confidence in our inference. If we keep the small group size and the model, one of the biggest impacts will be a less precise standard error estimate (and therefore a smaller test statistic and p-value since the CLT directly connects the sample size with $\frac{\sigma}{\sqrt{n}}$).
+3. Is there concerns about reducing the degrees of freedom we are "spending" on all our predictors? For example, we know that our $t$-tests in our regression model for the coefficient table rely on a $t_{n-p-1}$ distribution. Obviously, we cannot have more predictors than $n-1$ since we'd have 0 degrees of freedom, but even if we leave a few degrees of freedom behind, it can still impact our power to detect the results (i.e., $t$-distributions with fewer degrees of freedom have fatter tails). If we can reduce the number of categories, we have more degrees of freedom to use for either other predictors or to have a more normal-like distribution for reference.
+
+Again, one of the most sensible ways to combine groups is to use the scientific/contextual motivation. We can also consider combining groups that we identify as not being significantly different from one another when making a pairwise comparison. HOWEVER:
+
+* By combining groups it will alter the estimates and comparisons with the other (remaining) groups that are affected by sample size. For example, $n=3$ won't really impact the mean estimate for a group with $n=1000$.
+* If we have small sample sizes, we may be underpowered to detect a group difference and would combine groups just because "$p>0.05$".
+
+
+## Cells means model formulation, interpretation, and use
+
+The cell means model makes the connection between the mean levels within a group more explicit. In this approach we would exclude the intercept and include an indicator variable for each group:
+
+```{r}
+cell_means <- lm(betaplas ~ smoke_factor - 1, data=carotenoids)
+summary(cell_means)$coefficients
+```
+
+In the model above, we see that the "reference" category from our reference cell model is now included as one of the predictors. We can also note that all the estimated coefficients represent the means for each smoking group!
+
+The *fitted* regression model would be
+$$ \hat{Y} = 206.0510 I_N + 193.4696 I_F + 121.3256 I_C  $$
+
+The cell means model makes a more direct connection to the one-way ANOVA we've also seen (since we're only considering categorical variables here). However, we can also get the same estimates, as we saw before, with a reference cell model by combining our different estimated $\hat{\beta}$'s.
+
+
+### An Example of Using Cell Means
+
+In practice, I've only recommend a cell means model one time. The investigator wanted to summarize the mean level of response to a hearing test across a combination of gerbil age (young vs. old) and sound setting (three levels) and compare if each response was equal to 0, where in this case the response of 0 indicated a null effect of the combination. The cell means model made this extremely intuitive since it combined the two factors and provided that exact hypothesis test from the $t$-test.
+
+For example, if we look at our plasma concentration for those under 50 years old vs. over 50 years old with smoking status, we would have:
+
+```{r}
+carotenoids$AK_age_gte50 <- carotenoids$age >= 50
+
+# Calculate means by groups
+summaryBy( betaplas ~ AK_age_gte50*smoke_factor, data=carotenoids)
+
+# Fit cell means model with all groups
+coef(lm( betaplas ~ AK_age_gte50:smoke_factor - 1, data=carotenoids))
+```
+
+
+
+

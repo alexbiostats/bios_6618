@@ -1,0 +1,79 @@
+---
+title: "Tests of Association for 2x2 Tables"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Tests of Association for 2x2 Tables
+ 
+One of our lectures was on "Categorical Data: Tests of Association" and focused on ways we can test for associations within 2x2 tables. We focused on five different tests:
+
+* Chi-squared test *without continuity correction*
+* Chi-squared test *with Yates' continuity correction*
+* Fisher's exact test
+* Barnard's exact test
+* McNemar's paired test
+
+We'll briefly walk through these as three general groups of tests and then provide some guidance on how these can be selected for an analysis in practice.
+
+## Chi-Squared Tests
+
+The original statistic proposed by Karl Pearson is 
+
+$$ X^2 = \sum_{i=1}^{2} \sum_{j=1}^{2} \frac{(O_{ij}-E_{ij})^2}{E_{ij}} \sim \chi^{2}_{1},  $$
+
+where the $\chi^{2}_{1}$ is the square of a standard normal distribution, i.e $\chi_{1}^{2} = Z^{2}$.
+
+However, because we are applying a continuous distribution to discrete data, we often use the Yates-corrected version that corrects for continuity:
+
+$$ X^2 = \sum_{i=1}^{2} \sum_{j=1}^{2} \frac{(|O_{ij}-E_{ij}| - 0.5)^2}{E_{ij}} \sim \chi^{2}_{1}  $$
+
+Both versions have the same assumptions that must be met: *all of the expected values must be greater than or equal to 5* and *the two samples are independent*. This is because for these test statistics, we are calculating significance (e.g., p-values) based on *asymptotic properties*. This means we have confidence in our assumption that the test statistic is truly distributed as a $\chi^2_{1}$ distribution. If this is violated, it is a good sign that we should examine use of other testing strategies (e.g., exact tests below, permutation tests, etc.).
+
+
+
+## Exact Tests
+
+If we notice that our assumption for the chi-squared test having at least 5 in each expected cell calculation is violated, we can use exact tests that are not based on approximations. Two different tests were discussed in our lecture slides: Fisher's and Barnard's exact tests.
+
+Fisher's exact test calculates an *exact* p-value based on the hypergeometric distribution. Barnard's test will calculate an *exact* p-value from either a multinomial, binomial, or hypergeometric distribution depending on the study design being a cross-sectional study, case-control study, or one that stops after a set number of events has been observed, respectively.
+
+Since they work on calculating the exact probability, it can be computationally burdensome as the sample size increases to use exact tests. However, we can show that as the sample size increases, the resulting p-values tend to converge to what we would observe for the chi-squared test. This helps us identify that if we meet the assumptions of a chi-squared test, especially if we have larger sample sizes, we can just use the computationally less intense asymptotic tests.
+
+
+## Paired Data Tests
+
+If our assumption of samples being independent is violated, we cannot use the chi-squared test of independence. This could occur if our study design involved matching two participants to belong to two separate groups (e.g., matching by age/sex/disease severity for participants in a study) or because the test if conducted on the same participant (e.g., a cross-over trial where participants receive both treatments).
+
+To address this violation of the independence assumption, we need to use a test that accounts for the dependent nature of the data. McNemar's test is one such test. If you have a small sample (e.g., the number of discordant pairs that have different outcomes is <20) we can calculate an exact p-value using an exact binomial test, whereas if you have a "large" sample (e.g., >20 discordant pairs) we can use *asymptotic* theory to essentially conduct a chi-squared test.
+
+
+## How to Choose What to Use
+
+Many times when we are doing an analysis, we realize that there is not a single method that is "right" to use, but multiple choices. A good example of this is that if we have enough computation power to compare some exposure between two independent samples, we could run a Fisher's exact test *or* a chi-squared test (with our without continuity correction) and have both approaches be perfectly valid.
+
+This can lead to the very true concept that statistics is just as much art as science. If you are doing an analysis, some things to keep in mind that might help choose the best method(s):
+
+* **Are my assumptions met?** If not, don't do the test! (Or at least run some simulations to identify what are the implications of the violated assumptions.)
+* **What is the most parsimonious?** Parsimony in statistics is the idea that we should choose the simplest model or approach for addressing a given question. If you have multiple variables to test for independence/association, you might choose to use Fisher's exact tests for all of them to keep it simple when presenting your results (versus noting chi-squared versus Fisher's exact tests used depending on modeling assumptions). When we transition to linear regression, we'll see this concept also apply to reducing the complexity of the chosen regression model.
+* **What are the existing customs or practices in this discipline?** In certain cases, if multiple approaches are equally valid, you may consider seeing if the field has a standard approach they like to use. As long as it doesn't violate our assumptions and we don't think it is overly complex for a given scenario, we might elect to use what others are familiar with to avoid potential confusion.
+
+
+

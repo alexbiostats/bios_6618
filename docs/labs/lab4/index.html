@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alex Kaizer">
+
+<title>Alex Kaizer - Week 4 Lab</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/academicons-1.9.1/css/academicons.css" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="./files/favicon.ico">
+
+<script type="text/javascript">
+function setBrand() {
+document.getElementsByClassName("navbar-brand")[0].href="https://www.alexkaizer.com";
+}
+window.onload = setBrand;
+</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5PBG7BL207"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5PBG7BL207');
+</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Alex Kaizer</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/research" rel="" target="">
+ <span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/publications" rel="" target="">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Teaching</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching">    
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/teaching" rel="" target="">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6618" rel="" target="">
+ <span class="dropdown-text">BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6611" rel="" target="">
+ <span class="dropdown-text">BIOS 6611</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/study_design_berd" rel="" target="">
+ <span class="dropdown-text">BERD Study Design Short Course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/adaptivetrials_sc" rel="" target="">
+ <span class="dropdown-text">WNAR Adaptive and Bayesian Clinical Trial Design Short Course</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bios-6618" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">BIOS 6618</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-bios-6618">    
+        <li>
+    <a class="dropdown-item" href="../../index.html" rel="" target="">
+ <span class="dropdown-text">Home</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../bios_6618_materials" rel="" target="">
+ <span class="dropdown-text">Materials</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../journal_of_bios_6618" rel="" target="">
+ <span class="dropdown-text">Journal of BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../recitation" rel="" target="">
+ <span class="dropdown-text">Recitation Questions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs" rel="" target="">
+ <span class="dropdown-text">Labs and Practice Problems</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:alex.kaizer@cuanschutz.edu" rel="" target=""><i class="bi bi-envelope" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=ICpH74EAAAAJ&amp;hl=en" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-google-scholar ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="http://github.com/alexbiostats" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/files/Alex_CV.pdf" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-cv ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/alex-kaizer/" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#whats-on-the-docket-this-week" id="toc-whats-on-the-docket-this-week" class="nav-link active" data-scroll-target="#whats-on-the-docket-this-week">What’s on the docket this week?</a></li>
+  <li><a href="#the-ggplot2-package" id="toc-the-ggplot2-package" class="nav-link" data-scroll-target="#the-ggplot2-package">The <code>ggplot2</code> Package</a></li>
+  <li><a href="#using-r-for-power-and-sample-size" id="toc-using-r-for-power-and-sample-size" class="nav-link" data-scroll-target="#using-r-for-power-and-sample-size">Using <code>R</code> for Power and Sample Size</a>
+  <ul class="collapse">
+  <li><a href="#scenario-1---known-sigma-find-power" id="toc-scenario-1---known-sigma-find-power" class="nav-link" data-scroll-target="#scenario-1---known-sigma-find-power">Scenario 1 - Known <span class="math inline">\(\sigma\)</span>, Find Power</a></li>
+  <li><a href="#equivalent-of-qplot" id="toc-equivalent-of-qplot" class="nav-link" data-scroll-target="#equivalent-of-qplot">Equivalent of <code>qplot</code></a></li>
+  <li><a href="#scenario-2---unknown-sigma-find-power" id="toc-scenario-2---unknown-sigma-find-power" class="nav-link" data-scroll-target="#scenario-2---unknown-sigma-find-power">Scenario 2 - Unknown <span class="math inline">\(\sigma\)</span>, Find Power</a></li>
+  <li><a href="#can-power.t.test-take-vectors" id="toc-can-power.t.test-take-vectors" class="nav-link" data-scroll-target="#can-power.t.test-take-vectors">Can <code>power.t.test</code> Take Vectors</a></li>
+  <li><a href="#scenario-3---unknown-sigma-find-n" id="toc-scenario-3---unknown-sigma-find-n" class="nav-link" data-scroll-target="#scenario-3---unknown-sigma-find-n">Scenario 3 - Unknown <span class="math inline">\(\sigma\)</span>, Find N</a></li>
+  <li><a href="#scenario-4---unknown-sigma-find-detectable-difference" id="toc-scenario-4---unknown-sigma-find-detectable-difference" class="nav-link" data-scroll-target="#scenario-4---unknown-sigma-find-detectable-difference">Scenario 4 - Unknown <span class="math inline">\(\sigma\)</span>, Find Detectable Difference</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Week 4 Lab</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Alex Kaizer </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Colorado-Anschutz Medical Campus
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This page is part of the University of Colorado-Anschutz Medical Campus’ <a href="../../labs/index.html">BIOS 6618 Labs</a> collection, the mini-lecture content delivered at the start of class before breaking out into small groups to work on the homework assignment.</p>
+<section id="whats-on-the-docket-this-week" class="level1">
+<h1>What’s on the docket this week?</h1>
+<p>In Week 4 we are providing examples of coding in R for power calculations in different settings. We will also further introduce the use of the <code>ggplot2</code> package for creating plots of our power calculations.</p>
+</section>
+<section id="the-ggplot2-package" class="level1">
+<h1>The <code>ggplot2</code> Package</h1>
+<p>The <code>ggplot2</code> package helps to implement the “Grammar of Graphics” in R. It provides a nice framework for generating graphics that share a common structure (i.e., so you don’t have to refresh yourself on how 20 different graphics functions work with different arguments, settings, etc.). Like anything in R, though, it can have a bit of a steep learning curve.</p>
+<p>We aren’t going to delve too deeply into nitty-gritty of <code>ggplot()</code> (at least not in this lab), but there are a variety of sources out there that provide information on how to use and set-up plotting with <code>ggplot2</code>:</p>
+<ul>
+<li><a href="https://bookdown.org/agrogankaylor/quick-intro-to-ggplot2/quick-intro-to-ggplot2.html">This bookdown source</a> provides a nice primer on how <code>ggplot2</code> works and what the different components are</li>
+<li><a href="https://uc-r.github.io/ggplot_intro">The UC Business Analytics R Programming Guide</a> includes more examples of the set-up and how to make different figure types or modifications.</li>
+</ul>
+<p>One function that can help in applying the <code>ggplot()</code> function is the <code>qplot()</code> function, which serves as wrapper shortcut for those more familiar with building graphics with the base <code>plot()</code> function. You’ll see it used below for creating our plots.</p>
+</section>
+<section id="using-r-for-power-and-sample-size" class="level1">
+<h1>Using <code>R</code> for Power and Sample Size</h1>
+<p>We will consider different scenarios for testing a single mean (i.e., using a one-sample Z-test or a one-sample t-test with <span class="math inline">\(H_0: \mu_0 = 0\)</span>):</p>
+<ol type="1">
+<li><p><span class="math inline">\(\sigma=10\)</span> (known);<span class="math inline">\(N=15,20,25\)</span>; detectable difference between null and alternative means from -15 to 15; <span class="math inline">\(\alpha=0.01,0.05,0.10\)</span> (two-sided). <em>Find the power.</em></p></li>
+<li><p><span class="math inline">\(s=10\)</span> (<span class="math inline">\(\sigma\)</span> unknown);<span class="math inline">\(N=15,20,25\)</span>; detectable difference between null and alternative means from -15 to 15; <span class="math inline">\(\alpha=0.01,0.05,0.10\)</span> (two-sided). <em>Find the power.</em></p></li>
+<li><p><span class="math inline">\(s=10\)</span> (<span class="math inline">\(\sigma\)</span> unknown); detectable difference between null and alternative means from 5 to 10; <span class="math inline">\(\alpha=0.01,0.05,0.10\)</span> (two-sided); <span class="math inline">\(1-\beta=\text{Power}=0.80,0.90,0.95\)</span>. <em>Find N.</em></p></li>
+<li><p><span class="math inline">\(s=10\)</span> (<span class="math inline">\(\sigma\)</span> unknown); <span class="math inline">\(N=15,20,25\)</span>, <span class="math inline">\(\alpha=0.01,0.05,0.10\)</span> (two-sided); <span class="math inline">\(1-\beta=\text{Power}=0.80,0.90,0.95\)</span>. <em>Find the detectable difference between null and alternative means.</em></p></li>
+</ol>
+<p>For each scenario we will plot our values using the <code>ggplot2</code> package to visualize the differences across all the combinations.</p>
+<section id="scenario-1---known-sigma-find-power" class="level2">
+<h2 class="anchored" data-anchor-id="scenario-1---known-sigma-find-power">Scenario 1 - Known <span class="math inline">\(\sigma\)</span>, Find Power</h2>
+<p><span class="math inline">\(\sigma=10\)</span> (known);<span class="math inline">\(N=15,20,25\)</span>; detectable difference between null and alternative means from -15 to 15; <span class="math inline">\(\alpha=0.01,0.05,0.10\)</span> (two-sided). <em>Find the power.</em></p>
+<p>From our lecture slides we know that</p>
+<p><span class="math display">\[ Z_{1-\beta} = \frac{|\mu_0 - \mu_1|}{se(\bar{X})} - Z_{1-\frac{\alpha}{2}} \]</span></p>
+<p>However, in this form we have to do a few more steps to get the <em>power</em> and not just <span class="math inline">\(Z_{1-\beta}\)</span> (i.e., the value of the Z-statistic from our standard normal distribution that is at the given level of power):</p>
+<p><span class="math display">\[ 1-\beta = \Phi\left[ \frac{|\mu_0 - \mu_1|}{\sigma / \sqrt{n}} - Z_{1-\frac{\alpha}{2}} \right] \]</span></p>
+<p>In R it is easiest to program our own function from the equations provided in this lecture to calculate the power for our two-sided Z:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write function to calculate the power given the detectable difference, SD, N, and alpha</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>findPowerZ <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">diff =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">10</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>) { </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    z.alpha <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> (alpha<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    power <span class="ot">&lt;-</span> <span class="fu">pnorm</span>( <span class="fu">abs</span>(diff) <span class="sc">/</span> (sd<span class="sc">/</span><span class="fu">sqrt</span>(n) ) <span class="sc">-</span> z.alpha)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(power)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>For example, we can calculate what our power would be if we observed a detectable difference of either 5 or -5 when <span class="math inline">\(\sigma=10\)</span>, <span class="math inline">\(N=20\)</span>, <span class="math inline">\(\alpha=0.05\)</span>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate power for a detectable difference of 5</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">findPowerZ</span>( <span class="at">diff=</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">10</span>, <span class="at">n=</span><span class="dv">20</span>, <span class="at">alpha=</span><span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6087659</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate power for a detectable difference of -5</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">findPowerZ</span>( <span class="at">diff=</span><span class="sc">-</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">10</span>, <span class="at">n=</span><span class="dv">20</span>, <span class="at">alpha=</span><span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6087659</code></pre>
+</div>
+</div>
+<p>Note that they result in the same power because the normal distribution is symmetric and we assume that <span class="math inline">\(H_0: \mu_0=0\)</span>.</p>
+<p>We can leverage the <code>expand.grid()</code> function to more easily identify all combinations of <span class="math inline">\(n\)</span>, <span class="math inline">\(\alpha\)</span>, and our detectable difference (279 in total) to then loop through and calculate the power:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set standard deviation at desired value and create data frame with expand.grid for all combinations of parameters of interest</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>stdev <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>powers <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">n=</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">25</span>), <span class="at">alpha=</span><span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">diff=</span>(<span class="sc">-</span><span class="dv">15</span><span class="sc">:</span><span class="dv">15</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new column to save results of power</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>powers<span class="sc">$</span>power <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each row (i.e., combination) and calculate the power achieved</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(powers)){ </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">findPowerZ</span>(<span class="at">n =</span> powers<span class="sc">$</span>n[i], <span class="at">alpha =</span> powers<span class="sc">$</span>alpha[i], <span class="at">diff =</span> powers<span class="sc">$</span>diff[i], <span class="at">sd =</span> stdev)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    powers<span class="sc">$</span>power[i] <span class="ot">&lt;-</span> p</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># View the first 6 rows</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(powers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   n alpha diff     power
+1 15  0.01  -15 0.9993889
+2 20  0.01  -15 0.9999820
+3 25  0.01  -15 0.9999996
+4 15  0.05  -15 0.9999408
+5 20  0.05  -15 0.9999990
+6 25  0.05  -15 1.0000000</code></pre>
+</div>
+</div>
+<p>We may remember that some functions in R are able to handle vectorized arguments (i.e., instead of looping through a vector of values of interest it can automatically calculate across all values in the vector). Here we see that skipping the <code>for</code> loop with our <code>findPowerZ</code> function results in the same power estimates:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Since our findPowerZ function uses R functions that can take vectors for their arguments, we can bypass the loop and just use our respective columns to calculate the power without a for loop:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>powers<span class="sc">$</span>power_vectorize <span class="ot">&lt;-</span> <span class="fu">findPowerZ</span>(<span class="at">n =</span> powers<span class="sc">$</span>n, <span class="at">alpha =</span> powers<span class="sc">$</span>alpha, <span class="at">diff =</span> powers<span class="sc">$</span>diff, <span class="at">sd =</span> stdev)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># check that all powers are equal (should all be TRUE)</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(powers<span class="sc">$</span>power <span class="sc">==</span> powers<span class="sc">$</span>power_vectorize)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+TRUE 
+ 279 </code></pre>
+</div>
+</div>
+<p>Now that we’ve calculated the expected power for each of the 279 combinations, we can work on plotting them in one figure. For this example we will plot our desired measure, power, on the y-axis, and the detectable difference on the x-axis.</p>
+<p>The figure will be somewhat busy, but we can help differentiate the various combinations with different line colors, line styles, and types of points. One extra step we need to complete is to tell <code>R</code> we want to treat <code>n</code> and <code>alpha</code> as factors, because as their numeric values <code>ggplot()</code> will return errors.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the ggplot2 package</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># To take advantage of the linetype, color, and shape arguments with our current data frame we need to coerce the values into factors</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>powers<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(powers<span class="sc">$</span>n)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>powers<span class="sc">$</span>alpha <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(powers<span class="sc">$</span>alpha)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the resulting power curves</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(diff, power, <span class="at">data =</span> powers, <span class="at">linetype =</span> n, <span class="at">color =</span> alpha, <span class="at">geom =</span> <span class="st">"line"</span>,<span class="at">shape =</span> n) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># add points to plot</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="co"># change plotting aesthetic/style to have black/white background with grid</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Difference"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Power"</span>) <span class="sc">+</span> <span class="co"># change axis labels</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Achievable Power vs. Difference of Means by Sample Size (N) and Alpha"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `qplot()` was deprecated in ggplot2 3.4.0.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>From this figure we can make various insights, a few of which are highlighted below:</p>
+<ul>
+<li>When we evaluate the <strong>power</strong> at <span class="math inline">\(H_0\)</span>, what we actually have summarized is the <strong>type I error rate</strong>. We can roughly observe this since the colored lines achieve the approximate <span class="math inline">\(\alpha\)</span> value when the difference is 0. Alternatively, we can look at our <code>powers</code> data frame to review the resulting power when the difference is 0. (Strictly speaking, since we were calculating power, we actually have calculated <span class="math inline">\(\frac{\alpha}{2}\)</span>…but we could solve the equation for <span class="math inline">\(Z_{1-\alpha/2}\)</span> to then solve for <span class="math inline">\(\alpha\)</span> precisely.)</li>
+<li>We can see that as <span class="math inline">\(\alpha\)</span> increases we have higher power, holding <span class="math inline">\(n\)</span> and the difference constant. This makes sense given the trade off of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> (our type I and type II errors).</li>
+<li>Similar, as <span class="math inline">\(n\)</span> increases we have higher power.</li>
+<li>We can see the combinations where we wouldn’t have desirable power (e.g., &lt;80%).</li>
+</ul>
+</section>
+<section id="equivalent-of-qplot" class="level2">
+<h2 class="anchored" data-anchor-id="equivalent-of-qplot">Equivalent of <code>qplot</code></h2>
+<p>We can also just use the direct <code>ggplot</code> functions instead of its quick plotting shortcut function:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To take advantage of the linetype, color, and shape arguments with our current data frame we need to coerce the values into factors</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>powers<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(powers<span class="sc">$</span>n)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>powers<span class="sc">$</span>alpha <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(powers<span class="sc">$</span>alpha)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the resulting power curves</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>powers, <span class="fu">aes</span>(<span class="at">x=</span>diff, <span class="at">y=</span>power, <span class="at">color=</span>alpha, <span class="at">shape=</span>n, <span class="at">linetype=</span>n)) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Difference"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Power"</span>) <span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Achievable Power vs. Difference of Means by Sample Size (N) and Alpha"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="scenario-2---unknown-sigma-find-power" class="level2">
+<h2 class="anchored" data-anchor-id="scenario-2---unknown-sigma-find-power">Scenario 2 - Unknown <span class="math inline">\(\sigma\)</span>, Find Power</h2>
+<p><span class="math inline">\(s=10\)</span> (<span class="math inline">\(\sigma\)</span> unknown);<span class="math inline">\(N=15,20,25\)</span>; detectable difference between null and alternative means from -15 to 15; <span class="math inline">\(\alpha=0.01,0.05,0.10\)</span> (two-sided). <em>Find the power.</em></p>
+<p>In this case we know that there are existing functions we can leverage to calculate our power, such as <code>power.t.test()</code>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pwrt_b <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">15</span>, <span class="at">sd =</span> <span class="dv">10</span>, <span class="at">sig.level =</span> <span class="fl">0.01</span>, <span class="at">delta =</span> <span class="sc">-</span><span class="dv">15</span>, <span class="at">type =</span> <span class="st">"one.sample"</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pwrt_b <span class="co"># print the results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     One-sample t test power calculation 
+
+              n = 15
+          delta = 15
+             sd = 10
+      sig.level = 0.01
+          power = 0.9937996
+    alternative = two.sided</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pwrt_b<span class="sc">$</span>power <span class="co"># specifically print the estimated power</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9937996</code></pre>
+</div>
+</div>
+<p>We can essentially take our code from <em>Scenario 1</em> above and replace the function with <code>power.t.test</code> to create our figure:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set standard deviation at desired value and create data frame with expand.grid for all combinations of parameters of interest</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>stdev <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>powers2 <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">n=</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">25</span>), <span class="at">alpha=</span><span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">diff=</span>(<span class="sc">-</span><span class="dv">15</span><span class="sc">:</span><span class="dv">15</span>))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new column to save results of power</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>powers2<span class="sc">$</span>power <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each row (i.e., combination) and calculate the power achieved</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(powers2)){ </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">n =</span> powers2<span class="sc">$</span>n[i], <span class="at">sig.level =</span> powers2<span class="sc">$</span>alpha[i], <span class="at">delta =</span> powers2<span class="sc">$</span>diff[i], <span class="at">sd =</span> stdev, <span class="at">power =</span> <span class="cn">NULL</span>, </span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                      <span class="at">type =</span> <span class="st">'one.sample'</span>, <span class="at">alternative =</span> <span class="st">'two.sided'</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    powers2<span class="sc">$</span>power[i] <span class="ot">&lt;-</span> p<span class="sc">$</span>power</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the ggplot2 package (in case you hadn't already)</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># To take advantage of the linetype, color, and shape arguments with our current data frame we need to coerce the values into factors</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>powers2<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(powers2<span class="sc">$</span>n)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>powers2<span class="sc">$</span>alpha <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(powers2<span class="sc">$</span>alpha)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the resulting power curves</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(diff, power, <span class="at">data =</span> powers2, <span class="at">linetype =</span> n, <span class="at">color =</span> alpha, <span class="at">geom =</span> <span class="st">"line"</span>,<span class="at">shape =</span> n) <span class="sc">+</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Difference"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Power"</span>) <span class="sc">+</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Achievable Power vs. Difference of Means by Sample Size (N) and Alpha"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We see similar results to Scenario 1, however we can see that for each combination, we have generally lower power than in Scenario 1. This is a result of the difference between assuming <em>known</em> versus <em>unknown</em> standard deviation.</p>
+</section>
+<section id="can-power.t.test-take-vectors" class="level2">
+<h2 class="anchored" data-anchor-id="can-power.t.test-take-vectors">Can <code>power.t.test</code> Take Vectors</h2>
+<p>The <code>power.t.test</code> function is able to handle our vectorized data, but we can see that it returns multiple values from the function the we could reference:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pwrt_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "n"           "delta"       "sd"          "sig.level"   "power"      
+[6] "alternative" "note"        "method"     </code></pre>
+</div>
+</div>
+<p>So we can extract whatever information we find most relevant:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract only the power</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>pwrt_b<span class="sc">$</span>power</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9937996</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract only the delta</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>pwrt_b<span class="sc">$</span>delta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract both power and delta</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>pwrt_b[<span class="fu">c</span>(<span class="st">'power'</span>,<span class="st">'delta'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$power
+[1] 0.9937996
+
+$delta
+[1] 15</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract both power and delta, but force it to be a vector and not a list</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(pwrt_b[<span class="fu">c</span>(<span class="st">'power'</span>,<span class="st">'delta'</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     power      delta 
+ 0.9937996 15.0000000 </code></pre>
+</div>
+</div>
+<p>If we just put in our vectors we get all of the quantities returned:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>stdev <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>powers2_vec <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">n=</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">25</span>), <span class="at">alpha=</span><span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">diff=</span>(<span class="sc">-</span><span class="dv">15</span><span class="sc">:</span><span class="dv">15</span>))</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>pwrt_vectorized <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">n =</span> powers2_vec<span class="sc">$</span>n, </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>                                <span class="at">sig.level =</span> powers2_vec<span class="sc">$</span>alpha, </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>                                <span class="at">delta =</span> powers2_vec<span class="sc">$</span>diff, </span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">sd =</span> stdev, </span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>                                <span class="at">power =</span> <span class="cn">NULL</span>, </span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>                                <span class="at">type =</span> <span class="st">'one.sample'</span>, </span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>                                <span class="at">alternative =</span> <span class="st">'two.sided'</span>)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>pwrt_vectorized</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     One-sample t test power calculation 
+
+              n = 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25, 15, 20, 25
+          delta = 15, 15, 15, 15, 15, 15, 15, 15, 15, 14, 14, 14, 14, 14, 14, 14, 14, 14, 13, 13, 13, 13, 13, 13, 13, 13, 13, 12, 12, 12, 12, 12, 12, 12, 12, 12, 11, 11, 11, 11, 11, 11, 11, 11, 11, 10, 10, 10, 10, 10, 10, 10, 10, 10, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15
+             sd = 10
+      sig.level = 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10, 0.01, 0.01, 0.01, 0.05, 0.05, 0.05, 0.10, 0.10, 0.10
+          power = 0.99379964, 0.99977175, 0.99999374, 0.99968449, 0.99999414, 0.99999991, 0.99994334, 0.99999923, 0.99999999, 0.98492058, 0.99904610, 0.99995370, 0.99890204, 0.99996285, 0.99999894, 0.99976298, 0.99999400, 0.99999987, 0.96672386, 0.99656180, 0.99971913, 0.99659928, 0.99980079, 0.99998997, 0.99912482, 0.99996071, 0.99999843, 0.93326751, 0.98929560, 0.99860140, 0.99061448, 0.99909540, 0.99992373, 0.99714477, 0.99978391, 0.99998523, 0.87812317, 0.97115118, 0.99427099, 0.97688373, 0.99651570, 0.99953252, 0.99175854, 0.99900034, 0.99988907, 0.79670393, 0.93249537, 0.98063807, 0.94908647, 0.98859129, 0.99768460, 0.97891618, 0.99610286, 0.99933233, 0.68910390, 0.86228289, 0.94578357, 0.89945099, 0.96815164, 0.99070503, 0.95208492, 0.98716538, 0.99677194, 0.56192862, 0.75363390, 0.87346165, 0.82130998, 0.92389872, 0.96963105, 0.90297615, 0.96417280, 0.98741901, 0.42761072, 0.61050606, 0.75174714, 0.71289906, 0.84350550, 0.91877622, 0.82425706, 0.91484955, 0.96028374, 0.30095252, 0.45011623, 0.58571735, 0.58040966, 0.72100197, 0.82072129, 0.71377695, 0.82663952, 0.89776394, 0.19441072, 0.29734431, 0.40227469, 0.43784659, 0.56448290, 0.66970136, 0.57805549, 0.69514934, 0.78338612, 0.11453654, 0.17375617, 0.23822547, 0.30284108, 0.39686955, 0.48396689, 0.43215762, 0.53181412, 0.61725900, 0.06121551, 0.08891184, 0.11957051, 0.19037733, 0.24648577, 0.30161925, 0.29495606, 0.36277965, 0.42572891, 0.02954918, 0.03952378, 0.05021130, 0.10800411, 0.13348840, 0.15876192, 0.18211929, 0.21707518, 0.25048467, 0.01283438, 0.01516757, 0.01747061, 0.05498090, 0.06241123, 0.06948589, 0.10098691, 0.11249211, 0.12326268, 0.00500000, 0.00500000, 0.00500000, 0.02500000, 0.02500000, 0.02500000, 0.05000000, 0.05000000, 0.05000000, 0.01283438, 0.01516757, 0.01747061, 0.05498090, 0.06241123, 0.06948589, 0.10098691, 0.11249211, 0.12326268, 0.02954918, 0.03952378, 0.05021130, 0.10800411, 0.13348840, 0.15876192, 0.18211929, 0.21707518, 0.25048467, 0.06121551, 0.08891184, 0.11957051, 0.19037733, 0.24648577, 0.30161925, 0.29495606, 0.36277965, 0.42572891, 0.11453654, 0.17375617, 0.23822547, 0.30284108, 0.39686955, 0.48396689, 0.43215762, 0.53181412, 0.61725900, 0.19441072, 0.29734431, 0.40227469, 0.43784659, 0.56448290, 0.66970136, 0.57805549, 0.69514934, 0.78338612, 0.30095252, 0.45011623, 0.58571735, 0.58040966, 0.72100197, 0.82072129, 0.71377695, 0.82663952, 0.89776394, 0.42761072, 0.61050606, 0.75174714, 0.71289906, 0.84350550, 0.91877622, 0.82425706, 0.91484955, 0.96028374, 0.56192862, 0.75363390, 0.87346165, 0.82130998, 0.92389872, 0.96963105, 0.90297615, 0.96417280, 0.98741901, 0.68910390, 0.86228289, 0.94578357, 0.89945099, 0.96815164, 0.99070503, 0.95208492, 0.98716538, 0.99677194, 0.79670393, 0.93249537, 0.98063807, 0.94908647, 0.98859129, 0.99768460, 0.97891618, 0.99610286, 0.99933233, 0.87812317, 0.97115118, 0.99427099, 0.97688373, 0.99651570, 0.99953252, 0.99175854, 0.99900034, 0.99988907, 0.93326751, 0.98929560, 0.99860140, 0.99061448, 0.99909540, 0.99992373, 0.99714477, 0.99978391, 0.99998523, 0.96672386, 0.99656180, 0.99971913, 0.99659928, 0.99980079, 0.99998997, 0.99912482, 0.99996071, 0.99999843, 0.98492058, 0.99904610, 0.99995370, 0.99890204, 0.99996285, 0.99999894, 0.99976298, 0.99999400, 0.99999987, 0.99379964, 0.99977175, 0.99999374, 0.99968449, 0.99999414, 0.99999991, 0.99994334, 0.99999923, 0.99999999
+    alternative = two.sided</code></pre>
+</div>
+</div>
+<p>Fortunately this is easily solved by either [1] just extracting the <code>power</code> object in the results or [2] adding <code>$power</code> to our function so it only return those values:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract results from output dump</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>powers2_vec<span class="sc">$</span>power <span class="ot">&lt;-</span> pwrt_vectorized<span class="sc">$</span>power</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rerun power.t.test to only save power</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>powers2_vec<span class="sc">$</span>power_v2 <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">n =</span> powers2_vec<span class="sc">$</span>n, </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>                                <span class="at">sig.level =</span> powers2_vec<span class="sc">$</span>alpha, </span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">delta =</span> powers2_vec<span class="sc">$</span>diff, </span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>                                <span class="at">sd =</span> stdev, </span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>                                <span class="at">power =</span> <span class="cn">NULL</span>, </span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>                                <span class="at">type =</span> <span class="st">'one.sample'</span>, </span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>                                <span class="at">alternative =</span> <span class="st">'two.sided'</span>)<span class="sc">$</span>power</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="co"># check that everything matches the for loop above</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(powers2<span class="sc">$</span>power <span class="sc">==</span> powers2_vec<span class="sc">$</span>power)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+TRUE 
+ 279 </code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(powers2<span class="sc">$</span>power <span class="sc">==</span> powers2_vec<span class="sc">$</span>power_v2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+TRUE 
+ 279 </code></pre>
+</div>
+</div>
+</section>
+<section id="scenario-3---unknown-sigma-find-n" class="level2">
+<h2 class="anchored" data-anchor-id="scenario-3---unknown-sigma-find-n">Scenario 3 - Unknown <span class="math inline">\(\sigma\)</span>, Find N</h2>
+<p><span class="math inline">\(s=10\)</span> (<span class="math inline">\(\sigma\)</span> unknown); detectable difference between null and alternative means from 5 to 10; <span class="math inline">\(\alpha=0.01,0.05,0.10\)</span> (two-sided); <span class="math inline">\(1-\beta=\text{Power}=0.80,0.90,0.95\)</span>. <em>Find N.</em></p>
+<p>We again can modify our code from above to solve for the sample size needed. But first let’s examine how we can extract the needed sample size and round up to the next whole number with the <code>ceiling()</code> function:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>pwrt_c <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">power=</span><span class="fl">0.8</span>, <span class="at">sd =</span> <span class="dv">10</span>, <span class="at">sig.level =</span> <span class="fl">0.01</span>, <span class="at">delta =</span> <span class="dv">5</span>, <span class="at">type =</span> <span class="st">"one.sample"</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>pwrt_c <span class="co"># view all output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     One-sample t test power calculation 
+
+              n = 50.0647
+          delta = 5
+             sd = 10
+      sig.level = 0.01
+          power = 0.8
+    alternative = two.sided</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(pwrt_c<span class="sc">$</span>n) <span class="co"># only extract the needed N and round up to the next whole number</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 51</code></pre>
+</div>
+</div>
+<p>We see that our estimate here is rounded up from 50.0646962 to be 51.</p>
+<p>Now let’s modify our code from Scenario 2 to solve for <span class="math inline">\(N\)</span> over differences from 5 to 10 in increments of 0.1:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set standard deviation at desired value and create data frame with expand.grid for all combinations of parameters of interest</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>stdev <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>sampsize_df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">power=</span><span class="fu">c</span>(<span class="fl">0.8</span>,<span class="fl">0.9</span>,<span class="fl">0.95</span>), <span class="at">alpha=</span><span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">diff=</span><span class="fu">seq</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="at">by=</span><span class="fl">0.1</span>) )</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new column to save results of N</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>sampsize_df<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each row (i.e., combination) and calculate the power achieved</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(sampsize_df)){ </span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="cn">NULL</span>, <span class="at">sig.level =</span> sampsize_df<span class="sc">$</span>alpha[i], <span class="at">delta =</span> sampsize_df<span class="sc">$</span>diff[i], <span class="at">sd =</span> stdev, </span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>                      <span class="at">power =</span> sampsize_df<span class="sc">$</span>power[i], <span class="at">type =</span> <span class="st">'one.sample'</span>, <span class="at">alternative =</span> <span class="st">'two.sided'</span>)</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>    sampsize_df<span class="sc">$</span>n[i] <span class="ot">&lt;-</span> <span class="fu">ceiling</span>( p<span class="sc">$</span>n )</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="co"># load the ggplot2 package (in case you hadn't already)</span></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a><span class="co"># To take advantage of the linetype, color, and shape arguments with our current data frame we need to coerce the values into factors</span></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>sampsize_df<span class="sc">$</span>power <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(sampsize_df<span class="sc">$</span>power)</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>sampsize_df<span class="sc">$</span>alpha <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(sampsize_df<span class="sc">$</span>alpha)</span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the resulting power curves</span></span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(diff, n, <span class="at">data =</span> sampsize_df, <span class="at">linetype =</span> power, <span class="at">color =</span> alpha, <span class="at">geom =</span> <span class="st">"line"</span>,<span class="at">shape =</span> power) <span class="sc">+</span></span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Difference"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Required Sample Size"</span>) <span class="sc">+</span></span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Required Sample Size (N) vs. Difference of Means by Power and Alpha"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>From this figure we can take away the conclusion that smaller detectable differences lead to a larger sample size to achieve a desired power, type I error rate, and SD.</p>
+</section>
+<section id="scenario-4---unknown-sigma-find-detectable-difference" class="level2">
+<h2 class="anchored" data-anchor-id="scenario-4---unknown-sigma-find-detectable-difference">Scenario 4 - Unknown <span class="math inline">\(\sigma\)</span>, Find Detectable Difference</h2>
+<p><span class="math inline">\(s=10\)</span> (<span class="math inline">\(\sigma\)</span> unknown); <span class="math inline">\(N=15,20,25\)</span>, <span class="math inline">\(\alpha=0.01,0.05,0.10\)</span> (two-sided); <span class="math inline">\(1-\beta=\text{Power}=0.80,0.90,0.95\)</span>. <em>Find the detectable difference between null and alternative means.</em></p>
+<p>Again, we can modify our earlier set-up from Scenarios 2 and 3 to address this question:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>pwrt_d <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">power=</span><span class="fl">0.8</span>, <span class="at">sd =</span> <span class="dv">10</span>, <span class="at">sig.level =</span> <span class="fl">0.01</span>, <span class="at">n=</span><span class="dv">15</span>, <span class="at">type =</span> <span class="st">"one.sample"</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>pwrt_d <span class="co"># view the output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     One-sample t test power calculation 
+
+              n = 15
+          delta = 10.03483
+             sd = 10
+      sig.level = 0.01
+          power = 0.8
+    alternative = two.sided</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>pwrt_d<span class="sc">$</span>delta <span class="co"># view the detectable difference only</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.03483</code></pre>
+</div>
+</div>
+<p>Let’s modify our code to create a plot of our detectable difference across the scenarios:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set standard deviation at desired value and create data frame with expand.grid for all combinations of parameters of interest</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>stdev <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>diff_df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">n=</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">25</span>), <span class="at">alpha=</span><span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">power=</span><span class="fu">c</span>(<span class="fl">0.8</span>,<span class="fl">0.9</span>,<span class="fl">0.95</span>))</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new column to save results of diff</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>diff_df<span class="sc">$</span>diff <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each row (i.e., combination) and calculate the power achieved</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(diff_df)){ </span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">n =</span> diff_df<span class="sc">$</span>n[i], <span class="at">sig.level =</span> diff_df<span class="sc">$</span>alpha[i], <span class="at">delta =</span> <span class="cn">NULL</span>, <span class="at">sd =</span> stdev, <span class="at">power =</span> diff_df<span class="sc">$</span>power[i], </span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>                      <span class="at">type =</span> <span class="st">'one.sample'</span>, <span class="at">alternative =</span> <span class="st">'two.sided'</span>)</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>    diff_df<span class="sc">$</span>diff[i] <span class="ot">&lt;-</span> p<span class="sc">$</span>delta</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a><span class="co"># load the ggplot2 package (in case you hadn't already)</span></span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a><span class="co"># To take advantage of the linetype, color, and shape arguments with our current data frame we need to coerce the values into factors</span></span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>diff_df<span class="sc">$</span>power <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(diff_df<span class="sc">$</span>power)</span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>diff_df<span class="sc">$</span>alpha <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(diff_df<span class="sc">$</span>alpha)</span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the resulting power curves</span></span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(n, diff, <span class="at">data =</span> diff_df, <span class="at">linetype =</span> power, <span class="at">color =</span> alpha, <span class="at">geom =</span> <span class="st">"line"</span>,<span class="at">shape =</span> power) <span class="sc">+</span></span>
+<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Sample Size"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Difference in Means"</span>) <span class="sc">+</span></span>
+<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Detectable Mean Difference vs. Sample Size (N) by Power and Alpha"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>In this figure we can note that for any combination of <span class="math inline">\(\alpha\)</span> and power, the smaller our sample size is, the larger our difference in means will be that we can detect. In other words, if we wanted to detect a smaller difference in means, we would need to increase our sample size if we already set the values for <span class="math inline">\(s\)</span>, <span class="math inline">\(\alpha\)</span>, and <span class="math inline">\(1-\beta\)</span> (power).</p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb45" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 4 Lab"</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a>This page is part of the University of Colorado-Anschutz Medical Campus' <span class="co">[</span><span class="ot">BIOS 6618 Labs</span><span class="co">](/labs/index.qmd)</span> collection, the mini-lecture content delivered at the start of class before breaking out into small groups to work on the homework assignment.</span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a><span class="fu"># What's on the docket this week?</span></span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a>In Week 4 we are providing examples of coding in R for power calculations in different settings. We will also further introduce the use of the <span class="in">`ggplot2`</span> package for creating plots of our power calculations.</span>
+<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a><span class="fu"># The `ggplot2` Package</span></span>
+<span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a>The <span class="in">`ggplot2`</span> package helps to implement the "Grammar of Graphics" in R. It provides a nice framework for generating graphics that share a common structure (i.e., so you don't have to refresh yourself on how 20 different graphics functions work with different arguments, settings, etc.). Like anything in R, though, it can have a bit of a steep learning curve.</span>
+<span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-31"><a href="#cb45-31" aria-hidden="true" tabindex="-1"></a>We aren't going to delve too deeply into nitty-gritty of <span class="in">`ggplot()`</span> (at least not in this lab), but there are a variety of sources out there that provide information on how to use and set-up plotting with <span class="in">`ggplot2`</span>:</span>
+<span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="co">[</span><span class="ot">This bookdown source</span><span class="co">](https://bookdown.org/agrogankaylor/quick-intro-to-ggplot2/quick-intro-to-ggplot2.html)</span> provides a nice primer on how <span class="in">`ggplot2`</span> works and what the different components are</span>
+<span id="cb45-34"><a href="#cb45-34" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="co">[</span><span class="ot">The UC Business Analytics R Programming Guide</span><span class="co">](https://uc-r.github.io/ggplot_intro)</span> includes more examples of the set-up and how to make different figure types or modifications.</span>
+<span id="cb45-35"><a href="#cb45-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-36"><a href="#cb45-36" aria-hidden="true" tabindex="-1"></a>One function that can help in applying the <span class="in">`ggplot()`</span> function is the <span class="in">`qplot()`</span> function, which serves as wrapper shortcut for those more familiar with building graphics with the base <span class="in">`plot()`</span> function. You'll see it used below for creating our plots.</span>
+<span id="cb45-37"><a href="#cb45-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-38"><a href="#cb45-38" aria-hidden="true" tabindex="-1"></a><span class="fu"># Using `R` for Power and Sample Size</span></span>
+<span id="cb45-39"><a href="#cb45-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-40"><a href="#cb45-40" aria-hidden="true" tabindex="-1"></a>We will consider different scenarios for testing a single mean (i.e., using a one-sample Z-test or a one-sample t-test with $H_0: \mu_0 = 0$):</span>
+<span id="cb45-41"><a href="#cb45-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-42"><a href="#cb45-42" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>$\sigma=10$ (known);$N=15,20,25$; detectable difference between null and alternative means from -15 to 15; $\alpha=0.01,0.05,0.10$ (two-sided). *Find the power.*</span>
+<span id="cb45-43"><a href="#cb45-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-44"><a href="#cb45-44" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>$s=10$ ($\sigma$ unknown);$N=15,20,25$; detectable difference between null and alternative means from -15 to 15; $\alpha=0.01,0.05,0.10$ (two-sided). *Find the power.*</span>
+<span id="cb45-45"><a href="#cb45-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-46"><a href="#cb45-46" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>$s=10$ ($\sigma$ unknown); detectable difference between null and alternative means from 5 to 10; $\alpha=0.01,0.05,0.10$ (two-sided); $1-\beta=\text{Power}=0.80,0.90,0.95$. *Find N.*</span>
+<span id="cb45-47"><a href="#cb45-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-48"><a href="#cb45-48" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>$s=10$ ($\sigma$ unknown); $N=15,20,25$, $\alpha=0.01,0.05,0.10$ (two-sided); $1-\beta=\text{Power}=0.80,0.90,0.95$. *Find the detectable difference between null and alternative means.*</span>
+<span id="cb45-49"><a href="#cb45-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-50"><a href="#cb45-50" aria-hidden="true" tabindex="-1"></a>For each scenario we will plot our values using the <span class="in">`ggplot2`</span> package to visualize the differences across all the combinations.</span>
+<span id="cb45-51"><a href="#cb45-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-52"><a href="#cb45-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-53"><a href="#cb45-53" aria-hidden="true" tabindex="-1"></a><span class="fu">## Scenario 1 - Known $\sigma$, Find Power</span></span>
+<span id="cb45-54"><a href="#cb45-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-55"><a href="#cb45-55" aria-hidden="true" tabindex="-1"></a>$\sigma=10$ (known);$N=15,20,25$; detectable difference between null and alternative means from -15 to 15; $\alpha=0.01,0.05,0.10$ (two-sided). *Find the power.*</span>
+<span id="cb45-56"><a href="#cb45-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-57"><a href="#cb45-57" aria-hidden="true" tabindex="-1"></a>From our lecture slides we know that</span>
+<span id="cb45-58"><a href="#cb45-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-59"><a href="#cb45-59" aria-hidden="true" tabindex="-1"></a>$$ Z_{1-\beta} = \frac{|\mu_0 - \mu_1|}{se(\bar{X})} - Z_{1-\frac{\alpha}{2}} $$</span>
+<span id="cb45-60"><a href="#cb45-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-61"><a href="#cb45-61" aria-hidden="true" tabindex="-1"></a>However, in this form we have to do a few more steps to get the *power* and not just $Z_{1-\beta}$ (i.e., the value of the Z-statistic from our standard normal distribution that is at the given level of power):</span>
+<span id="cb45-62"><a href="#cb45-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-63"><a href="#cb45-63" aria-hidden="true" tabindex="-1"></a>$$ 1-\beta = \Phi\left<span class="co">[</span><span class="ot"> \frac{|\mu_0 - \mu_1|}{\sigma / \sqrt{n}} - Z_{1-\frac{\alpha}{2}} \right</span><span class="co">]</span> $$</span>
+<span id="cb45-64"><a href="#cb45-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-65"><a href="#cb45-65" aria-hidden="true" tabindex="-1"></a>In R it is easiest to program our own function from the equations provided in this lecture to calculate the power for our two-sided Z:</span>
+<span id="cb45-66"><a href="#cb45-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-69"><a href="#cb45-69" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-70"><a href="#cb45-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Write function to calculate the power given the detectable difference, SD, N, and alpha</span></span>
+<span id="cb45-71"><a href="#cb45-71" aria-hidden="true" tabindex="-1"></a>findPowerZ <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">diff =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">10</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>) { </span>
+<span id="cb45-72"><a href="#cb45-72" aria-hidden="true" tabindex="-1"></a>    z.alpha <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> (alpha<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb45-73"><a href="#cb45-73" aria-hidden="true" tabindex="-1"></a>    power <span class="ot">&lt;-</span> <span class="fu">pnorm</span>( <span class="fu">abs</span>(diff) <span class="sc">/</span> (sd<span class="sc">/</span><span class="fu">sqrt</span>(n) ) <span class="sc">-</span> z.alpha)</span>
+<span id="cb45-74"><a href="#cb45-74" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(power)</span>
+<span id="cb45-75"><a href="#cb45-75" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb45-76"><a href="#cb45-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-77"><a href="#cb45-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-78"><a href="#cb45-78" aria-hidden="true" tabindex="-1"></a>For example, we can calculate what our power would be if we observed a detectable difference of either 5 or -5 when $\sigma=10$, $N=20$, $\alpha=0.05$:</span>
+<span id="cb45-81"><a href="#cb45-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-82"><a href="#cb45-82" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate power for a detectable difference of 5</span></span>
+<span id="cb45-83"><a href="#cb45-83" aria-hidden="true" tabindex="-1"></a><span class="fu">findPowerZ</span>( <span class="at">diff=</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">10</span>, <span class="at">n=</span><span class="dv">20</span>, <span class="at">alpha=</span><span class="fl">0.05</span>)</span>
+<span id="cb45-84"><a href="#cb45-84" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate power for a detectable difference of -5</span></span>
+<span id="cb45-85"><a href="#cb45-85" aria-hidden="true" tabindex="-1"></a><span class="fu">findPowerZ</span>( <span class="at">diff=</span><span class="sc">-</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">10</span>, <span class="at">n=</span><span class="dv">20</span>, <span class="at">alpha=</span><span class="fl">0.05</span>)</span>
+<span id="cb45-86"><a href="#cb45-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-87"><a href="#cb45-87" aria-hidden="true" tabindex="-1"></a>Note that they result in the same power because the normal distribution is symmetric and we assume that $H_0: \mu_0=0$.</span>
+<span id="cb45-88"><a href="#cb45-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-89"><a href="#cb45-89" aria-hidden="true" tabindex="-1"></a>We can leverage the <span class="in">`expand.grid()`</span> function to more easily identify all combinations of $n$, $\alpha$, and our detectable difference (279 in total) to then loop through and calculate the power:</span>
+<span id="cb45-92"><a href="#cb45-92" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-93"><a href="#cb45-93" aria-hidden="true" tabindex="-1"></a><span class="co"># Set standard deviation at desired value and create data frame with expand.grid for all combinations of parameters of interest</span></span>
+<span id="cb45-94"><a href="#cb45-94" aria-hidden="true" tabindex="-1"></a>stdev <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb45-95"><a href="#cb45-95" aria-hidden="true" tabindex="-1"></a>powers <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">n=</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">25</span>), <span class="at">alpha=</span><span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">diff=</span>(<span class="sc">-</span><span class="dv">15</span><span class="sc">:</span><span class="dv">15</span>))</span>
+<span id="cb45-96"><a href="#cb45-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-97"><a href="#cb45-97" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new column to save results of power</span></span>
+<span id="cb45-98"><a href="#cb45-98" aria-hidden="true" tabindex="-1"></a>powers<span class="sc">$</span>power <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb45-99"><a href="#cb45-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-100"><a href="#cb45-100" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each row (i.e., combination) and calculate the power achieved</span></span>
+<span id="cb45-101"><a href="#cb45-101" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(powers)){ </span>
+<span id="cb45-102"><a href="#cb45-102" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">findPowerZ</span>(<span class="at">n =</span> powers<span class="sc">$</span>n[i], <span class="at">alpha =</span> powers<span class="sc">$</span>alpha[i], <span class="at">diff =</span> powers<span class="sc">$</span>diff[i], <span class="at">sd =</span> stdev)</span>
+<span id="cb45-103"><a href="#cb45-103" aria-hidden="true" tabindex="-1"></a>    powers<span class="sc">$</span>power[i] <span class="ot">&lt;-</span> p</span>
+<span id="cb45-104"><a href="#cb45-104" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb45-105"><a href="#cb45-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-106"><a href="#cb45-106" aria-hidden="true" tabindex="-1"></a><span class="co"># View the first 6 rows</span></span>
+<span id="cb45-107"><a href="#cb45-107" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(powers)</span>
+<span id="cb45-108"><a href="#cb45-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-109"><a href="#cb45-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-110"><a href="#cb45-110" aria-hidden="true" tabindex="-1"></a>We may remember that some functions in R are able to handle vectorized arguments (i.e., instead of looping through a vector of values of interest it can automatically calculate across all values in the vector). Here we see that skipping the <span class="in">`for`</span> loop with our <span class="in">`findPowerZ`</span> function results in the same power estimates:</span>
+<span id="cb45-111"><a href="#cb45-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-114"><a href="#cb45-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-115"><a href="#cb45-115" aria-hidden="true" tabindex="-1"></a><span class="co"># Since our findPowerZ function uses R functions that can take vectors for their arguments, we can bypass the loop and just use our respective columns to calculate the power without a for loop:</span></span>
+<span id="cb45-116"><a href="#cb45-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-117"><a href="#cb45-117" aria-hidden="true" tabindex="-1"></a>powers<span class="sc">$</span>power_vectorize <span class="ot">&lt;-</span> <span class="fu">findPowerZ</span>(<span class="at">n =</span> powers<span class="sc">$</span>n, <span class="at">alpha =</span> powers<span class="sc">$</span>alpha, <span class="at">diff =</span> powers<span class="sc">$</span>diff, <span class="at">sd =</span> stdev)</span>
+<span id="cb45-118"><a href="#cb45-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-119"><a href="#cb45-119" aria-hidden="true" tabindex="-1"></a><span class="co"># check that all powers are equal (should all be TRUE)</span></span>
+<span id="cb45-120"><a href="#cb45-120" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(powers<span class="sc">$</span>power <span class="sc">==</span> powers<span class="sc">$</span>power_vectorize)</span>
+<span id="cb45-121"><a href="#cb45-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-122"><a href="#cb45-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-123"><a href="#cb45-123" aria-hidden="true" tabindex="-1"></a>Now that we've calculated the expected power for each of the 279 combinations, we can work on plotting them in one figure. For this example we will plot our desired measure, power, on the y-axis, and the detectable difference on the x-axis. </span>
+<span id="cb45-124"><a href="#cb45-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-125"><a href="#cb45-125" aria-hidden="true" tabindex="-1"></a>The figure will be somewhat busy, but we can help differentiate the various combinations with different line colors, line styles, and types of points. One extra step we need to complete is to tell <span class="in">`R`</span> we want to treat <span class="in">`n`</span> and <span class="in">`alpha`</span> as factors, because as their numeric values <span class="in">`ggplot()`</span> will return errors.</span>
+<span id="cb45-126"><a href="#cb45-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-129"><a href="#cb45-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-130"><a href="#cb45-130" aria-hidden="true" tabindex="-1"></a><span class="co"># load the ggplot2 package</span></span>
+<span id="cb45-131"><a href="#cb45-131" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb45-132"><a href="#cb45-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-133"><a href="#cb45-133" aria-hidden="true" tabindex="-1"></a><span class="co"># To take advantage of the linetype, color, and shape arguments with our current data frame we need to coerce the values into factors</span></span>
+<span id="cb45-134"><a href="#cb45-134" aria-hidden="true" tabindex="-1"></a>powers<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(powers<span class="sc">$</span>n)</span>
+<span id="cb45-135"><a href="#cb45-135" aria-hidden="true" tabindex="-1"></a>powers<span class="sc">$</span>alpha <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(powers<span class="sc">$</span>alpha)</span>
+<span id="cb45-136"><a href="#cb45-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-137"><a href="#cb45-137" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the resulting power curves</span></span>
+<span id="cb45-138"><a href="#cb45-138" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(diff, power, <span class="at">data =</span> powers, <span class="at">linetype =</span> n, <span class="at">color =</span> alpha, <span class="at">geom =</span> <span class="st">"line"</span>,<span class="at">shape =</span> n) <span class="sc">+</span></span>
+<span id="cb45-139"><a href="#cb45-139" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># add points to plot</span></span>
+<span id="cb45-140"><a href="#cb45-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="co"># change plotting aesthetic/style to have black/white background with grid</span></span>
+<span id="cb45-141"><a href="#cb45-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Difference"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Power"</span>) <span class="sc">+</span> <span class="co"># change axis labels</span></span>
+<span id="cb45-142"><a href="#cb45-142" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Achievable Power vs. Difference of Means by Sample Size (N) and Alpha"</span>)</span>
+<span id="cb45-143"><a href="#cb45-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-144"><a href="#cb45-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-145"><a href="#cb45-145" aria-hidden="true" tabindex="-1"></a>From this figure we can make various insights, a few of which are highlighted below:</span>
+<span id="cb45-146"><a href="#cb45-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-147"><a href="#cb45-147" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>When we evaluate the **power** at $H_0$, what we actually have summarized is the **type I error rate**. We can roughly observe this since the colored lines achieve the approximate $\alpha$ value when the difference is 0. Alternatively, we can look at our <span class="in">`powers`</span> data frame to review the resulting power when the difference is 0. (Strictly speaking, since we were calculating power, we actually have calculated $\frac{\alpha}{2}$...but we could solve the equation for $Z_{1-\alpha/2}$ to then solve for $\alpha$ precisely.)</span>
+<span id="cb45-148"><a href="#cb45-148" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>We can see that as $\alpha$ increases we have higher power, holding $n$ and the difference constant. This makes sense given the trade off of $\alpha$ and $\beta$ (our type I and type II errors).</span>
+<span id="cb45-149"><a href="#cb45-149" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Similar, as $n$ increases we have higher power.</span>
+<span id="cb45-150"><a href="#cb45-150" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>We can see the combinations where we wouldn't have desirable power (e.g., &lt;80%).</span>
+<span id="cb45-151"><a href="#cb45-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-152"><a href="#cb45-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-153"><a href="#cb45-153" aria-hidden="true" tabindex="-1"></a><span class="fu">## Equivalent of `qplot`</span></span>
+<span id="cb45-154"><a href="#cb45-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-155"><a href="#cb45-155" aria-hidden="true" tabindex="-1"></a>We can also just use the direct <span class="in">`ggplot`</span> functions instead of its quick plotting shortcut function:</span>
+<span id="cb45-156"><a href="#cb45-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-159"><a href="#cb45-159" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-160"><a href="#cb45-160" aria-hidden="true" tabindex="-1"></a><span class="co"># To take advantage of the linetype, color, and shape arguments with our current data frame we need to coerce the values into factors</span></span>
+<span id="cb45-161"><a href="#cb45-161" aria-hidden="true" tabindex="-1"></a>powers<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(powers<span class="sc">$</span>n)</span>
+<span id="cb45-162"><a href="#cb45-162" aria-hidden="true" tabindex="-1"></a>powers<span class="sc">$</span>alpha <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(powers<span class="sc">$</span>alpha)</span>
+<span id="cb45-163"><a href="#cb45-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-164"><a href="#cb45-164" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the resulting power curves</span></span>
+<span id="cb45-165"><a href="#cb45-165" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>powers, <span class="fu">aes</span>(<span class="at">x=</span>diff, <span class="at">y=</span>power, <span class="at">color=</span>alpha, <span class="at">shape=</span>n, <span class="at">linetype=</span>n)) <span class="sc">+</span></span>
+<span id="cb45-166"><a href="#cb45-166" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb45-167"><a href="#cb45-167" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb45-168"><a href="#cb45-168" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb45-169"><a href="#cb45-169" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Difference"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Power"</span>) <span class="sc">+</span></span>
+<span id="cb45-170"><a href="#cb45-170" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Achievable Power vs. Difference of Means by Sample Size (N) and Alpha"</span>)</span>
+<span id="cb45-171"><a href="#cb45-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-172"><a href="#cb45-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-173"><a href="#cb45-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-174"><a href="#cb45-174" aria-hidden="true" tabindex="-1"></a><span class="fu">## Scenario 2 - Unknown $\sigma$, Find Power</span></span>
+<span id="cb45-175"><a href="#cb45-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-176"><a href="#cb45-176" aria-hidden="true" tabindex="-1"></a>$s=10$ ($\sigma$ unknown);$N=15,20,25$; detectable difference between null and alternative means from -15 to 15; $\alpha=0.01,0.05,0.10$ (two-sided). *Find the power.*</span>
+<span id="cb45-177"><a href="#cb45-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-178"><a href="#cb45-178" aria-hidden="true" tabindex="-1"></a>In this case we know that there are existing functions we can leverage to calculate our power, such as <span class="in">`power.t.test()`</span>:</span>
+<span id="cb45-179"><a href="#cb45-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-182"><a href="#cb45-182" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-183"><a href="#cb45-183" aria-hidden="true" tabindex="-1"></a>pwrt_b <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">15</span>, <span class="at">sd =</span> <span class="dv">10</span>, <span class="at">sig.level =</span> <span class="fl">0.01</span>, <span class="at">delta =</span> <span class="sc">-</span><span class="dv">15</span>, <span class="at">type =</span> <span class="st">"one.sample"</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb45-184"><a href="#cb45-184" aria-hidden="true" tabindex="-1"></a>pwrt_b <span class="co"># print the results</span></span>
+<span id="cb45-185"><a href="#cb45-185" aria-hidden="true" tabindex="-1"></a>pwrt_b<span class="sc">$</span>power <span class="co"># specifically print the estimated power</span></span>
+<span id="cb45-186"><a href="#cb45-186" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-187"><a href="#cb45-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-188"><a href="#cb45-188" aria-hidden="true" tabindex="-1"></a>We can essentially take our code from *Scenario 1* above and replace the function with <span class="in">`power.t.test`</span> to create our figure:</span>
+<span id="cb45-189"><a href="#cb45-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-192"><a href="#cb45-192" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-193"><a href="#cb45-193" aria-hidden="true" tabindex="-1"></a><span class="co"># Set standard deviation at desired value and create data frame with expand.grid for all combinations of parameters of interest</span></span>
+<span id="cb45-194"><a href="#cb45-194" aria-hidden="true" tabindex="-1"></a>stdev <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb45-195"><a href="#cb45-195" aria-hidden="true" tabindex="-1"></a>powers2 <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">n=</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">25</span>), <span class="at">alpha=</span><span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">diff=</span>(<span class="sc">-</span><span class="dv">15</span><span class="sc">:</span><span class="dv">15</span>))</span>
+<span id="cb45-196"><a href="#cb45-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-197"><a href="#cb45-197" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new column to save results of power</span></span>
+<span id="cb45-198"><a href="#cb45-198" aria-hidden="true" tabindex="-1"></a>powers2<span class="sc">$</span>power <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb45-199"><a href="#cb45-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-200"><a href="#cb45-200" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each row (i.e., combination) and calculate the power achieved</span></span>
+<span id="cb45-201"><a href="#cb45-201" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(powers2)){ </span>
+<span id="cb45-202"><a href="#cb45-202" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">n =</span> powers2<span class="sc">$</span>n[i], <span class="at">sig.level =</span> powers2<span class="sc">$</span>alpha[i], <span class="at">delta =</span> powers2<span class="sc">$</span>diff[i], <span class="at">sd =</span> stdev, <span class="at">power =</span> <span class="cn">NULL</span>, </span>
+<span id="cb45-203"><a href="#cb45-203" aria-hidden="true" tabindex="-1"></a>                      <span class="at">type =</span> <span class="st">'one.sample'</span>, <span class="at">alternative =</span> <span class="st">'two.sided'</span>)</span>
+<span id="cb45-204"><a href="#cb45-204" aria-hidden="true" tabindex="-1"></a>    powers2<span class="sc">$</span>power[i] <span class="ot">&lt;-</span> p<span class="sc">$</span>power</span>
+<span id="cb45-205"><a href="#cb45-205" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb45-206"><a href="#cb45-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-207"><a href="#cb45-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-210"><a href="#cb45-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-211"><a href="#cb45-211" aria-hidden="true" tabindex="-1"></a><span class="co"># load the ggplot2 package (in case you hadn't already)</span></span>
+<span id="cb45-212"><a href="#cb45-212" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb45-213"><a href="#cb45-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-214"><a href="#cb45-214" aria-hidden="true" tabindex="-1"></a><span class="co"># To take advantage of the linetype, color, and shape arguments with our current data frame we need to coerce the values into factors</span></span>
+<span id="cb45-215"><a href="#cb45-215" aria-hidden="true" tabindex="-1"></a>powers2<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(powers2<span class="sc">$</span>n)</span>
+<span id="cb45-216"><a href="#cb45-216" aria-hidden="true" tabindex="-1"></a>powers2<span class="sc">$</span>alpha <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(powers2<span class="sc">$</span>alpha)</span>
+<span id="cb45-217"><a href="#cb45-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-218"><a href="#cb45-218" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the resulting power curves</span></span>
+<span id="cb45-219"><a href="#cb45-219" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(diff, power, <span class="at">data =</span> powers2, <span class="at">linetype =</span> n, <span class="at">color =</span> alpha, <span class="at">geom =</span> <span class="st">"line"</span>,<span class="at">shape =</span> n) <span class="sc">+</span></span>
+<span id="cb45-220"><a href="#cb45-220" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Difference"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Power"</span>) <span class="sc">+</span></span>
+<span id="cb45-221"><a href="#cb45-221" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Achievable Power vs. Difference of Means by Sample Size (N) and Alpha"</span>)</span>
+<span id="cb45-222"><a href="#cb45-222" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-223"><a href="#cb45-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-224"><a href="#cb45-224" aria-hidden="true" tabindex="-1"></a>We see similar results to Scenario 1, however we can see that for each combination, we have generally lower power than in Scenario 1. This is a result of the difference between assuming *known* versus *unknown* standard deviation.</span>
+<span id="cb45-225"><a href="#cb45-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-226"><a href="#cb45-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-227"><a href="#cb45-227" aria-hidden="true" tabindex="-1"></a><span class="fu">## Can `power.t.test` Take Vectors</span></span>
+<span id="cb45-228"><a href="#cb45-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-229"><a href="#cb45-229" aria-hidden="true" tabindex="-1"></a>The <span class="in">`power.t.test`</span> function is able to handle our vectorized data, but we can see that it returns multiple values from the function the we could reference:</span>
+<span id="cb45-230"><a href="#cb45-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-233"><a href="#cb45-233" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-234"><a href="#cb45-234" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pwrt_b)</span>
+<span id="cb45-235"><a href="#cb45-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-236"><a href="#cb45-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-237"><a href="#cb45-237" aria-hidden="true" tabindex="-1"></a>So we can extract whatever information we find most relevant:</span>
+<span id="cb45-238"><a href="#cb45-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-241"><a href="#cb45-241" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-242"><a href="#cb45-242" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract only the power</span></span>
+<span id="cb45-243"><a href="#cb45-243" aria-hidden="true" tabindex="-1"></a>pwrt_b<span class="sc">$</span>power</span>
+<span id="cb45-244"><a href="#cb45-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-245"><a href="#cb45-245" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract only the delta</span></span>
+<span id="cb45-246"><a href="#cb45-246" aria-hidden="true" tabindex="-1"></a>pwrt_b<span class="sc">$</span>delta</span>
+<span id="cb45-247"><a href="#cb45-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-248"><a href="#cb45-248" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract both power and delta</span></span>
+<span id="cb45-249"><a href="#cb45-249" aria-hidden="true" tabindex="-1"></a>pwrt_b[<span class="fu">c</span>(<span class="st">'power'</span>,<span class="st">'delta'</span>)]</span>
+<span id="cb45-250"><a href="#cb45-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-251"><a href="#cb45-251" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract both power and delta, but force it to be a vector and not a list</span></span>
+<span id="cb45-252"><a href="#cb45-252" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(pwrt_b[<span class="fu">c</span>(<span class="st">'power'</span>,<span class="st">'delta'</span>)])</span>
+<span id="cb45-253"><a href="#cb45-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-254"><a href="#cb45-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-255"><a href="#cb45-255" aria-hidden="true" tabindex="-1"></a>If we just put in our vectors we get all of the quantities returned:</span>
+<span id="cb45-256"><a href="#cb45-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-259"><a href="#cb45-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-260"><a href="#cb45-260" aria-hidden="true" tabindex="-1"></a>stdev <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb45-261"><a href="#cb45-261" aria-hidden="true" tabindex="-1"></a>powers2_vec <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">n=</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">25</span>), <span class="at">alpha=</span><span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">diff=</span>(<span class="sc">-</span><span class="dv">15</span><span class="sc">:</span><span class="dv">15</span>))</span>
+<span id="cb45-262"><a href="#cb45-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-263"><a href="#cb45-263" aria-hidden="true" tabindex="-1"></a>pwrt_vectorized <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">n =</span> powers2_vec<span class="sc">$</span>n, </span>
+<span id="cb45-264"><a href="#cb45-264" aria-hidden="true" tabindex="-1"></a>                                <span class="at">sig.level =</span> powers2_vec<span class="sc">$</span>alpha, </span>
+<span id="cb45-265"><a href="#cb45-265" aria-hidden="true" tabindex="-1"></a>                                <span class="at">delta =</span> powers2_vec<span class="sc">$</span>diff, </span>
+<span id="cb45-266"><a href="#cb45-266" aria-hidden="true" tabindex="-1"></a>                                <span class="at">sd =</span> stdev, </span>
+<span id="cb45-267"><a href="#cb45-267" aria-hidden="true" tabindex="-1"></a>                                <span class="at">power =</span> <span class="cn">NULL</span>, </span>
+<span id="cb45-268"><a href="#cb45-268" aria-hidden="true" tabindex="-1"></a>                                <span class="at">type =</span> <span class="st">'one.sample'</span>, </span>
+<span id="cb45-269"><a href="#cb45-269" aria-hidden="true" tabindex="-1"></a>                                <span class="at">alternative =</span> <span class="st">'two.sided'</span>)</span>
+<span id="cb45-270"><a href="#cb45-270" aria-hidden="true" tabindex="-1"></a>pwrt_vectorized</span>
+<span id="cb45-271"><a href="#cb45-271" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-272"><a href="#cb45-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-273"><a href="#cb45-273" aria-hidden="true" tabindex="-1"></a>Fortunately this is easily solved by either <span class="co">[</span><span class="ot">1</span><span class="co">]</span> just extracting the <span class="in">`power`</span> object in the results or <span class="co">[</span><span class="ot">2</span><span class="co">]</span> adding <span class="in">`$power`</span> to our function so it only return those values:</span>
+<span id="cb45-274"><a href="#cb45-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-277"><a href="#cb45-277" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-278"><a href="#cb45-278" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract results from output dump</span></span>
+<span id="cb45-279"><a href="#cb45-279" aria-hidden="true" tabindex="-1"></a>powers2_vec<span class="sc">$</span>power <span class="ot">&lt;-</span> pwrt_vectorized<span class="sc">$</span>power</span>
+<span id="cb45-280"><a href="#cb45-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-281"><a href="#cb45-281" aria-hidden="true" tabindex="-1"></a><span class="co"># Rerun power.t.test to only save power</span></span>
+<span id="cb45-282"><a href="#cb45-282" aria-hidden="true" tabindex="-1"></a>powers2_vec<span class="sc">$</span>power_v2 <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">n =</span> powers2_vec<span class="sc">$</span>n, </span>
+<span id="cb45-283"><a href="#cb45-283" aria-hidden="true" tabindex="-1"></a>                                <span class="at">sig.level =</span> powers2_vec<span class="sc">$</span>alpha, </span>
+<span id="cb45-284"><a href="#cb45-284" aria-hidden="true" tabindex="-1"></a>                                <span class="at">delta =</span> powers2_vec<span class="sc">$</span>diff, </span>
+<span id="cb45-285"><a href="#cb45-285" aria-hidden="true" tabindex="-1"></a>                                <span class="at">sd =</span> stdev, </span>
+<span id="cb45-286"><a href="#cb45-286" aria-hidden="true" tabindex="-1"></a>                                <span class="at">power =</span> <span class="cn">NULL</span>, </span>
+<span id="cb45-287"><a href="#cb45-287" aria-hidden="true" tabindex="-1"></a>                                <span class="at">type =</span> <span class="st">'one.sample'</span>, </span>
+<span id="cb45-288"><a href="#cb45-288" aria-hidden="true" tabindex="-1"></a>                                <span class="at">alternative =</span> <span class="st">'two.sided'</span>)<span class="sc">$</span>power</span>
+<span id="cb45-289"><a href="#cb45-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-290"><a href="#cb45-290" aria-hidden="true" tabindex="-1"></a><span class="co"># check that everything matches the for loop above</span></span>
+<span id="cb45-291"><a href="#cb45-291" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(powers2<span class="sc">$</span>power <span class="sc">==</span> powers2_vec<span class="sc">$</span>power)</span>
+<span id="cb45-292"><a href="#cb45-292" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(powers2<span class="sc">$</span>power <span class="sc">==</span> powers2_vec<span class="sc">$</span>power_v2)</span>
+<span id="cb45-293"><a href="#cb45-293" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-294"><a href="#cb45-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-295"><a href="#cb45-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-296"><a href="#cb45-296" aria-hidden="true" tabindex="-1"></a><span class="fu">## Scenario 3 - Unknown $\sigma$, Find N</span></span>
+<span id="cb45-297"><a href="#cb45-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-298"><a href="#cb45-298" aria-hidden="true" tabindex="-1"></a>$s=10$ ($\sigma$ unknown); detectable difference between null and alternative means from 5 to 10; $\alpha=0.01,0.05,0.10$ (two-sided); $1-\beta=\text{Power}=0.80,0.90,0.95$. *Find N.*</span>
+<span id="cb45-299"><a href="#cb45-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-300"><a href="#cb45-300" aria-hidden="true" tabindex="-1"></a>We again can modify our code from above to solve for the sample size needed. But first let's examine how we can extract the needed sample size and round up to the next whole number with the <span class="in">`ceiling()`</span> function:</span>
+<span id="cb45-301"><a href="#cb45-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-304"><a href="#cb45-304" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-305"><a href="#cb45-305" aria-hidden="true" tabindex="-1"></a>pwrt_c <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">power=</span><span class="fl">0.8</span>, <span class="at">sd =</span> <span class="dv">10</span>, <span class="at">sig.level =</span> <span class="fl">0.01</span>, <span class="at">delta =</span> <span class="dv">5</span>, <span class="at">type =</span> <span class="st">"one.sample"</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb45-306"><a href="#cb45-306" aria-hidden="true" tabindex="-1"></a>pwrt_c <span class="co"># view all output</span></span>
+<span id="cb45-307"><a href="#cb45-307" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(pwrt_c<span class="sc">$</span>n) <span class="co"># only extract the needed N and round up to the next whole number</span></span>
+<span id="cb45-308"><a href="#cb45-308" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-309"><a href="#cb45-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-310"><a href="#cb45-310" aria-hidden="true" tabindex="-1"></a>We see that our estimate here is rounded up from <span class="in">`r pwrt_c$n`</span> to be <span class="in">`r ceiling(pwrt_c$n)`</span>.</span>
+<span id="cb45-311"><a href="#cb45-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-312"><a href="#cb45-312" aria-hidden="true" tabindex="-1"></a>Now let's modify our code from Scenario 2 to solve for $N$ over differences from 5 to 10 in increments of 0.1:</span>
+<span id="cb45-313"><a href="#cb45-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-316"><a href="#cb45-316" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-317"><a href="#cb45-317" aria-hidden="true" tabindex="-1"></a><span class="co"># Set standard deviation at desired value and create data frame with expand.grid for all combinations of parameters of interest</span></span>
+<span id="cb45-318"><a href="#cb45-318" aria-hidden="true" tabindex="-1"></a>stdev <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb45-319"><a href="#cb45-319" aria-hidden="true" tabindex="-1"></a>sampsize_df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">power=</span><span class="fu">c</span>(<span class="fl">0.8</span>,<span class="fl">0.9</span>,<span class="fl">0.95</span>), <span class="at">alpha=</span><span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">diff=</span><span class="fu">seq</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="at">by=</span><span class="fl">0.1</span>) )</span>
+<span id="cb45-320"><a href="#cb45-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-321"><a href="#cb45-321" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new column to save results of N</span></span>
+<span id="cb45-322"><a href="#cb45-322" aria-hidden="true" tabindex="-1"></a>sampsize_df<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb45-323"><a href="#cb45-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-324"><a href="#cb45-324" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each row (i.e., combination) and calculate the power achieved</span></span>
+<span id="cb45-325"><a href="#cb45-325" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(sampsize_df)){ </span>
+<span id="cb45-326"><a href="#cb45-326" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="cn">NULL</span>, <span class="at">sig.level =</span> sampsize_df<span class="sc">$</span>alpha[i], <span class="at">delta =</span> sampsize_df<span class="sc">$</span>diff[i], <span class="at">sd =</span> stdev, </span>
+<span id="cb45-327"><a href="#cb45-327" aria-hidden="true" tabindex="-1"></a>                      <span class="at">power =</span> sampsize_df<span class="sc">$</span>power[i], <span class="at">type =</span> <span class="st">'one.sample'</span>, <span class="at">alternative =</span> <span class="st">'two.sided'</span>)</span>
+<span id="cb45-328"><a href="#cb45-328" aria-hidden="true" tabindex="-1"></a>    sampsize_df<span class="sc">$</span>n[i] <span class="ot">&lt;-</span> <span class="fu">ceiling</span>( p<span class="sc">$</span>n )</span>
+<span id="cb45-329"><a href="#cb45-329" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb45-330"><a href="#cb45-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-331"><a href="#cb45-331" aria-hidden="true" tabindex="-1"></a><span class="co"># load the ggplot2 package (in case you hadn't already)</span></span>
+<span id="cb45-332"><a href="#cb45-332" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb45-333"><a href="#cb45-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-334"><a href="#cb45-334" aria-hidden="true" tabindex="-1"></a><span class="co"># To take advantage of the linetype, color, and shape arguments with our current data frame we need to coerce the values into factors</span></span>
+<span id="cb45-335"><a href="#cb45-335" aria-hidden="true" tabindex="-1"></a>sampsize_df<span class="sc">$</span>power <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(sampsize_df<span class="sc">$</span>power)</span>
+<span id="cb45-336"><a href="#cb45-336" aria-hidden="true" tabindex="-1"></a>sampsize_df<span class="sc">$</span>alpha <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(sampsize_df<span class="sc">$</span>alpha)</span>
+<span id="cb45-337"><a href="#cb45-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-338"><a href="#cb45-338" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the resulting power curves</span></span>
+<span id="cb45-339"><a href="#cb45-339" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(diff, n, <span class="at">data =</span> sampsize_df, <span class="at">linetype =</span> power, <span class="at">color =</span> alpha, <span class="at">geom =</span> <span class="st">"line"</span>,<span class="at">shape =</span> power) <span class="sc">+</span></span>
+<span id="cb45-340"><a href="#cb45-340" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Difference"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Required Sample Size"</span>) <span class="sc">+</span></span>
+<span id="cb45-341"><a href="#cb45-341" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Required Sample Size (N) vs. Difference of Means by Power and Alpha"</span>)</span>
+<span id="cb45-342"><a href="#cb45-342" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-343"><a href="#cb45-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-344"><a href="#cb45-344" aria-hidden="true" tabindex="-1"></a>From this figure we can take away the conclusion that smaller detectable differences lead to a larger sample size to achieve a desired power, type I error rate, and SD.</span>
+<span id="cb45-345"><a href="#cb45-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-346"><a href="#cb45-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-347"><a href="#cb45-347" aria-hidden="true" tabindex="-1"></a><span class="fu">## Scenario 4 - Unknown $\sigma$, Find Detectable Difference</span></span>
+<span id="cb45-348"><a href="#cb45-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-349"><a href="#cb45-349" aria-hidden="true" tabindex="-1"></a>$s=10$ ($\sigma$ unknown); $N=15,20,25$, $\alpha=0.01,0.05,0.10$ (two-sided); $1-\beta=\text{Power}=0.80,0.90,0.95$. *Find the detectable difference between null and alternative means.*</span>
+<span id="cb45-350"><a href="#cb45-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-351"><a href="#cb45-351" aria-hidden="true" tabindex="-1"></a>Again, we can modify our earlier set-up from Scenarios 2 and 3 to address this question:</span>
+<span id="cb45-352"><a href="#cb45-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-355"><a href="#cb45-355" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-356"><a href="#cb45-356" aria-hidden="true" tabindex="-1"></a>pwrt_d <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">power=</span><span class="fl">0.8</span>, <span class="at">sd =</span> <span class="dv">10</span>, <span class="at">sig.level =</span> <span class="fl">0.01</span>, <span class="at">n=</span><span class="dv">15</span>, <span class="at">type =</span> <span class="st">"one.sample"</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb45-357"><a href="#cb45-357" aria-hidden="true" tabindex="-1"></a>pwrt_d <span class="co"># view the output</span></span>
+<span id="cb45-358"><a href="#cb45-358" aria-hidden="true" tabindex="-1"></a>pwrt_d<span class="sc">$</span>delta <span class="co"># view the detectable difference only</span></span>
+<span id="cb45-359"><a href="#cb45-359" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-360"><a href="#cb45-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-361"><a href="#cb45-361" aria-hidden="true" tabindex="-1"></a>Let's modify our code to create a plot of our detectable difference across the scenarios:</span>
+<span id="cb45-362"><a href="#cb45-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-365"><a href="#cb45-365" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-366"><a href="#cb45-366" aria-hidden="true" tabindex="-1"></a><span class="co"># Set standard deviation at desired value and create data frame with expand.grid for all combinations of parameters of interest</span></span>
+<span id="cb45-367"><a href="#cb45-367" aria-hidden="true" tabindex="-1"></a>stdev <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb45-368"><a href="#cb45-368" aria-hidden="true" tabindex="-1"></a>diff_df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">n=</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">25</span>), <span class="at">alpha=</span><span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>), <span class="at">power=</span><span class="fu">c</span>(<span class="fl">0.8</span>,<span class="fl">0.9</span>,<span class="fl">0.95</span>))</span>
+<span id="cb45-369"><a href="#cb45-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-370"><a href="#cb45-370" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new column to save results of diff</span></span>
+<span id="cb45-371"><a href="#cb45-371" aria-hidden="true" tabindex="-1"></a>diff_df<span class="sc">$</span>diff <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb45-372"><a href="#cb45-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-373"><a href="#cb45-373" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each row (i.e., combination) and calculate the power achieved</span></span>
+<span id="cb45-374"><a href="#cb45-374" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(diff_df)){ </span>
+<span id="cb45-375"><a href="#cb45-375" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(<span class="at">n =</span> diff_df<span class="sc">$</span>n[i], <span class="at">sig.level =</span> diff_df<span class="sc">$</span>alpha[i], <span class="at">delta =</span> <span class="cn">NULL</span>, <span class="at">sd =</span> stdev, <span class="at">power =</span> diff_df<span class="sc">$</span>power[i], </span>
+<span id="cb45-376"><a href="#cb45-376" aria-hidden="true" tabindex="-1"></a>                      <span class="at">type =</span> <span class="st">'one.sample'</span>, <span class="at">alternative =</span> <span class="st">'two.sided'</span>)</span>
+<span id="cb45-377"><a href="#cb45-377" aria-hidden="true" tabindex="-1"></a>    diff_df<span class="sc">$</span>diff[i] <span class="ot">&lt;-</span> p<span class="sc">$</span>delta</span>
+<span id="cb45-378"><a href="#cb45-378" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb45-379"><a href="#cb45-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-380"><a href="#cb45-380" aria-hidden="true" tabindex="-1"></a><span class="co"># load the ggplot2 package (in case you hadn't already)</span></span>
+<span id="cb45-381"><a href="#cb45-381" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb45-382"><a href="#cb45-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-383"><a href="#cb45-383" aria-hidden="true" tabindex="-1"></a><span class="co"># To take advantage of the linetype, color, and shape arguments with our current data frame we need to coerce the values into factors</span></span>
+<span id="cb45-384"><a href="#cb45-384" aria-hidden="true" tabindex="-1"></a>diff_df<span class="sc">$</span>power <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(diff_df<span class="sc">$</span>power)</span>
+<span id="cb45-385"><a href="#cb45-385" aria-hidden="true" tabindex="-1"></a>diff_df<span class="sc">$</span>alpha <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(diff_df<span class="sc">$</span>alpha)</span>
+<span id="cb45-386"><a href="#cb45-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-387"><a href="#cb45-387" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the resulting power curves</span></span>
+<span id="cb45-388"><a href="#cb45-388" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(n, diff, <span class="at">data =</span> diff_df, <span class="at">linetype =</span> power, <span class="at">color =</span> alpha, <span class="at">geom =</span> <span class="st">"line"</span>,<span class="at">shape =</span> power) <span class="sc">+</span></span>
+<span id="cb45-389"><a href="#cb45-389" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Sample Size"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Difference in Means"</span>) <span class="sc">+</span></span>
+<span id="cb45-390"><a href="#cb45-390" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Detectable Mean Difference vs. Sample Size (N) by Power and Alpha"</span>)</span>
+<span id="cb45-391"><a href="#cb45-391" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-392"><a href="#cb45-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-393"><a href="#cb45-393" aria-hidden="true" tabindex="-1"></a>In this figure we can note that for any combination of $\alpha$ and power, the smaller our sample size is, the larger our difference in means will be that we can detect. In other words, if we wanted to detect a smaller difference in means, we would need to increase our sample size if we already set the values for $s$, $\alpha$, and $1-\beta$ (power).</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alex Kaizer">
+
+<title>Alex Kaizer - Week 9 Practice Problems: Solutions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/academicons-1.9.1/css/academicons.css" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="./files/favicon.ico">
+
+<script type="text/javascript">
+function setBrand() {
+document.getElementsByClassName("navbar-brand")[0].href="https://www.alexkaizer.com";
+}
+window.onload = setBrand;
+</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5PBG7BL207"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5PBG7BL207');
+</script>
+
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Alex Kaizer</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/research" rel="" target="">
+ <span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/publications" rel="" target="">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Teaching</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching">    
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/teaching" rel="" target="">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6618" rel="" target="">
+ <span class="dropdown-text">BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6611" rel="" target="">
+ <span class="dropdown-text">BIOS 6611</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/study_design_berd" rel="" target="">
+ <span class="dropdown-text">BERD Study Design Short Course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/adaptivetrials_sc" rel="" target="">
+ <span class="dropdown-text">WNAR Adaptive and Bayesian Clinical Trial Design Short Course</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bios-6618" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">BIOS 6618</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-bios-6618">    
+        <li>
+    <a class="dropdown-item" href="../../index.html" rel="" target="">
+ <span class="dropdown-text">Home</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../bios_6618_materials" rel="" target="">
+ <span class="dropdown-text">Materials</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../journal_of_bios_6618" rel="" target="">
+ <span class="dropdown-text">Journal of BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../recitation" rel="" target="">
+ <span class="dropdown-text">Recitation Questions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs" rel="" target="">
+ <span class="dropdown-text">Labs and Practice Problems</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:alex.kaizer@cuanschutz.edu" rel="" target=""><i class="bi bi-envelope" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=ICpH74EAAAAJ&amp;hl=en" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-google-scholar ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="http://github.com/alexbiostats" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/files/Alex_CV.pdf" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-cv ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/alex-kaizer/" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#dataset-background" id="toc-dataset-background" class="nav-link active" data-scroll-target="#dataset-background">Dataset Background</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1-multiple-linear-regression-example" id="toc-exercise-1-multiple-linear-regression-example" class="nav-link" data-scroll-target="#exercise-1-multiple-linear-regression-example">Exercise 1: Multiple Linear Regression Example</a>
+  <ul class="collapse">
+  <li><a href="#a-the-true-regression-equation" id="toc-a-the-true-regression-equation" class="nav-link" data-scroll-target="#a-the-true-regression-equation">1a: The True Regression Equation</a></li>
+  <li><a href="#b-fitting-the-model" id="toc-b-fitting-the-model" class="nav-link" data-scroll-target="#b-fitting-the-model">1b: Fitting the Model</a></li>
+  <li><a href="#c-predicted-regression-equation" id="toc-c-predicted-regression-equation" class="nav-link" data-scroll-target="#c-predicted-regression-equation">1c: Predicted Regression Equation</a></li>
+  <li><a href="#d-intercept-interpretation-and-hypothesis-test" id="toc-d-intercept-interpretation-and-hypothesis-test" class="nav-link" data-scroll-target="#d-intercept-interpretation-and-hypothesis-test">1d: Intercept Interpretation and Hypothesis Test</a></li>
+  <li><a href="#e-coefficient-interpretation-and-hypothesis-test-for-binary-predictor" id="toc-e-coefficient-interpretation-and-hypothesis-test-for-binary-predictor" class="nav-link" data-scroll-target="#e-coefficient-interpretation-and-hypothesis-test-for-binary-predictor">1e: Coefficient Interpretation and Hypothesis Test for Binary Predictor</a></li>
+  <li><a href="#f-coefficient-interpretation-and-hypothesis-test-for-continuous-predictor" id="toc-f-coefficient-interpretation-and-hypothesis-test-for-continuous-predictor" class="nav-link" data-scroll-target="#f-coefficient-interpretation-and-hypothesis-test-for-continuous-predictor">1f: Coefficient Interpretation and Hypothesis Test for Continuous Predictor</a></li>
+  <li><a href="#g-the-partial-f-test" id="toc-g-the-partial-f-test" class="nav-link" data-scroll-target="#g-the-partial-f-test">1g: The Partial F-test</a></li>
+  <li><a href="#h-the-overall-f-test" id="toc-h-the-overall-f-test" class="nav-link" data-scroll-target="#h-the-overall-f-test">1h: The Overall F-test</a></li>
+  <li><a href="#i-multicollinearity" id="toc-i-multicollinearity" class="nav-link" data-scroll-target="#i-multicollinearity">1i: Multicollinearity</a></li>
+  <li><a href="#j-diagnostic-plots" id="toc-j-diagnostic-plots" class="nav-link" data-scroll-target="#j-diagnostic-plots">1j: Diagnostic Plots</a></li>
+  </ul></li>
+  <li><a href="#exercise-2-but-now-with-matrices" id="toc-exercise-2-but-now-with-matrices" class="nav-link" data-scroll-target="#exercise-2-but-now-with-matrices">Exercise 2: But Now With Matrices!</a>
+  <ul class="collapse">
+  <li><a href="#a-the-design-matrix" id="toc-a-the-design-matrix" class="nav-link" data-scroll-target="#a-the-design-matrix">2a: The Design Matrix</a></li>
+  <li><a href="#b-beta-coefficients" id="toc-b-beta-coefficients" class="nav-link" data-scroll-target="#b-beta-coefficients">2b: Beta Coefficients</a></li>
+  <li><a href="#c-standard-error-of-beta-coefficients" id="toc-c-standard-error-of-beta-coefficients" class="nav-link" data-scroll-target="#c-standard-error-of-beta-coefficients">2c: Standard Error of Beta Coefficients</a></li>
+  <li><a href="#d-test-statistics-and-p-values" id="toc-d-test-statistics-and-p-values" class="nav-link" data-scroll-target="#d-test-statistics-and-p-values">2d: Test Statistics and p-values</a></li>
+  <li><a href="#e-confidence-and-prediction-interval" id="toc-e-confidence-and-prediction-interval" class="nav-link" data-scroll-target="#e-confidence-and-prediction-interval">2e: Confidence and Prediction Interval</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Week 9 Practice Problems: Solutions</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Alex Kaizer </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Colorado-Anschutz Medical Campus
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This page includes the solutions to the optional practice problems for the given week. If you want to see a version <a href="../../labs/prac9/index.html">without solutions please click here</a>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</p>
+<p>This week’s extra practice exercises are focusing on implementing and interpreting a multiple linear regression (MLR) model, both using existing functions and by coding our own matrices.</p>
+<section id="dataset-background" class="level1">
+<h1>Dataset Background</h1>
+<p>The following code can load the <code>Licorice_Gargle.csv</code> file into R:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r fold-show code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat_all <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../../.data/Licorice_Gargle.csv'</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># remove records with missing data for the outcome or any predictors:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>complete_case_vec <span class="ot">&lt;-</span> <span class="fu">complete.cases</span>(dat_all[,<span class="fu">c</span>(<span class="st">'pacu30min_throatPain'</span>,<span class="st">'preOp_gender'</span>,<span class="st">'preOp_age'</span>,<span class="st">'treat'</span>)]) <span class="co"># creates a vector of TRUE or FALSE for each row if the cases are complete (i.e., no NA values)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat_all[complete_case_vec,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The dataset represents a randomized control trial of 236 adult patients undergoing elective thoracic surgery requiring a double-lumen endotracheal tube comparing if licorice vs.&nbsp;sugar-water gargle prevents postoperative sore throat. For our exercises below we will focus on the following variables:</p>
+<ul>
+<li><code>pacu30min_throatPain</code>: sore throat pain score at rest 30 minutes after arriving in the post-anesthesia care unit (PACU) measured on an 11 point Likert scale (0=no pain to 10=worst pain)</li>
+<li><code>preOp_gender</code>: an indicator variable for gender (0=Male, 1=Female)</li>
+<li><code>preOp_age</code>: age (in years)</li>
+<li><code>treat</code>: the randomized treatment in the trial where 0=sugar 5g and 1=licorice 0.5g</li>
+</ul>
+<p>For our solutions, we will also use our ANOVA table creation function from lecture/recitation:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r fold-hide code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>linreg_anova_func <span class="ot">&lt;-</span> <span class="cf">function</span>(mod, <span class="at">ndigits=</span><span class="dv">2</span>, <span class="at">p_ndigits=</span><span class="dv">3</span>, <span class="at">format=</span><span class="st">'kable'</span>){</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Function to create an ANOVA table linear regression results from lm or glm</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># mod: an object with the fitted model results</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ndigits: number of digits to round to for most values, default is 2</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># p_digits: number of digits to round the p-value to, default is 3</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># format: desired format output (default is kable):</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">## "kable" for kable table</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">## "df" for data frame as table</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># extract outcome from the object produced by the glm or lm function</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>( <span class="fu">class</span>(mod)[<span class="dv">1</span>] <span class="sc">==</span> <span class="st">'glm'</span> ){</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> mod<span class="sc">$</span>y</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>( <span class="fu">class</span>(mod)[<span class="dv">1</span>] <span class="sc">==</span> <span class="st">'lm'</span> ){</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> mod<span class="sc">$</span>model[,<span class="dv">1</span>] <span class="co"># first column contains outcome data</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  }  </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  yhat <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">length</span>(mod<span class="sc">$</span>coefficients)<span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  ssm <span class="ot">&lt;-</span> <span class="fu">sum</span>( (yhat<span class="sc">-</span>ybar)<span class="sc">^</span><span class="dv">2</span> )</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  sse <span class="ot">&lt;-</span> <span class="fu">sum</span>( (y<span class="sc">-</span>yhat)<span class="sc">^</span><span class="dv">2</span> )</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  sst <span class="ot">&lt;-</span> <span class="fu">sum</span>( (y<span class="sc">-</span>ybar)<span class="sc">^</span><span class="dv">2</span> )</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  msm <span class="ot">&lt;-</span> ssm<span class="sc">/</span>p</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  mse <span class="ot">&lt;-</span> sse<span class="sc">/</span>(n<span class="sc">-</span>p<span class="dv">-1</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  f_val <span class="ot">&lt;-</span> msm<span class="sc">/</span>mse</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  p_val <span class="ot">&lt;-</span> <span class="fu">pf</span>(f_val, <span class="at">df1=</span>p, <span class="at">df2=</span>n<span class="sc">-</span>p<span class="dv">-1</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create an ANOVA table to summarize all our results:</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  p_digits <span class="ot">&lt;-</span> (<span class="dv">10</span><span class="sc">^</span>(<span class="sc">-</span>p_ndigits))</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  p_val_tab <span class="ot">&lt;-</span> <span class="cf">if</span>(p_val<span class="sc">&lt;</span>p_digits){<span class="fu">paste0</span>(<span class="st">'&lt;'</span>,p_digits)}<span class="cf">else</span>{<span class="fu">round</span>(p_val,p_ndigits)}</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  anova_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="st">'Source'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'Model'</span>,<span class="st">'Error'</span>,<span class="st">'Total'</span>),</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Sums of Squares'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">round</span>(ssm,ndigits), <span class="fu">round</span>(sse,ndigits), <span class="fu">round</span>(sst,ndigits)),</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Degrees of Freedom'</span> <span class="ot">=</span> <span class="fu">c</span>(p, n<span class="sc">-</span>p<span class="dv">-1</span>, n<span class="dv">-1</span>),</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Mean Square'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">round</span>(msm,ndigits), <span class="fu">round</span>(mse,ndigits),<span class="st">''</span>),</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'F Value'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">round</span>(f_val,ndigits),<span class="st">''</span>,<span class="st">''</span>),</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'p-value'</span> <span class="ot">=</span> <span class="fu">c</span>(p_val_tab,<span class="st">''</span>,<span class="st">''</span>))</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>( format <span class="sc">==</span> <span class="st">'kable'</span> ){  </span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(kableExtra)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kbl</span>(anova_table, <span class="at">col.names=</span><span class="fu">c</span>(<span class="st">'Source'</span>,<span class="st">'Sums of Squares'</span>,<span class="st">'Degrees of Freedom'</span>,<span class="st">'Mean Square'</span>,<span class="st">'F-value'</span>,<span class="st">'p-value'</span>), <span class="at">align=</span><span class="st">'lccccc'</span>, <span class="at">escape=</span>F) <span class="sc">%&gt;%</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>, <span class="at">full_width =</span> F, <span class="at">position =</span> <span class="st">"left"</span>)</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    anova_table</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="exercise-1-multiple-linear-regression-example" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-multiple-linear-regression-example">Exercise 1: Multiple Linear Regression Example</h2>
+<section id="a-the-true-regression-equation" class="level3">
+<h3 class="anchored" data-anchor-id="a-the-true-regression-equation">1a: The True Regression Equation</h3>
+<p>Write the the multiple linear regression model for the outcome of throat pain (i.e., dependent variable) and independent variables for ASA score, gender, age, and treatment status. Be sure to define all terms.</p>
+<p><strong>Solution:</strong></p>
+<p>The true regression model is</p>
+<p><span class="math display">\[ Y_i = \beta_0 + \beta_1 X_{\text{Licorice},i} + \beta_2 X_{\text{Female},i} + \beta_3 X_{\text{Age},i} + \epsilon_i \]</span></p>
+<p>where <span class="math inline">\(\epsilon_i \sim N(0,\sigma^{2}_{Y|X})\)</span> and the subscript for each variable corresponds to the designated variable (e.g., the group if categorical, or the value if continuous).</p>
+</section>
+<section id="b-fitting-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="b-fitting-the-model">1b: Fitting the Model</h3>
+<p>Fit the multiple linear regression model for the outcome of throat pain (i.e., dependent variable) and independent variables for ASA score, gender, age, and treatment status. Print the summary table output for reference in the following questions.</p>
+<p><strong>Solution:</strong></p>
+<p>We could fit this model with either <code>lm</code> or <code>glm</code>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit with lm function</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lm_full <span class="ot">&lt;-</span> <span class="fu">lm</span>(pacu30min_throatPain <span class="sc">~</span> treat <span class="sc">+</span> preOp_gender <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = pacu30min_throatPain ~ treat + preOp_gender + preOp_age, 
+    data = dat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.1968 -0.8539 -0.3559  0.5968  5.1079 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   1.229559   0.317234   3.876 0.000139 ***
+treat        -0.744559   0.156179  -4.767 3.32e-06 ***
+preOp_gender -0.259238   0.159345  -1.627 0.105134    
+preOp_age    -0.001819   0.005051  -0.360 0.719128    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.19 on 229 degrees of freedom
+Multiple R-squared:  0.1023,    Adjusted R-squared:  0.09054 
+F-statistic: 8.699 on 3 and 229 DF,  p-value: 1.728e-05</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit with glm function</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>glm_full <span class="ot">&lt;-</span> <span class="fu">glm</span>(pacu30min_throatPain <span class="sc">~</span> treat <span class="sc">+</span> preOp_gender <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = pacu30min_throatPain ~ treat + preOp_gender + preOp_age, 
+    data = dat)
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   1.229559   0.317234   3.876 0.000139 ***
+treat        -0.744559   0.156179  -4.767 3.32e-06 ***
+preOp_gender -0.259238   0.159345  -1.627 0.105134    
+preOp_age    -0.001819   0.005051  -0.360 0.719128    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 1.415709)
+
+    Null deviance: 361.14  on 232  degrees of freedom
+Residual deviance: 324.20  on 229  degrees of freedom
+AIC: 748.19
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<p>Notice, since we haven’t changed any of the variable types, it is treating <code>treat</code> and <code>preOp_gender</code> as numeric (i.e., it doesn’t specify the group in the variable name) since the values are 0/1. Since they are binary, we can see we arrive at identical results if we coerce the variables to categorical with <code>as.factor()</code>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit with lm function but with treat and preOp_gender as factors</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>lm_full_factor <span class="ot">&lt;-</span> <span class="fu">lm</span>(pacu30min_throatPain <span class="sc">~</span> <span class="fu">as.factor</span>(treat) <span class="sc">+</span> <span class="fu">as.factor</span>(preOp_gender) <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_full_factor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = pacu30min_throatPain ~ as.factor(treat) + as.factor(preOp_gender) + 
+    preOp_age, data = dat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.1968 -0.8539 -0.3559  0.5968  5.1079 
+
+Coefficients:
+                          Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)               1.229559   0.317234   3.876 0.000139 ***
+as.factor(treat)1        -0.744559   0.156179  -4.767 3.32e-06 ***
+as.factor(preOp_gender)1 -0.259238   0.159345  -1.627 0.105134    
+preOp_age                -0.001819   0.005051  -0.360 0.719128    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.19 on 229 degrees of freedom
+Multiple R-squared:  0.1023,    Adjusted R-squared:  0.09054 
+F-statistic: 8.699 on 3 and 229 DF,  p-value: 1.728e-05</code></pre>
+</div>
+</div>
+<p>Since our later questions ask for a “brief, but complete” interpretation, we can also output the confidence intervals:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print confidence intervals to use for later responses</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   2.5 %       97.5 %
+(Intercept)   0.60448955  1.854629278
+treat        -1.05229143 -0.436826568
+preOp_gender -0.57320823  0.054731424
+preOp_age    -0.01177002  0.008132942</code></pre>
+</div>
+</div>
+</section>
+<section id="c-predicted-regression-equation" class="level3">
+<h3 class="anchored" data-anchor-id="c-predicted-regression-equation">1c: Predicted Regression Equation</h3>
+<p>Write down the predicted regression equation that describes the relationship between throat pain and your predictors based on the output.</p>
+<p><strong>Solution:</strong></p>
+<p>Our predicted regression equation is</p>
+<p><span class="math display">\[ \hat{Y}_i = 1.230 + -0.745 X_{\text{Licorice},i} + -0.259 X_{\text{Female},i} + -0.002 X_{\text{Age},i} \]</span></p>
+</section>
+<section id="d-intercept-interpretation-and-hypothesis-test" class="level3">
+<h3 class="anchored" data-anchor-id="d-intercept-interpretation-and-hypothesis-test">1d: Intercept Interpretation and Hypothesis Test</h3>
+<p>Write the hypothesis being tested in the regression output for this coefficient. What is the estimated intercept and how would you interpret it (provide a brief, but complete, interpretation)?</p>
+<p><strong>Solution:</strong></p>
+<p>Our hypotheses are <span class="math inline">\(H_0\colon \beta_0 = 0\)</span> versus <span class="math inline">\(H_1\colon \beta_0 \neq 0\)</span>.</p>
+<p>The average throat pain after 30 minutes in the PACU is 1.230 (95% CI: 0.604, 1.855) when all other predictors are 0. Since p&lt;0.001, we reject the null hypothesis and conclude it is significantly different from 0.</p>
+<p>This interpretation, however, is nonsensical since it both extrapolates to ages we do not have (i.e., 0) and a newborn would not be able to report their pain at 30 minutes in the PACU.</p>
+<p><em>Recall, our brief, but complete, interpretation involves (1) the point estimate, (2) an interval estimate, (3) a decision, and (4) a measure of uncertainty.</em></p>
+</section>
+<section id="e-coefficient-interpretation-and-hypothesis-test-for-binary-predictor" class="level3">
+<h3 class="anchored" data-anchor-id="e-coefficient-interpretation-and-hypothesis-test-for-binary-predictor">1e: Coefficient Interpretation and Hypothesis Test for Binary Predictor</h3>
+<p>Write the hypothesis being tested in the regression output for this coefficient. What is the estimated effect of treatment and how would you interpret it (provide a brief, but complete, interpretation)?</p>
+<p><strong>Solution:</strong></p>
+<p>Our hypotheses are <span class="math inline">\(H_0\colon \beta_1 = 0\)</span> versus <span class="math inline">\(H_1\colon \beta_1 \neq 0\)</span>.</p>
+<p>Those treated with licorice have a significantly lower throat pain score after 30 minutes in the PACU that is, on average, 0.745 lower (95% CI: 0.437 to 1.052 lower) than those treated with sugar water after adjusting for gender and age (p&lt;0.001).</p>
+</section>
+<section id="f-coefficient-interpretation-and-hypothesis-test-for-continuous-predictor" class="level3">
+<h3 class="anchored" data-anchor-id="f-coefficient-interpretation-and-hypothesis-test-for-continuous-predictor">1f: Coefficient Interpretation and Hypothesis Test for Continuous Predictor</h3>
+<p>Write the hypothesis being tested in the regression output for this coefficient. What is the estimated effect of age and how would you interpret it (provide a brief, but complete, interpretation)?</p>
+<p><strong>Solution:</strong></p>
+<p>Our hypotheses are <span class="math inline">\(H_0\colon \beta_3 = 0\)</span> versus <span class="math inline">\(H_1\colon \beta_3 \neq 0\)</span>.</p>
+<p>For a one year increase in age, throat pain score after 30 minutes in the PACU is 0.002 higher (95% CI: -0.012 lower to 0.008 higher) after adjusting for treatment group and gender. Since p=0.719, we fail to reject the null hypothesis that the slope is different from 0.</p>
+</section>
+<section id="g-the-partial-f-test" class="level3">
+<h3 class="anchored" data-anchor-id="g-the-partial-f-test">1g: The Partial F-test</h3>
+<p>Evaluate if the addition of age and gender contribute significantly to the prediction of throat pain over and above that achieved by treatment group alone. Write out the null and alternative hypotheses being tested and your conclusion.</p>
+<p><strong>Solution:</strong></p>
+<p>We can do this “by hand” or using R (or SAS) to do the calculations for us. We will start with our hand calculation and compare to R’s result.</p>
+<p>The null hypothesis we are evaluating is <span class="math inline">\(H_0\colon \beta_2 = \beta_3 = 0\)</span> versus the alternative hypothesis (<span class="math inline">\(H_1\)</span>) that at least one coefficient of <span class="math inline">\(\beta_2\)</span> and <span class="math inline">\(\beta_3\)</span> is not equal to 0.</p>
+<p>First, we must fit the reduced model and create the ANOVA tables for both the full and reduced models:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create ANOVA table for full model</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">linreg_anova_func</span>(lm_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Source</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Sums of Squares</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Degrees of Freedom</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Mean Square</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">F-value</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Model</td>
+<td style="text-align: center;">36.94</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">12.31</td>
+<td style="text-align: center;">8.7</td>
+<td style="text-align: center;">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Error</td>
+<td style="text-align: center;">324.20</td>
+<td style="text-align: center;">229</td>
+<td style="text-align: center;">1.42</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: center;">361.14</td>
+<td style="text-align: center;">232</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit reduced model with age and gender removed</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>lm_red <span class="ot">&lt;-</span> <span class="fu">lm</span>(pacu30min_throatPain <span class="sc">~</span> treat, <span class="at">data=</span>dat)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create ANOVA table for reduced model</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">linreg_anova_func</span>(lm_red)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Source</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Sums of Squares</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Degrees of Freedom</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Mean Square</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">F-value</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Model</td>
+<td style="text-align: center;">32.97</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">32.97</td>
+<td style="text-align: center;">23.21</td>
+<td style="text-align: center;">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Error</td>
+<td style="text-align: center;">328.17</td>
+<td style="text-align: center;">231</td>
+<td style="text-align: center;">1.42</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: center;">361.14</td>
+<td style="text-align: center;">232</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Taking the relevant quantities from our ANOVA tables, we can calculate our partial <span class="math inline">\(F\)</span> statistic:</p>
+<p><span class="math display">\[ F = \frac{SS_{model}(full) - SS_{model}(reduced)]/k}{MS_{error}(full)} = \frac{(36.94 - 32.97) / 2}{1.42} = 1.40 \sim F_{2,233-1-2-1} = F_{2,229} \]</span></p>
+<p>Since we are using software, we can calculate the p-value directly that <span class="math inline">\(P(F \geq F_{2,229})\)</span> using <code>pf(1.40,2,229,lower.tail=F)</code>: 0.249. Since we see that p&gt;0.05, we fail to reject the null hypothesis that the addition of age and gender contribute significantly to the prediction of throat pain over and above that achieved by treatment group alone.</p>
+<p>Another approach we could use is to calculate the critical value represented by <span class="math inline">\(F_{2,229}\)</span> for an <span class="math inline">\(\alpha=0.05\)</span> to compare our test statistic to using <code>qf(0.95,2,229)</code>: 3.035. Since <span class="math inline">\(F=1.40 &lt; 3.035 = F_{0.95,2,229}\)</span>, we would still fail to reject our null hypothesis.</p>
+<p>A third approach would be to use the <code>anova</code> function in R to solve this without doing any calculations by hand:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm_full, lm_red, <span class="at">test=</span><span class="st">'F'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Model 1: pacu30min_throatPain ~ treat + preOp_gender + preOp_age
+Model 2: pacu30min_throatPain ~ treat
+  Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+1    229 324.20                           
+2    231 328.17 -2   -3.9728 1.4031 0.2479</code></pre>
+</div>
+</div>
+<p>We see our results closely match our by hand work above (with some slight differences due to rounding), where we still have <span class="math inline">\(p&gt;0.05\)</span> and fail to reject the null hypothesis.</p>
+</section>
+<section id="h-the-overall-f-test" class="level3">
+<h3 class="anchored" data-anchor-id="h-the-overall-f-test">1h: The Overall F-test</h3>
+<p>Evaluate if the the entire set of independent variables (i.e., predictors) contribute significantly to the prediction of throat pain. Write out the null and alternative hypotheses being tested and your conclusion.</p>
+<p><strong>Solution:</strong></p>
+<p>The null hypothesis is that <span class="math inline">\(H_0\colon \beta_1 = \beta_2 = \beta_3 = 0\)</span> versus the alternative hypothesis (<span class="math inline">\(H_1\)</span>) that at least one of these <span class="math inline">\(\beta_k; k=1,2,3\)</span> is not equal to 0.</p>
+<p>For this problem, we can see that in our <code>lm_full</code> summary that <span class="math inline">\(F=8.699\)</span> and its corresponding <span class="math inline">\(p&lt;0.001\)</span>. Since <span class="math inline">\(p&lt;0.05\)</span>, we reject the null hypothesis and conclude that at least one <span class="math inline">\(\beta_k\)</span> is significantly different from 0.</p>
+<p>Further, we could combine our findings from the previous problem to note that adding age and gender were not significant, so it seems that a model with just treatment would be better and more parsimonious, even if the overall <span class="math inline">\(F\)</span>-test for all three predictors is significant.</p>
+</section>
+<section id="i-multicollinearity" class="level3">
+<h3 class="anchored" data-anchor-id="i-multicollinearity">1i: Multicollinearity</h3>
+<p>Calculate the variance inflation factors (VIFs) for the independent variables in the model. Does it appear that multicollinearity may be a concern?</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(lm_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       treat preOp_gender    preOp_age 
+    1.003602     1.002208     1.002467 </code></pre>
+</div>
+</div>
+<p>Since all VIFs are less than 10, it appears multicollinearity is not a concern in our full model.</p>
+</section>
+<section id="j-diagnostic-plots" class="level3">
+<h3 class="anchored" data-anchor-id="j-diagnostic-plots">1j: Diagnostic Plots</h3>
+<p>Evaluate the assumptions of our multiple linear regression model by creating diagnostic plots.</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r fold-hide code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">4.1</span>,<span class="fl">4.1</span>,<span class="fl">3.1</span>,<span class="fl">2.1</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="do">## X1 Partial Plot MLR</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>x1_mlr_step1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(pacu30min_throatPain <span class="sc">~</span> preOp_gender <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>x1_mlr_step2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(treat <span class="sc">~</span> preOp_gender <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="fu">residuals</span>(x1_mlr_step2), <span class="at">y=</span><span class="fu">residuals</span>(x1_mlr_step1),</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="fu">expression</span>(<span class="st">'Partial Plot for X'</span>[<span class="dv">1</span>]), <span class="at">ylab=</span><span class="st">'Partial Dependent Residual'</span>, </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">'Partial Regressor Residual'</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(<span class="fu">residuals</span>(x1_mlr_step1) <span class="sc">~</span> <span class="fu">residuals</span>(x1_mlr_step2)))</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="do">## X2 Partial Plot MLR</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>x2_mlr_step1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(pacu30min_throatPain <span class="sc">~</span> treat <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>x2_mlr_step2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(preOp_gender <span class="sc">~</span> treat <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="fu">residuals</span>(x2_mlr_step2), <span class="at">y=</span><span class="fu">residuals</span>(x2_mlr_step1),</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="fu">expression</span>(<span class="st">'Partial Plot for X'</span>[<span class="dv">2</span>]), <span class="at">ylab=</span><span class="st">'Partial Dependent Residual'</span>, </span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">'Partial Regressor Residual'</span>)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(<span class="fu">residuals</span>(x2_mlr_step1) <span class="sc">~</span> <span class="fu">residuals</span>(x2_mlr_step2)))</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="do">## X3 Partial Plot MLR</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>x3_mlr_step1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(pacu30min_throatPain <span class="sc">~</span> treat <span class="sc">+</span> preOp_gender, <span class="at">data=</span>dat)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>x3_mlr_step2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(preOp_age <span class="sc">~</span> treat <span class="sc">+</span> preOp_gender, <span class="at">data=</span>dat)</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="fu">residuals</span>(x3_mlr_step2), <span class="at">y=</span><span class="fu">residuals</span>(x3_mlr_step1),</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="fu">expression</span>(<span class="st">'Partial Plot for X'</span>[<span class="dv">3</span>]), <span class="at">ylab=</span><span class="st">'Partial Dependent Residual'</span>, </span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">'Partial Regressor Residual'</span>)</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(<span class="fu">residuals</span>(x3_mlr_step1) <span class="sc">~</span> <span class="fu">residuals</span>(x3_mlr_step2)))</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="do">## Scatterplot of residuals by predicted values</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="fu">predict</span>(lm_full), <span class="at">y=</span><span class="fu">rstudent</span>(lm_full), <span class="at">xlab=</span><span class="fu">expression</span>(<span class="fu">hat</span>(Y)), <span class="at">ylab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Residual Plot by Y-hat'</span>, <span class="at">cex=</span><span class="dv">1</span>); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="do">## Histogram of jackknife residuals with normal curve</span></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">rstudent</span>(lm_full), <span class="at">xlab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Histogram of Residuals'</span>, <span class="at">freq=</span>F, <span class="at">breaks=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>,<span class="fl">0.25</span>)); </span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">curve</span>( <span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">add=</span>T)</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="do">## PP-plot</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( <span class="fu">ppoints</span>(<span class="fu">length</span>(<span class="fu">rstudent</span>(lm_full))), <span class="fu">sort</span>(<span class="fu">pnorm</span>(<span class="fu">rstudent</span>(lm_full))), </span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab=</span><span class="st">'Observed Cumulative Probability'</span>, </span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab=</span><span class="st">'Expected Cumulative Probability'</span>, </span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">main=</span><span class="st">'Normal Probability Plot'</span>, <span class="at">cex=</span><span class="dv">1</span>); </span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>,<span class="at">b=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">'gray65'</span>, <span class="at">lwd=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>These plots are somewhat challenging to decipher since we have two categorical predictors and only one continuous predictor. However, the lower figures all suggest that normality may be violated and that this model, as it currently is, may not be the most appropriate. It is possible that a data transformation may result in a model more appropriate for linear regression. Adding other variables (that may or may not be measured), may also improve the model fit. It is also entirely possible that our outcome of a 0-10 Likert pain scale is not normal and an entirely different approach to modeling may be needed (e.g., zero-inflated Poisson regression).</p>
+</section>
+</section>
+<section id="exercise-2-but-now-with-matrices" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-but-now-with-matrices">Exercise 2: But Now With Matrices!</h2>
+<p>Using your results in Exercise 1 to check your answers, complete the following parts using matrices you code yourself.</p>
+<section id="a-the-design-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="a-the-design-matrix">2a: The Design Matrix</h3>
+<p>Create the design matrix that we will use for our regression calculations.</p>
+<p><strong>Solution:</strong></p>
+<p>Our design matrix, <span class="math inline">\(\mathbf{X}\)</span>, includes a columns of 1’s for the intercept and then our three predictors:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>( <span class="fu">cbind</span>(<span class="dv">1</span>, dat[,<span class="fu">c</span>(<span class="st">'treat'</span>,<span class="st">'preOp_gender'</span>,<span class="st">'preOp_age'</span>)]) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="b-beta-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="b-beta-coefficients">2b: Beta Coefficients</h3>
+<p>Calculate the estimated beta coefficients via matrix algebra.</p>
+<p><strong>Solution:</strong></p>
+<p>We need to first create a vector for our outcome of throat pain (<code>Y</code>). Then we will calculate <span class="math inline">\(\hat{\boldsymbol{\beta}} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{Y}\)</span>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> dat<span class="sc">$</span>pacu30min_throatPain</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>beta_est <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> Y</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>beta_est</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     [,1]
+1             1.229559412
+treat        -0.744558998
+preOp_gender -0.259238404
+preOp_age    -0.001818539</code></pre>
+</div>
+</div>
+<p>We see that our estimates match those from the <code>lm</code> function.</p>
+</section>
+<section id="c-standard-error-of-beta-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="c-standard-error-of-beta-coefficients">2c: Standard Error of Beta Coefficients</h3>
+<p>Calculate the standard error of the beta coefficients via matrix algebra.</p>
+<p><strong>Solution:</strong></p>
+<p>We will first calculate our MSE as <span class="math inline">\(\hat{\sigma}_{Y|X}^{2} = \frac{SSE}{n-p-1} = \frac{\mathbf{Y}^\top\mathbf{Y}-\hat{\boldsymbol{\beta}}^\top\mathbf{X}^\top\mathbf{Y}}{n-p-1}\)</span>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mse <span class="ot">&lt;-</span> (<span class="fu">t</span>(Y) <span class="sc">%*%</span> Y <span class="sc">-</span> <span class="fu">t</span>(beta_est) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> Y) <span class="sc">/</span> (<span class="fu">nrow</span>(dat) <span class="sc">-</span> <span class="fu">ncol</span>(X))</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>mse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>         [,1]
+[1,] 1.415709</code></pre>
+</div>
+</div>
+<p>Notice, that <span class="math inline">\(n-p-1\)</span> can be pulled from our objects as <span class="math inline">\(n=\)</span><code>nrow(dat)</code> and <span class="math inline">\(p-1=\)</span><code>ncol(X)</code> (since our design matrix already includes the intercept).</p>
+<p>The variance of our beta coefficients is therefore <span class="math inline">\(Var(\hat{\boldsymbol{\beta}}) = \hat{\sigma}_{Y|X}^{2} (\mathbf{X}^\top \mathbf{X})^{-1}\)</span>, which is our <em>variance-covariance</em> matrix:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>beta_var <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>( mse ) <span class="sc">*</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>beta_var</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                        1         treat  preOp_gender     preOp_age
+1             0.100637153 -1.384092e-02 -8.509392e-03 -1.470583e-03
+treat        -0.013840916  2.439202e-02 -1.028729e-03  3.498007e-05
+preOp_gender -0.008509392 -1.028729e-03  2.539084e-02 -1.935834e-05
+preOp_age    -0.001470583  3.498007e-05 -1.935834e-05  2.550802e-05</code></pre>
+</div>
+</div>
+<p>We can compare this to the <code>vcov</code> output:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vcov</span>(lm_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>              (Intercept)         treat  preOp_gender     preOp_age
+(Intercept)   0.100637153 -1.384092e-02 -8.509392e-03 -1.470583e-03
+treat        -0.013840916  2.439202e-02 -1.028729e-03  3.498007e-05
+preOp_gender -0.008509392 -1.028729e-03  2.539084e-02 -1.935834e-05
+preOp_age    -0.001470583  3.498007e-05 -1.935834e-05  2.550802e-05</code></pre>
+</div>
+</div>
+<p>The <em>standard error</em> is then the square root of the variance terms along the diagonal:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>beta_se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(beta_var))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>beta_se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           1        treat preOp_gender    preOp_age 
+ 0.317233593  0.156179445  0.159345030  0.005050546 </code></pre>
+</div>
+</div>
+<p>This matches our <code>lm</code> output.</p>
+</section>
+<section id="d-test-statistics-and-p-values" class="level3">
+<h3 class="anchored" data-anchor-id="d-test-statistics-and-p-values">2d: Test Statistics and p-values</h3>
+<p>Calculate the <span class="math inline">\(t\)</span>-statistic and associated p-value based on the previous estimates from <strong>1b</strong> and <strong>1c</strong>.</p>
+<p><strong>Solution:</strong></p>
+<p>We know that our <span class="math inline">\(t\)</span>-statistic is the beta coefficient estimate divided by its standard error:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>t_stat <span class="ot">&lt;-</span> beta_est <span class="sc">/</span> beta_se</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>t_stat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   [,1]
+1             3.8758802
+treat        -4.7673303
+preOp_gender -1.6268998
+preOp_age    -0.3600678</code></pre>
+</div>
+</div>
+<p>The p-value is then calculated for our two-sided test:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pval <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>( <span class="fu">abs</span>(t_stat), <span class="at">df =</span> <span class="fu">length</span>(Y) <span class="sc">-</span> <span class="fu">ncol</span>(X)) ) <span class="co"># df = n-p-1</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>pval</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     [,1]
+1            1.387762e-04
+treat        3.319843e-06
+preOp_gender 1.051336e-01
+preOp_age    7.191283e-01</code></pre>
+</div>
+</div>
+<p>These results match the p-values in our regression output.</p>
+</section>
+<section id="e-confidence-and-prediction-interval" class="level3">
+<h3 class="anchored" data-anchor-id="e-confidence-and-prediction-interval">2e: Confidence and Prediction Interval</h3>
+<p>Calculate the 95% confidence and prediction interval for a male in the treatment group who is 50 years old. Compare this result to the calculation provided by <code>R</code> when using the <code>predict</code> function.</p>
+<p><strong>Solution:</strong></p>
+<p>We first need to define <span class="math inline">\(x_0\)</span> for our given combination of covariates:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>x0 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">50</span>) <span class="co"># intercept, treatment, gender, age</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>pred_val <span class="ot">&lt;-</span> <span class="fu">t</span>(x0) <span class="sc">%*%</span> beta_est <span class="co"># predicted throat pain score</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>pred_val</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]
+[1,] 0.3940735</code></pre>
+</div>
+</div>
+<p>We can then calculate our variances for a predicted mean and individual value. The variance for a fitted value (i.e., the expected mean <span class="math inline">\(\mu\)</span> for a given value of <span class="math inline">\(X=x_0\)</span>) is given by <span class="math display">\[ Var(\mu_{Y|x_0}) = x_0^\top [Var(\hat{\boldsymbol{\beta}})] x_0 = \hat{\sigma}^{2}_{Y|X} x_{0}^\top (\mathbf{X}^\top \mathbf{X})^{-1} x_{0} \]</span></p>
+<p>The variance of a future predicted value of <span class="math inline">\(Y\)</span> for a given <span class="math inline">\(x_0\)</span> for an individual is given by: <span class="math display">\[ Var(\hat{Y} | x_0 ) = \hat{\sigma}^{2}_{Y|X} \left[ 1 + x_{0}^\top (\mathbf{X}^\top \mathbf{X})^{-1} x_{0}\right] \]</span></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>var_mean <span class="ot">&lt;-</span> <span class="fu">t</span>(x0) <span class="sc">%*%</span> beta_var <span class="sc">%*%</span> x0</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>var_ind <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>( mse ) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">t</span>(x0) <span class="sc">%*%</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> x0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The 95% confidence and prediction intervals are:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Note, we don't necessarily need to wrap pred_val and var_mean or var_ind in as.numeric(), but it avoids a warning about deprecated functions</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% CI</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(pred_val) <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>)) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">as.numeric</span>(var_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1343719 0.6537750</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% PI</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(pred_val) <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>)) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">as.numeric</span>(var_ind))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.952378  2.740525</code></pre>
+</div>
+</div>
+<p>We can compare this to the <code>predict</code> function:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm_full, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">treat=</span><span class="dv">1</span>, <span class="at">preOp_gender=</span><span class="dv">0</span>, <span class="at">preOp_age=</span><span class="dv">50</span>), <span class="at">interval=</span><span class="st">'confidence'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        fit       lwr       upr
+1 0.3940735 0.1329921 0.6551548</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm_full, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">treat=</span><span class="dv">1</span>, <span class="at">preOp_gender=</span><span class="dv">0</span>, <span class="at">preOp_age=</span><span class="dv">50</span>), <span class="at">interval=</span><span class="st">'predict'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        fit       lwr      upr
+1 0.3940735 -1.964845 2.752992</code></pre>
+</div>
+</div>
+<p>We see that our matrix approach and the <code>lm::predict</code> function nearly match. The difference being due to using the standard normal (<span class="math inline">\(Z\)</span>) distribution instead of the <span class="math inline">\(t\)</span>-distribution in our “by hand” calculation. If we use the <span class="math inline">\(t_{229}\)</span> distribution instead, we see they do exactly match:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Note, we don't necessarily need to wrap pred_val and var_mean or var_ind in as.numeric(), but it avoids a warning about deprecated functions</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% CI</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(pred_val) <span class="sc">+</span> <span class="fu">qt</span>(<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>), <span class="at">df=</span><span class="dv">229</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">as.numeric</span>(var_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1329921 0.6551548</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% PI</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(pred_val) <span class="sc">+</span> <span class="fu">qt</span>(<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>), <span class="at">df=</span><span class="dv">229</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">as.numeric</span>(var_ind))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.964845  2.752992</code></pre>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb48" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 9 Practice Problems: Solutions"</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a>This page includes the solutions to the optional practice problems for the given week. If you want to see a version <span class="co">[</span><span class="ot">without solutions please click here</span><span class="co">](/labs/prac9/index.qmd)</span>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>This week's extra practice exercises are focusing on implementing and interpreting a multiple linear regression (MLR) model, both using existing functions and by coding our own matrices.</span>
+<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a><span class="fu"># Dataset Background</span></span>
+<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-29"><a href="#cb48-29" aria-hidden="true" tabindex="-1"></a>The following code can load the <span class="in">`Licorice_Gargle.csv`</span> file into R:</span>
+<span id="cb48-30"><a href="#cb48-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-31"><a href="#cb48-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.source = 'fold-show'}</span></span>
+<span id="cb48-32"><a href="#cb48-32" aria-hidden="true" tabindex="-1"></a>dat_all <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../../.data/Licorice_Gargle.csv'</span>)</span>
+<span id="cb48-33"><a href="#cb48-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-34"><a href="#cb48-34" aria-hidden="true" tabindex="-1"></a><span class="co"># remove records with missing data for the outcome or any predictors:</span></span>
+<span id="cb48-35"><a href="#cb48-35" aria-hidden="true" tabindex="-1"></a>complete_case_vec <span class="ot">&lt;-</span> <span class="fu">complete.cases</span>(dat_all[,<span class="fu">c</span>(<span class="st">'pacu30min_throatPain'</span>,<span class="st">'preOp_gender'</span>,<span class="st">'preOp_age'</span>,<span class="st">'treat'</span>)]) <span class="co"># creates a vector of TRUE or FALSE for each row if the cases are complete (i.e., no NA values)</span></span>
+<span id="cb48-36"><a href="#cb48-36" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat_all[complete_case_vec,]</span>
+<span id="cb48-37"><a href="#cb48-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-38"><a href="#cb48-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-39"><a href="#cb48-39" aria-hidden="true" tabindex="-1"></a>The dataset represents a randomized control trial of 236 adult patients undergoing elective thoracic surgery requiring a double-lumen endotracheal tube comparing if licorice vs. sugar-water gargle prevents postoperative sore throat. For our exercises below we will focus on the following variables:</span>
+<span id="cb48-40"><a href="#cb48-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-41"><a href="#cb48-41" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`pacu30min_throatPain`</span>: sore throat pain score at rest 30 minutes after arriving in the post-anesthesia care unit (PACU) measured on an 11 point Likert scale (0=no pain to 10=worst pain)</span>
+<span id="cb48-42"><a href="#cb48-42" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`preOp_gender`</span>: an indicator variable for gender (0=Male, 1=Female)</span>
+<span id="cb48-43"><a href="#cb48-43" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`preOp_age`</span>: age (in years)</span>
+<span id="cb48-44"><a href="#cb48-44" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`treat`</span>: the randomized treatment in the trial where 0=sugar 5g and 1=licorice 0.5g</span>
+<span id="cb48-45"><a href="#cb48-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-46"><a href="#cb48-46" aria-hidden="true" tabindex="-1"></a>For our solutions, we will also use our ANOVA table creation function from lecture/recitation:</span>
+<span id="cb48-47"><a href="#cb48-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-48"><a href="#cb48-48" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.source = 'fold-hide'}</span></span>
+<span id="cb48-49"><a href="#cb48-49" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb48-50"><a href="#cb48-50" aria-hidden="true" tabindex="-1"></a>linreg_anova_func <span class="ot">&lt;-</span> <span class="cf">function</span>(mod, <span class="at">ndigits=</span><span class="dv">2</span>, <span class="at">p_ndigits=</span><span class="dv">3</span>, <span class="at">format=</span><span class="st">'kable'</span>){</span>
+<span id="cb48-51"><a href="#cb48-51" aria-hidden="true" tabindex="-1"></a><span class="do">### Function to create an ANOVA table linear regression results from lm or glm</span></span>
+<span id="cb48-52"><a href="#cb48-52" aria-hidden="true" tabindex="-1"></a><span class="co"># mod: an object with the fitted model results</span></span>
+<span id="cb48-53"><a href="#cb48-53" aria-hidden="true" tabindex="-1"></a><span class="co"># ndigits: number of digits to round to for most values, default is 2</span></span>
+<span id="cb48-54"><a href="#cb48-54" aria-hidden="true" tabindex="-1"></a><span class="co"># p_digits: number of digits to round the p-value to, default is 3</span></span>
+<span id="cb48-55"><a href="#cb48-55" aria-hidden="true" tabindex="-1"></a><span class="co"># format: desired format output (default is kable):</span></span>
+<span id="cb48-56"><a href="#cb48-56" aria-hidden="true" tabindex="-1"></a><span class="do">## "kable" for kable table</span></span>
+<span id="cb48-57"><a href="#cb48-57" aria-hidden="true" tabindex="-1"></a><span class="do">## "df" for data frame as table</span></span>
+<span id="cb48-58"><a href="#cb48-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-59"><a href="#cb48-59" aria-hidden="true" tabindex="-1"></a>  <span class="co"># extract outcome from the object produced by the glm or lm function</span></span>
+<span id="cb48-60"><a href="#cb48-60" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>( <span class="fu">class</span>(mod)[<span class="dv">1</span>] <span class="sc">==</span> <span class="st">'glm'</span> ){</span>
+<span id="cb48-61"><a href="#cb48-61" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> mod<span class="sc">$</span>y</span>
+<span id="cb48-62"><a href="#cb48-62" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb48-63"><a href="#cb48-63" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>( <span class="fu">class</span>(mod)[<span class="dv">1</span>] <span class="sc">==</span> <span class="st">'lm'</span> ){</span>
+<span id="cb48-64"><a href="#cb48-64" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> mod<span class="sc">$</span>model[,<span class="dv">1</span>] <span class="co"># first column contains outcome data</span></span>
+<span id="cb48-65"><a href="#cb48-65" aria-hidden="true" tabindex="-1"></a>  }  </span>
+<span id="cb48-66"><a href="#cb48-66" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-67"><a href="#cb48-67" aria-hidden="true" tabindex="-1"></a>  ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
+<span id="cb48-68"><a href="#cb48-68" aria-hidden="true" tabindex="-1"></a>  yhat <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod)</span>
+<span id="cb48-69"><a href="#cb48-69" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">length</span>(mod<span class="sc">$</span>coefficients)<span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb48-70"><a href="#cb48-70" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb48-71"><a href="#cb48-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-72"><a href="#cb48-72" aria-hidden="true" tabindex="-1"></a>  ssm <span class="ot">&lt;-</span> <span class="fu">sum</span>( (yhat<span class="sc">-</span>ybar)<span class="sc">^</span><span class="dv">2</span> )</span>
+<span id="cb48-73"><a href="#cb48-73" aria-hidden="true" tabindex="-1"></a>  sse <span class="ot">&lt;-</span> <span class="fu">sum</span>( (y<span class="sc">-</span>yhat)<span class="sc">^</span><span class="dv">2</span> )</span>
+<span id="cb48-74"><a href="#cb48-74" aria-hidden="true" tabindex="-1"></a>  sst <span class="ot">&lt;-</span> <span class="fu">sum</span>( (y<span class="sc">-</span>ybar)<span class="sc">^</span><span class="dv">2</span> )</span>
+<span id="cb48-75"><a href="#cb48-75" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-76"><a href="#cb48-76" aria-hidden="true" tabindex="-1"></a>  msm <span class="ot">&lt;-</span> ssm<span class="sc">/</span>p</span>
+<span id="cb48-77"><a href="#cb48-77" aria-hidden="true" tabindex="-1"></a>  mse <span class="ot">&lt;-</span> sse<span class="sc">/</span>(n<span class="sc">-</span>p<span class="dv">-1</span>)</span>
+<span id="cb48-78"><a href="#cb48-78" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-79"><a href="#cb48-79" aria-hidden="true" tabindex="-1"></a>  f_val <span class="ot">&lt;-</span> msm<span class="sc">/</span>mse</span>
+<span id="cb48-80"><a href="#cb48-80" aria-hidden="true" tabindex="-1"></a>  p_val <span class="ot">&lt;-</span> <span class="fu">pf</span>(f_val, <span class="at">df1=</span>p, <span class="at">df2=</span>n<span class="sc">-</span>p<span class="dv">-1</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span>
+<span id="cb48-81"><a href="#cb48-81" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-82"><a href="#cb48-82" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create an ANOVA table to summarize all our results:</span></span>
+<span id="cb48-83"><a href="#cb48-83" aria-hidden="true" tabindex="-1"></a>  p_digits <span class="ot">&lt;-</span> (<span class="dv">10</span><span class="sc">^</span>(<span class="sc">-</span>p_ndigits))</span>
+<span id="cb48-84"><a href="#cb48-84" aria-hidden="true" tabindex="-1"></a>  p_val_tab <span class="ot">&lt;-</span> <span class="cf">if</span>(p_val<span class="sc">&lt;</span>p_digits){<span class="fu">paste0</span>(<span class="st">'&lt;'</span>,p_digits)}<span class="cf">else</span>{<span class="fu">round</span>(p_val,p_ndigits)}</span>
+<span id="cb48-85"><a href="#cb48-85" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-86"><a href="#cb48-86" aria-hidden="true" tabindex="-1"></a>  anova_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="st">'Source'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'Model'</span>,<span class="st">'Error'</span>,<span class="st">'Total'</span>),</span>
+<span id="cb48-87"><a href="#cb48-87" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Sums of Squares'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">round</span>(ssm,ndigits), <span class="fu">round</span>(sse,ndigits), <span class="fu">round</span>(sst,ndigits)),</span>
+<span id="cb48-88"><a href="#cb48-88" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Degrees of Freedom'</span> <span class="ot">=</span> <span class="fu">c</span>(p, n<span class="sc">-</span>p<span class="dv">-1</span>, n<span class="dv">-1</span>),</span>
+<span id="cb48-89"><a href="#cb48-89" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Mean Square'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">round</span>(msm,ndigits), <span class="fu">round</span>(mse,ndigits),<span class="st">''</span>),</span>
+<span id="cb48-90"><a href="#cb48-90" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'F Value'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">round</span>(f_val,ndigits),<span class="st">''</span>,<span class="st">''</span>),</span>
+<span id="cb48-91"><a href="#cb48-91" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'p-value'</span> <span class="ot">=</span> <span class="fu">c</span>(p_val_tab,<span class="st">''</span>,<span class="st">''</span>))</span>
+<span id="cb48-92"><a href="#cb48-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-93"><a href="#cb48-93" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>( format <span class="sc">==</span> <span class="st">'kable'</span> ){  </span>
+<span id="cb48-94"><a href="#cb48-94" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(kableExtra)</span>
+<span id="cb48-95"><a href="#cb48-95" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kbl</span>(anova_table, <span class="at">col.names=</span><span class="fu">c</span>(<span class="st">'Source'</span>,<span class="st">'Sums of Squares'</span>,<span class="st">'Degrees of Freedom'</span>,<span class="st">'Mean Square'</span>,<span class="st">'F-value'</span>,<span class="st">'p-value'</span>), <span class="at">align=</span><span class="st">'lccccc'</span>, <span class="at">escape=</span>F) <span class="sc">%&gt;%</span></span>
+<span id="cb48-96"><a href="#cb48-96" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>, <span class="at">full_width =</span> F, <span class="at">position =</span> <span class="st">"left"</span>)</span>
+<span id="cb48-97"><a href="#cb48-97" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb48-98"><a href="#cb48-98" aria-hidden="true" tabindex="-1"></a>    anova_table</span>
+<span id="cb48-99"><a href="#cb48-99" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb48-100"><a href="#cb48-100" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb48-101"><a href="#cb48-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-102"><a href="#cb48-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-103"><a href="#cb48-103" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 1: Multiple Linear Regression Example</span></span>
+<span id="cb48-104"><a href="#cb48-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-105"><a href="#cb48-105" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1a: The True Regression Equation</span></span>
+<span id="cb48-106"><a href="#cb48-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-107"><a href="#cb48-107" aria-hidden="true" tabindex="-1"></a>Write the the multiple linear regression model for the outcome of throat pain (i.e., dependent variable) and independent variables for ASA score, gender, age, and treatment status. Be sure to define all terms.</span>
+<span id="cb48-108"><a href="#cb48-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-109"><a href="#cb48-109" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb48-110"><a href="#cb48-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-111"><a href="#cb48-111" aria-hidden="true" tabindex="-1"></a>The true regression model is </span>
+<span id="cb48-112"><a href="#cb48-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-113"><a href="#cb48-113" aria-hidden="true" tabindex="-1"></a>$$ Y_i = \beta_0 + \beta_1 X_{\text{Licorice},i} + \beta_2 X_{\text{Female},i} + \beta_3 X_{\text{Age},i} + \epsilon_i $$</span>
+<span id="cb48-114"><a href="#cb48-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-115"><a href="#cb48-115" aria-hidden="true" tabindex="-1"></a>where $\epsilon_i \sim N(0,\sigma^{2}_{Y|X})$ and the subscript for each variable corresponds to the designated variable (e.g., the group if categorical, or the value if continuous).</span>
+<span id="cb48-116"><a href="#cb48-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-117"><a href="#cb48-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-118"><a href="#cb48-118" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1b: Fitting the Model</span></span>
+<span id="cb48-119"><a href="#cb48-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-120"><a href="#cb48-120" aria-hidden="true" tabindex="-1"></a>Fit the multiple linear regression model for the outcome of throat pain (i.e., dependent variable) and independent variables for ASA score, gender, age, and treatment status. Print the summary table output for reference in the following questions.</span>
+<span id="cb48-121"><a href="#cb48-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-122"><a href="#cb48-122" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb48-123"><a href="#cb48-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-124"><a href="#cb48-124" aria-hidden="true" tabindex="-1"></a>We could fit this model with either <span class="in">`lm`</span> or <span class="in">`glm`</span>:</span>
+<span id="cb48-125"><a href="#cb48-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-128"><a href="#cb48-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-129"><a href="#cb48-129" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit with lm function</span></span>
+<span id="cb48-130"><a href="#cb48-130" aria-hidden="true" tabindex="-1"></a>lm_full <span class="ot">&lt;-</span> <span class="fu">lm</span>(pacu30min_throatPain <span class="sc">~</span> treat <span class="sc">+</span> preOp_gender <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb48-131"><a href="#cb48-131" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_full)</span>
+<span id="cb48-132"><a href="#cb48-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-133"><a href="#cb48-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-136"><a href="#cb48-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-137"><a href="#cb48-137" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit with glm function</span></span>
+<span id="cb48-138"><a href="#cb48-138" aria-hidden="true" tabindex="-1"></a>glm_full <span class="ot">&lt;-</span> <span class="fu">glm</span>(pacu30min_throatPain <span class="sc">~</span> treat <span class="sc">+</span> preOp_gender <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb48-139"><a href="#cb48-139" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm_full)</span>
+<span id="cb48-140"><a href="#cb48-140" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-141"><a href="#cb48-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-142"><a href="#cb48-142" aria-hidden="true" tabindex="-1"></a>Notice, since we haven't changed any of the variable types, it is treating <span class="in">`treat`</span> and <span class="in">`preOp_gender`</span> as numeric (i.e., it doesn't specify the group in the variable name) since the values are 0/1. Since they are binary, we can see we arrive at identical results if we coerce the variables to categorical with <span class="in">`as.factor()`</span>:</span>
+<span id="cb48-143"><a href="#cb48-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-146"><a href="#cb48-146" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-147"><a href="#cb48-147" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit with lm function but with treat and preOp_gender as factors</span></span>
+<span id="cb48-148"><a href="#cb48-148" aria-hidden="true" tabindex="-1"></a>lm_full_factor <span class="ot">&lt;-</span> <span class="fu">lm</span>(pacu30min_throatPain <span class="sc">~</span> <span class="fu">as.factor</span>(treat) <span class="sc">+</span> <span class="fu">as.factor</span>(preOp_gender) <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb48-149"><a href="#cb48-149" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_full_factor)</span>
+<span id="cb48-150"><a href="#cb48-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-151"><a href="#cb48-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-152"><a href="#cb48-152" aria-hidden="true" tabindex="-1"></a>Since our later questions ask for a "brief, but complete" interpretation, we can also output the confidence intervals:</span>
+<span id="cb48-153"><a href="#cb48-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-156"><a href="#cb48-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-157"><a href="#cb48-157" aria-hidden="true" tabindex="-1"></a><span class="co"># Print confidence intervals to use for later responses</span></span>
+<span id="cb48-158"><a href="#cb48-158" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm_full)</span>
+<span id="cb48-159"><a href="#cb48-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-160"><a href="#cb48-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-161"><a href="#cb48-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-162"><a href="#cb48-162" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1c: Predicted Regression Equation</span></span>
+<span id="cb48-163"><a href="#cb48-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-164"><a href="#cb48-164" aria-hidden="true" tabindex="-1"></a>Write down the predicted regression equation that describes the relationship between throat pain and your predictors based on the output.</span>
+<span id="cb48-165"><a href="#cb48-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-166"><a href="#cb48-166" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb48-167"><a href="#cb48-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-168"><a href="#cb48-168" aria-hidden="true" tabindex="-1"></a>Our predicted regression equation is</span>
+<span id="cb48-169"><a href="#cb48-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-170"><a href="#cb48-170" aria-hidden="true" tabindex="-1"></a>$$ \hat{Y}_i = 1.230 + -0.745 X_{\text{Licorice},i} + -0.259 X_{\text{Female},i} + -0.002 X_{\text{Age},i} $$</span>
+<span id="cb48-171"><a href="#cb48-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-172"><a href="#cb48-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-173"><a href="#cb48-173" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1d: Intercept Interpretation and Hypothesis Test</span></span>
+<span id="cb48-174"><a href="#cb48-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-175"><a href="#cb48-175" aria-hidden="true" tabindex="-1"></a>Write the hypothesis being tested in the regression output for this coefficient. What is the estimated intercept and how would you interpret it (provide a brief, but complete, interpretation)? </span>
+<span id="cb48-176"><a href="#cb48-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-177"><a href="#cb48-177" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb48-178"><a href="#cb48-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-179"><a href="#cb48-179" aria-hidden="true" tabindex="-1"></a>Our hypotheses are $H_0\colon \beta_0 = 0$ versus $H_1\colon \beta_0 \neq 0$.</span>
+<span id="cb48-180"><a href="#cb48-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-181"><a href="#cb48-181" aria-hidden="true" tabindex="-1"></a>The average throat pain after 30 minutes in the PACU is 1.230 (95% CI: 0.604, 1.855) when all other predictors are 0. Since p&lt;0.001, we reject the null hypothesis and conclude it is significantly different from 0. </span>
+<span id="cb48-182"><a href="#cb48-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-183"><a href="#cb48-183" aria-hidden="true" tabindex="-1"></a>This interpretation, however, is nonsensical since it both extrapolates to ages we do not have (i.e., 0) and a newborn would not be able to report their pain at 30 minutes in the PACU.</span>
+<span id="cb48-184"><a href="#cb48-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-185"><a href="#cb48-185" aria-hidden="true" tabindex="-1"></a>*Recall, our brief, but complete, interpretation involves (1) the point estimate, (2) an interval estimate, (3) a decision, and (4) a measure of uncertainty.*</span>
+<span id="cb48-186"><a href="#cb48-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-187"><a href="#cb48-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-188"><a href="#cb48-188" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1e: Coefficient Interpretation and Hypothesis Test for Binary Predictor</span></span>
+<span id="cb48-189"><a href="#cb48-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-190"><a href="#cb48-190" aria-hidden="true" tabindex="-1"></a>Write the hypothesis being tested in the regression output for this coefficient. What is the estimated effect of treatment and how would you interpret it (provide a brief, but complete, interpretation)? </span>
+<span id="cb48-191"><a href="#cb48-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-192"><a href="#cb48-192" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb48-193"><a href="#cb48-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-194"><a href="#cb48-194" aria-hidden="true" tabindex="-1"></a>Our hypotheses are $H_0\colon \beta_1 = 0$ versus $H_1\colon \beta_1 \neq 0$.</span>
+<span id="cb48-195"><a href="#cb48-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-196"><a href="#cb48-196" aria-hidden="true" tabindex="-1"></a>Those treated with licorice have a significantly lower throat pain score after 30 minutes in the PACU that is, on average, 0.745 lower (95% CI: 0.437 to 1.052 lower) than those treated with sugar water after adjusting for gender and age  (p&lt;0.001).</span>
+<span id="cb48-197"><a href="#cb48-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-198"><a href="#cb48-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-199"><a href="#cb48-199" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1f: Coefficient Interpretation and Hypothesis Test for Continuous Predictor</span></span>
+<span id="cb48-200"><a href="#cb48-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-201"><a href="#cb48-201" aria-hidden="true" tabindex="-1"></a>Write the hypothesis being tested in the regression output for this coefficient. What is the estimated effect of age and how would you interpret it (provide a brief, but complete, interpretation)? </span>
+<span id="cb48-202"><a href="#cb48-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-203"><a href="#cb48-203" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb48-204"><a href="#cb48-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-205"><a href="#cb48-205" aria-hidden="true" tabindex="-1"></a>Our hypotheses are $H_0\colon \beta_3 = 0$ versus $H_1\colon \beta_3 \neq 0$.</span>
+<span id="cb48-206"><a href="#cb48-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-207"><a href="#cb48-207" aria-hidden="true" tabindex="-1"></a>For a one year increase in age, throat pain score after 30 minutes in the PACU is 0.002 higher (95% CI: -0.012 lower to 0.008 higher) after adjusting for treatment group and gender. Since p=0.719, we fail to reject the null hypothesis that the slope is different from 0.</span>
+<span id="cb48-208"><a href="#cb48-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-209"><a href="#cb48-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-210"><a href="#cb48-210" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1g: The Partial F-test</span></span>
+<span id="cb48-211"><a href="#cb48-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-212"><a href="#cb48-212" aria-hidden="true" tabindex="-1"></a>Evaluate if the addition of age and gender contribute significantly to the prediction of throat pain over and above that achieved by treatment group alone. Write out the null and alternative hypotheses being tested and your conclusion.</span>
+<span id="cb48-213"><a href="#cb48-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-214"><a href="#cb48-214" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb48-215"><a href="#cb48-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-216"><a href="#cb48-216" aria-hidden="true" tabindex="-1"></a>We can do this "by hand" or using R (or SAS) to do the calculations for us. We will start with our hand calculation and compare to R's result.</span>
+<span id="cb48-217"><a href="#cb48-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-218"><a href="#cb48-218" aria-hidden="true" tabindex="-1"></a>The null hypothesis we are evaluating is $H_0\colon \beta_2 = \beta_3 = 0$ versus the alternative hypothesis ($H_1$) that at least one coefficient of $\beta_2$ and $\beta_3$ is not equal to 0.</span>
+<span id="cb48-219"><a href="#cb48-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-220"><a href="#cb48-220" aria-hidden="true" tabindex="-1"></a>First, we must fit the reduced model and create the ANOVA tables for both the full and reduced models:</span>
+<span id="cb48-221"><a href="#cb48-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-224"><a href="#cb48-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-225"><a href="#cb48-225" aria-hidden="true" tabindex="-1"></a><span class="co"># Create ANOVA table for full model</span></span>
+<span id="cb48-226"><a href="#cb48-226" aria-hidden="true" tabindex="-1"></a><span class="fu">linreg_anova_func</span>(lm_full)</span>
+<span id="cb48-227"><a href="#cb48-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-228"><a href="#cb48-228" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit reduced model with age and gender removed</span></span>
+<span id="cb48-229"><a href="#cb48-229" aria-hidden="true" tabindex="-1"></a>lm_red <span class="ot">&lt;-</span> <span class="fu">lm</span>(pacu30min_throatPain <span class="sc">~</span> treat, <span class="at">data=</span>dat)</span>
+<span id="cb48-230"><a href="#cb48-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-231"><a href="#cb48-231" aria-hidden="true" tabindex="-1"></a><span class="co"># Create ANOVA table for reduced model</span></span>
+<span id="cb48-232"><a href="#cb48-232" aria-hidden="true" tabindex="-1"></a><span class="fu">linreg_anova_func</span>(lm_red)</span>
+<span id="cb48-233"><a href="#cb48-233" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-234"><a href="#cb48-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-235"><a href="#cb48-235" aria-hidden="true" tabindex="-1"></a>Taking the relevant quantities from our ANOVA tables, we can calculate our partial $F$ statistic:</span>
+<span id="cb48-236"><a href="#cb48-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-237"><a href="#cb48-237" aria-hidden="true" tabindex="-1"></a>$$ F = \frac{SS_{model}(full) - SS_{model}(reduced)]/k}{MS_{error}(full)} = \frac{(36.94 - 32.97) / 2}{1.42} = 1.40 \sim F_{2,233-1-2-1} = F_{2,229} $$</span>
+<span id="cb48-238"><a href="#cb48-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-239"><a href="#cb48-239" aria-hidden="true" tabindex="-1"></a>Since we are using software, we can calculate the p-value directly that $P(F \geq F_{2,229})$ using <span class="in">`pf(1.40,2,229,lower.tail=F)`</span>: <span class="in">`r round(pf(1.40,2,229,lower.tail=F),3)`</span>. Since we see that p&gt;0.05, we fail to reject the null hypothesis that the addition of age and gender contribute significantly to the prediction of throat pain over and above that achieved by treatment group alone.</span>
+<span id="cb48-240"><a href="#cb48-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-241"><a href="#cb48-241" aria-hidden="true" tabindex="-1"></a>Another approach we could use is to calculate the critical value represented by $F_{2,229}$ for an $\alpha=0.05$ to compare our test statistic to using <span class="in">`qf(0.95,2,229)`</span>: <span class="in">`r round(qf(0.95,2,229),3)`</span>. Since $F=1.40 &lt; 3.035 = F_{0.95,2,229}$, we would still fail to reject our null hypothesis.</span>
+<span id="cb48-242"><a href="#cb48-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-243"><a href="#cb48-243" aria-hidden="true" tabindex="-1"></a>A third approach would be to use the <span class="in">`anova`</span> function in R to solve this without doing any calculations by hand:</span>
+<span id="cb48-244"><a href="#cb48-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-247"><a href="#cb48-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-248"><a href="#cb48-248" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm_full, lm_red, <span class="at">test=</span><span class="st">'F'</span>)</span>
+<span id="cb48-249"><a href="#cb48-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-250"><a href="#cb48-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-251"><a href="#cb48-251" aria-hidden="true" tabindex="-1"></a>We see our results closely match our by hand work above (with some slight differences due to rounding), where we still have $p&gt;0.05$ and fail to reject the null hypothesis.</span>
+<span id="cb48-252"><a href="#cb48-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-253"><a href="#cb48-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-254"><a href="#cb48-254" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1h: The Overall F-test</span></span>
+<span id="cb48-255"><a href="#cb48-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-256"><a href="#cb48-256" aria-hidden="true" tabindex="-1"></a>Evaluate if the the entire set of independent variables (i.e., predictors) contribute significantly to the prediction of throat pain. Write out the null and alternative hypotheses being tested and your conclusion.</span>
+<span id="cb48-257"><a href="#cb48-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-258"><a href="#cb48-258" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb48-259"><a href="#cb48-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-260"><a href="#cb48-260" aria-hidden="true" tabindex="-1"></a>The null hypothesis is that $H_0\colon \beta_1 = \beta_2 = \beta_3 = 0$ versus the alternative hypothesis ($H_1$) that at least one of these $\beta_k; k=1,2,3$ is not equal to 0.</span>
+<span id="cb48-261"><a href="#cb48-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-262"><a href="#cb48-262" aria-hidden="true" tabindex="-1"></a>For this problem, we can see that in our <span class="in">`lm_full`</span> summary that $F=8.699$ and its corresponding $p&lt;0.001$. Since $p&lt;0.05$, we reject the null hypothesis and conclude that at least one $\beta_k$ is significantly different from 0.</span>
+<span id="cb48-263"><a href="#cb48-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-264"><a href="#cb48-264" aria-hidden="true" tabindex="-1"></a>Further, we could combine our findings from the previous problem to note that adding age and gender were not significant, so it seems that a model with just treatment would be better and more parsimonious, even if the overall $F$-test for all three predictors is significant.</span>
+<span id="cb48-265"><a href="#cb48-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-266"><a href="#cb48-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-267"><a href="#cb48-267" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1i: Multicollinearity</span></span>
+<span id="cb48-268"><a href="#cb48-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-269"><a href="#cb48-269" aria-hidden="true" tabindex="-1"></a>Calculate the variance inflation factors (VIFs) for the independent variables in the model. Does it appear that multicollinearity may be a concern?</span>
+<span id="cb48-270"><a href="#cb48-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-271"><a href="#cb48-271" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb48-272"><a href="#cb48-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-273"><a href="#cb48-273" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=F}</span></span>
+<span id="cb48-274"><a href="#cb48-274" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(lm_full)</span>
+<span id="cb48-275"><a href="#cb48-275" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-276"><a href="#cb48-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-277"><a href="#cb48-277" aria-hidden="true" tabindex="-1"></a>Since all VIFs are less than 10, it appears multicollinearity is not a concern in our full model.</span>
+<span id="cb48-278"><a href="#cb48-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-279"><a href="#cb48-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-280"><a href="#cb48-280" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1j: Diagnostic Plots</span></span>
+<span id="cb48-281"><a href="#cb48-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-282"><a href="#cb48-282" aria-hidden="true" tabindex="-1"></a>Evaluate the assumptions of our multiple linear regression model by creating diagnostic plots.</span>
+<span id="cb48-283"><a href="#cb48-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-284"><a href="#cb48-284" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb48-285"><a href="#cb48-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-286"><a href="#cb48-286" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.source = 'fold-hide'}</span></span>
+<span id="cb48-287"><a href="#cb48-287" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb48-288"><a href="#cb48-288" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">4.1</span>,<span class="fl">4.1</span>,<span class="fl">3.1</span>,<span class="fl">2.1</span>))</span>
+<span id="cb48-289"><a href="#cb48-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-290"><a href="#cb48-290" aria-hidden="true" tabindex="-1"></a><span class="do">## X1 Partial Plot MLR</span></span>
+<span id="cb48-291"><a href="#cb48-291" aria-hidden="true" tabindex="-1"></a>x1_mlr_step1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(pacu30min_throatPain <span class="sc">~</span> preOp_gender <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb48-292"><a href="#cb48-292" aria-hidden="true" tabindex="-1"></a>x1_mlr_step2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(treat <span class="sc">~</span> preOp_gender <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb48-293"><a href="#cb48-293" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="fu">residuals</span>(x1_mlr_step2), <span class="at">y=</span><span class="fu">residuals</span>(x1_mlr_step1),</span>
+<span id="cb48-294"><a href="#cb48-294" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="fu">expression</span>(<span class="st">'Partial Plot for X'</span>[<span class="dv">1</span>]), <span class="at">ylab=</span><span class="st">'Partial Dependent Residual'</span>, </span>
+<span id="cb48-295"><a href="#cb48-295" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">'Partial Regressor Residual'</span>)</span>
+<span id="cb48-296"><a href="#cb48-296" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(<span class="fu">residuals</span>(x1_mlr_step1) <span class="sc">~</span> <span class="fu">residuals</span>(x1_mlr_step2)))</span>
+<span id="cb48-297"><a href="#cb48-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-298"><a href="#cb48-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-299"><a href="#cb48-299" aria-hidden="true" tabindex="-1"></a><span class="do">## X2 Partial Plot MLR</span></span>
+<span id="cb48-300"><a href="#cb48-300" aria-hidden="true" tabindex="-1"></a>x2_mlr_step1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(pacu30min_throatPain <span class="sc">~</span> treat <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb48-301"><a href="#cb48-301" aria-hidden="true" tabindex="-1"></a>x2_mlr_step2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(preOp_gender <span class="sc">~</span> treat <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb48-302"><a href="#cb48-302" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="fu">residuals</span>(x2_mlr_step2), <span class="at">y=</span><span class="fu">residuals</span>(x2_mlr_step1),</span>
+<span id="cb48-303"><a href="#cb48-303" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="fu">expression</span>(<span class="st">'Partial Plot for X'</span>[<span class="dv">2</span>]), <span class="at">ylab=</span><span class="st">'Partial Dependent Residual'</span>, </span>
+<span id="cb48-304"><a href="#cb48-304" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">'Partial Regressor Residual'</span>)</span>
+<span id="cb48-305"><a href="#cb48-305" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(<span class="fu">residuals</span>(x2_mlr_step1) <span class="sc">~</span> <span class="fu">residuals</span>(x2_mlr_step2)))</span>
+<span id="cb48-306"><a href="#cb48-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-307"><a href="#cb48-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-308"><a href="#cb48-308" aria-hidden="true" tabindex="-1"></a><span class="do">## X3 Partial Plot MLR</span></span>
+<span id="cb48-309"><a href="#cb48-309" aria-hidden="true" tabindex="-1"></a>x3_mlr_step1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(pacu30min_throatPain <span class="sc">~</span> treat <span class="sc">+</span> preOp_gender, <span class="at">data=</span>dat)</span>
+<span id="cb48-310"><a href="#cb48-310" aria-hidden="true" tabindex="-1"></a>x3_mlr_step2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(preOp_age <span class="sc">~</span> treat <span class="sc">+</span> preOp_gender, <span class="at">data=</span>dat)</span>
+<span id="cb48-311"><a href="#cb48-311" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="fu">residuals</span>(x3_mlr_step2), <span class="at">y=</span><span class="fu">residuals</span>(x3_mlr_step1),</span>
+<span id="cb48-312"><a href="#cb48-312" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="fu">expression</span>(<span class="st">'Partial Plot for X'</span>[<span class="dv">3</span>]), <span class="at">ylab=</span><span class="st">'Partial Dependent Residual'</span>, </span>
+<span id="cb48-313"><a href="#cb48-313" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">'Partial Regressor Residual'</span>)</span>
+<span id="cb48-314"><a href="#cb48-314" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(<span class="fu">residuals</span>(x3_mlr_step1) <span class="sc">~</span> <span class="fu">residuals</span>(x3_mlr_step2)))</span>
+<span id="cb48-315"><a href="#cb48-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-316"><a href="#cb48-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-317"><a href="#cb48-317" aria-hidden="true" tabindex="-1"></a><span class="do">## Scatterplot of residuals by predicted values</span></span>
+<span id="cb48-318"><a href="#cb48-318" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="fu">predict</span>(lm_full), <span class="at">y=</span><span class="fu">rstudent</span>(lm_full), <span class="at">xlab=</span><span class="fu">expression</span>(<span class="fu">hat</span>(Y)), <span class="at">ylab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb48-319"><a href="#cb48-319" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Residual Plot by Y-hat'</span>, <span class="at">cex=</span><span class="dv">1</span>); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb48-320"><a href="#cb48-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-321"><a href="#cb48-321" aria-hidden="true" tabindex="-1"></a><span class="do">## Histogram of jackknife residuals with normal curve</span></span>
+<span id="cb48-322"><a href="#cb48-322" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">rstudent</span>(lm_full), <span class="at">xlab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb48-323"><a href="#cb48-323" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Histogram of Residuals'</span>, <span class="at">freq=</span>F, <span class="at">breaks=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>,<span class="fl">0.25</span>)); </span>
+<span id="cb48-324"><a href="#cb48-324" aria-hidden="true" tabindex="-1"></a>  <span class="fu">curve</span>( <span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">add=</span>T)</span>
+<span id="cb48-325"><a href="#cb48-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-326"><a href="#cb48-326" aria-hidden="true" tabindex="-1"></a><span class="do">## PP-plot</span></span>
+<span id="cb48-327"><a href="#cb48-327" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( <span class="fu">ppoints</span>(<span class="fu">length</span>(<span class="fu">rstudent</span>(lm_full))), <span class="fu">sort</span>(<span class="fu">pnorm</span>(<span class="fu">rstudent</span>(lm_full))), </span>
+<span id="cb48-328"><a href="#cb48-328" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab=</span><span class="st">'Observed Cumulative Probability'</span>, </span>
+<span id="cb48-329"><a href="#cb48-329" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab=</span><span class="st">'Expected Cumulative Probability'</span>, </span>
+<span id="cb48-330"><a href="#cb48-330" aria-hidden="true" tabindex="-1"></a>      <span class="at">main=</span><span class="st">'Normal Probability Plot'</span>, <span class="at">cex=</span><span class="dv">1</span>); </span>
+<span id="cb48-331"><a href="#cb48-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>,<span class="at">b=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">'gray65'</span>, <span class="at">lwd=</span><span class="dv">1</span>)</span>
+<span id="cb48-332"><a href="#cb48-332" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-333"><a href="#cb48-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-334"><a href="#cb48-334" aria-hidden="true" tabindex="-1"></a>These plots are somewhat challenging to decipher since we have two categorical predictors and only one continuous predictor. However, the lower figures all suggest that normality may be violated and that this model, as it currently is, may not be the most appropriate. It is possible that a data transformation may result in a model more appropriate for linear regression. Adding other variables (that may or may not be measured), may also improve the model fit. It is also entirely possible that our outcome of a 0-10 Likert pain scale is not normal and an entirely different approach to modeling may be needed (e.g., zero-inflated Poisson regression).</span>
+<span id="cb48-335"><a href="#cb48-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-336"><a href="#cb48-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-337"><a href="#cb48-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-338"><a href="#cb48-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-339"><a href="#cb48-339" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 2: But Now With Matrices!</span></span>
+<span id="cb48-340"><a href="#cb48-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-341"><a href="#cb48-341" aria-hidden="true" tabindex="-1"></a>Using your results in Exercise 1 to check your answers, complete the following parts using matrices you code yourself.</span>
+<span id="cb48-342"><a href="#cb48-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-343"><a href="#cb48-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-344"><a href="#cb48-344" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2a: The Design Matrix</span></span>
+<span id="cb48-345"><a href="#cb48-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-346"><a href="#cb48-346" aria-hidden="true" tabindex="-1"></a>Create the design matrix that we will use for our regression calculations.</span>
+<span id="cb48-347"><a href="#cb48-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-348"><a href="#cb48-348" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb48-349"><a href="#cb48-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-350"><a href="#cb48-350" aria-hidden="true" tabindex="-1"></a>Our design matrix, $\mathbf{X}$, includes a columns of 1's for the intercept and then our three predictors:</span>
+<span id="cb48-351"><a href="#cb48-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-354"><a href="#cb48-354" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-355"><a href="#cb48-355" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>( <span class="fu">cbind</span>(<span class="dv">1</span>, dat[,<span class="fu">c</span>(<span class="st">'treat'</span>,<span class="st">'preOp_gender'</span>,<span class="st">'preOp_age'</span>)]) )</span>
+<span id="cb48-356"><a href="#cb48-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-357"><a href="#cb48-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-358"><a href="#cb48-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-359"><a href="#cb48-359" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2b: Beta Coefficients</span></span>
+<span id="cb48-360"><a href="#cb48-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-361"><a href="#cb48-361" aria-hidden="true" tabindex="-1"></a>Calculate the estimated beta coefficients via matrix algebra.</span>
+<span id="cb48-362"><a href="#cb48-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-363"><a href="#cb48-363" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb48-364"><a href="#cb48-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-365"><a href="#cb48-365" aria-hidden="true" tabindex="-1"></a>We need to first create a vector for our outcome of throat pain (<span class="in">`Y`</span>). Then we will calculate $\hat{\boldsymbol{\beta}} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{Y}$:</span>
+<span id="cb48-366"><a href="#cb48-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-369"><a href="#cb48-369" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-370"><a href="#cb48-370" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> dat<span class="sc">$</span>pacu30min_throatPain</span>
+<span id="cb48-371"><a href="#cb48-371" aria-hidden="true" tabindex="-1"></a>beta_est <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> Y</span>
+<span id="cb48-372"><a href="#cb48-372" aria-hidden="true" tabindex="-1"></a>beta_est</span>
+<span id="cb48-373"><a href="#cb48-373" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-374"><a href="#cb48-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-375"><a href="#cb48-375" aria-hidden="true" tabindex="-1"></a>We see that our estimates match those from the <span class="in">`lm`</span> function.</span>
+<span id="cb48-376"><a href="#cb48-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-377"><a href="#cb48-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-378"><a href="#cb48-378" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2c: Standard Error of Beta Coefficients</span></span>
+<span id="cb48-379"><a href="#cb48-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-380"><a href="#cb48-380" aria-hidden="true" tabindex="-1"></a>Calculate the standard error of the beta coefficients via matrix algebra.</span>
+<span id="cb48-381"><a href="#cb48-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-382"><a href="#cb48-382" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb48-383"><a href="#cb48-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-384"><a href="#cb48-384" aria-hidden="true" tabindex="-1"></a>We will first calculate our MSE as $\hat{\sigma}_{Y|X}^{2} = \frac{SSE}{n-p-1} = \frac{\mathbf{Y}^\top\mathbf{Y}-\hat{\boldsymbol{\beta}}^\top\mathbf{X}^\top\mathbf{Y}}{n-p-1}$:</span>
+<span id="cb48-385"><a href="#cb48-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-388"><a href="#cb48-388" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-389"><a href="#cb48-389" aria-hidden="true" tabindex="-1"></a>mse <span class="ot">&lt;-</span> (<span class="fu">t</span>(Y) <span class="sc">%*%</span> Y <span class="sc">-</span> <span class="fu">t</span>(beta_est) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> Y) <span class="sc">/</span> (<span class="fu">nrow</span>(dat) <span class="sc">-</span> <span class="fu">ncol</span>(X))</span>
+<span id="cb48-390"><a href="#cb48-390" aria-hidden="true" tabindex="-1"></a>mse</span>
+<span id="cb48-391"><a href="#cb48-391" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-392"><a href="#cb48-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-393"><a href="#cb48-393" aria-hidden="true" tabindex="-1"></a>Notice, that $n-p-1$ can be pulled from our objects as $n=$<span class="in">`nrow(dat)`</span> and $p-1=$<span class="in">`ncol(X)`</span> (since our design matrix already includes the intercept).</span>
+<span id="cb48-394"><a href="#cb48-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-395"><a href="#cb48-395" aria-hidden="true" tabindex="-1"></a>The variance of our beta coefficients is therefore $Var(\hat{\boldsymbol{\beta}}) = \hat{\sigma}_{Y|X}^{2} (\mathbf{X}^\top \mathbf{X})^{-1}$, which is our *variance-covariance* matrix:</span>
+<span id="cb48-396"><a href="#cb48-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-399"><a href="#cb48-399" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-400"><a href="#cb48-400" aria-hidden="true" tabindex="-1"></a>beta_var <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>( mse ) <span class="sc">*</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X)</span>
+<span id="cb48-401"><a href="#cb48-401" aria-hidden="true" tabindex="-1"></a>beta_var</span>
+<span id="cb48-402"><a href="#cb48-402" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-403"><a href="#cb48-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-404"><a href="#cb48-404" aria-hidden="true" tabindex="-1"></a>We can compare this to the <span class="in">`vcov`</span> output:</span>
+<span id="cb48-405"><a href="#cb48-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-408"><a href="#cb48-408" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-409"><a href="#cb48-409" aria-hidden="true" tabindex="-1"></a><span class="fu">vcov</span>(lm_full)</span>
+<span id="cb48-410"><a href="#cb48-410" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-411"><a href="#cb48-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-412"><a href="#cb48-412" aria-hidden="true" tabindex="-1"></a>The *standard error* is then the square root of the variance terms along the diagonal:</span>
+<span id="cb48-413"><a href="#cb48-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-416"><a href="#cb48-416" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-417"><a href="#cb48-417" aria-hidden="true" tabindex="-1"></a>beta_se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(beta_var))</span>
+<span id="cb48-418"><a href="#cb48-418" aria-hidden="true" tabindex="-1"></a>beta_se</span>
+<span id="cb48-419"><a href="#cb48-419" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-420"><a href="#cb48-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-421"><a href="#cb48-421" aria-hidden="true" tabindex="-1"></a>This matches our <span class="in">`lm`</span> output.</span>
+<span id="cb48-422"><a href="#cb48-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-423"><a href="#cb48-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-424"><a href="#cb48-424" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2d: Test Statistics and p-values</span></span>
+<span id="cb48-425"><a href="#cb48-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-426"><a href="#cb48-426" aria-hidden="true" tabindex="-1"></a>Calculate the $t$-statistic and associated p-value based on the previous estimates from **1b** and **1c**.</span>
+<span id="cb48-427"><a href="#cb48-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-428"><a href="#cb48-428" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb48-429"><a href="#cb48-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-430"><a href="#cb48-430" aria-hidden="true" tabindex="-1"></a>We know that our $t$-statistic is the beta coefficient estimate divided by its standard error:</span>
+<span id="cb48-431"><a href="#cb48-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-434"><a href="#cb48-434" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-435"><a href="#cb48-435" aria-hidden="true" tabindex="-1"></a>t_stat <span class="ot">&lt;-</span> beta_est <span class="sc">/</span> beta_se</span>
+<span id="cb48-436"><a href="#cb48-436" aria-hidden="true" tabindex="-1"></a>t_stat</span>
+<span id="cb48-437"><a href="#cb48-437" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-438"><a href="#cb48-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-439"><a href="#cb48-439" aria-hidden="true" tabindex="-1"></a>The p-value is then calculated for our two-sided test:</span>
+<span id="cb48-440"><a href="#cb48-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-443"><a href="#cb48-443" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-444"><a href="#cb48-444" aria-hidden="true" tabindex="-1"></a>pval <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>( <span class="fu">abs</span>(t_stat), <span class="at">df =</span> <span class="fu">length</span>(Y) <span class="sc">-</span> <span class="fu">ncol</span>(X)) ) <span class="co"># df = n-p-1</span></span>
+<span id="cb48-445"><a href="#cb48-445" aria-hidden="true" tabindex="-1"></a>pval</span>
+<span id="cb48-446"><a href="#cb48-446" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-447"><a href="#cb48-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-448"><a href="#cb48-448" aria-hidden="true" tabindex="-1"></a>These results match the p-values in our regression output.</span>
+<span id="cb48-449"><a href="#cb48-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-450"><a href="#cb48-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-451"><a href="#cb48-451" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2e: Confidence and Prediction Interval</span></span>
+<span id="cb48-452"><a href="#cb48-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-453"><a href="#cb48-453" aria-hidden="true" tabindex="-1"></a>Calculate the 95% confidence and prediction interval for a male in the treatment group who is 50 years old. Compare this result to the calculation provided by <span class="in">`R`</span> when using the <span class="in">`predict`</span> function.</span>
+<span id="cb48-454"><a href="#cb48-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-455"><a href="#cb48-455" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb48-456"><a href="#cb48-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-457"><a href="#cb48-457" aria-hidden="true" tabindex="-1"></a>We first need to define $x_0$ for our given combination of covariates:</span>
+<span id="cb48-458"><a href="#cb48-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-461"><a href="#cb48-461" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-462"><a href="#cb48-462" aria-hidden="true" tabindex="-1"></a>x0 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">50</span>) <span class="co"># intercept, treatment, gender, age</span></span>
+<span id="cb48-463"><a href="#cb48-463" aria-hidden="true" tabindex="-1"></a>pred_val <span class="ot">&lt;-</span> <span class="fu">t</span>(x0) <span class="sc">%*%</span> beta_est <span class="co"># predicted throat pain score</span></span>
+<span id="cb48-464"><a href="#cb48-464" aria-hidden="true" tabindex="-1"></a>pred_val</span>
+<span id="cb48-465"><a href="#cb48-465" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-466"><a href="#cb48-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-467"><a href="#cb48-467" aria-hidden="true" tabindex="-1"></a>We can then calculate our variances for a predicted mean and individual value. The variance for a fitted value (i.e., the expected mean $\mu$ for a given value of $X=x_0$) is given by</span>
+<span id="cb48-468"><a href="#cb48-468" aria-hidden="true" tabindex="-1"></a>$$ Var(\mu_{Y|x_0}) = x_0^\top <span class="co">[</span><span class="ot">Var(\hat{\boldsymbol{\beta}})</span><span class="co">]</span> x_0 = \hat{\sigma}^{2}_{Y|X} x_{0}^\top (\mathbf{X}^\top \mathbf{X})^{-1} x_{0} $$</span>
+<span id="cb48-469"><a href="#cb48-469" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-470"><a href="#cb48-470" aria-hidden="true" tabindex="-1"></a>The variance of a future predicted value of $Y$ for a given $x_0$ for an individual is given by:</span>
+<span id="cb48-471"><a href="#cb48-471" aria-hidden="true" tabindex="-1"></a>$$ Var(\hat{Y} | x_0 ) = \hat{\sigma}^{2}_{Y|X} \left[ 1 + x_{0}^\top (\mathbf{X}^\top \mathbf{X})^{-1} x_{0}\right] $$</span>
+<span id="cb48-472"><a href="#cb48-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-475"><a href="#cb48-475" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-476"><a href="#cb48-476" aria-hidden="true" tabindex="-1"></a>var_mean <span class="ot">&lt;-</span> <span class="fu">t</span>(x0) <span class="sc">%*%</span> beta_var <span class="sc">%*%</span> x0</span>
+<span id="cb48-477"><a href="#cb48-477" aria-hidden="true" tabindex="-1"></a>var_ind <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>( mse ) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">t</span>(x0) <span class="sc">%*%</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> x0)</span>
+<span id="cb48-478"><a href="#cb48-478" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-479"><a href="#cb48-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-480"><a href="#cb48-480" aria-hidden="true" tabindex="-1"></a>The 95% confidence and prediction intervals are:</span>
+<span id="cb48-481"><a href="#cb48-481" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-484"><a href="#cb48-484" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-485"><a href="#cb48-485" aria-hidden="true" tabindex="-1"></a><span class="do">## Note, we don't necessarily need to wrap pred_val and var_mean or var_ind in as.numeric(), but it avoids a warning about deprecated functions</span></span>
+<span id="cb48-486"><a href="#cb48-486" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% CI</span></span>
+<span id="cb48-487"><a href="#cb48-487" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(pred_val) <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>)) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">as.numeric</span>(var_mean))</span>
+<span id="cb48-488"><a href="#cb48-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-489"><a href="#cb48-489" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% PI</span></span>
+<span id="cb48-490"><a href="#cb48-490" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(pred_val) <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>)) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">as.numeric</span>(var_ind))</span>
+<span id="cb48-491"><a href="#cb48-491" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-492"><a href="#cb48-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-493"><a href="#cb48-493" aria-hidden="true" tabindex="-1"></a>We can compare this to the <span class="in">`predict`</span> function:</span>
+<span id="cb48-494"><a href="#cb48-494" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-497"><a href="#cb48-497" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-498"><a href="#cb48-498" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm_full, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">treat=</span><span class="dv">1</span>, <span class="at">preOp_gender=</span><span class="dv">0</span>, <span class="at">preOp_age=</span><span class="dv">50</span>), <span class="at">interval=</span><span class="st">'confidence'</span>)</span>
+<span id="cb48-499"><a href="#cb48-499" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm_full, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">treat=</span><span class="dv">1</span>, <span class="at">preOp_gender=</span><span class="dv">0</span>, <span class="at">preOp_age=</span><span class="dv">50</span>), <span class="at">interval=</span><span class="st">'predict'</span>)</span>
+<span id="cb48-500"><a href="#cb48-500" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-501"><a href="#cb48-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-502"><a href="#cb48-502" aria-hidden="true" tabindex="-1"></a>We see that our matrix approach and the <span class="in">`lm::predict`</span> function nearly match. The difference being due to using the standard normal ($Z$) distribution instead of the $t$-distribution in our "by hand" calculation. If we use the $t_{229}$ distribution instead, we see they do exactly match:</span>
+<span id="cb48-503"><a href="#cb48-503" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-506"><a href="#cb48-506" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-507"><a href="#cb48-507" aria-hidden="true" tabindex="-1"></a><span class="do">## Note, we don't necessarily need to wrap pred_val and var_mean or var_ind in as.numeric(), but it avoids a warning about deprecated functions</span></span>
+<span id="cb48-508"><a href="#cb48-508" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% CI</span></span>
+<span id="cb48-509"><a href="#cb48-509" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(pred_val) <span class="sc">+</span> <span class="fu">qt</span>(<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>), <span class="at">df=</span><span class="dv">229</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">as.numeric</span>(var_mean))</span>
+<span id="cb48-510"><a href="#cb48-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-511"><a href="#cb48-511" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% PI</span></span>
+<span id="cb48-512"><a href="#cb48-512" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(pred_val) <span class="sc">+</span> <span class="fu">qt</span>(<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>), <span class="at">df=</span><span class="dv">229</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">as.numeric</span>(var_ind))</span>
+<span id="cb48-513"><a href="#cb48-513" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

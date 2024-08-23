@@ -24,6 +24,10 @@ Differential and integral calculus is a prerequisite for the course, along with 
 
 All BIOS 6618 lecture videos have been broken down into modular sections and posted to [YouTube](https://www.youtube.com/channel/UCB9212rDruEh_xEXQxoExGQ). To view the list of videos, download slides, and access other materials, please visit the [BIOS 6618 Materials](bios_6618_materials/index.qmd) page.
 
+I've also added all my responses to [recitation questions](/recitation/index.qmd) that students submit each week. The landing page includes all questions broken out by weekly topics, but you may also wish to use the built-in Quarto search functionality located near the top-right of the webpage.
+
+Finally, we also have all of our weekly labs and practice problems (with solutions) provided on the [labs page](/page/index.qmd). This includes some deeper dives into lecture material or coding tips and tricks for the labs, as well as practice problems designed to assist on completing course homework assignments and having more practice with the different methods covered in class.
+
 
 ### Journal of BIOS 6618
 

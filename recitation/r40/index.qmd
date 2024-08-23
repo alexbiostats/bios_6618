@@ -1,0 +1,74 @@
+---
+title: "Confidence Interval Interpretations and Calculations"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Confidence Interval Interpretations and Calculations
+
+At this point we've seen a few varieties of confidence intervals: asymptotic based (e.g., $\bar{X} \pm Z_{1-\alpha/2} \times SE(\bar{X})$), bootstrap percentile (i.e., the 2.5th and 97.5th quantiles from our bootstrap resampled distribution of the statistic of interest), and normal percentile for bootstraps (i.e., like the asymptotic based approach but using the bootstraps for our estimates). There are hosts of other approaches to calculating confidence intervals that you will likely encounter throughout your future statistical adventures as well!
+
+The good news, for any *confidence* interval, regardless of the flavor, we have a consistent interpretation: *The 95% confidence interval is (a, b). We are 95% confident that the true mean/difference/OR/RR/etc. is in this interval.* A major caveat is the reliability of our confidence interval depends on the underlying assumptions used to calculate it. If we use a normal percentile confidence interval for a bootstrap, but have awful coverage, we are going to end up with a poor summary of the variability (i.e., either too liberal and/or too conservative in the tails).
+
+There are a few points worth highlighting:
+
+* In a simulation study, the **coverage probability** is the proportion of the confidence intervals that contains the "true" value of interest (which we know, since it is a simulation). Ideally, the coverage would correspond to the targeted $1-\alpha$ rate, but for different methods it may be higher or lower. For an example of a simulation study in SAS (that may inspire you for topics to examine), you can check out this blog post: [https://blogs.sas.com/content/iml/2016/09/08/coverage-probability-confidence-intervals.html](https://blogs.sas.com/content/iml/2016/09/08/coverage-probability-confidence-intervals.html).
+
+* In the real world, we don't generally include lots of caveats after each confidence interval. Rather, you lay out the assumptions you made in the methods section of a paper or report, then someone can determine if they agree with those assumptions. If you made a wild assumption that clearly seems suspect (e.g., I used the normal percentile bootstrap interval for data that is clearly skewed), it is more likely a reviewer or future reader will question what you've chosen.
+
+* If we wanted to be Bayesian, the corresponding quantity to a confidence interval (CI) is a credible interval (CrI). The nice thing about credible intervals is that the interpretation is what people actually wish the confidence interval meant. *The 95% credible interval is (a,b). Given the observed data, the true mean/difference/OR/RR/etc. has 95% probability of falling in this interval.*
+
+
+## Interpretation
+
+As a reminder of the general interpretation of any confidence interval: *The 95% confidence interval is (a, b). We are 95% confident that the true mean/difference/OR/RR/etc. is in this interval.*
+
+Strictly speaking, in the null hypothesis significance testing (NHST) framework that underlies much of frequentist statistics, we *cannot* say that there is a 95% *probability* that the true value is in the interval. Instead, we must refer to *confidence*.
+
+## Can We Evaluate Significance?
+
+In general, we can evaluate the 95% confidence interval to see if our $H_0$ value is present in the interval. We generally have two conclusions:
+
+* If it is in the interval, we would fail to reject $H_0$. We cannot conclude the null hypothesis is different.
+* If it isn't in the interval, we would reject $H_0$. We would conclude there is a significant difference from the null hypothesis.
+
+Whenever conducting an experiment we can set the $H_0$ value to be anything, although it should be motivated by the clinical/scientific context. In practice, we usually have two "default" null values we frequently use:
+
+* For continuous outcomes, $H_0$ is there is no difference (i.e., the difference is 0 or the mean value is 0, etc.)
+* For ratio outcomes (e.g., odds ratios, risk ratios), $H_0$ is there is no difference (i.e., the OR or RR is 1)
+
+
+## Will I Ever See a p-value *NOT* Match the Confidence Interval?
+
+Yes, it is very possible to see a mismatch between a p-value and the confidence interval.
+
+This occurs because there are multiple ways we can derive p-values and corresponding intervals, and packages or our calculations will not always match. Some of the common derivation methods include:
+
+* Wald test and CI
+* Score test and CI 
+* Likelihood Ratio and CI
+
+For 6618 we won't delve too deeply into these differences, but we should be aware they exist. For some additional details (and theory) check out
+
+* [FAQ: How are the likelihood ratio, Wald, and Lagrange multiplier (score) tests different and/or similar?](https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-are-the-likelihood-ratio-wald-and-lagrange-multiplier-score-tests-different-andor-similar)
+* [Penn State Hypothesis Tests and Related Intervals](https://online.stat.psu.edu/stat504/lesson/2/2.7)
+
+In practice, the derivations have some trade-offs. Ones that might seem overly simple may have lower **coverage** (i.e., the proportion of confidence intervals the include the true value for a simulation study) at the expense of its simplicity. Others that are more complex may involve calculations or derivations that, without being coded into an existing function/package, would be a little too tedious to implement. In practice we can use any variation of the calculations, and if we know it has a certain assumption for its derivation we can include that note in our analysis plan or write-up to be precise.
+

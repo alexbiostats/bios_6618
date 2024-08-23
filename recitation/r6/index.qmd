@@ -1,0 +1,34 @@
+---
+title: "Is the CLT Only for the Mean?"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+
+# Is the CLT Only for the Mean?
+
+The central limit theorem (CLT) only applies for the sample mean. However, this is an extremely strong result since this holds as long as (1) the mean and variance exist (i.e., no Cauchy distributions here!), (2) the observations are independent and identically distributed (i.e., come from the same distribution), and (3) you have sufficient $n$ (sample size). For normally distributed data, the CLT holds exactly. For all other data, the approximation becomes more accurate as $n$ increases.
+
+However, once we know the sample mean is normally distributed we are able to do lots of statistical inference that may be more challenging if each distribution's sample mean had its own properties. 
+
+Further, there are other flavors of CLT's that relax our independence (CLT under weak dependence) or identically distributed (Lyapunov CLT) assumptions with some additional conditions that must be met.
+
+There has also been related theoretical work that connects to the sample mean, but in very different contexts. For example, see the ["Beyond the classical framework" subsection of the CLT's Wiki page](https://en.wikipedia.org/wiki/Central_limit_theorem#Beyond_the_classical_framework).
+

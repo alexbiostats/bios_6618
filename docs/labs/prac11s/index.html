@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alex Kaizer">
+
+<title>Alex Kaizer - Week 11 Practice Problems: Solutions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/academicons-1.9.1/css/academicons.css" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="./files/favicon.ico">
+
+<script type="text/javascript">
+function setBrand() {
+document.getElementsByClassName("navbar-brand")[0].href="https://www.alexkaizer.com";
+}
+window.onload = setBrand;
+</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5PBG7BL207"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5PBG7BL207');
+</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Alex Kaizer</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/research" rel="" target="">
+ <span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/publications" rel="" target="">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Teaching</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching">    
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/teaching" rel="" target="">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6618" rel="" target="">
+ <span class="dropdown-text">BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6611" rel="" target="">
+ <span class="dropdown-text">BIOS 6611</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/study_design_berd" rel="" target="">
+ <span class="dropdown-text">BERD Study Design Short Course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/adaptivetrials_sc" rel="" target="">
+ <span class="dropdown-text">WNAR Adaptive and Bayesian Clinical Trial Design Short Course</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bios-6618" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">BIOS 6618</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-bios-6618">    
+        <li>
+    <a class="dropdown-item" href="../../index.html" rel="" target="">
+ <span class="dropdown-text">Home</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../bios_6618_materials" rel="" target="">
+ <span class="dropdown-text">Materials</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../journal_of_bios_6618" rel="" target="">
+ <span class="dropdown-text">Journal of BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../recitation" rel="" target="">
+ <span class="dropdown-text">Recitation Questions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs" rel="" target="">
+ <span class="dropdown-text">Labs and Practice Problems</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:alex.kaizer@cuanschutz.edu" rel="" target=""><i class="bi bi-envelope" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=ICpH74EAAAAJ&amp;hl=en" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-google-scholar ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="http://github.com/alexbiostats" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/files/Alex_CV.pdf" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-cv ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/alex-kaizer/" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#dataset-background" id="toc-dataset-background" class="nav-link active" data-scroll-target="#dataset-background">Dataset Background</a></li>
+  <li><a href="#exercise-1-confounding" id="toc-exercise-1-confounding" class="nav-link" data-scroll-target="#exercise-1-confounding">Exercise 1: Confounding</a>
+  <ul class="collapse">
+  <li><a href="#a-unadjusted-model-and-interpretation" id="toc-a-unadjusted-model-and-interpretation" class="nav-link" data-scroll-target="#a-unadjusted-model-and-interpretation">1a: Unadjusted Model and Interpretation</a></li>
+  <li><a href="#b-adjusted-model-and-interpretation" id="toc-b-adjusted-model-and-interpretation" class="nav-link" data-scroll-target="#b-adjusted-model-and-interpretation">1b: Adjusted Model and Interpretation</a></li>
+  <li><a href="#c-moon-phase-confounding" id="toc-c-moon-phase-confounding" class="nav-link" data-scroll-target="#c-moon-phase-confounding">1c: Moon Phase Confounding</a></li>
+  </ul></li>
+  <li><a href="#exercise-2-mediation" id="toc-exercise-2-mediation" class="nav-link" data-scroll-target="#exercise-2-mediation">Exercise 2: Mediation</a>
+  <ul class="collapse">
+  <li><a href="#a-mediation-dag" id="toc-a-mediation-dag" class="nav-link" data-scroll-target="#a-mediation-dag">2a: Mediation DAG</a></li>
+  <li><a href="#b-percent-mediated" id="toc-b-percent-mediated" class="nav-link" data-scroll-target="#b-percent-mediated">2b: Percent Mediated</a></li>
+  <li><a href="#c-95-ci-for-percent-mediated" id="toc-c-95-ci-for-percent-mediated" class="nav-link" data-scroll-target="#c-95-ci-for-percent-mediated">2c: 95% CI for Percent Mediated</a></li>
+  </ul></li>
+  <li><a href="#exercise-3-interactions" id="toc-exercise-3-interactions" class="nav-link" data-scroll-target="#exercise-3-interactions">Exercise 3: Interactions</a>
+  <ul class="collapse">
+  <li><a href="#a-fitted-regression-equation-with-interaction" id="toc-a-fitted-regression-equation-with-interaction" class="nav-link" data-scroll-target="#a-fitted-regression-equation-with-interaction">3a: Fitted Regression Equation with Interaction</a></li>
+  <li><a href="#b-interaction-test" id="toc-b-interaction-test" class="nav-link" data-scroll-target="#b-interaction-test">3b: Interaction Test</a></li>
+  <li><a href="#c-fitted-regression-model-for-patients-without-diabetes" id="toc-c-fitted-regression-model-for-patients-without-diabetes" class="nav-link" data-scroll-target="#c-fitted-regression-model-for-patients-without-diabetes">3c: Fitted Regression Model for Patients without Diabetes</a></li>
+  <li><a href="#d-fitted-regression-model-for-patients-with-diabetes" id="toc-d-fitted-regression-model-for-patients-with-diabetes" class="nav-link" data-scroll-target="#d-fitted-regression-model-for-patients-with-diabetes">3d: Fitted Regression Model for Patients with Diabetes</a></li>
+  <li><a href="#e-interaction-visualization" id="toc-e-interaction-visualization" class="nav-link" data-scroll-target="#e-interaction-visualization">3e: Interaction Visualization</a></li>
+  <li><a href="#f-hypothesis-test-for-bmi-without-diabetes" id="toc-f-hypothesis-test-for-bmi-without-diabetes" class="nav-link" data-scroll-target="#f-hypothesis-test-for-bmi-without-diabetes">3f: Hypothesis Test for BMI without Diabetes</a></li>
+  <li><a href="#g-hypothesis-test-for-bmi-with-diabetes" id="toc-g-hypothesis-test-for-bmi-with-diabetes" class="nav-link" data-scroll-target="#g-hypothesis-test-for-bmi-with-diabetes">3g: Hypothesis Test for BMI with Diabetes</a></li>
+  <li><a href="#h-interactions-and-brief-but-complete-summaries" id="toc-h-interactions-and-brief-but-complete-summaries" class="nav-link" data-scroll-target="#h-interactions-and-brief-but-complete-summaries">3h: Interactions and Brief, but Complete, Summaries</a></li>
+  </ul></li>
+  <li><a href="#exercise-4-polynomial-regression" id="toc-exercise-4-polynomial-regression" class="nav-link" data-scroll-target="#exercise-4-polynomial-regression">Exercise 4: Polynomial Regression</a>
+  <ul class="collapse">
+  <li><a href="#a-slr" id="toc-a-slr" class="nav-link" data-scroll-target="#a-slr">4a: SLR</a></li>
+  <li><a href="#b-polynomial-regression" id="toc-b-polynomial-regression" class="nav-link" data-scroll-target="#b-polynomial-regression">4b: Polynomial Regression</a></li>
+  <li><a href="#c-polynomial-plots" id="toc-c-polynomial-plots" class="nav-link" data-scroll-target="#c-polynomial-plots">4c: Polynomial Plots</a></li>
+  <li><a href="#d-polynomial-vs-slr" id="toc-d-polynomial-vs-slr" class="nav-link" data-scroll-target="#d-polynomial-vs-slr">4d: Polynomial vs SLR</a></li>
+  </ul></li>
+  <li><a href="#exercise-5-tests-of-general-linear-hypotheses" id="toc-exercise-5-tests-of-general-linear-hypotheses" class="nav-link" data-scroll-target="#exercise-5-tests-of-general-linear-hypotheses">Exercise 5: Tests of General Linear Hypotheses</a>
+  <ul class="collapse">
+  <li><a href="#a-fitting-the-model" id="toc-a-fitting-the-model" class="nav-link" data-scroll-target="#a-fitting-the-model">5a: Fitting The Model</a></li>
+  <li><a href="#b-glht-for-two-coefficients" id="toc-b-glht-for-two-coefficients" class="nav-link" data-scroll-target="#b-glht-for-two-coefficients">5b: GLHT for Two Coefficients</a></li>
+  <li><a href="#c-glht-for-combination-of-coefficients" id="toc-c-glht-for-combination-of-coefficients" class="nav-link" data-scroll-target="#c-glht-for-combination-of-coefficients">5c: GLHT for Combination of Coefficients</a></li>
+  <li><a href="#d-glht-for-simultaneous-testing" id="toc-d-glht-for-simultaneous-testing" class="nav-link" data-scroll-target="#d-glht-for-simultaneous-testing">5d: GLHT for Simultaneous Testing</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Week 11 Practice Problems: Solutions</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Alex Kaizer </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Colorado-Anschutz Medical Campus
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This page includes the solutions to the optional practice problems for the given week. If you want to see a version <a href="../../labs/prac11/index.html">without solutions please click here</a>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</p>
+<p>This week’s extra practice exercises focus on the wonderfully wide world of applications for MLR: confounding, mediation, interactions, general linear hypothesis testing, and polynomial regression.</p>
+<section id="dataset-background" class="level1">
+<h1>Dataset Background</h1>
+<p>All of our exercises will use the surgery timing data set (<code>Surgery_Timing.csv</code>) provided by the TSHS section of the American Statistical Association. We can load the data into R with the following line of code:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../../.data/Surgery_Timing.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The following table summarizes the variables we will be exploring and provide brief definitions:</p>
+<table class="table">
+<colgroup>
+<col style="width: 39%">
+<col style="width: 11%">
+<col style="width: 49%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Code Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Risk Stratification Index (RSI) for In-Hospital Complications</td>
+<td style="text-align: left;"><code>complication_rsi</code></td>
+<td style="text-align: left;">Estimated risk of having an in-hospital complication.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day of Week</td>
+<td style="text-align: left;"><code>dow</code></td>
+<td style="text-align: left;">Weekday surgery took place (1=Monday, 5=Friday)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Operation Time</td>
+<td style="text-align: left;"><code>hour</code></td>
+<td style="text-align: left;">Timing of operation during the day (06:00 to 19:00)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Phase of Moon</td>
+<td style="text-align: left;"><code>moonphase</code></td>
+<td style="text-align: left;">Moon phase during procedure (1=new, 2=first quarter, 3=full, 4=last quarter)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Age</td>
+<td style="text-align: left;"><code>age</code></td>
+<td style="text-align: left;">Age in years</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BMI</td>
+<td style="text-align: left;"><code>bmi</code></td>
+<td style="text-align: left;">Body mass index (kg/m2)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AHRQ Procedure Category</td>
+<td style="text-align: left;"><code>ahrq_ccs</code></td>
+<td style="text-align: left;">US Agency for Healthcare Research and Quality’s Clinical Classifications Software procedure category</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Complication Observed</td>
+<td style="text-align: left;"><code>complication</code></td>
+<td style="text-align: left;">In-hospital complication</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Diabetes</td>
+<td style="text-align: left;"><code>baseline_diabetes</code></td>
+<td style="text-align: left;">Diabetes present at baseline</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="exercise-1-confounding" class="level1">
+<h1>Exercise 1: Confounding</h1>
+<p>We will use linear regression to examine the relationship between the outcome of RSI for in-hospital complications with surgery on a Monday/Tuesday (versus Wednesday/Thursday/Friday) and moon phase to answer the following exercises:</p>
+<section id="a-unadjusted-model-and-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="a-unadjusted-model-and-interpretation">1a: Unadjusted Model and Interpretation</h2>
+<p>What is the unadjusted (crude) estimate for the association between RSI and day of the week? Write a brief, but complete, summary of the relationship between RSI and day of the week. <em>Hint: you will need to create a new variable for day of the week.</em></p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>AK_mt <span class="ot">&lt;-</span> dat<span class="sc">$</span>dow <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mod1u <span class="ot">&lt;-</span> <span class="fu">lm</span>(complication_rsi <span class="sc">~</span> AK_mt, <span class="at">data=</span>dat)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1u)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = complication_rsi ~ AK_mt, data = dat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.3843 -0.4943  0.0757  0.4333 13.8033 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.335689   0.008956  -37.48   &lt;2e-16 ***
+AK_mtTRUE   -0.167634   0.013534  -12.39   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.201 on 31999 degrees of freedom
+Multiple R-squared:  0.004772,  Adjusted R-squared:  0.004741 
+F-statistic: 153.4 on 1 and 31999 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mod1u)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 2.5 %     97.5 %
+(Intercept) -0.3532430 -0.3181357
+AK_mtTRUE   -0.1941607 -0.1411073</code></pre>
+</div>
+</div>
+<p>There is a significant relationship between RSI for in-hospital complications and day of week (M/T vs.&nbsp;W/Th/F) (p&lt;0.001). On average, RSI is 0.17 lower (95% CI: 0.14 to 0.19 lower) on M/T compared to W/Th/F surgeries.</p>
+</section>
+<section id="b-adjusted-model-and-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="b-adjusted-model-and-interpretation">1b: Adjusted Model and Interpretation</h2>
+<p>Adjusting for the effect of moon phase, what is the adjusted estimate for the association between RSI and day of the week? Write a brief, but complete, summary of the relationship between RSI and day of the week adjusting for moon phase.</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mod1a <span class="ot">&lt;-</span> <span class="fu">lm</span>(complication_rsi <span class="sc">~</span> AK_mt <span class="sc">+</span> <span class="fu">as.factor</span>(moonphase), <span class="at">data=</span>dat)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = complication_rsi ~ AK_mt + as.factor(moonphase), 
+    data = dat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.3828 -0.4928  0.0772  0.4278 13.8247 
+
+Coefficients:
+                      Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)           -0.32039    0.01490 -21.507   &lt;2e-16 ***
+AK_mtTRUE             -0.16740    0.01354 -12.369   &lt;2e-16 ***
+as.factor(moonphase)2 -0.03689    0.01911  -1.930   0.0536 .  
+as.factor(moonphase)3 -0.00707    0.01914  -0.369   0.7118    
+as.factor(moonphase)4 -0.01682    0.01909  -0.881   0.3782    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.201 on 31996 degrees of freedom
+Multiple R-squared:  0.004904,  Adjusted R-squared:  0.00478 
+F-statistic: 39.42 on 4 and 31996 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mod1a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            2.5 %        97.5 %
+(Intercept)           -0.34959437 -0.2911952782
+AK_mtTRUE             -0.19393341 -0.1408770162
+as.factor(moonphase)2 -0.07434743  0.0005763537
+as.factor(moonphase)3 -0.04458653  0.0304459049
+as.factor(moonphase)4 -0.05423393  0.0205935279</code></pre>
+</div>
+</div>
+<p>There is a significant relationship between RSI for in-hospital complications and day of week (M/T vs.&nbsp;W/Th/F) (p&lt;0.001). After accounting for moon phase, on average, RSI is 0.17 lower (95% CI: 0.14 to 0.19 lower) on M/T compared to W/Th/F surgeries.</p>
+</section>
+<section id="c-moon-phase-confounding" class="level2">
+<h2 class="anchored" data-anchor-id="c-moon-phase-confounding">1c: Moon Phase Confounding</h2>
+<p>Is moon phase a confounder of the association between RSI and day of the week based on the operational criterion? Should you report the results from (A) or (B)? Justify your answer.</p>
+<p><strong>Solution:</strong></p>
+<p>Moon phase is not a confounder by the operational definition, since it does not greatly change our point estimate of M/T vs.&nbsp;W/Th/F:</p>
+<p><span class="math display">\[ \frac{|0.167634 - 0.16740|}{0.167634} \times 100 = 0.1396% \]</span></p>
+<p>While there is no rigid threshold for a change that is “big” enough, this is rather small and &lt;10% or &lt;20% are commonly used to rule out potential confounding with the operational definition.</p>
+</section>
+</section>
+<section id="exercise-2-mediation" class="level1">
+<h1>Exercise 2: Mediation</h1>
+<p>We will use linear regression to examine the relationship between the outcome of RSI for in-hospital complications with surgery on a Monday/Tuesday (versus Wednesday/Thursday/Friday) and BMI of the patient potential mediator to complete the following exercises:</p>
+<section id="a-mediation-dag" class="level2">
+<h2 class="anchored" data-anchor-id="a-mediation-dag">2a: Mediation DAG</h2>
+<p>Fit the three fundamental models of mediation analysis and fill in the following DAG:</p>
+<div class="cell" data-layout-align="center" data-hash="index_cache/html/tikz-med_76300dbfeac1c5465be335f6af83b6bc">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/tikz-med-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit our three models</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>mod2_crude <span class="ot">&lt;-</span> <span class="fu">lm</span>(complication_rsi <span class="sc">~</span> AK_mt, <span class="at">data=</span>dat)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>mod2_adjusted <span class="ot">&lt;-</span> <span class="fu">lm</span>(complication_rsi <span class="sc">~</span> AK_mt <span class="sc">+</span> bmi, <span class="at">data=</span>dat)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>mod2_covariate <span class="ot">&lt;-</span> <span class="fu">lm</span>(bmi <span class="sc">~</span> AK_mt, <span class="at">data=</span>dat)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract coefficients</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod2_crude)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)   AK_mtTRUE 
+ -0.3356893  -0.1676340 </code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod2_adjusted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)   AK_mtTRUE         bmi 
+ 0.57313211 -0.15765353 -0.03148069 </code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod2_covariate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)   AK_mtTRUE 
+  29.290095    0.367003 </code></pre>
+</div>
+</div>
+</section>
+<section id="b-percent-mediated" class="level2">
+<h2 class="anchored" data-anchor-id="b-percent-mediated">2b: Percent Mediated</h2>
+<p>What is the proportion/percent mediated by age?</p>
+<p><strong>Solution:</strong></p>
+<p>The proportion mediated is <span class="math inline">\(\frac{\text{indirect effect}}{\text{total effect}} = \frac{\hat{\beta}_{crude} - \hat{\beta}_{adj}}{\hat{\beta}_{crude}} = \frac{-0.1676 - (-0.1577)}{-0.1676} = 0.0591\)</span>. This corresponds to the percent mediated of <span class="math inline">\(0.0591 \times 100 = 5.91\%\)</span>.</p>
+</section>
+<section id="c-95-ci-for-percent-mediated" class="level2">
+<h2 class="anchored" data-anchor-id="c-95-ci-for-percent-mediated">2c: 95% CI for Percent Mediated</h2>
+<p>What is the 95% CI and corresponding p-value for the proportion/percent mediated by age using the normal approximation to estimate the standard error (i.e., Sobel’s test)?</p>
+<p><strong>Solution:</strong></p>
+<p>We first need to calculate the standard error for our indirect effect:</p>
+<p><span class="math display">\[ SE(\hat{\beta}_{crude} - \hat{\beta}_{adj}) = \sqrt{{\hat{\gamma}}_X^2\left(SE\left({\hat{\beta}}_M\right)\right)^2+{\hat{\beta}}_M^2\left(SE\left({\hat{\gamma}}_X\right)\right)^2}  \]</span></p>
+<p>We can find this information in our coefficient tables:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2_adjusted)<span class="sc">$</span>coefficient</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Estimate   Std. Error   t value      Pr(&gt;|t|)
+(Intercept)  0.57313211 0.0290929009  19.70007  7.953691e-86
+AK_mtTRUE   -0.15765353 0.0138026533 -11.42197  3.773477e-30
+bmi         -0.03148069 0.0009427987 -33.39068 7.305638e-240</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2_covariate)<span class="sc">$</span>coefficient</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Estimate Std. Error    t value     Pr(&gt;|t|)
+(Intercept) 29.290095 0.05731452 511.041478 0.000000e+00
+AK_mtTRUE    0.367003 0.08637699   4.248851 2.155467e-05</code></pre>
+</div>
+</div>
+<p><span class="math display">\[ SE(\hat{\beta}_{crude} - \hat{\beta}_{adj}) = \sqrt{(0.3670)^2(0.0009)^2 + (-0.0315)^2 (0.0864)^2} = 0.0027 \]</span></p>
+<p>Our 95% CI for the indirect effect is</p>
+<p><span class="math display">\[ (-0.1676 - (-0.1577)) \pm 1.96 \times 0.0027 = (-0.015, -0.005)  \]</span></p>
+<p>This corresponds to a 95% CI for our proportion mediated of:</p>
+<p><span class="math display">\[ \left(\frac{-0.005}{-0.1676}, \frac{-0.015}{-0.1676} \right) = (0.0298, 0.0895)) \]</span></p>
+<p>We are 95% confident that the proportion mediated by BMI is betwee 2.98% and 8.95%.</p>
+<p>Our p-value is calculated from referencing the standard normal distribution (per Sobel’s test):</p>
+<p><span class="math display">\[ Z = \frac{\text{indirect effect}}{SE(\hat{\beta}_{crude} - \hat{\beta}_{adj})} = \frac{-0.0099}{0.0027} = -3.67 \]</span></p>
+<p>This corresponds to a p-value of <code>2 * pnorm(-3.67)</code>=2.4^{-4}, which is less than 0.05.</p>
+<p>Note, that although this proportion mediated is not very large, our larger sample size may be powered enough to detect even weak mediation relationships.</p>
+</section>
+</section>
+<section id="exercise-3-interactions" class="level1">
+<h1>Exercise 3: Interactions</h1>
+<p>Use linear regression to examine the relationship between RSI for in-hospital complications and BMI. In this exercise you will examine whether the magnitude of the association between RSI (the response) and BMI (the primary explanatory variable) depends on whether the patient has diabetes.</p>
+<section id="a-fitted-regression-equation-with-interaction" class="level2">
+<h2 class="anchored" data-anchor-id="a-fitted-regression-equation-with-interaction">3a: Fitted Regression Equation with Interaction</h2>
+<p>Write down the fitted regression equation for the regression of RSI on BMI, diabetes, and the interaction between the two. Provide an interpretation for each of the coefficients in the model (including the intercept).</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>( complication_rsi <span class="sc">~</span> bmi <span class="sc">+</span> baseline_diabetes <span class="sc">+</span> bmi<span class="sc">*</span>baseline_diabetes, <span class="at">data=</span>dat)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="fu">summary</span>(mod3)<span class="sc">$</span>coef, <span class="fu">confint</span>(mod3))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         Estimate  Std. Error    t value      Pr(&gt;|t|)
+(Intercept)            0.53713273 0.031985132  16.793200  5.472708e-63
+bmi                   -0.03156706 0.001080522 -29.214640 6.452865e-185
+baseline_diabetes     -0.64875563 0.082053863  -7.906461  2.742595e-15
+bmi:baseline_diabetes  0.01223915 0.002424084   5.048979  4.468924e-07
+                             2.5 %      97.5 %
+(Intercept)            0.474440377  0.59982508
+bmi                   -0.033684938 -0.02944919
+baseline_diabetes     -0.809585030 -0.48792624
+bmi:baseline_diabetes  0.007487831  0.01699046</code></pre>
+</div>
+</div>
+<p>Our fitted regression model is</p>
+<p><span class="math display">\[ \hat{Y} = 0.537 + -0.032 \times \text{BMI} + -0.649 \times \text{diabetes} + 0.012 \times \text{BMI} \times \text{diabetes} \]</span></p>
+<p><span class="math inline">\(\hat{\beta}_0 = 0.537\)</span>: The expected RSI for patients with a 0 kg/m<sup>2</sup> BMI and who do not have diabetes is 0.537 points.</p>
+<p><span class="math inline">\(\hat{\beta}_{bmi}=-0.032\)</span>: For patients who do not have diabetes, RSI decreases, on average, by 0.032 points for 1 kg/m<sup>2</sup> increase in BMI.</p>
+<p><span class="math inline">\(\hat{\beta}_{diabetes}=-0.649\)</span>: For patients with a 0 kg/m<sup>2</sup> BMI, RSI, on average, is 0.649 points lower for those with diabetes.</p>
+<p><span class="math inline">\(\hat{\beta}_{bmi*diabetes} = 0.012\)</span>: This is the difference between the effect of BMI for those with diabetes compared to those without diabetes. For patients with diabetes, a one kg/m<sup>2</sup> increase in BMI results in an RSI that is 0.012 units higher, on average.</p>
+</section>
+<section id="b-interaction-test" class="level2">
+<h2 class="anchored" data-anchor-id="b-interaction-test">3b: Interaction Test</h2>
+<p>Test whether the relationship between RSI and BMI depends on whether the patient had diabetes.</p>
+<p><strong>Solution:</strong></p>
+<p>From our model results in 3a, the relationship between RSI and BMI is significantly different for those with diabetes compared to those without diabetes (p=4.47e-07&lt;0.001).</p>
+</section>
+<section id="c-fitted-regression-model-for-patients-without-diabetes" class="level2">
+<h2 class="anchored" data-anchor-id="c-fitted-regression-model-for-patients-without-diabetes">3c: Fitted Regression Model for Patients without Diabetes</h2>
+<p>What is the regression equation for patients who don’t have diabetes?</p>
+<p><strong>Solution:</strong></p>
+<p><span class="math display">\[ \hat{Y} = 0.537 + -0.032 \times \text{BMI} + -0.649 \times 0 + 0.012 \times \text{BMI} \times 0 = 0.537 + -0.032 \times \text{BMI} \]</span></p>
+</section>
+<section id="d-fitted-regression-model-for-patients-with-diabetes" class="level2">
+<h2 class="anchored" data-anchor-id="d-fitted-regression-model-for-patients-with-diabetes">3d: Fitted Regression Model for Patients with Diabetes</h2>
+<p>What is the regression equation for patients with diabetes?</p>
+<p><strong>Solution:</strong></p>
+<p><span class="math display">\[ \hat{Y} = 0.537 + -0.032 \times \text{BMI} + -0.649 \times 1 + 0.012 \times \text{BMI} \times 1 = -0.112 + -0.020 \times \text{BMI} \]</span></p>
+</section>
+<section id="e-interaction-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="e-interaction-visualization">3e: Interaction Visualization</h2>
+<p>Create a scatterplot of RSI versus BMI, using different symbols and separate regression lines for patients with and without diabetes.</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat<span class="sc">$</span>bmi, <span class="at">y=</span>dat<span class="sc">$</span>complication_rsi, <span class="at">xlab=</span><span class="st">'BMI'</span>, <span class="at">ylab=</span><span class="st">'RSI'</span>, <span class="at">pch=</span>dat<span class="sc">$</span>baseline_diabetes)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="fl">0.537</span>, <span class="at">b=</span><span class="sc">-</span><span class="fl">0.032</span>, <span class="at">lty=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">'orangered2'</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="sc">-</span><span class="fl">0.112</span>, <span class="at">b=</span><span class="sc">-</span><span class="fl">0.020</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'orangered2'</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="at">bty=</span><span class="st">'n'</span>, <span class="at">pch=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend=</span><span class="fu">c</span>(<span class="st">'No Diabetes'</span>,<span class="st">'Diabetes'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="f-hypothesis-test-for-bmi-without-diabetes" class="level2">
+<h2 class="anchored" data-anchor-id="f-hypothesis-test-for-bmi-without-diabetes">3f: Hypothesis Test for BMI without Diabetes</h2>
+<p>Test if the slope for BMI for those who don’t have diabetes is significantly different from 0.</p>
+<p><strong>Solution:</strong></p>
+<p>For this question we can directly use the <span class="math inline">\(t\)</span>-test results from our table of coefficients in 3A. In that output we see that p&lt;2e-16 for <code>bmi</code>, so we reject the null hypothesis that the slope is significantly different from 0 for those who didn’t have diabetes.</p>
+</section>
+<section id="g-hypothesis-test-for-bmi-with-diabetes" class="level2">
+<h2 class="anchored" data-anchor-id="g-hypothesis-test-for-bmi-with-diabetes">3g: Hypothesis Test for BMI with Diabetes</h2>
+<p>Test if the slope for BMI for those who do have diabetes is significantly different from 0.</p>
+<p><strong>Solution:</strong></p>
+<p>For this question we can approach it by either calculating the standard error of <span class="math inline">\(\hat{\beta}_{bmi} + \hat{\beta}_{bmi*diabetes}\)</span> or using reverse coding.</p>
+<p>Calculating the standard error using our original model requires the variance-covariance matrix:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vcov</span>(mod3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                        (Intercept)           bmi baseline_diabetes
+(Intercept)            1.023049e-03 -3.363775e-05     -1.023049e-03
+bmi                   -3.363775e-05  1.167528e-06      3.363775e-05
+baseline_diabetes     -1.023049e-03  3.363775e-05      6.732836e-03
+bmi:baseline_diabetes  3.363775e-05 -1.167528e-06     -1.923745e-04
+                      bmi:baseline_diabetes
+(Intercept)                    3.363775e-05
+bmi                           -1.167528e-06
+baseline_diabetes             -1.923745e-04
+bmi:baseline_diabetes          5.876182e-06</code></pre>
+</div>
+</div>
+<p>With this information we can calculate our standard error:</p>
+<p><span class="math inline">\(\begin{aligned} SE(\hat{\beta}_{bmi} + \hat{\beta}_{bmi*diabetes}) =&amp; \sqrt{Var(\hat{\beta}_{bmi}) + Var(\hat{\beta}_{bmi*diabetes}) + 2 \times Cov(\hat{\beta}_{bmi},\hat{\beta}_{bmi*diabetes})} \\ =&amp; \sqrt{1.167528e-06 + 5.876182e-06 + 2 \times (-1.167528e-06)} \\ =&amp; \sqrt{4.708654e-06} \\ =&amp; 0.002169943 \end{aligned}\)</span></p>
+<p>Our estimated 95% CI using a critical value of 1.96 (i.e., <code>qt(0.975, 28707)</code> based on <span class="math inline">\(n=28711\)</span> with complete data for BMI and diabetes status and subtracting four degrees of freedom) is</p>
+<p><span class="math display">\[ -0.020 \pm 1.96 \times 0.002169943 = (-0.0243, -0.0157) \]</span></p>
+<p>We have <span class="math inline">\(t=\frac{-0.020}{0.002169943}=-9.217\)</span> and a p-value of <code>2 * pt(-9.217,28707,lower.tail=T)</code>=0.</p>
+<p>We can verify this result if we reverse code <code>baseline_diabetes</code>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create reverse coding where not_first2y=1 if they did NOT live in first 2 years</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>AK_no_diabetes <span class="ot">&lt;-</span> <span class="fu">abs</span>(dat<span class="sc">$</span>baseline_diabetes <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># fit model with reverse coding</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>mod3_reverse <span class="ot">&lt;-</span> <span class="fu">lm</span>(complication_rsi <span class="sc">~</span> bmi <span class="sc">+</span> AK_no_diabetes <span class="sc">+</span> bmi<span class="sc">*</span>AK_no_diabetes, <span class="at">data=</span>dat)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>( <span class="fu">cbind</span>(<span class="fu">summary</span>(mod3_reverse)<span class="sc">$</span>coefficients, <span class="fu">confint</span>(mod3_reverse)), <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Estimate Std. Error t value Pr(&gt;|t|)   2.5 %  97.5 %
+(Intercept)         -0.1116     0.0756 -1.4772   0.1396 -0.2597  0.0365
+bmi                 -0.0193     0.0022 -8.9071   0.0000 -0.0236 -0.0151
+AK_no_diabetes       0.6488     0.0821  7.9065   0.0000  0.4879  0.8096
+bmi:AK_no_diabetes  -0.0122     0.0024 -5.0490   0.0000 -0.0170 -0.0075</code></pre>
+</div>
+</div>
+<p>We can see that we arrive at the same results (with slight differences due to rounding) when interpreting <code>bmi</code> in our reverse coded model results.</p>
+</section>
+<section id="h-interactions-and-brief-but-complete-summaries" class="level2">
+<h2 class="anchored" data-anchor-id="h-interactions-and-brief-but-complete-summaries">3h: Interactions and Brief, but Complete, Summaries</h2>
+<p>Provide a brief, but complete, summary of the relationship between RSI and BMI, accounting for any observed interaction with diabetes (i.e., if there is a significant interaction, interpret those who do and don’t have diabetes separately).</p>
+<p><strong>Solution:</strong></p>
+<p>The relationship between BMI and RSI differs significantly according to whether or not the patient has diabetes (p&lt;0.001).</p>
+<p>There is a significant association between BMI and RSI for patients without diabetes (p &lt; 0.001). For these patients, RSI decreases an average of 0.032 units for every one kg/m<sup>2</sup> increase in BMI (95% CI: 0.0294 to 0.0337 units lower).</p>
+<p>There is a significant association between BMI and RSI among patients with diabetes (p &lt; 0.001). For these patients, RSI decreases an average of 0.020 units for every one kg/m<sup>2</sup> increase in BMI (95% CI: 0.0157 to 0.0243 units lower).</p>
+<p>The difference in these relationships for patients with and without diabetes can be seen in the scatterplot with regression fits for each group, where those without diabetes have a slightly stronger negative linear relationship with RSI as BMI increases.</p>
+</section>
+</section>
+<section id="exercise-4-polynomial-regression" class="level1">
+<h1>Exercise 4: Polynomial Regression</h1>
+<p>For this exercise, subset the data set to only those with an in-hospital complication recorded and those who have hip replacements (i.e., <code>dat$ahrq_ccs=='Hip replacement; total and partial'</code>).</p>
+<section id="a-slr" class="level2">
+<h2 class="anchored" data-anchor-id="a-slr">4a: SLR</h2>
+<p>Fit a simple linear regression model for the outcome of RSI for in-hospital complications with age as the predictor.</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dat4 <span class="ot">&lt;-</span> dat[<span class="fu">which</span>(dat<span class="sc">$</span>complication<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span> dat<span class="sc">$</span>ahrq_ccs<span class="sc">==</span><span class="st">'Hip replacement; total and partial'</span>),]</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>dat4 <span class="ot">&lt;-</span> dat4[<span class="sc">!</span><span class="fu">is.na</span>(dat4<span class="sc">$</span>age),] <span class="co"># remove one record without age</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>lm4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(complication_rsi <span class="sc">~</span> age, <span class="at">data=</span>dat4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="b-polynomial-regression" class="level2">
+<h2 class="anchored" data-anchor-id="b-polynomial-regression">4b: Polynomial Regression</h2>
+<p>Fit a polynomial regression model that adds a squared term for age.</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>lm4_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(complication_rsi <span class="sc">~</span> age <span class="sc">+</span> <span class="fu">I</span>(age<span class="sc">^</span><span class="dv">2</span>), <span class="at">data=</span>dat4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="c-polynomial-plots" class="level2">
+<h2 class="anchored" data-anchor-id="c-polynomial-plots">4c: Polynomial Plots</h2>
+<p>Create a scatterplot of the data and add the predicted regression lines for each model.</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat4<span class="sc">$</span>age, <span class="at">y=</span>dat4<span class="sc">$</span>complication_rsi, <span class="at">xlab=</span><span class="st">'Age'</span>, <span class="at">ylab=</span><span class="st">'RSI (In-Hospital Complications)'</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(lm4, <span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># plot SLR predicted regression line</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># predict Y-hat from regression model with age and age^2, add to scatterplot</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>xval <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(dat4<span class="sc">$</span>age,<span class="at">na.rm=</span>T), <span class="fu">max</span>(dat4<span class="sc">$</span>age,<span class="at">na.rm=</span>T), <span class="at">length.out=</span><span class="dv">100</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm4_2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age=</span>xval))</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span>xval, <span class="at">y=</span>y2, <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># add legend</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topleft'</span>, <span class="at">bty=</span><span class="st">'n'</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">'black'</span>,<span class="st">'blue'</span>), <span class="at">lwd=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">legend=</span><span class="fu">c</span>(<span class="st">'Linear'</span>,<span class="st">'Quadratic'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="d-polynomial-vs-slr" class="level2">
+<h2 class="anchored" data-anchor-id="d-polynomial-vs-slr">4d: Polynomial vs SLR</h2>
+<p>Based on the model output and figure, is there evidence that a quadratic model may be more appropriate than the simple linear regression model?</p>
+<p><strong>Solution:</strong></p>
+<p>Visually, both models may be appropriate. There are fewer young patients, so it can be challenging to definitely identify if the linear or quadratic model is more appropriate. While we know that age and age<sup>2</sup> are highly correlated, we can examine our summary output to note that age<sup>2</sup> is significant in the quadratic model (p&lt;0.05):</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = complication_rsi ~ age, data = dat4)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.8344 -1.0164 -0.4061  0.5047  8.9619 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -1.307892   0.535371  -2.443 0.015352 *  
+age          0.028510   0.007953   3.585 0.000415 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.772 on 221 degrees of freedom
+Multiple R-squared:  0.05495,   Adjusted R-squared:  0.05067 
+F-statistic: 12.85 on 1 and 221 DF,  p-value: 0.0004152</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm4_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = complication_rsi ~ age + I(age^2), data = dat4)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.9407 -0.9988 -0.3736  0.4102  9.1707 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)  1.8377058  1.4762057   1.245   0.2145  
+age         -0.0827367  0.0493547  -1.676   0.0951 .
+I(age^2)     0.0009173  0.0004018   2.283   0.0234 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.755 on 220 degrees of freedom
+Multiple R-squared:  0.07683,   Adjusted R-squared:  0.06843 
+F-statistic: 9.154 on 2 and 220 DF,  p-value: 0.0001517</code></pre>
+</div>
+</div>
+<p>We can also calculate the MSE to see if it decreases in the quadratic model relative to the first-order model without any polynomial terms:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(lm4<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>) <span class="co"># MSE for first-order model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.110576</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(lm4_2<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>) <span class="co"># MSE for second-order model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.038569</code></pre>
+</div>
+</div>
+<p>Since the change in MSE is not very large (3.11 to 3.04), we might argue the more parsimonious SLR model may be preferred given the limited improvement relative to the increased complexity.</p>
+<p>Finally, we may want to evalute the diagnostic plots to see if there is evidence to support the more complex model:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SLR diagnostics (no quadratic term)</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">4.1</span>,<span class="fl">4.1</span>,<span class="fl">3.1</span>,<span class="fl">2.1</span>))</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of Y-X</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat4<span class="sc">$</span>age, <span class="at">y=</span>dat4<span class="sc">$</span>complication_rsi, <span class="at">xlab=</span><span class="st">'Age'</span>, <span class="at">ylab=</span><span class="st">'RSI'</span>, </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Scatterplot'</span>, <span class="at">cex=</span><span class="dv">1</span>); <span class="fu">abline</span>( lm4, <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">lwd=</span><span class="dv">2</span> )</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of residuals by X</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat4<span class="sc">$</span>age, <span class="at">y=</span><span class="fu">rstudent</span>(lm4), <span class="at">xlab=</span><span class="st">'Age'</span>, <span class="at">ylab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Residual Plot by Age'</span>, <span class="at">cex=</span><span class="dv">1</span>); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of residuals by predicted values</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="fu">predict</span>(lm4), <span class="at">y=</span><span class="fu">rstudent</span>(lm4), <span class="at">xlab=</span><span class="fu">expression</span>(<span class="fu">hat</span>(Y)), <span class="at">ylab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Residual Plot by Y-hat'</span>, <span class="at">cex=</span><span class="dv">1</span>); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram of jackknife residuals with normal curve</span></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">rstudent</span>(lm4), <span class="at">xlab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Histogram of Residuals'</span>, <span class="at">freq=</span>F, <span class="at">breaks=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">6</span>,<span class="fl">0.25</span>)); </span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">curve</span>( <span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">add=</span>T)</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="co"># PP-plot</span></span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( <span class="fu">ppoints</span>(<span class="fu">length</span>(<span class="fu">rstudent</span>(lm4))), <span class="fu">sort</span>(<span class="fu">pnorm</span>(<span class="fu">rstudent</span>(lm4))), </span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab=</span><span class="st">'Observed Cumulative Probability'</span>, </span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab=</span><span class="st">'Expected Cumulative Probability'</span>, </span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">main=</span><span class="st">'Normal Probability Plot'</span>, <span class="at">cex=</span><span class="dv">1</span>); </span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>,<span class="at">b=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">'gray65'</span>, <span class="at">lwd=</span><span class="dv">1</span>)</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ-plot</span></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>( <span class="fu">rstudent</span>(lm4) ); <span class="fu">qqline</span>( <span class="fu">rstudent</span>(lm4) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/slr_diag-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SLR diagnostics (no quadratic term)</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">4.1</span>,<span class="fl">4.1</span>,<span class="fl">3.1</span>,<span class="fl">2.1</span>))</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of Y-X</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat4<span class="sc">$</span>age, <span class="at">y=</span>dat4<span class="sc">$</span>complication_rsi, <span class="at">xlab=</span><span class="st">'Age'</span>, <span class="at">ylab=</span><span class="st">'RSI'</span>, </span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Scatterplot'</span>, <span class="at">cex=</span><span class="dv">1</span>)</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co"># predict Y-hat from regression model with age and age^2, add to scatterplot</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>xval <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(dat4<span class="sc">$</span>age,<span class="at">na.rm=</span>T), <span class="fu">max</span>(dat4<span class="sc">$</span>age,<span class="at">na.rm=</span>T), <span class="at">length.out=</span><span class="dv">100</span>)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm4_2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age=</span>xval))</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span>xval, <span class="at">y=</span>y2, <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of residuals by X</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat4<span class="sc">$</span>age, <span class="at">y=</span><span class="fu">rstudent</span>(lm4_2), <span class="at">xlab=</span><span class="st">'Age'</span>, <span class="at">ylab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Residual Plot by Age'</span>, <span class="at">cex=</span><span class="dv">1</span>); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of residuals by predicted values</span></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="fu">predict</span>(lm4_2), <span class="at">y=</span><span class="fu">rstudent</span>(lm4_2), <span class="at">xlab=</span><span class="fu">expression</span>(<span class="fu">hat</span>(Y)), <span class="at">ylab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Residual Plot by Y-hat'</span>, <span class="at">cex=</span><span class="dv">1</span>); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram of jackknife residuals with normal curve</span></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">rstudent</span>(lm4_2), <span class="at">xlab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Histogram of Residuals'</span>, <span class="at">freq=</span>F, <span class="at">breaks=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">6</span>,<span class="fl">0.25</span>)); </span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">curve</span>( <span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">add=</span>T)</span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a><span class="co"># PP-plot</span></span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( <span class="fu">ppoints</span>(<span class="fu">length</span>(<span class="fu">rstudent</span>(lm4_2))), <span class="fu">sort</span>(<span class="fu">pnorm</span>(<span class="fu">rstudent</span>(lm4_2))), </span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab=</span><span class="st">'Observed Cumulative Probability'</span>, </span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab=</span><span class="st">'Expected Cumulative Probability'</span>, </span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">main=</span><span class="st">'Normal Probability Plot'</span>, <span class="at">cex=</span><span class="dv">1</span>); </span>
+<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>,<span class="at">b=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">'gray65'</span>, <span class="at">lwd=</span><span class="dv">1</span>)</span>
+<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ-plot</span></span>
+<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>( <span class="fu">rstudent</span>(lm4_2) ); <span class="fu">qqline</span>( <span class="fu">rstudent</span>(lm4_2) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/polynomial_diag-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Based on the diagnostic plots, it appears both models are impacted by violations of the normality (histogram, PP, and QQ plots all have departures from normality) and potentially homoscedasticity assumption (residual plot by age might have a bit of a fan shape, but Y-hat not as much). Regardless, if just comparing to select between the first- and second-order model, there is not much evidence supporting a drastic improvement with the more complicated model with the quadratic polynomial term.</p>
+</section>
+</section>
+<section id="exercise-5-tests-of-general-linear-hypotheses" class="level1">
+<h1>Exercise 5: Tests of General Linear Hypotheses</h1>
+<section id="a-fitting-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="a-fitting-the-model">5a: Fitting The Model</h2>
+<p>Fit a linear regression model for the outcome of RSI for in-hospital complication with day of the week as a predictor for all days.</p>
+<p><strong>Solution:</strong></p>
+<p>Here we will fit our model and view the summary output for use in later problems.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">glm</span>(complication_rsi <span class="sc">~</span> <span class="fu">as.factor</span>(dow), <span class="at">data=</span>dat)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = complication_rsi ~ as.factor(dow), data = dat)
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     -0.51529    0.01435 -35.907  &lt; 2e-16 ***
+as.factor(dow)2  0.02393    0.02029   1.179    0.238    
+as.factor(dow)3  0.18989    0.02088   9.092  &lt; 2e-16 ***
+as.factor(dow)4  0.15168    0.02149   7.057 1.73e-12 ***
+as.factor(dow)5  0.19485    0.02105   9.258  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 1.442609)
+
+    Null deviance: 46388  on 32000  degrees of freedom
+Residual deviance: 46158  on 31996  degrees of freedom
+AIC: 102549
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<p>Our fitted regression equation is</p>
+<p><span class="math display">\[\hat{Y} = -0.52 + 0.02 I_{T} + 0.19 I_{W} + 0.15 I_{Th} + 0.19 I_{F} \]</span></p>
+</section>
+<section id="b-glht-for-two-coefficients" class="level2">
+<h2 class="anchored" data-anchor-id="b-glht-for-two-coefficients">5b: GLHT for Two Coefficients</h2>
+<p>Using a general linear hypothesis, test if the mean RSI on Tuesday and Wednesday are equal to each other.</p>
+<p><strong>Solution:</strong></p>
+<p>First, if we want to compare the <em>mean</em> RSI value for each day we know from our reference cell model we would have an estimate of the mean for each group as <span class="math inline">\(\mu_{T} = \beta_0 + \beta_T\)</span> and <span class="math inline">\(\mu_{W} = \beta_0 + \beta_{W}\)</span>. However, since our intercept <span class="math inline">\(\beta_0\)</span> is in both, it will cancel out when testing our null hypothesis that <span class="math inline">\(\mu_T = \mu_W\)</span>.</p>
+<p>Therefore, this tests <span class="math inline">\(H_0\colon \beta_{T} = \beta_{W}\)</span>, or equivalently <span class="math inline">\(H_0\colon \beta_{T} - \beta_{W} = 0\)</span>. We can further imagine this as <span class="math inline">\(1 \times \beta_{T} - 1 \times \beta_{W}\)</span>, so our matrix is <span class="math inline">\(\mathbf{c} = \begin{pmatrix} 0 &amp; 1 &amp; -1 &amp; 0 &amp; 0 \end{pmatrix}\)</span>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gmodels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'gmodels' was built under R version 4.4.1</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, create matrix for given contrast</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>c_matrix_5b <span class="ot">&lt;-</span> <span class="fu">rbind</span>( <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Then, implement general linear hypothesis test</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glh.test</span>(mod5, c_matrix_5b, <span class="at">d=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(c_matrix_5b)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Test of General Linear Hypothesis  
+Call:
+glh.test(reg = mod5, cm = c_matrix_5b, d = rep(0, nrow(c_matrix_5b)))
+F = 63.1627, df1 =     1, df2 = 31996, p-value = 1.998e-15 </code></pre>
+</div>
+</div>
+<p>Since <span class="math inline">\(p&lt;0.05\)</span>, we would reject the null hypothesis and conclude that Tuesday and Wednesday have different mean RSI values.</p>
+<p>Since we only wanted to compare if Tuesday and Wednesday were equal, we could also have fit a model with the reference category for our categorical variable changed to Tuesday or Wednesday:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>dow_v2 <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>dow, <span class="at">levels=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">1</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">'T'</span>,<span class="st">'W'</span>,<span class="st">'Th'</span>,<span class="st">'F'</span>,<span class="st">'M'</span>))</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>( <span class="fu">glm</span>(complication_rsi <span class="sc">~</span> dow_v2, <span class="at">data=</span>dat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = complication_rsi ~ dow_v2, data = dat)
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.49136    0.01435 -34.247  &lt; 2e-16 ***
+dow_v2W      0.16596    0.02088   7.947 1.97e-15 ***
+dow_v2Th     0.12775    0.02149   5.945 2.80e-09 ***
+dow_v2F      0.17093    0.02104   8.122 4.74e-16 ***
+dow_v2M     -0.02393    0.02029  -1.179    0.238    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 1.442609)
+
+    Null deviance: 46388  on 32000  degrees of freedom
+Residual deviance: 46158  on 31996  degrees of freedom
+AIC: 102549
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<p>In our regression output with Tuesday as the reference category, we see we have a similar p-value and that <span class="math inline">\(t^2 = 7.946^2 = 63.139\)</span>, which is approximately equal to our <span class="math inline">\(F\)</span>-statistic from the GLHT (differing slightly due to rounding).</p>
+</section>
+<section id="c-glht-for-combination-of-coefficients" class="level2">
+<h2 class="anchored" data-anchor-id="c-glht-for-combination-of-coefficients">5c: GLHT for Combination of Coefficients</h2>
+<p>Using a general linear hypothesis, test if the mean RSI on Monday is equal to two times the RSI on Thursday.</p>
+<p><strong>Solution:</strong></p>
+<p>Here we know that for our model fit in 5a, <span class="math inline">\(\mu_M = \beta_0\)</span> and <span class="math inline">\(\mu_{Th} = \beta_0 + \beta_{Th}\)</span>. Therefore this hypothesis is testing the null that <span class="math inline">\(\mu_M = 2 \times \mu_{Th}\)</span>. Plugging in our regression coefficients we have <span class="math inline">\(\beta_0 = 2 \times (\beta_0 + \beta_{Th})\)</span>. This can be rearranged to show that <span class="math inline">\(-\beta_0 + 2\beta_{Th} = 0\)</span>:</p>
+<p><span class="math display">\[ H_0 \colon \begin{pmatrix} -1 &amp; 0 &amp; 0 &amp; 2 &amp; 0 \end{pmatrix} \begin{pmatrix} \beta_0 \\ \beta_T \\ \beta_W \\ \beta_{Th} \\ \beta_{F} \end{pmatrix} = 0 \]</span></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, create matrix for given contrast</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>c_matrix_5c <span class="ot">&lt;-</span> <span class="fu">rbind</span>( <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">0</span>) )</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Then, implement general linear hypothesis test</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glh.test</span>(mod5, c_matrix_5c, <span class="at">d=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(c_matrix_5c)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Test of General Linear Hypothesis  
+Call:
+glh.test(reg = mod5, cm = c_matrix_5c, d = rep(0, nrow(c_matrix_5c)))
+F = 232.9077, df1 =     1, df2 = 31996, p-value = &lt; 2.2e-16 </code></pre>
+</div>
+</div>
+<p>Since <span class="math inline">\(p &lt; 0.05\)</span>, we reject <span class="math inline">\(H_0\)</span> and conclude that the mean RSI on Monday is not equal to two times the mean RSI on Thursday.</p>
+</section>
+<section id="d-glht-for-simultaneous-testing" class="level2">
+<h2 class="anchored" data-anchor-id="d-glht-for-simultaneous-testing">5d: GLHT for Simultaneous Testing</h2>
+<p>Using a general linear hypothesis, test both 5b and 5c simultaneously.</p>
+<p><strong>Solution:</strong></p>
+<p>For 5b and 5c, we tested each hypothesis on its own. However, we could test both simultaneously:</p>
+<p><span class="math display">\[ H_0 \colon \begin{pmatrix} 0 &amp; 1 &amp; -1 &amp; 0  &amp; 0 \\ -1 &amp; 0 &amp; 0 &amp; 2 &amp; 0 \end{pmatrix} \begin{pmatrix} \beta_0 \\ \beta_T \\ \beta_W \\ \beta_{Th} \\ \beta_{F} \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix} \]</span></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, create matrix for given contrast</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>c_matrix_5d <span class="ot">&lt;-</span> <span class="fu">rbind</span>( <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">0</span>) )</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Then, implement general linear hypothesis test</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glh.test</span>(mod5, c_matrix_5d, <span class="at">d=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(c_matrix_5d)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Test of General Linear Hypothesis  
+Call:
+glh.test(reg = mod5, cm = c_matrix_5d, d = rep(0, nrow(c_matrix_5d)))
+F = 148.0352, df1 =     2, df2 = 31996, p-value = &lt; 2.2e-16 </code></pre>
+</div>
+</div>
+<p>Unsurprisingly, given our previous results with both being very significant on their own, this result is still also significant since <span class="math inline">\(p&lt;0.001\)</span>. In other words, our results suggests that at least one null hypothesis is rejected.</p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb52" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 11 Practice Problems: Solutions"</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
+<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-22"><a href="#cb52-22" aria-hidden="true" tabindex="-1"></a>This page includes the solutions to the optional practice problems for the given week. If you want to see a version <span class="co">[</span><span class="ot">without solutions please click here</span><span class="co">](/labs/prac11/index.qmd)</span>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</span>
+<span id="cb52-23"><a href="#cb52-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-24"><a href="#cb52-24" aria-hidden="true" tabindex="-1"></a>This week's extra practice exercises focus on the wonderfully wide world of applications for MLR: confounding, mediation, interactions, general linear hypothesis testing, and polynomial regression.</span>
+<span id="cb52-25"><a href="#cb52-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-26"><a href="#cb52-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-27"><a href="#cb52-27" aria-hidden="true" tabindex="-1"></a><span class="fu"># Dataset Background</span></span>
+<span id="cb52-28"><a href="#cb52-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-29"><a href="#cb52-29" aria-hidden="true" tabindex="-1"></a>All of our exercises will use the surgery timing data set (<span class="in">`Surgery_Timing.csv`</span>) provided by the TSHS section of the American Statistical Association. We can load the data into R with the following line of code:</span>
+<span id="cb52-30"><a href="#cb52-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-31"><a href="#cb52-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=T}</span></span>
+<span id="cb52-32"><a href="#cb52-32" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../../.data/Surgery_Timing.csv'</span>)</span>
+<span id="cb52-33"><a href="#cb52-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-34"><a href="#cb52-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-35"><a href="#cb52-35" aria-hidden="true" tabindex="-1"></a>The following table summarizes the variables we will be exploring and provide brief definitions:</span>
+<span id="cb52-36"><a href="#cb52-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-37"><a href="#cb52-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-38"><a href="#cb52-38" aria-hidden="true" tabindex="-1"></a>| Variable                                                      | Code Name        | Description                                                                  |</span>
+<span id="cb52-39"><a href="#cb52-39" aria-hidden="true" tabindex="-1"></a>|:--------------------------------------------------------------|:-----------------|:-----------------------------------------------------------------------------|</span>
+<span id="cb52-40"><a href="#cb52-40" aria-hidden="true" tabindex="-1"></a>| Risk Stratification Index (RSI) for In-Hospital Complications | <span class="in">`complication_rsi`</span> | Estimated risk of having an in-hospital complication.                        |</span>
+<span id="cb52-41"><a href="#cb52-41" aria-hidden="true" tabindex="-1"></a>| Day of Week                                                   | <span class="in">`dow`</span>            | Weekday surgery took place (1=Monday, 5=Friday)                              |</span>
+<span id="cb52-42"><a href="#cb52-42" aria-hidden="true" tabindex="-1"></a>| Operation Time                                                | <span class="in">`hour`</span>           | Timing of operation during the day (06:00 to 19:00)                          |</span>
+<span id="cb52-43"><a href="#cb52-43" aria-hidden="true" tabindex="-1"></a>| Phase of Moon                                                 | <span class="in">`moonphase`</span>      | Moon phase during procedure (1=new, 2=first quarter, 3=full, 4=last quarter) |</span>
+<span id="cb52-44"><a href="#cb52-44" aria-hidden="true" tabindex="-1"></a>| Age                                                           | <span class="in">`age`</span>            | Age in years                                                                 |</span>
+<span id="cb52-45"><a href="#cb52-45" aria-hidden="true" tabindex="-1"></a>| BMI                                                           | <span class="in">`bmi`</span>            | Body mass index (kg/m2)                                                      |</span>
+<span id="cb52-46"><a href="#cb52-46" aria-hidden="true" tabindex="-1"></a>| AHRQ Procedure Category                                       | <span class="in">`ahrq_ccs`</span>       | US Agency for Healthcare Research and Quality's Clinical Classifications Software procedure category |</span>
+<span id="cb52-47"><a href="#cb52-47" aria-hidden="true" tabindex="-1"></a>| Complication Observed                                         | <span class="in">`complication`</span>   | In-hospital complication                                                                             |</span>
+<span id="cb52-48"><a href="#cb52-48" aria-hidden="true" tabindex="-1"></a>| Diabetes | <span class="in">`baseline_diabetes`</span> | Diabetes present at baseline |</span>
+<span id="cb52-49"><a href="#cb52-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-50"><a href="#cb52-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-51"><a href="#cb52-51" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise 1: Confounding</span></span>
+<span id="cb52-52"><a href="#cb52-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-53"><a href="#cb52-53" aria-hidden="true" tabindex="-1"></a>We will use linear regression to examine the relationship between the outcome of RSI for in-hospital complications with surgery on a Monday/Tuesday (versus Wednesday/Thursday/Friday) and moon phase to answer the following exercises:</span>
+<span id="cb52-54"><a href="#cb52-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-55"><a href="#cb52-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1a: Unadjusted Model and Interpretation</span></span>
+<span id="cb52-56"><a href="#cb52-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-57"><a href="#cb52-57" aria-hidden="true" tabindex="-1"></a>What is the unadjusted (crude) estimate for the association between RSI and day of the week? Write a brief, but complete, summary of the relationship between RSI and day of the week. *Hint: you will need to create a new variable for day of the week.* </span>
+<span id="cb52-58"><a href="#cb52-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-59"><a href="#cb52-59" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-60"><a href="#cb52-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-63"><a href="#cb52-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-64"><a href="#cb52-64" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>AK_mt <span class="ot">&lt;-</span> dat<span class="sc">$</span>dow <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb52-65"><a href="#cb52-65" aria-hidden="true" tabindex="-1"></a>mod1u <span class="ot">&lt;-</span> <span class="fu">lm</span>(complication_rsi <span class="sc">~</span> AK_mt, <span class="at">data=</span>dat)</span>
+<span id="cb52-66"><a href="#cb52-66" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1u)</span>
+<span id="cb52-67"><a href="#cb52-67" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mod1u)</span>
+<span id="cb52-68"><a href="#cb52-68" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-69"><a href="#cb52-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-70"><a href="#cb52-70" aria-hidden="true" tabindex="-1"></a>There is a significant relationship between RSI for in-hospital complications and day of week (M/T vs. W/Th/F) (p&lt;0.001). On average, RSI is 0.17 lower (95% CI: 0.14 to 0.19 lower) on M/T compared to W/Th/F surgeries.</span>
+<span id="cb52-71"><a href="#cb52-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-72"><a href="#cb52-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-73"><a href="#cb52-73" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1b: Adjusted Model and Interpretation</span></span>
+<span id="cb52-74"><a href="#cb52-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-75"><a href="#cb52-75" aria-hidden="true" tabindex="-1"></a>Adjusting for the effect of moon phase, what is the adjusted estimate for the association between RSI and day of the week? Write a brief, but complete, summary of the relationship between RSI and day of the week adjusting for moon phase.</span>
+<span id="cb52-76"><a href="#cb52-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-77"><a href="#cb52-77" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-78"><a href="#cb52-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-81"><a href="#cb52-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-82"><a href="#cb52-82" aria-hidden="true" tabindex="-1"></a>mod1a <span class="ot">&lt;-</span> <span class="fu">lm</span>(complication_rsi <span class="sc">~</span> AK_mt <span class="sc">+</span> <span class="fu">as.factor</span>(moonphase), <span class="at">data=</span>dat)</span>
+<span id="cb52-83"><a href="#cb52-83" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1a)</span>
+<span id="cb52-84"><a href="#cb52-84" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mod1a)</span>
+<span id="cb52-85"><a href="#cb52-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-86"><a href="#cb52-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-87"><a href="#cb52-87" aria-hidden="true" tabindex="-1"></a>There is a significant relationship between RSI for in-hospital complications and day of week (M/T vs. W/Th/F) (p&lt;0.001). After accounting for moon phase, on average, RSI is 0.17 lower (95% CI: 0.14 to 0.19 lower) on M/T compared to W/Th/F surgeries.</span>
+<span id="cb52-88"><a href="#cb52-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-89"><a href="#cb52-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-90"><a href="#cb52-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1c: Moon Phase Confounding</span></span>
+<span id="cb52-91"><a href="#cb52-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-92"><a href="#cb52-92" aria-hidden="true" tabindex="-1"></a>Is moon phase a confounder of the association between RSI and day of the week based on the operational criterion? Should you report the results from (A) or (B)? Justify your answer.</span>
+<span id="cb52-93"><a href="#cb52-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-94"><a href="#cb52-94" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-95"><a href="#cb52-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-96"><a href="#cb52-96" aria-hidden="true" tabindex="-1"></a>Moon phase is not a confounder by the operational definition, since it does not greatly change our point estimate of M/T vs. W/Th/F:</span>
+<span id="cb52-97"><a href="#cb52-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-98"><a href="#cb52-98" aria-hidden="true" tabindex="-1"></a>$$ \frac{|0.167634 - 0.16740|}{0.167634} \times 100 = 0.1396% $$</span>
+<span id="cb52-99"><a href="#cb52-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-100"><a href="#cb52-100" aria-hidden="true" tabindex="-1"></a>While there is no rigid threshold for a change that is "big" enough, this is rather small and &lt;10% or &lt;20% are commonly used to rule out potential confounding with the operational definition.</span>
+<span id="cb52-101"><a href="#cb52-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-102"><a href="#cb52-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-103"><a href="#cb52-103" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise 2: Mediation</span></span>
+<span id="cb52-104"><a href="#cb52-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-105"><a href="#cb52-105" aria-hidden="true" tabindex="-1"></a>We will use linear regression to examine the relationship between the outcome of RSI for in-hospital complications with surgery on a Monday/Tuesday (versus Wednesday/Thursday/Friday) and BMI of the patient potential mediator to complete the following exercises:</span>
+<span id="cb52-106"><a href="#cb52-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-107"><a href="#cb52-107" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2a: Mediation DAG</span></span>
+<span id="cb52-108"><a href="#cb52-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-109"><a href="#cb52-109" aria-hidden="true" tabindex="-1"></a>Fit the three fundamental models of mediation analysis and fill in the following DAG:</span>
+<span id="cb52-110"><a href="#cb52-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-111"><a href="#cb52-111" aria-hidden="true" tabindex="-1"></a><span class="in">```{tikz, tikz-med, fig.ext = 'png', cache=TRUE, echo=F, fig.align="center", fig.width=4}</span></span>
+<span id="cb52-112"><a href="#cb52-112" aria-hidden="true" tabindex="-1"></a><span class="in">\usetikzlibrary{arrows}</span></span>
+<span id="cb52-113"><a href="#cb52-113" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{tikzpicture}[node distance=4cm, auto,&gt;=latex, thick, scale = 0.5]</span></span>
+<span id="cb52-114"><a href="#cb52-114" aria-hidden="true" tabindex="-1"></a><span class="in">\node (X) [align=center] {Day of Week \\ ($X$)};</span></span>
+<span id="cb52-115"><a href="#cb52-115" aria-hidden="true" tabindex="-1"></a><span class="in">\node (M) [align=center,above of=X,xshift=2cm,yshift=-2cm] {BMI \\ ($M$)};</span></span>
+<span id="cb52-116"><a href="#cb52-116" aria-hidden="true" tabindex="-1"></a><span class="in">\node (Y) [align=center,right of=X] {RSI \\ ($Y$)};</span></span>
+<span id="cb52-117"><a href="#cb52-117" aria-hidden="true" tabindex="-1"></a><span class="in">\draw[-&gt;] (X) to node [above left] {$\hat{\gamma}_{X}=0.3670$} (M);</span></span>
+<span id="cb52-118"><a href="#cb52-118" aria-hidden="true" tabindex="-1"></a><span class="in">\draw[-&gt;] (M) to node [above right] {$\hat{\beta}_{M}=-0.0315$} (Y);</span></span>
+<span id="cb52-119"><a href="#cb52-119" aria-hidden="true" tabindex="-1"></a><span class="in">\draw[-&gt;] (X) to node [align=center,swap] {$\hat{\beta}_{adj}=-0.1577$ \\ $\hat{\beta}_{crude}=-0.1676$} (Y);</span></span>
+<span id="cb52-120"><a href="#cb52-120" aria-hidden="true" tabindex="-1"></a><span class="in">\end{tikzpicture}</span></span>
+<span id="cb52-121"><a href="#cb52-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-122"><a href="#cb52-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-123"><a href="#cb52-123" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-124"><a href="#cb52-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-127"><a href="#cb52-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-128"><a href="#cb52-128" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit our three models</span></span>
+<span id="cb52-129"><a href="#cb52-129" aria-hidden="true" tabindex="-1"></a>mod2_crude <span class="ot">&lt;-</span> <span class="fu">lm</span>(complication_rsi <span class="sc">~</span> AK_mt, <span class="at">data=</span>dat)</span>
+<span id="cb52-130"><a href="#cb52-130" aria-hidden="true" tabindex="-1"></a>mod2_adjusted <span class="ot">&lt;-</span> <span class="fu">lm</span>(complication_rsi <span class="sc">~</span> AK_mt <span class="sc">+</span> bmi, <span class="at">data=</span>dat)</span>
+<span id="cb52-131"><a href="#cb52-131" aria-hidden="true" tabindex="-1"></a>mod2_covariate <span class="ot">&lt;-</span> <span class="fu">lm</span>(bmi <span class="sc">~</span> AK_mt, <span class="at">data=</span>dat)</span>
+<span id="cb52-132"><a href="#cb52-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-133"><a href="#cb52-133" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract coefficients</span></span>
+<span id="cb52-134"><a href="#cb52-134" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod2_crude)</span>
+<span id="cb52-135"><a href="#cb52-135" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod2_adjusted)</span>
+<span id="cb52-136"><a href="#cb52-136" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod2_covariate)</span>
+<span id="cb52-137"><a href="#cb52-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-138"><a href="#cb52-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-139"><a href="#cb52-139" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2b: Percent Mediated</span></span>
+<span id="cb52-140"><a href="#cb52-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-141"><a href="#cb52-141" aria-hidden="true" tabindex="-1"></a>What is the proportion/percent mediated by age?</span>
+<span id="cb52-142"><a href="#cb52-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-143"><a href="#cb52-143" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-144"><a href="#cb52-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-145"><a href="#cb52-145" aria-hidden="true" tabindex="-1"></a>The proportion mediated is $\frac{\text{indirect effect}}{\text{total effect}} = \frac{\hat{\beta}_{crude} - \hat{\beta}_{adj}}{\hat{\beta}_{crude}} = \frac{-0.1676 - (-0.1577)}{-0.1676} = 0.0591$. This corresponds to the percent mediated of $0.0591 \times 100 = 5.91\%$.</span>
+<span id="cb52-146"><a href="#cb52-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-147"><a href="#cb52-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-148"><a href="#cb52-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2c: 95% CI for Percent Mediated</span></span>
+<span id="cb52-149"><a href="#cb52-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-150"><a href="#cb52-150" aria-hidden="true" tabindex="-1"></a>What is the 95% CI and corresponding p-value for the proportion/percent mediated by age using the normal approximation to estimate the standard error (i.e., Sobel's test)?</span>
+<span id="cb52-151"><a href="#cb52-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-152"><a href="#cb52-152" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-153"><a href="#cb52-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-154"><a href="#cb52-154" aria-hidden="true" tabindex="-1"></a>We first need to calculate the standard error for our indirect effect:</span>
+<span id="cb52-155"><a href="#cb52-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-156"><a href="#cb52-156" aria-hidden="true" tabindex="-1"></a>$$ SE(\hat{\beta}_{crude} - \hat{\beta}_{adj}) = \sqrt{{\hat{\gamma}}_X^2\left(SE\left({\hat{\beta}}_M\right)\right)^2+{\hat{\beta}}_M^2\left(SE\left({\hat{\gamma}}_X\right)\right)^2}  $$</span>
+<span id="cb52-157"><a href="#cb52-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-158"><a href="#cb52-158" aria-hidden="true" tabindex="-1"></a>We can find this information in our coefficient tables:</span>
+<span id="cb52-159"><a href="#cb52-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-160"><a href="#cb52-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=T}</span></span>
+<span id="cb52-161"><a href="#cb52-161" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2_adjusted)<span class="sc">$</span>coefficient</span>
+<span id="cb52-162"><a href="#cb52-162" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2_covariate)<span class="sc">$</span>coefficient</span>
+<span id="cb52-163"><a href="#cb52-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-164"><a href="#cb52-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-165"><a href="#cb52-165" aria-hidden="true" tabindex="-1"></a>$$ SE(\hat{\beta}_{crude} - \hat{\beta}_{adj}) = \sqrt{(0.3670)^2(0.0009)^2 + (-0.0315)^2 (0.0864)^2} = 0.0027 $$</span>
+<span id="cb52-166"><a href="#cb52-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-167"><a href="#cb52-167" aria-hidden="true" tabindex="-1"></a>Our 95% CI for the indirect effect is</span>
+<span id="cb52-168"><a href="#cb52-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-169"><a href="#cb52-169" aria-hidden="true" tabindex="-1"></a>$$ (-0.1676 - (-0.1577)) \pm 1.96 \times 0.0027 = (-0.015, -0.005)  $$</span>
+<span id="cb52-170"><a href="#cb52-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-171"><a href="#cb52-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-172"><a href="#cb52-172" aria-hidden="true" tabindex="-1"></a>This corresponds to a 95% CI for our proportion mediated of:</span>
+<span id="cb52-173"><a href="#cb52-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-174"><a href="#cb52-174" aria-hidden="true" tabindex="-1"></a>$$ \left(\frac{-0.005}{-0.1676}, \frac{-0.015}{-0.1676} \right) = (0.0298, 0.0895)) $$</span>
+<span id="cb52-175"><a href="#cb52-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-176"><a href="#cb52-176" aria-hidden="true" tabindex="-1"></a>We are 95% confident that the proportion mediated by BMI is betwee 2.98% and 8.95%.</span>
+<span id="cb52-177"><a href="#cb52-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-178"><a href="#cb52-178" aria-hidden="true" tabindex="-1"></a>Our p-value is calculated from referencing the standard normal distribution (per Sobel's test):</span>
+<span id="cb52-179"><a href="#cb52-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-180"><a href="#cb52-180" aria-hidden="true" tabindex="-1"></a>$$ Z = \frac{\text{indirect effect}}{SE(\hat{\beta}_{crude} - \hat{\beta}_{adj})} = \frac{-0.0099}{0.0027} = -3.67 $$</span>
+<span id="cb52-181"><a href="#cb52-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-182"><a href="#cb52-182" aria-hidden="true" tabindex="-1"></a>This corresponds to a p-value of <span class="in">`2 * pnorm(-3.67)`</span>=<span class="in">`r round(2*pnorm(-3.67),5)`</span>, which is less than 0.05.</span>
+<span id="cb52-183"><a href="#cb52-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-184"><a href="#cb52-184" aria-hidden="true" tabindex="-1"></a>Note, that although this proportion mediated is not very large, our larger sample size may be powered enough to detect even weak mediation relationships.</span>
+<span id="cb52-185"><a href="#cb52-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-186"><a href="#cb52-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-187"><a href="#cb52-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-188"><a href="#cb52-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-189"><a href="#cb52-189" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise 3: Interactions</span></span>
+<span id="cb52-190"><a href="#cb52-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-191"><a href="#cb52-191" aria-hidden="true" tabindex="-1"></a>Use linear regression to examine the relationship between RSI for in-hospital complications and BMI.  In this exercise you will examine whether the magnitude of the association between RSI (the response) and BMI (the primary explanatory variable) depends on whether the patient has diabetes.</span>
+<span id="cb52-192"><a href="#cb52-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-193"><a href="#cb52-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-194"><a href="#cb52-194" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3a: Fitted Regression Equation with Interaction</span></span>
+<span id="cb52-195"><a href="#cb52-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-196"><a href="#cb52-196" aria-hidden="true" tabindex="-1"></a>Write down the fitted regression equation for the regression of RSI on BMI, diabetes, and the interaction between the two. Provide an interpretation for each of the coefficients in the model (including the intercept).</span>
+<span id="cb52-197"><a href="#cb52-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-198"><a href="#cb52-198" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-199"><a href="#cb52-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-202"><a href="#cb52-202" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-203"><a href="#cb52-203" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>( complication_rsi <span class="sc">~</span> bmi <span class="sc">+</span> baseline_diabetes <span class="sc">+</span> bmi<span class="sc">*</span>baseline_diabetes, <span class="at">data=</span>dat)</span>
+<span id="cb52-204"><a href="#cb52-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-205"><a href="#cb52-205" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="fu">summary</span>(mod3)<span class="sc">$</span>coef, <span class="fu">confint</span>(mod3))</span>
+<span id="cb52-206"><a href="#cb52-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-207"><a href="#cb52-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-208"><a href="#cb52-208" aria-hidden="true" tabindex="-1"></a>Our fitted regression model is</span>
+<span id="cb52-209"><a href="#cb52-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-210"><a href="#cb52-210" aria-hidden="true" tabindex="-1"></a>$$ \hat{Y} = 0.537 + -0.032 \times \text{BMI} + -0.649 \times \text{diabetes} + 0.012 \times \text{BMI} \times \text{diabetes} $$</span>
+<span id="cb52-211"><a href="#cb52-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-212"><a href="#cb52-212" aria-hidden="true" tabindex="-1"></a>$\hat{\beta}_0 = 0.537$: The expected RSI for patients with a 0 kg/m^2^ BMI and who do not have diabetes is 0.537 points.</span>
+<span id="cb52-213"><a href="#cb52-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-214"><a href="#cb52-214" aria-hidden="true" tabindex="-1"></a>$\hat{\beta}_{bmi}=-0.032$: For patients who do not have diabetes, RSI decreases, on average, by 0.032 points for 1 kg/m^2^ increase in BMI.</span>
+<span id="cb52-215"><a href="#cb52-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-216"><a href="#cb52-216" aria-hidden="true" tabindex="-1"></a>$\hat{\beta}_{diabetes}=-0.649$: For patients with a 0 kg/m^2^ BMI, RSI, on average, is 0.649 points lower for those with diabetes.</span>
+<span id="cb52-217"><a href="#cb52-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-218"><a href="#cb52-218" aria-hidden="true" tabindex="-1"></a>$\hat{\beta}_{bmi*diabetes} = 0.012$: This is the difference between the effect of BMI for those with diabetes compared to those without diabetes. For patients with diabetes, a one kg/m^2^ increase in BMI results in an RSI that is 0.012 units higher, on average. </span>
+<span id="cb52-219"><a href="#cb52-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-220"><a href="#cb52-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-221"><a href="#cb52-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-222"><a href="#cb52-222" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3b: Interaction Test</span></span>
+<span id="cb52-223"><a href="#cb52-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-224"><a href="#cb52-224" aria-hidden="true" tabindex="-1"></a>Test whether the relationship between RSI and BMI depends on whether the patient had diabetes.</span>
+<span id="cb52-225"><a href="#cb52-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-226"><a href="#cb52-226" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-227"><a href="#cb52-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-228"><a href="#cb52-228" aria-hidden="true" tabindex="-1"></a>From our model results in 3a, the relationship between RSI and BMI is significantly different for those with diabetes compared to those without diabetes (p=4.47e-07&lt;0.001).</span>
+<span id="cb52-229"><a href="#cb52-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-230"><a href="#cb52-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-231"><a href="#cb52-231" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3c: Fitted Regression Model for Patients without Diabetes</span></span>
+<span id="cb52-232"><a href="#cb52-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-233"><a href="#cb52-233" aria-hidden="true" tabindex="-1"></a>What is the regression equation for patients who don't have diabetes?</span>
+<span id="cb52-234"><a href="#cb52-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-235"><a href="#cb52-235" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-236"><a href="#cb52-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-237"><a href="#cb52-237" aria-hidden="true" tabindex="-1"></a>$$ \hat{Y} = 0.537 + -0.032 \times \text{BMI} + -0.649 \times 0 + 0.012 \times \text{BMI} \times 0 = 0.537 + -0.032 \times \text{BMI} $$</span>
+<span id="cb52-238"><a href="#cb52-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-239"><a href="#cb52-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-240"><a href="#cb52-240" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3d: Fitted Regression Model for Patients with Diabetes</span></span>
+<span id="cb52-241"><a href="#cb52-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-242"><a href="#cb52-242" aria-hidden="true" tabindex="-1"></a>What is the regression equation for patients with diabetes? </span>
+<span id="cb52-243"><a href="#cb52-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-244"><a href="#cb52-244" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-245"><a href="#cb52-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-246"><a href="#cb52-246" aria-hidden="true" tabindex="-1"></a>$$ \hat{Y} = 0.537 + -0.032 \times \text{BMI} + -0.649 \times 1 + 0.012 \times \text{BMI} \times 1 = -0.112 + -0.020 \times \text{BMI} $$</span>
+<span id="cb52-247"><a href="#cb52-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-248"><a href="#cb52-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-249"><a href="#cb52-249" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3e: Interaction Visualization</span></span>
+<span id="cb52-250"><a href="#cb52-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-251"><a href="#cb52-251" aria-hidden="true" tabindex="-1"></a>Create a scatterplot of RSI versus BMI, using different symbols and separate regression lines for patients with and without diabetes.</span>
+<span id="cb52-252"><a href="#cb52-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-253"><a href="#cb52-253" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-254"><a href="#cb52-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-257"><a href="#cb52-257" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-258"><a href="#cb52-258" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat<span class="sc">$</span>bmi, <span class="at">y=</span>dat<span class="sc">$</span>complication_rsi, <span class="at">xlab=</span><span class="st">'BMI'</span>, <span class="at">ylab=</span><span class="st">'RSI'</span>, <span class="at">pch=</span>dat<span class="sc">$</span>baseline_diabetes)</span>
+<span id="cb52-259"><a href="#cb52-259" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="fl">0.537</span>, <span class="at">b=</span><span class="sc">-</span><span class="fl">0.032</span>, <span class="at">lty=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">'orangered2'</span>)</span>
+<span id="cb52-260"><a href="#cb52-260" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="sc">-</span><span class="fl">0.112</span>, <span class="at">b=</span><span class="sc">-</span><span class="fl">0.020</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'orangered2'</span>)</span>
+<span id="cb52-261"><a href="#cb52-261" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="at">bty=</span><span class="st">'n'</span>, <span class="at">pch=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),</span>
+<span id="cb52-262"><a href="#cb52-262" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend=</span><span class="fu">c</span>(<span class="st">'No Diabetes'</span>,<span class="st">'Diabetes'</span>))</span>
+<span id="cb52-263"><a href="#cb52-263" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-264"><a href="#cb52-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-265"><a href="#cb52-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-266"><a href="#cb52-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-267"><a href="#cb52-267" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3f: Hypothesis Test for BMI without Diabetes</span></span>
+<span id="cb52-268"><a href="#cb52-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-269"><a href="#cb52-269" aria-hidden="true" tabindex="-1"></a>Test if the slope for BMI for those who don't have diabetes is significantly different from 0. </span>
+<span id="cb52-270"><a href="#cb52-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-271"><a href="#cb52-271" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-272"><a href="#cb52-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-273"><a href="#cb52-273" aria-hidden="true" tabindex="-1"></a>For this question we can directly use the $t$-test results from our table of coefficients in 3A. In that output we see that p&lt;2e-16 for <span class="in">`bmi`</span>, so we reject the null hypothesis that the slope is significantly different from 0 for those who didn't have diabetes.</span>
+<span id="cb52-274"><a href="#cb52-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-275"><a href="#cb52-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-276"><a href="#cb52-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-277"><a href="#cb52-277" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3g: Hypothesis Test for BMI with Diabetes</span></span>
+<span id="cb52-278"><a href="#cb52-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-279"><a href="#cb52-279" aria-hidden="true" tabindex="-1"></a>Test if the slope for BMI for those who do have diabetes is significantly different from 0. </span>
+<span id="cb52-280"><a href="#cb52-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-281"><a href="#cb52-281" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-282"><a href="#cb52-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-283"><a href="#cb52-283" aria-hidden="true" tabindex="-1"></a>For this question we can approach it by either calculating the standard error of $\hat{\beta}_{bmi} + \hat{\beta}_{bmi*diabetes}$ or using reverse coding.</span>
+<span id="cb52-284"><a href="#cb52-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-285"><a href="#cb52-285" aria-hidden="true" tabindex="-1"></a>Calculating the standard error using our original model requires the variance-covariance matrix:</span>
+<span id="cb52-286"><a href="#cb52-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-289"><a href="#cb52-289" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-290"><a href="#cb52-290" aria-hidden="true" tabindex="-1"></a><span class="fu">vcov</span>(mod3)</span>
+<span id="cb52-291"><a href="#cb52-291" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-292"><a href="#cb52-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-293"><a href="#cb52-293" aria-hidden="true" tabindex="-1"></a>With this information we can calculate our standard error:</span>
+<span id="cb52-294"><a href="#cb52-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-295"><a href="#cb52-295" aria-hidden="true" tabindex="-1"></a>$\begin{aligned}</span>
+<span id="cb52-296"><a href="#cb52-296" aria-hidden="true" tabindex="-1"></a>SE(\hat{\beta}_{bmi} + \hat{\beta}_{bmi*diabetes}) =&amp; \sqrt{Var(\hat{\beta}_{bmi}) + Var(\hat{\beta}_{bmi*diabetes}) + 2 \times Cov(\hat{\beta}_{bmi},\hat{\beta}_{bmi*diabetes})} <span class="sc">\\</span></span>
+<span id="cb52-297"><a href="#cb52-297" aria-hidden="true" tabindex="-1"></a>=&amp; \sqrt{1.167528e-06 + 5.876182e-06 + 2 \times (-1.167528e-06)} <span class="sc">\\</span></span>
+<span id="cb52-298"><a href="#cb52-298" aria-hidden="true" tabindex="-1"></a>=&amp; \sqrt{4.708654e-06} <span class="sc">\\</span></span>
+<span id="cb52-299"><a href="#cb52-299" aria-hidden="true" tabindex="-1"></a>=&amp; 0.002169943</span>
+<span id="cb52-300"><a href="#cb52-300" aria-hidden="true" tabindex="-1"></a>\end{aligned}$</span>
+<span id="cb52-301"><a href="#cb52-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-302"><a href="#cb52-302" aria-hidden="true" tabindex="-1"></a>Our estimated 95% CI using a critical value of 1.96 (i.e., <span class="in">`qt(0.975, 28707)`</span> based on $n=28711$ with complete data for BMI and diabetes status and subtracting four degrees of freedom) is</span>
+<span id="cb52-303"><a href="#cb52-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-304"><a href="#cb52-304" aria-hidden="true" tabindex="-1"></a>$$ -0.020 \pm 1.96 \times 0.002169943 = (-0.0243, -0.0157) $$</span>
+<span id="cb52-305"><a href="#cb52-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-306"><a href="#cb52-306" aria-hidden="true" tabindex="-1"></a>We have $t=\frac{-0.020}{0.002169943}=-9.217$ and a p-value of <span class="in">`2 * pt(-9.217,28707,lower.tail=T)`</span>=<span class="in">`r round(2 * pt(-9.217,28707,lower.tail=T),4)`</span>.</span>
+<span id="cb52-307"><a href="#cb52-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-308"><a href="#cb52-308" aria-hidden="true" tabindex="-1"></a>We can verify this result if we reverse code <span class="in">`baseline_diabetes`</span>:</span>
+<span id="cb52-309"><a href="#cb52-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-310"><a href="#cb52-310" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=T}</span></span>
+<span id="cb52-311"><a href="#cb52-311" aria-hidden="true" tabindex="-1"></a><span class="co"># create reverse coding where not_first2y=1 if they did NOT live in first 2 years</span></span>
+<span id="cb52-312"><a href="#cb52-312" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>AK_no_diabetes <span class="ot">&lt;-</span> <span class="fu">abs</span>(dat<span class="sc">$</span>baseline_diabetes <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb52-313"><a href="#cb52-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-314"><a href="#cb52-314" aria-hidden="true" tabindex="-1"></a><span class="co"># fit model with reverse coding</span></span>
+<span id="cb52-315"><a href="#cb52-315" aria-hidden="true" tabindex="-1"></a>mod3_reverse <span class="ot">&lt;-</span> <span class="fu">lm</span>(complication_rsi <span class="sc">~</span> bmi <span class="sc">+</span> AK_no_diabetes <span class="sc">+</span> bmi<span class="sc">*</span>AK_no_diabetes, <span class="at">data=</span>dat)</span>
+<span id="cb52-316"><a href="#cb52-316" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>( <span class="fu">cbind</span>(<span class="fu">summary</span>(mod3_reverse)<span class="sc">$</span>coefficients, <span class="fu">confint</span>(mod3_reverse)), <span class="dv">4</span>)</span>
+<span id="cb52-317"><a href="#cb52-317" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-318"><a href="#cb52-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-319"><a href="#cb52-319" aria-hidden="true" tabindex="-1"></a>We can see that we arrive at the same results (with slight differences due to rounding) when interpreting <span class="in">`bmi`</span> in our reverse coded model results.</span>
+<span id="cb52-320"><a href="#cb52-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-321"><a href="#cb52-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-322"><a href="#cb52-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-323"><a href="#cb52-323" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3h: Interactions and Brief, but Complete, Summaries</span></span>
+<span id="cb52-324"><a href="#cb52-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-325"><a href="#cb52-325" aria-hidden="true" tabindex="-1"></a>Provide a brief, but complete, summary of the relationship between RSI and BMI, accounting for any observed interaction with diabetes (i.e., if there is a significant interaction, interpret those who do and don't have diabetes separately).</span>
+<span id="cb52-326"><a href="#cb52-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-327"><a href="#cb52-327" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-328"><a href="#cb52-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-329"><a href="#cb52-329" aria-hidden="true" tabindex="-1"></a>The relationship between BMI and RSI differs significantly according to whether or not the patient has diabetes (p&lt;0.001). </span>
+<span id="cb52-330"><a href="#cb52-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-331"><a href="#cb52-331" aria-hidden="true" tabindex="-1"></a>There is a significant association between BMI and RSI for patients without diabetes (p &lt; 0.001). For these patients, RSI decreases an average of 0.032 units for every one kg/m^2^ increase in BMI (95% CI: 0.0294 to 0.0337 units lower). </span>
+<span id="cb52-332"><a href="#cb52-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-333"><a href="#cb52-333" aria-hidden="true" tabindex="-1"></a>There is a significant association between BMI and RSI among patients with diabetes (p &lt; 0.001). For these patients, RSI decreases an average of 0.020 units for every one kg/m^2^ increase in BMI (95% CI: 0.0157 to 0.0243 units lower). </span>
+<span id="cb52-334"><a href="#cb52-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-335"><a href="#cb52-335" aria-hidden="true" tabindex="-1"></a>The difference in these relationships for patients with and without diabetes can be seen in the scatterplot with regression fits for each group, where those without diabetes have a slightly stronger negative linear relationship with RSI as BMI increases.</span>
+<span id="cb52-336"><a href="#cb52-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-337"><a href="#cb52-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-338"><a href="#cb52-338" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise 4: Polynomial Regression</span></span>
+<span id="cb52-339"><a href="#cb52-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-340"><a href="#cb52-340" aria-hidden="true" tabindex="-1"></a>For this exercise, subset the data set to only those with an in-hospital complication recorded and those who have hip replacements (i.e., <span class="in">`dat$ahrq_ccs=='Hip replacement; total and partial'`</span>).</span>
+<span id="cb52-341"><a href="#cb52-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-342"><a href="#cb52-342" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4a: SLR</span></span>
+<span id="cb52-343"><a href="#cb52-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-344"><a href="#cb52-344" aria-hidden="true" tabindex="-1"></a>Fit a simple linear regression model for the outcome of RSI for in-hospital complications with age as the predictor.</span>
+<span id="cb52-345"><a href="#cb52-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-346"><a href="#cb52-346" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-347"><a href="#cb52-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-350"><a href="#cb52-350" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-351"><a href="#cb52-351" aria-hidden="true" tabindex="-1"></a>dat4 <span class="ot">&lt;-</span> dat[<span class="fu">which</span>(dat<span class="sc">$</span>complication<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span> dat<span class="sc">$</span>ahrq_ccs<span class="sc">==</span><span class="st">'Hip replacement; total and partial'</span>),]</span>
+<span id="cb52-352"><a href="#cb52-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-353"><a href="#cb52-353" aria-hidden="true" tabindex="-1"></a>dat4 <span class="ot">&lt;-</span> dat4[<span class="sc">!</span><span class="fu">is.na</span>(dat4<span class="sc">$</span>age),] <span class="co"># remove one record without age</span></span>
+<span id="cb52-354"><a href="#cb52-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-355"><a href="#cb52-355" aria-hidden="true" tabindex="-1"></a>lm4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(complication_rsi <span class="sc">~</span> age, <span class="at">data=</span>dat4)</span>
+<span id="cb52-356"><a href="#cb52-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-357"><a href="#cb52-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-358"><a href="#cb52-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-359"><a href="#cb52-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-360"><a href="#cb52-360" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4b: Polynomial Regression</span></span>
+<span id="cb52-361"><a href="#cb52-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-362"><a href="#cb52-362" aria-hidden="true" tabindex="-1"></a>Fit a polynomial regression model that adds a squared term for age.</span>
+<span id="cb52-363"><a href="#cb52-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-364"><a href="#cb52-364" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-365"><a href="#cb52-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-368"><a href="#cb52-368" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-369"><a href="#cb52-369" aria-hidden="true" tabindex="-1"></a>lm4_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(complication_rsi <span class="sc">~</span> age <span class="sc">+</span> <span class="fu">I</span>(age<span class="sc">^</span><span class="dv">2</span>), <span class="at">data=</span>dat4)</span>
+<span id="cb52-370"><a href="#cb52-370" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-371"><a href="#cb52-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-372"><a href="#cb52-372" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4c: Polynomial Plots</span></span>
+<span id="cb52-373"><a href="#cb52-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-374"><a href="#cb52-374" aria-hidden="true" tabindex="-1"></a>Create a scatterplot of the data and add the predicted regression lines for each model.</span>
+<span id="cb52-375"><a href="#cb52-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-376"><a href="#cb52-376" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-377"><a href="#cb52-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-380"><a href="#cb52-380" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-381"><a href="#cb52-381" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat4<span class="sc">$</span>age, <span class="at">y=</span>dat4<span class="sc">$</span>complication_rsi, <span class="at">xlab=</span><span class="st">'Age'</span>, <span class="at">ylab=</span><span class="st">'RSI (In-Hospital Complications)'</span>)</span>
+<span id="cb52-382"><a href="#cb52-382" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(lm4, <span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># plot SLR predicted regression line</span></span>
+<span id="cb52-383"><a href="#cb52-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-384"><a href="#cb52-384" aria-hidden="true" tabindex="-1"></a><span class="co"># predict Y-hat from regression model with age and age^2, add to scatterplot</span></span>
+<span id="cb52-385"><a href="#cb52-385" aria-hidden="true" tabindex="-1"></a>xval <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(dat4<span class="sc">$</span>age,<span class="at">na.rm=</span>T), <span class="fu">max</span>(dat4<span class="sc">$</span>age,<span class="at">na.rm=</span>T), <span class="at">length.out=</span><span class="dv">100</span>)</span>
+<span id="cb52-386"><a href="#cb52-386" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm4_2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age=</span>xval))</span>
+<span id="cb52-387"><a href="#cb52-387" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span>xval, <span class="at">y=</span>y2, <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb52-388"><a href="#cb52-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-389"><a href="#cb52-389" aria-hidden="true" tabindex="-1"></a><span class="co"># add legend</span></span>
+<span id="cb52-390"><a href="#cb52-390" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topleft'</span>, <span class="at">bty=</span><span class="st">'n'</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">'black'</span>,<span class="st">'blue'</span>), <span class="at">lwd=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">legend=</span><span class="fu">c</span>(<span class="st">'Linear'</span>,<span class="st">'Quadratic'</span>))</span>
+<span id="cb52-391"><a href="#cb52-391" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-392"><a href="#cb52-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-393"><a href="#cb52-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-394"><a href="#cb52-394" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4d: Polynomial vs SLR</span></span>
+<span id="cb52-395"><a href="#cb52-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-396"><a href="#cb52-396" aria-hidden="true" tabindex="-1"></a>Based on the model output and figure, is there evidence that a quadratic model may be more appropriate than the simple linear regression model?</span>
+<span id="cb52-397"><a href="#cb52-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-398"><a href="#cb52-398" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-399"><a href="#cb52-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-400"><a href="#cb52-400" aria-hidden="true" tabindex="-1"></a>Visually, both models may be appropriate. There are fewer young patients, so it can be challenging to definitely identify if the linear or quadratic model is more appropriate. While we know that age and age^2^ are highly correlated, we can examine our summary output to note that age^2^ is significant in the quadratic model (p&lt;0.05):</span>
+<span id="cb52-401"><a href="#cb52-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-404"><a href="#cb52-404" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-405"><a href="#cb52-405" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm4)</span>
+<span id="cb52-406"><a href="#cb52-406" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm4_2)</span>
+<span id="cb52-407"><a href="#cb52-407" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-408"><a href="#cb52-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-409"><a href="#cb52-409" aria-hidden="true" tabindex="-1"></a>We can also calculate the MSE to see if it decreases in the quadratic model relative to the first-order model without any polynomial terms:</span>
+<span id="cb52-410"><a href="#cb52-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-413"><a href="#cb52-413" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-414"><a href="#cb52-414" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(lm4<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>) <span class="co"># MSE for first-order model</span></span>
+<span id="cb52-415"><a href="#cb52-415" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(lm4_2<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>) <span class="co"># MSE for second-order model</span></span>
+<span id="cb52-416"><a href="#cb52-416" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-417"><a href="#cb52-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-418"><a href="#cb52-418" aria-hidden="true" tabindex="-1"></a>Since the change in MSE is not very large (3.11 to 3.04), we might argue the more parsimonious SLR model may be preferred given the limited improvement relative to the increased complexity.</span>
+<span id="cb52-419"><a href="#cb52-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-420"><a href="#cb52-420" aria-hidden="true" tabindex="-1"></a>Finally, we may want to evalute the diagnostic plots to see if there is evidence to support the more complex model:</span>
+<span id="cb52-421"><a href="#cb52-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-422"><a href="#cb52-422" aria-hidden="true" tabindex="-1"></a><span class="in">```{r slr_diag}</span></span>
+<span id="cb52-423"><a href="#cb52-423" aria-hidden="true" tabindex="-1"></a><span class="co"># SLR diagnostics (no quadratic term)</span></span>
+<span id="cb52-424"><a href="#cb52-424" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">4.1</span>,<span class="fl">4.1</span>,<span class="fl">3.1</span>,<span class="fl">2.1</span>))</span>
+<span id="cb52-425"><a href="#cb52-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-426"><a href="#cb52-426" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of Y-X</span></span>
+<span id="cb52-427"><a href="#cb52-427" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat4<span class="sc">$</span>age, <span class="at">y=</span>dat4<span class="sc">$</span>complication_rsi, <span class="at">xlab=</span><span class="st">'Age'</span>, <span class="at">ylab=</span><span class="st">'RSI'</span>, </span>
+<span id="cb52-428"><a href="#cb52-428" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Scatterplot'</span>, <span class="at">cex=</span><span class="dv">1</span>); <span class="fu">abline</span>( lm4, <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">lwd=</span><span class="dv">2</span> )</span>
+<span id="cb52-429"><a href="#cb52-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-430"><a href="#cb52-430" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of residuals by X</span></span>
+<span id="cb52-431"><a href="#cb52-431" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat4<span class="sc">$</span>age, <span class="at">y=</span><span class="fu">rstudent</span>(lm4), <span class="at">xlab=</span><span class="st">'Age'</span>, <span class="at">ylab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb52-432"><a href="#cb52-432" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Residual Plot by Age'</span>, <span class="at">cex=</span><span class="dv">1</span>); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb52-433"><a href="#cb52-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-434"><a href="#cb52-434" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of residuals by predicted values</span></span>
+<span id="cb52-435"><a href="#cb52-435" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="fu">predict</span>(lm4), <span class="at">y=</span><span class="fu">rstudent</span>(lm4), <span class="at">xlab=</span><span class="fu">expression</span>(<span class="fu">hat</span>(Y)), <span class="at">ylab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb52-436"><a href="#cb52-436" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Residual Plot by Y-hat'</span>, <span class="at">cex=</span><span class="dv">1</span>); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb52-437"><a href="#cb52-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-438"><a href="#cb52-438" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram of jackknife residuals with normal curve</span></span>
+<span id="cb52-439"><a href="#cb52-439" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">rstudent</span>(lm4), <span class="at">xlab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb52-440"><a href="#cb52-440" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Histogram of Residuals'</span>, <span class="at">freq=</span>F, <span class="at">breaks=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">6</span>,<span class="fl">0.25</span>)); </span>
+<span id="cb52-441"><a href="#cb52-441" aria-hidden="true" tabindex="-1"></a>  <span class="fu">curve</span>( <span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">add=</span>T)</span>
+<span id="cb52-442"><a href="#cb52-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-443"><a href="#cb52-443" aria-hidden="true" tabindex="-1"></a><span class="co"># PP-plot</span></span>
+<span id="cb52-444"><a href="#cb52-444" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( <span class="fu">ppoints</span>(<span class="fu">length</span>(<span class="fu">rstudent</span>(lm4))), <span class="fu">sort</span>(<span class="fu">pnorm</span>(<span class="fu">rstudent</span>(lm4))), </span>
+<span id="cb52-445"><a href="#cb52-445" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab=</span><span class="st">'Observed Cumulative Probability'</span>, </span>
+<span id="cb52-446"><a href="#cb52-446" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab=</span><span class="st">'Expected Cumulative Probability'</span>, </span>
+<span id="cb52-447"><a href="#cb52-447" aria-hidden="true" tabindex="-1"></a>      <span class="at">main=</span><span class="st">'Normal Probability Plot'</span>, <span class="at">cex=</span><span class="dv">1</span>); </span>
+<span id="cb52-448"><a href="#cb52-448" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>,<span class="at">b=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">'gray65'</span>, <span class="at">lwd=</span><span class="dv">1</span>)</span>
+<span id="cb52-449"><a href="#cb52-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-450"><a href="#cb52-450" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ-plot</span></span>
+<span id="cb52-451"><a href="#cb52-451" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>( <span class="fu">rstudent</span>(lm4) ); <span class="fu">qqline</span>( <span class="fu">rstudent</span>(lm4) )</span>
+<span id="cb52-452"><a href="#cb52-452" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-453"><a href="#cb52-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-454"><a href="#cb52-454" aria-hidden="true" tabindex="-1"></a><span class="in">```{r polynomial_diag}</span></span>
+<span id="cb52-455"><a href="#cb52-455" aria-hidden="true" tabindex="-1"></a><span class="co"># SLR diagnostics (no quadratic term)</span></span>
+<span id="cb52-456"><a href="#cb52-456" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">4.1</span>,<span class="fl">4.1</span>,<span class="fl">3.1</span>,<span class="fl">2.1</span>))</span>
+<span id="cb52-457"><a href="#cb52-457" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-458"><a href="#cb52-458" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of Y-X</span></span>
+<span id="cb52-459"><a href="#cb52-459" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat4<span class="sc">$</span>age, <span class="at">y=</span>dat4<span class="sc">$</span>complication_rsi, <span class="at">xlab=</span><span class="st">'Age'</span>, <span class="at">ylab=</span><span class="st">'RSI'</span>, </span>
+<span id="cb52-460"><a href="#cb52-460" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Scatterplot'</span>, <span class="at">cex=</span><span class="dv">1</span>)</span>
+<span id="cb52-461"><a href="#cb52-461" aria-hidden="true" tabindex="-1"></a><span class="co"># predict Y-hat from regression model with age and age^2, add to scatterplot</span></span>
+<span id="cb52-462"><a href="#cb52-462" aria-hidden="true" tabindex="-1"></a>xval <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(dat4<span class="sc">$</span>age,<span class="at">na.rm=</span>T), <span class="fu">max</span>(dat4<span class="sc">$</span>age,<span class="at">na.rm=</span>T), <span class="at">length.out=</span><span class="dv">100</span>)</span>
+<span id="cb52-463"><a href="#cb52-463" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm4_2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age=</span>xval))</span>
+<span id="cb52-464"><a href="#cb52-464" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span>xval, <span class="at">y=</span>y2, <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb52-465"><a href="#cb52-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-466"><a href="#cb52-466" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of residuals by X</span></span>
+<span id="cb52-467"><a href="#cb52-467" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat4<span class="sc">$</span>age, <span class="at">y=</span><span class="fu">rstudent</span>(lm4_2), <span class="at">xlab=</span><span class="st">'Age'</span>, <span class="at">ylab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb52-468"><a href="#cb52-468" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Residual Plot by Age'</span>, <span class="at">cex=</span><span class="dv">1</span>); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb52-469"><a href="#cb52-469" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-470"><a href="#cb52-470" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of residuals by predicted values</span></span>
+<span id="cb52-471"><a href="#cb52-471" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="fu">predict</span>(lm4_2), <span class="at">y=</span><span class="fu">rstudent</span>(lm4_2), <span class="at">xlab=</span><span class="fu">expression</span>(<span class="fu">hat</span>(Y)), <span class="at">ylab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb52-472"><a href="#cb52-472" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Residual Plot by Y-hat'</span>, <span class="at">cex=</span><span class="dv">1</span>); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb52-473"><a href="#cb52-473" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-474"><a href="#cb52-474" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram of jackknife residuals with normal curve</span></span>
+<span id="cb52-475"><a href="#cb52-475" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">rstudent</span>(lm4_2), <span class="at">xlab=</span><span class="st">'Jackknife Residual'</span>, </span>
+<span id="cb52-476"><a href="#cb52-476" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Histogram of Residuals'</span>, <span class="at">freq=</span>F, <span class="at">breaks=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">6</span>,<span class="fl">0.25</span>)); </span>
+<span id="cb52-477"><a href="#cb52-477" aria-hidden="true" tabindex="-1"></a>  <span class="fu">curve</span>( <span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">add=</span>T)</span>
+<span id="cb52-478"><a href="#cb52-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-479"><a href="#cb52-479" aria-hidden="true" tabindex="-1"></a><span class="co"># PP-plot</span></span>
+<span id="cb52-480"><a href="#cb52-480" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( <span class="fu">ppoints</span>(<span class="fu">length</span>(<span class="fu">rstudent</span>(lm4_2))), <span class="fu">sort</span>(<span class="fu">pnorm</span>(<span class="fu">rstudent</span>(lm4_2))), </span>
+<span id="cb52-481"><a href="#cb52-481" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab=</span><span class="st">'Observed Cumulative Probability'</span>, </span>
+<span id="cb52-482"><a href="#cb52-482" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab=</span><span class="st">'Expected Cumulative Probability'</span>, </span>
+<span id="cb52-483"><a href="#cb52-483" aria-hidden="true" tabindex="-1"></a>      <span class="at">main=</span><span class="st">'Normal Probability Plot'</span>, <span class="at">cex=</span><span class="dv">1</span>); </span>
+<span id="cb52-484"><a href="#cb52-484" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>,<span class="at">b=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">'gray65'</span>, <span class="at">lwd=</span><span class="dv">1</span>)</span>
+<span id="cb52-485"><a href="#cb52-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-486"><a href="#cb52-486" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ-plot</span></span>
+<span id="cb52-487"><a href="#cb52-487" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>( <span class="fu">rstudent</span>(lm4_2) ); <span class="fu">qqline</span>( <span class="fu">rstudent</span>(lm4_2) )</span>
+<span id="cb52-488"><a href="#cb52-488" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-489"><a href="#cb52-489" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-490"><a href="#cb52-490" aria-hidden="true" tabindex="-1"></a>Based on the diagnostic plots, it appears both models are impacted by violations of the normality (histogram, PP, and QQ plots all have departures from normality) and potentially homoscedasticity assumption (residual plot by age might have a bit of a fan shape, but Y-hat not as much). Regardless, if just comparing to select between the first- and second-order model, there is not much evidence supporting a drastic improvement with the more complicated model with the quadratic polynomial term. </span>
+<span id="cb52-491"><a href="#cb52-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-492"><a href="#cb52-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-493"><a href="#cb52-493" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise 5: Tests of General Linear Hypotheses</span></span>
+<span id="cb52-494"><a href="#cb52-494" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-495"><a href="#cb52-495" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5a: Fitting The Model</span></span>
+<span id="cb52-496"><a href="#cb52-496" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-497"><a href="#cb52-497" aria-hidden="true" tabindex="-1"></a>Fit a linear regression model for the outcome of RSI for in-hospital complication with day of the week as a predictor for all days.</span>
+<span id="cb52-498"><a href="#cb52-498" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-499"><a href="#cb52-499" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-500"><a href="#cb52-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-501"><a href="#cb52-501" aria-hidden="true" tabindex="-1"></a>Here we will fit our model and view the summary output for use in later problems.</span>
+<span id="cb52-502"><a href="#cb52-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-505"><a href="#cb52-505" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-506"><a href="#cb52-506" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">glm</span>(complication_rsi <span class="sc">~</span> <span class="fu">as.factor</span>(dow), <span class="at">data=</span>dat)</span>
+<span id="cb52-507"><a href="#cb52-507" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod5)</span>
+<span id="cb52-508"><a href="#cb52-508" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-509"><a href="#cb52-509" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-510"><a href="#cb52-510" aria-hidden="true" tabindex="-1"></a>Our fitted regression equation is </span>
+<span id="cb52-511"><a href="#cb52-511" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-512"><a href="#cb52-512" aria-hidden="true" tabindex="-1"></a>$$\hat{Y} = -0.52 + 0.02 I_{T} + 0.19 I_{W} + 0.15 I_{Th} + 0.19 I_{F} $$</span>
+<span id="cb52-513"><a href="#cb52-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-514"><a href="#cb52-514" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-515"><a href="#cb52-515" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5b: GLHT for Two Coefficients</span></span>
+<span id="cb52-516"><a href="#cb52-516" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-517"><a href="#cb52-517" aria-hidden="true" tabindex="-1"></a>Using a general linear hypothesis, test if the mean RSI on Tuesday and Wednesday are equal to each other.</span>
+<span id="cb52-518"><a href="#cb52-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-519"><a href="#cb52-519" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-520"><a href="#cb52-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-521"><a href="#cb52-521" aria-hidden="true" tabindex="-1"></a>First, if we want to compare the *mean* RSI value for each day we know from our reference cell model we would have an estimate of the mean for each group as $\mu_{T} = \beta_0 + \beta_T$ and $\mu_{W} = \beta_0 + \beta_{W}$. However, since our intercept $\beta_0$ is in both, it will cancel out when testing our null hypothesis that $\mu_T = \mu_W$.</span>
+<span id="cb52-522"><a href="#cb52-522" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-523"><a href="#cb52-523" aria-hidden="true" tabindex="-1"></a>Therefore, this tests $H_0\colon \beta_{T} = \beta_{W}$, or equivalently $H_0\colon \beta_{T} - \beta_{W} = 0$. We can further imagine this as $1 \times \beta_{T} - 1 \times \beta_{W}$, so our matrix is $\mathbf{c} = \begin{pmatrix} 0 &amp; 1 &amp; -1 &amp; 0 &amp; 0 \end{pmatrix}$:</span>
+<span id="cb52-524"><a href="#cb52-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-527"><a href="#cb52-527" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-528"><a href="#cb52-528" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gmodels)</span>
+<span id="cb52-529"><a href="#cb52-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-530"><a href="#cb52-530" aria-hidden="true" tabindex="-1"></a><span class="co"># First, create matrix for given contrast</span></span>
+<span id="cb52-531"><a href="#cb52-531" aria-hidden="true" tabindex="-1"></a>c_matrix_5b <span class="ot">&lt;-</span> <span class="fu">rbind</span>( <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb52-532"><a href="#cb52-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-533"><a href="#cb52-533" aria-hidden="true" tabindex="-1"></a><span class="co"># Then, implement general linear hypothesis test</span></span>
+<span id="cb52-534"><a href="#cb52-534" aria-hidden="true" tabindex="-1"></a><span class="fu">glh.test</span>(mod5, c_matrix_5b, <span class="at">d=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(c_matrix_5b)))</span>
+<span id="cb52-535"><a href="#cb52-535" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-536"><a href="#cb52-536" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-537"><a href="#cb52-537" aria-hidden="true" tabindex="-1"></a>Since $p&lt;0.05$, we would reject the null hypothesis and conclude that Tuesday and Wednesday have different mean RSI values.</span>
+<span id="cb52-538"><a href="#cb52-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-539"><a href="#cb52-539" aria-hidden="true" tabindex="-1"></a>Since we only wanted to compare if Tuesday and Wednesday were equal, we could also have fit a model with the reference category for our categorical variable changed to Tuesday or Wednesday:</span>
+<span id="cb52-540"><a href="#cb52-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-543"><a href="#cb52-543" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-544"><a href="#cb52-544" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>dow_v2 <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>dow, <span class="at">levels=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">1</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">'T'</span>,<span class="st">'W'</span>,<span class="st">'Th'</span>,<span class="st">'F'</span>,<span class="st">'M'</span>))</span>
+<span id="cb52-545"><a href="#cb52-545" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>( <span class="fu">glm</span>(complication_rsi <span class="sc">~</span> dow_v2, <span class="at">data=</span>dat))</span>
+<span id="cb52-546"><a href="#cb52-546" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-547"><a href="#cb52-547" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-548"><a href="#cb52-548" aria-hidden="true" tabindex="-1"></a>In our regression output with Tuesday as the reference category, we see we have a similar p-value and that $t^2 = 7.946^2 = 63.139$, which is approximately equal to our $F$-statistic from the GLHT (differing slightly due to rounding). </span>
+<span id="cb52-549"><a href="#cb52-549" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-550"><a href="#cb52-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-551"><a href="#cb52-551" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5c: GLHT for Combination of Coefficients</span></span>
+<span id="cb52-552"><a href="#cb52-552" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-553"><a href="#cb52-553" aria-hidden="true" tabindex="-1"></a>Using a general linear hypothesis, test if the mean RSI on Monday is equal to two times the RSI on Thursday.</span>
+<span id="cb52-554"><a href="#cb52-554" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-555"><a href="#cb52-555" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-556"><a href="#cb52-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-557"><a href="#cb52-557" aria-hidden="true" tabindex="-1"></a>Here we know that for our model fit in 5a, $\mu_M = \beta_0$ and $\mu_{Th} = \beta_0 + \beta_{Th}$. Therefore this hypothesis is testing the null that $\mu_M = 2 \times \mu_{Th}$. Plugging in our regression coefficients we have $\beta_0 = 2 \times (\beta_0 + \beta_{Th})$. This can be rearranged to show that $-\beta_0 + 2\beta_{Th} = 0$:</span>
+<span id="cb52-558"><a href="#cb52-558" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-559"><a href="#cb52-559" aria-hidden="true" tabindex="-1"></a>$$ H_0 \colon \begin{pmatrix} -1 &amp; 0 &amp; 0 &amp; 2 &amp; 0 \end{pmatrix} \begin{pmatrix} \beta_0 <span class="sc">\\</span> \beta_T <span class="sc">\\</span> \beta_W <span class="sc">\\</span> \beta_{Th} <span class="sc">\\</span> \beta_{F} \end{pmatrix} = 0 $$</span>
+<span id="cb52-560"><a href="#cb52-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-563"><a href="#cb52-563" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-564"><a href="#cb52-564" aria-hidden="true" tabindex="-1"></a><span class="co"># First, create matrix for given contrast</span></span>
+<span id="cb52-565"><a href="#cb52-565" aria-hidden="true" tabindex="-1"></a>c_matrix_5c <span class="ot">&lt;-</span> <span class="fu">rbind</span>( <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">0</span>) )</span>
+<span id="cb52-566"><a href="#cb52-566" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-567"><a href="#cb52-567" aria-hidden="true" tabindex="-1"></a><span class="co"># Then, implement general linear hypothesis test</span></span>
+<span id="cb52-568"><a href="#cb52-568" aria-hidden="true" tabindex="-1"></a><span class="fu">glh.test</span>(mod5, c_matrix_5c, <span class="at">d=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(c_matrix_5c)))</span>
+<span id="cb52-569"><a href="#cb52-569" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-570"><a href="#cb52-570" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-571"><a href="#cb52-571" aria-hidden="true" tabindex="-1"></a>Since $p &lt; 0.05$, we reject $H_0$ and conclude that the mean RSI on Monday is not equal to two times the mean RSI on Thursday.</span>
+<span id="cb52-572"><a href="#cb52-572" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-573"><a href="#cb52-573" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-574"><a href="#cb52-574" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5d: GLHT for Simultaneous Testing</span></span>
+<span id="cb52-575"><a href="#cb52-575" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-576"><a href="#cb52-576" aria-hidden="true" tabindex="-1"></a>Using a general linear hypothesis, test both 5b and 5c simultaneously.</span>
+<span id="cb52-577"><a href="#cb52-577" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-578"><a href="#cb52-578" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb52-579"><a href="#cb52-579" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-580"><a href="#cb52-580" aria-hidden="true" tabindex="-1"></a>For 5b and 5c, we tested each hypothesis on its own. However, we could test both simultaneously:</span>
+<span id="cb52-581"><a href="#cb52-581" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-582"><a href="#cb52-582" aria-hidden="true" tabindex="-1"></a>$$ H_0 \colon \begin{pmatrix} 0 &amp; 1 &amp; -1 &amp; 0  &amp; 0 <span class="sc">\\</span> -1 &amp; 0 &amp; 0 &amp; 2 &amp; 0 \end{pmatrix} \begin{pmatrix} \beta_0 <span class="sc">\\</span> \beta_T <span class="sc">\\</span> \beta_W <span class="sc">\\</span> \beta_{Th} <span class="sc">\\</span> \beta_{F} \end{pmatrix} = \begin{pmatrix} 0 <span class="sc">\\</span> 0 \end{pmatrix} $$</span>
+<span id="cb52-583"><a href="#cb52-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-586"><a href="#cb52-586" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-587"><a href="#cb52-587" aria-hidden="true" tabindex="-1"></a><span class="co"># First, create matrix for given contrast</span></span>
+<span id="cb52-588"><a href="#cb52-588" aria-hidden="true" tabindex="-1"></a>c_matrix_5d <span class="ot">&lt;-</span> <span class="fu">rbind</span>( <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">0</span>) )</span>
+<span id="cb52-589"><a href="#cb52-589" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-590"><a href="#cb52-590" aria-hidden="true" tabindex="-1"></a><span class="co"># Then, implement general linear hypothesis test</span></span>
+<span id="cb52-591"><a href="#cb52-591" aria-hidden="true" tabindex="-1"></a><span class="fu">glh.test</span>(mod5, c_matrix_5d, <span class="at">d=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(c_matrix_5d)))</span>
+<span id="cb52-592"><a href="#cb52-592" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-593"><a href="#cb52-593" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-594"><a href="#cb52-594" aria-hidden="true" tabindex="-1"></a>Unsurprisingly, given our previous results with both being very significant on their own, this result is still also significant since $p&lt;0.001$. In other words, our results suggests that at least one null hypothesis is rejected.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

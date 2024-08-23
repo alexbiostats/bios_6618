@@ -1,0 +1,99 @@
+---
+title: "Creating Tables for Rmd Files"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Creating Tables for Rmd Files
+
+Like anything in R, there are many ways you could approach creating tables. Some of the approaches play more nicely with a specific type of output type (e.g., PDF versus HTML), but I wanted to provide some code examples so you can play around with different options to see what might work for your own work.
+
+## Markdown Style Tables
+
+One approach to creating tables in Rmd is to use Markdown-specific syntax. The [Tables Generator website](https://www.tablesgenerator.com/markdown_tables) includes online tools where you can enter your information and copy the code.
+
+The code to create the table of length of stay data from Homework 6 might look something like:
+
+```
+| **Hospital (Treatment)** | **LOS (days)**                                    |
+|:-------------------------|:--------------------------------------------------|
+| Cauchy General (New)     | 3, 3, 4, 5, 5, 5, 6, 7, 7, 8, 9, 15               |
+| Skellam Memorial (SOC)   | 6, 7, 7, 7, 8, 8, 8, 9, 9, 10, 10, 11, 13, 13, 15 |
+```
+
+which produces
+
+| **Hospital (Treatment)** | **LOS (days)**                                    |
+|:-------------------------|:--------------------------------------------------|
+| Cauchy General (New)     | 3, 3, 4, 5, 5, 5, 6, 7, 7, 8, 9, 15               |
+| Skellam Memorial (SOC)   | 6, 7, 7, 7, 8, 8, 8, 9, 9, 10, 10, 11, 13, 13, 15 |
+
+A limitation of this table type is that you may have "wider" tables or columns than you want and it is hard to change.
+
+## Latex Style Tables
+
+If you are creating a PDF file in Rmd, you can enter the Latex syntax directly:
+
+```
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Hospital (Treatment)} & \textbf{LOS (days)} \\ \hline
+Cauchy General (New)          & 3, 3, 4, 5, 5, 5, 6, 7, 7, 8, 9, 15  \\ \hline
+Skellam Memorial (SOC)        & 6, 7, 7, 7, 8, 8, 8, 9, 9, 10, 10, 11, 13, 13, 15 \\ \hline
+\end{tabular}
+\end{table}
+```
+
+Since this document is an HTML, it won't generate here. In some cases, you also need to add `{=latex}` to the code chunk.
+
+## Use kableExtra Package
+
+We can create latex-esque table using various packages. One older package is known as [kableExtra](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html). We can create our table by first making a data frame to plot:
+
+```{r}
+library(kableExtra)
+
+my_table <- data.frame(
+  'Hospital (Treatment)' = c('Cauchy General (New)','Skellam Memorial (SOC)'),
+  'LOS (Days)' = c('3, 3, 4, 5, 5, 5, 6, 7, 7, 8, 9, 15' , '6, 7, 7, 7, 8, 8, 8, 9, 9, 10, 10, 11, 13, 13, 15')
+)
+
+my_table # check what is in data frame
+
+my_table %>%
+  kbl(col.names=c('Hospital (Treatment)','LOS (Days)')) %>%
+  kable_styling() %>%
+  kable_styling(full_width = F)
+```
+
+You can also change the styling very easily:
+
+```{r}
+my_table %>%
+  kbl(col.names=c('Hospital (Treatment)','LOS (Days)')) %>%
+  kable_classic_2() %>%
+  kable_styling(full_width = F)
+```
+
+[kableExtra](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) supports tables in HTML (with extra functionality, check the link out!), PDF, and Word. 
+
+

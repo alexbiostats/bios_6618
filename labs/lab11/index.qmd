@@ -1,0 +1,245 @@
+---
+title: "Week 11 Lab"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Labs](/labs/index.qmd) collection, the mini-lecture content delivered at the start of class before breaking out into small groups to work on the homework assignment.
+
+# What's on the docket this week?
+This week we will present a few examples of how to do inference on different numbers of independent variables in a multiple linear regression model, while also seeing the connections between them. We'll then break out into small groups to work on homework.
+
+Also of potential use, our ANOVA function (code hidden below):
+
+```{r, class.source = 'fold-hide'}
+#| code-fold: true
+linreg_anova_func <- function(mod, ndigits=2, p_ndigits=3, format='kable'){
+## Function to create an ANOVA table linear regression results from lm or glm
+# mod: an object with the fitted model results
+# ndigits: number of digits to round to for most values, default is 2
+# p_digits: number of digits to round the p-value to, default is 3
+# format: desired format output (default is kable):
+# "kable" for kable table
+# "df" for data frame as table
+
+  # extract outcome from the object produced by the glm or lm function
+  if( class(mod)[1] == 'glm' ){
+    y <- mod$y
+  }
+  if( class(mod)[1] == 'lm' ){
+    y <- mod$model[,1] # first column contains outcome data
+  }  
+  
+  ybar <- mean(y)
+  yhat <- predict(mod)
+  p <- length(mod$coefficients)-1
+  n <- length(y)
+
+  ssm <- sum( (yhat-ybar)^2 )
+  sse <- sum( (y-yhat)^2 )
+  sst <- sum( (y-ybar)^2 )
+  
+  msm <- ssm/p
+  mse <- sse/(n-p-1)
+  
+  f_val <- msm/mse
+  p_val <- pf(f_val, df1=p, df2=n-p-1, lower.tail=FALSE)
+  
+  # Create an ANOVA table to summarize all our results:
+  p_digits <- (10^(-p_ndigits))
+  p_val_tab <- if(p_val<p_digits){paste0('<',p_digits)}else{round(p_val,p_ndigits)}
+  
+  anova_table <- data.frame( 'Source' = c('Model','Error','Total'),
+                          'Sums of Squares' = c(round(ssm,ndigits), round(sse,ndigits), round(sst,ndigits)),
+                          'Degrees of Freedom' = c(p, n-p-1, n-1),
+                          'Mean Square' = c(round(msm,ndigits), round(mse,ndigits),''),
+                          'F Value' = c(round(f_val,ndigits),'',''),
+                          'p-value' = c(p_val_tab,'',''))
+
+  if( format == 'kable' ){  
+    library(kableExtra)
+    kbl(anova_table, col.names=c('Source','Sums of Squares','Degrees of Freedom','Mean Square','F-value','p-value'), align='lccccc', escape=F) %>%
+      kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+  }else{
+    anova_table
+  }
+}
+```
+
+
+# Motivating Example and Our Questions of Interest
+
+We will work with the "Laryngoscope" dataset from the Teaching of Statistics in the Health Sciences (TSHS) section of the American Statistical Association. It was a randomized trial that enrolled 99 adult patients with a BMI between 30 and 50 who were undergoing elective surgery that required orotracheal intubation. Specifically the trial randomized between the Pentax AWS Video Laryngoscope (intervention) and the Macintosh Laryngoscope (control).
+
+First, let's read in the data:
+
+```{r, class.source = 'fold-show'}
+dat <- read.csv('../../.data/Laryngoscope.csv')
+dat <- dat[!is.na(dat$BMI),] # remove 2 cases with missing BMI for example
+```
+
+For our lab today we will use the ease of tracheal intubation (`ease`) as our outcome (i.e., dependent variable) that ranges from 0 to 100. For predictors in our *full* multiple regression model we wish to include BMI (`BMI`), age (`age`), group (`Randomization` where 0=Macintosh; 1=Pentax AWS), and ASA status (`asa`). 
+
+The ASA status is the American Society of Anesthesiologists physical status score and ranges from I to VI, with I being a healthy patient and VI being a brain dead patient whose organs are being removed for donor purposes. In our dataset we have scores from II to IV, suggesting mild disease to severe disease that is a threat to life.
+
+```{r, class.source = 'fold-show'}
+# Let's look at a few random rows to get a feel for the data
+dat[c(3,6,19,80,97),c('ease','BMI','age','Randomization','asa')]
+```
+
+We will create our own indicator variables to help illustrate the different tests, but we will briefly show they are equivalent to a model where we let `R` do the coding for us behind the scenes:
+
+```{r, class.source = 'fold-show'}
+dat$intervention <- dat$Randomization==1
+dat$asa2 <- dat$asa==2
+dat$asa3 <- dat$asa==3
+dat$asa4 <- dat$asa==4
+
+# Fit the full model with our indicator variables:
+mod_full <- glm(ease ~ BMI + age + intervention + asa3 + asa4, data=dat)
+
+# Fit the full model with R creating our indicator variables (note we need to tell R we want asa as a factor since it is currently a numeric variable)
+mod_full_alt <- glm(ease ~ BMI + age + Randomization + as.factor(asa), data=dat)
+```
+
+First let's compare the coefficients tables from each model:
+
+```{r, class.source = 'fold-show'}
+summary(mod_full)$coefficients
+summary(mod_full_alt)$coefficients
+```
+
+Notice we have the same results, just with different labels based on if we used our coded indicator variable or let `R` do it for us. **This does lead us to one aspect we have to be careful with...mistakenly treating categorical variables as continuous:**
+
+```{r, class.source = 'fold-show'}
+# What happens if we forget to tell R asa is categorical
+summary(glm(ease ~ BMI + age + Randomization + asa, data=dat))$coefficients
+```
+
+Now our ASA status is treated as a continuous predictor, which likely does not make much sense given how it is defined.
+
+Let's now explore 3 different questions:
+
+1. Are any of our variables significantly associated with ease of intubation?
+2. Is age significantly associated with ease of intubation (over and above the contribution of other variables in the model)?
+3. Is ASA significantly associated with ease of intubation (over and above the contribution of other variables in the model)?
+
+
+# Overall Test of the Model
+
+To test if any of our $\beta_{p} \neq 0$ ($p=1,2,3,4,5$), we can use the overall $F$-test. This test result could come from our ANOVA table, using the `anova` function to compare the full and null (i.e., reduced model with no predictors) models, or by fitting an `lm` model and examining the summary output:
+
+```{r, class.source = 'fold-show'}
+# Create the ANOVA table to evaluate
+linreg_anova_func(mod_full)
+
+# Use the anova function to run the overall F-test
+mod_null <- glm(ease ~ 1, data=dat) # fit the null/reduced model with no predictors
+anova(mod_full, mod_null, test='F')
+
+# Using the lm function summary
+summary(lm(ease ~ BMI + age + intervention + asa3 + asa4, data=dat))
+```
+
+We arrive at the same answer with either approach: $p=0.018$, which is less than 0.05, so we reject $H_0$ and conclude that at least one $\beta_p$ is significantly different from 0.
+
+
+## The Partial F-test for the Overall Model
+
+We can also use the partial $F$-test to address this question. It will be equivalent to our overall $F$-test because $SS_{model} = \sum_{i=1}^{n} (\hat{Y} - \overline{Y})^2$, but with no predictors $\hat{Y} = \overline{Y} \implies \sum_{i=1}^{n} (\hat{Y} - \overline{Y})^2 = 0$. 
+
+For notation, let 
+
+* $n$ be the number of observations
+* $p$ be the number of IVs in the *reduced model*
+* $k$ the number of IVs *removed* from the full model
+* $p+k$ the number of IVs in the *full model*
+
+The partial $F$-test is
+$$ F = \frac{[SS_{model}(full) - SS_{model}(reduced)]/k}{MS_{error}(full)} \sim F_{k,n-p-k-1} $$
+
+Therefore, our partial $F$-test for the overall model becomes
+$$ F = \frac{[SS_{model}(full) - 0]/k}{MS_{error}(full)} = \frac{MS_{model}(full)}{MS_{error}(full)}\sim F_{k,n-k-1} $$
+
+
+# Is Age Significantly Associated with Ease?
+
+When evaluating if a single covariate of interest contributes above and beyond all other variables in the model we can use a $t$-test to evaluate the significance. Often this information is also included in the regression table's output:
+
+```{r}
+summary(mod_full)$coefficients
+```
+
+Here we are specifically testing if $H_0\colon \beta_{Age} = 0$ versus $H_1\colon \beta_{Age} \neq 0$. From the output we see that $t=1.697$ and $p=0.093$ for age Since $p > 0.05 = \alpha$, we fail to reject $H_0$. We cannot conclude that age is significantly associated with ease of intubation when adjusting for the contribution of all other covariates in the model.
+
+In practice we may wish to remove age from the model since it would be more parsimonious. But there may also be clinical, biologic, or scientific reasons for keeping it in the model (e.g., confounding, etc.).
+
+
+## The Partial F-test for One Variable
+
+We could also use the partial $F$-test to evaluate if age on its own contributes to the explanation of the variability observed in our outcome above and beyond BMI, the study arm, or ASA status. In this case we'd fit our *reduced* model which excludes age and calculate the difference either by hand or using the `anova` function:
+
+```{r, class.source='fold-show'}
+# Fit the reduced model
+mod_red1 <- glm(ease ~ BMI + intervention + asa3 + asa4, data=dat)
+
+# Partial F-test with anova
+anova(mod_full, mod_red1, test='F')
+
+# ANOVA table to calculate partial F by hand
+linreg_anova_func(mod_red1)
+```
+
+Based on our ANOVA tables we would have:
+
+$$ F = \frac{[SS_{model}(full) - SS_{model}(reduced)]/k}{MS_{error}(full)} = \frac{[12209.82 - 9787.24]/1}{841.08} = 2.88 $$
+
+Here we have $n=97$, $k=1$, and $p=4$. So we would reference an $F_{k,n-p-k-1} = F_{1,97-4-1-1} = F_{1,91}$ distribution, where our critical value is `qf(0.95,1,91)`=`r round(qf(0.95,1,91),3)` and our p-value is `pf(2.88,1,91,lower.tail=F)`=`r round(pf(2.88,1,91,lower.tail=F),3)`. 
+
+These estimates match our `anova` function results and the estimate from the table of coefficients. We can also note that our partial $F$ statistic is equal to $t^2$ for the variable being considered.
+
+
+# Is ASA Status Significantly Associated with Ease?
+
+Finally, we arrive at our third question: is ASA status significantly associated with ease of intubation above and beyond the other variables in the model?
+
+When we have a categorical independent variable with more than 2 categories we have a natural application of the partial $F$-test. With three ASA categories, if we drop one of the indicator variables we'd be changing the information included in the model! For example, dropping `asa3` and only keeping `asa4` would now transform our interpretation of `asa4` from being a comparison of ASA IV with the reference category of ASA II, to a comparison of ASA IV to the reference category of ASA III or IV.
+
+For this reason, we generally evaluate the contribution of a categorical variable with >2 categories using the partial $F$-test. We want to know if the variable overall contributes to the model, not necessarily a single category. *That being said, we are many times interested in interpreting the effect of each category with respect to the reference category or between categories.*
+
+For the partial $F$-test, we can again use `anova` or do the calculation by hand:
+
+```{r, class.source='fold-show'}
+# Fit the reduced model
+mod_red2 <- glm(ease ~ BMI + age + intervention, data=dat)
+
+# Partial F-test with anova
+anova(mod_full, mod_red2, test='F')
+
+# ANOVA table to calculate partial F by hand
+linreg_anova_func(mod_red2)
+```
+
+Based on our ANOVA tables we would have:
+
+$$ F = \frac{[SS_{model}(full) - SS_{model}(reduced)]/k}{MS_{error}(full)} = \frac{[12209.82 - 8457.71]/2}{841.08} = 2.2305 $$
+
+Here we have $n=97$, $k=2$, and $p=3$. So we would reference an $F_{k,n-p-k-1} = F_{2,97-3-2-1} = F_{2,91}$ distribution, where our critical value is `qf(0.95,2,91)`=`r round(qf(0.95,2,91),3)` and our p-value is `pf(2.2305,2,91,lower.tail=F)`=`r round(pf(2.2305,2,91,lower.tail=F),3)`. 
+
+In this case, we would fail to reject our $H_0$ that $\beta_{ASA-III} = \beta_{ASA-IV} = 0$, because $F=2.2305 < 3.097$ or $p=0.113 > 0.05$. Therefore, we *cannot* conclude that ASA status significantly contributes above and beyond age, BMI, and randomized group to the prediction of ease of intubation.
+

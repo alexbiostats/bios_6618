@@ -1,0 +1,101 @@
+---
+title: "Week 7 Practice Problems"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page includes optional practice problems, many of which are structured to assist you on the homework with [Solutions provided on a separate page](/labs/prac7s/index.qmd). Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.
+
+This week's extra practice exercises are focusing on implementing a simple linear regression and using the output to address various questions.
+
+# Dataset Background
+
+The following code can load the `Seasonal_Effect.csv` file into R. The seasonal effect data set contains 2,919 adults who underwent colorectal surgery. For our simple linear regression model, we wish to examine if there is an association between the outcome of how long surgery lasted (`DurationSurgery` in hours) and the body mass index (`BMI` in kg/m^2^).
+
+```{r, class.source = 'fold-show'}
+dat <- read.csv('../../.data/Seasonal_Effect.csv')
+```
+
+
+# Exercise 1: Simple Linear Regression
+
+## 1a: Fitting the Model
+
+Fit the simple linear regression model for an outcome of surgery duration with a single predictor for BMI. Print the summary table output for reference in the following questions.
+
+
+## 1b: Fitted Least-Squares Regression Equation
+
+Write down the least-squares regression equation that describes the relationship between surgery duration and BMI based on your output.
+
+
+## 1c: Intercept Interpretation
+
+What is the estimated intercept and how would you interpret it?
+
+
+## 1d: Slope Interpretation
+
+What is the estimated slope and how would you interpret it?
+
+
+## 1e: Slope Hypothesis Test
+
+Test the hypothesis that the true slope is 0.
+
+
+## 1f: CI for Slope with $t$
+
+For the estimated slope, calculate a 95% confidence interval *by hand* based on the output with the $t$-distribution (i.e., the "correct" calculation).
+
+
+## 1g: CI for Slope with $Z$
+
+For the estimated slope, calculate a 95% confidence interval *by hand* based on the output with the $Z$-distribution (i.e., pretend we forgot to use the $t$-distribution and went with the simpler standard normal distribution). How different is your estimated interval and why might it be more similar (or more different) for our given context?
+
+
+## 1h: CI for Slope in R
+
+For the estimated slope, calculate a 95% confidence interval using a function in R. Which approach (in **f** or **g**) is this confidence interval most like?
+
+
+## 1i: Summary for Slope
+
+Write a brief, but complete, summary of the effect of BMI on surgery duration.
+
+
+## 1j: Prediction
+
+What is the estimated surgery duration for someone with a BMI of 27.5?
+
+
+## 1k: Confidence Interval Around Prediction
+
+Calculate the 95% confidence interval around the mean surgery duration for the population with a BMI of 27.5.
+
+
+## 1l: Prediction Interval Around Prediction
+
+Calculate the 95% prediction interval around the mean surgery duration for a single individual with a BMI of 27.5.
+
+
+## 1m: Scattplot and Fitted Line
+
+Create a scatterplot with the fitted linear regression line.
+
+

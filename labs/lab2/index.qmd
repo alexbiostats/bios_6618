@@ -1,0 +1,368 @@
+---
+title: "Week 2 Lab"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Labs](/labs/index.qmd) collection, the mini-lecture content delivered at the start of class before breaking out into small groups to work on the homework assignment.
+
+# The Magic of R
+
+Throughout the semester, but especially the first half, we will be focusing on developing our R programming skills. The good news is that R is free, open source, and has seemingly limitless potential! 
+
+However, there are two sides to every coin. Because packages or code can be written by anyone, it is possible that you will come across packages or functions with errors that no one has caught before, or perhaps they stop maintaining the package and finding access is challenging. The limitless potential also means there are a myriad of possible coding solutions that all arrive at the desired solution, where the difference may be the structure of your code, the functions/packages used, or how many steps you try to condense into fewer lines of code.
+
+Ultimately what we see in the labs are examples based on my own experience. It doesn't mean the example is the "best" code, but I figure it is helpful for you all to learn from my own mistakes while I also learn from what you already learned or discover along the way. 
+
+In Week 2 we will first introduce some simple code examples for initializing vectors, then touch on a few different approaches to coding loops. Later in the semester we will discuss vectorized alternatives to loops. But first, we review integration by parts and how to calculate the expected value for an exponential distribution.
+
+
+# Calculus Review: Integration by Parts
+
+When we wish to use integration on a product of functions, we may need to use *integration by parts*. While you may have encountered integration by parts with different notation, the general idea is that
+
+$$ \int_{a}^{b} u \, dv = uv |_{a}^{b} - \int_{a}^{b} v \, du $$
+
+In other words, we would identify a $u$ and $dv$ from the value we wish to integrate, then calculate $du$ and $v$ by taking the derivative and anti-derivative, respectively. Once we have these items calculated, we can then evaluate $uv$ from $a$ up to $b$, and calculate another integration of $v \, du$. It is easier to see how this works in practice with an example.
+
+
+## Calculating the Expected Value ($E(X)$) of the Exponential Distribution
+
+Assume that $X \sim \text{Exp}(\lambda)$, then the probability density function is given by
+
+$$
+    f(x)= 
+\begin{cases}
+    \lambda e^{-\lambda x},& \text{if } x\geq 0 \\
+    0,              & \text{otherwise}
+\end{cases}
+$$
+
+To calculate the expected value of a continuous variable we know that $E(X) = \int_{-\infty}^{\infty} x f(x) \, dx$ (i.e., we multiply our probability density function, $f(x)$, by $x$ and integrate it across the range of support for $x$). For our exponential distribution, this definition gives
+
+$$ E(X) = \int_{-\infty}^{\infty} x f(x) \, dx = \int_{0}^{\infty} x \times \lambda e^{-\lambda x} \, dx $$
+
+Since we wish to integrate over $x$, and we see that we have a product of functions where $x$ is in multiple places, so we need to use integration by parts. We will let $u = x\lambda$ and $dv = e^{-\lambda x} \, dx$, but still need to calculate $du$ and $v$:
+
+$$
+\begin{array}{cc}
+u = x\lambda & dv = e^{-\lambda x} \, dx \\
+du = \lambda \, dx & v = \frac{-e^{-\lambda x}}{\lambda} 
+\end{array}
+$$
+
+We can then plug these values into our integration by parts formula:
+
+$$ uv |_{a}^{b} - \int_{a}^{b} v \, du = \left. (x\lambda) \times \frac{-e^{-\lambda x}}{\lambda} \right|_{0}^{\infty} - \int_0^{\infty} \frac{-e^{-\lambda x}}{\lambda} \times \lambda \, dx $$
+
+This can be simplified by cancelling some of the $\lambda$ values we see in each part:
+
+$$ \left. (x) \times -e^{-\lambda x} \right|_{0}^{\infty} - \int_0^{\infty} -e^{-\lambda x} \, dx  $$
+
+It may be helpful to write $-e^{-\lambda x}$ as $\frac{-1}{e^{\lambda x}}$ for our $uv |_{a}^{b}$ piece. For the $\int_{a}^{b} v \, du$ piece, we can note that this is our $dv$ identified above:
+
+$$ \left. \frac{-x}{e^{\lambda x}} \right|_{0}^{\infty} - \left[ \left. \frac{-e^{-\lambda x}}{\lambda} \right|_{0}^{\infty}  \right]  $$
+
+Now we just need to plug everything in to finish up our calculation of $E(X)$:
+
+$$ \left( \frac{-\infty}{e^{\lambda \times \infty}} - \frac{-0}{e^{\lambda \times 0}} \right) - \left[ \frac{-e^{-\lambda \times \infty}}{\lambda} - \frac{-e^{-\lambda \times 0}}{\lambda} \right] $$
+
+Some of these values may look pretty funky, and we have to remember some properties about the rates of convergence (e.g., $e^{\infty}$ approaches infinity at a faster rate than just $\infty$):
+
+* $\frac{-\infty}{e^{\lambda \times \infty}} = 0$ because it is in an *indeterminate* form of $\frac{\infty}{\infty}$, so by applying L'Hôpital's rule (the limit of the fraction is the same as the limit of the fraction of the derivatives of the numerator and denominator when in an indeterminate form, and when evaluating an integral that has a limit at infinity we are essentially evaluating the limit as $x \to \infty$) we have $\lim_{x \to \infty} \frac{-x}{e^{\lambda \times x}} = \lim_{x \to \infty} \frac{-1}{\lambda e^{\lambda \times x}} = 0$
+* $\frac{-0}{e^{\lambda \times 0}} = \frac{0}{1} = 0$
+* $\frac{-e^{-\lambda \times \infty}}{\lambda} = \frac{-1}{\lambda e^{\lambda \times \infty}} = 0$
+* $\frac{-e^{-\lambda \times 0}}{\lambda} = \frac{1}{\lambda}$
+
+Ultimately, this results in:
+
+$$ E(X) = (0 - 0) - \left[0 - \frac{1}{\lambda}\right] = 0 - \left[ -\frac{1}{\lambda} \right] = \frac{1}{\lambda} $$
+
+We can check this by looking up the [exponential distribution on Wikipedia](https://en.wikipedia.org/wiki/Exponential_distribution) or using [Wolfram Alpha](https://www.wolframalpha.com/input/?i=%5Cint_%7B0%7D%5E%7B%5Cinfty%7D+x+%5Ctimes+%5Clambda+e%5E%7B-%5Clambda+x%7D+dx) to check what we should end up with.
+
+If we wanted to calculate the variance of the exponential distribution, such as in Homework 2, it might be easier to calculate $E(X^2)$ using a similar approach to the integration by parts above, then calculating $Var(X) = E(X^2) - E(X)^2$. We can then plug in the given value in the homework to get our $E(X)$ and $Var(X)$ for a given $\lambda$.
+
+
+
+# Initializing Vectors
+
+Chapter 5 of our R textbook (<https://rstudio-education.github.io/hopr/r-objects.html>) discusses the different types of objects in R. For today's lab we will be working with vectors, but similar concepts will apply to working with matrices (which I like to think of as a lot of column vectors or row vectors smooshed together), lists, data frames, etc.
+
+For certain problems, we may need to initialize (i.e., create) an object to store our results in. A vector is an excellent choice when you only have 1 result you want to keep track of. 
+
+
+## Initialize a Vector Example 1: Use Actual Numbers
+
+In our [lecture set on Simulations](https://youtu.be/u9Zq6ZdMthw), we initialized a vector that had a length of 10 and used `NA` for our results. Instead, we could create a vector with numbers (or any other value):
+
+```{r}
+# number of simulations
+reps <- 10
+
+# initialize a vector of thetas (-999 = missing)
+thetas <- rep(-999, reps)
+thetas
+```
+
+From the output, we see that we have 10 `-999` values, as we would expect.
+
+In some data sets, numbers are used to code missing data. This is sometimes for informative purposes (e.g., -999 is missing for an unknown reason, -998 is a skipped visit, etc.). However, if we do not know this coding scheme, we may be confused at a value that is drastically different from the expected data or even wonder why so many are equal to the same thing. In practice, I like to avoid this strategy since it won't kick back any warnings/errors if we try to do something like calculate the mean.
+
+
+## Initialize a Vector Example 2: Use `NA`
+
+In some cases you may be unsure what type of data you are expecting to encounter, so you may be worried about using a numeric value. One option I frequently use to avoid this issue is `NA`, which represents general missingness:
+
+```{r}
+# number of simulations
+reps <- 10
+
+# initialize a vector of thetas (NA = missing)
+thetas2 <- rep(NA, reps)
+thetas2
+```
+
+From the output, we see that we have 10 `NA` values, as we would expect.
+
+One potentially frustrating aspect of `NA` is that many functions will return back an `NA` result if any item of the vector is missing, even if you may want to calculate the mean of the non-missing values. Fortunately, we can often times solve this with certain arguments for a function (e.g., `na.rm=TRUE` indicates that we want to remove any `NA` values for the function).
+
+
+## Initialize a Vector Example 3: Make it `NULL`
+
+A third way that may be useful in some contexts is to create a `NULL` object that can become a vector by concatenating results (which we will see an example of below for our loops!):
+
+```{r}
+# initialize an object to store thetas in
+thetas3 <- NULL
+thetas3
+```
+
+Since we just wanted to create an object to store our results in, we see that it only returns a `NULL` value. This is useful because without initializing an empty object, our loops would run into an error where the object we were trying to store values in did not exist.
+
+
+# `for` Loop Strategies
+
+[Chapter 11.3 of our R textbook](https://rstudio-education.github.io/hopr/loops.html#for-loops) does a great job of introducing for loops, with Chapters 11.4 and 11.5 exploring `while` and `repeat` loops as well (which we won't work with in this lab).
+
+As someone who didn't have a lot of programming experience prior to learning R, I find the translation in our textbook of *"Do this for every value of that."* helpful to connect the R syntax and how we should recognize the computer is thinking:
+
+```{r, eval=FALSE}
+for (value in that) {
+  this
+}
+```
+
+We essentially loop through whatever is in `that`, where `value` takes on the *value* of `that` in each iteration of the for loop so we can do whatever `this` is. We will see in our examples below that sometimes `value` is extremely important to consider, and other times it doesn't necessarily come into play.
+
+For our examples we will see different ways to estimate the mean from a sample of data from a random normal distribution under different conditions.
+
+
+## `for` Loop Example 1: Initialize a Vector, then Save Results in Vector by Index
+
+For this example we will first initialize a vector of size 10 (here using `NA`) and then save the results from 10 random samples with $\mu=5$ and $\sigma=3$:
+```{r}
+# set our seed for reproducibility
+set.seed(515)
+
+# number of simulations
+reps <- 10
+
+# initialize our vector
+mean1 <- rep(NA, reps)
+```
+
+We know at this stage that mean1 is a vector of length 10 with only `NA` values. So now we can loop through and generate 10 random samples:
+
+```{r}
+# loop through where 
+## "i" is our "value"
+## "that" is a vector from 1 up to the length of mean1 (i.e., 10)
+## "this" is our code within the loop
+
+for( i in 1:length(mean1)){
+  mean1[i] <- mean( rnorm(n=30, mean=5, sd=3) ) #calculate the mean for the random sample of sample size 30
+}
+
+mean1
+```
+
+We see that `mean1` is no longer a vector of 10 `NA` values, but instead has the estimated values from 10 simulated random experiments. 
+
+In this example we specifically **indexed** the `mean1` vector by using the `[i]` to tell R which of the 10 positions to save the result in. If we had forgotten it, the initialized `mean1` vector would have just been replaced with the sample mean from the last simulated data set!
+
+We can also see that R has created an object for `i` that should indicate whatever the last value from the loop was:
+```{r}
+i
+```
+
+We see that `i=10`, so we know R made it through the entire loop. As you get into increasingly complex simulations you may encounter functions or models where errors occur (e.g., due to convergence), and this can serve as a great tool to work backwards to try and pinpoint what is causing the code to stop and either modify the code or work to escape these issues.
+
+Another piece of coding that may help in the future is that I wrote `1:length(mean1)` instead of `1:10`. If I ever changed the number of simulations I wouldn't also have to update the `that` in our for loop. *(We could have also used `1:reps` to achieve the same result.)*
+
+
+### Detour for Example 1: Let's Change the Order of Index
+
+To keep things somewhat simple, let's see what happens if we change the vector from `1:length(mean1)` to `c(2,1,3:10)` (i.e., a vector where we've switched the order of the first 2 values):
+
+```{r}
+# set our seed for reproducibility
+set.seed(515)
+
+# initialize our vector
+mean1_detour <- rep(NA, 10)
+
+
+for( j in c(2,1,3:10)){
+  mean1_detour[j] <- mean( rnorm(n=30, mean=5, sd=3) )
+}
+
+mean1_detour
+```
+
+We can see that, since we set the same seed, we have the same values for the 3rd to 10th spots in the vector, with the 1st and 2nd spots just changing places. Also note that I changed the value from `i` to `j` and it still worked since the "value" was also updated in the loop to be `[j]`.
+
+
+## for Loop Example 2: Initialize a NULL Object, then Save Results by Concatenation
+
+In the previous example, we may examine our code and realize that the index of `[i]` is not really serving much of a purpose beyond indexing a specific location. Instead we may wish to instead initialize a NULL object and then concatenate our results:
+
+```{r}
+# set our seed for reproducibility
+set.seed(515)
+
+# number of simulations
+reps <- 10
+
+# initialize our vector
+mean2 <- NULL
+
+# specify the number of times to loop through and add (concatenate) the results to mean2
+for( k in 1:reps){
+  mean2 <- c( mean2, mean( rnorm(n=30, mean=5, sd=3) ) )
+}
+
+mean2
+```
+
+In this example we see that `k` doesn't appear within the for loop at all! Instead we leverage the properties of NULL objects and just concatenate the results that match those in Example 1 above.
+
+We can also note that we made the code a little shorter by concatenating and calculating the mean in one line of code. It is totally fine to separate the steps as well:
+
+```{r}
+# set our seed for reproducibility
+set.seed(515)
+
+# number of simulations
+reps <- 10
+
+# initialize our vector
+mean2 <- NULL
+
+# specify the number of times to loop through and add (concatenate) the results to mean2
+for( k in 1:reps){
+  sim_dat <- rnorm(n=30, mean=5, sd=3) # first we simulate our data
+  mean_sim <- mean(sim_dat) # then we calculate the mean
+  mean2 <- c( mean2, mean_sim) # finally, we concatenate the mean to our mean2 vector
+}
+
+mean2
+```
+
+Notice the results between the two loops match, so the approaches result in the same answer.
+
+
+## for Loop Example 3: Create a Vector with Names, then Save Results by Name
+
+**Fun fact:** you can give names to the elements in a vector! (Yes, I am quite the thrill at parties.)
+
+Naming is something we may expect more with data frames (e.g., the names of each column), but we can also give names to columns/rows in matrices and other R objects. This can be helpful if we have a vector of values to loop through that do not simply go from 1 up to some larger number. *For example, on Homework 1, Exercise 3b, we are asked to increase the sample size from 100 to 100,000 by increments of 100.* 
+
+For our example here, we will choose a more manageable scenario of sample sizes from 100 to 500 by increments of 100, where we want to calculate the sample mean for a random sample from the normal distribution with $\mu=5$ and $\sigma=3$ at each of the sample sizes.
+
+Our first step is to create the vector from 100 to 500 by increments of 100:
+```{r}
+# Generate vector of sample sizes
+sampsize_vec <- seq(from=100, to=500, by=100)
+sampsize_vec
+```
+
+The next step is to create a vector to save the results, with names for the different sample sizes (*note: here they are numeric, but you could have names that are text strings as well*):
+```{r}
+# Generate vector save results
+mean3 <- rep(NA, length(sampsize_vec) )
+mean3
+
+# Rename vector elements to be the sample size
+names(mean3) <- sampsize_vec
+mean3
+```
+
+We see above that `mean3` now has a "name" for each component of the vector. The one super tricky thing about names that are also numbers is that we have to be very intentional in what we request from R. For example:
+
+```{r}
+# Extract what is in named '200' 
+mean3['200']
+
+# What if we forget the quotes/apostrophes
+mean3[200]
+```
+
+We will have to make sure in our loop to enter the results with the name as a character string, even though it is a number. This is because R, by default, is trying to extract the 200th element of our vector of length 5 (i.e., it doesn't exist).
+
+Let's now program the loop to save the resulting sample means:
+
+```{r}
+# set our seed for reproducibility
+set.seed(515)
+
+# calculate the means at different sample sizes
+for( n in sampsize_vec){
+  mean3[ paste0(n) ] <- mean( rnorm(n=n, mean=5, sd=3) )
+}
+
+mean3
+```
+
+Notice that `n` is coerced to a character by using `paste0(n)`, but remains a number for `rnorm(n=n...`. The nice thing here is that our results are already labeled, so we can identify which mean corresponds to which sample size.
+
+
+## for Loop Example 4: Vector with Names, but Loop through an Index to Extract Specific Value
+
+Let's recreate Example 3 above, but instead of looping through the `sampsize_vec`, let's loop through an index from `1:length(sampsize_vec)` and extract the correct sample size. We'll also recreate the named vector to store our results in:
+
+```{r}
+mean4 <- rep(NA, length(sampsize_vec) )
+names(mean4) <- sampsize_vec
+
+# set our seed for reproducibility
+set.seed(515)
+
+# calculate the means at different sample sizes
+for( sampsize in 1:length(sampsize_vec)){
+    n_to_use <- sampsize_vec[ sampsize ] #extract the "sampsize"th value from the vector
+    mean4[ paste0(n_to_use) ] <- mean( rnorm(n=n_to_use, mean=5, sd=3) )
+}
+
+mean4
+```
+
+We can see that `mean3` and `mean4` are identical, illustrating we can achieve the same result in different ways. If the names were not of interest, we could have also stored the results either via concatenation with a `NULL` initial object or by indexing the vector (i.e., `mean4[ sampsize ]`).
+
+In this example the strategy above may seem a bit silly. However, in more complex simulations or problems you may wish to work with different structures of data or multiple scenarios that are easier to define outside the loop.
+
+

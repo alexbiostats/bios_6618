@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alex Kaizer">
+
+<title>Alex Kaizer - Week 5 Lab</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/academicons-1.9.1/css/academicons.css" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="./files/favicon.ico">
+
+<script type="text/javascript">
+function setBrand() {
+document.getElementsByClassName("navbar-brand")[0].href="https://www.alexkaizer.com";
+}
+window.onload = setBrand;
+</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5PBG7BL207"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5PBG7BL207');
+</script>
+
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Alex Kaizer</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/research" rel="" target="">
+ <span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/publications" rel="" target="">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Teaching</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching">    
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/teaching" rel="" target="">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6618" rel="" target="">
+ <span class="dropdown-text">BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/bios_6611" rel="" target="">
+ <span class="dropdown-text">BIOS 6611</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/study_design_berd" rel="" target="">
+ <span class="dropdown-text">BERD Study Design Short Course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.alexkaizer.com/adaptivetrials_sc" rel="" target="">
+ <span class="dropdown-text">WNAR Adaptive and Bayesian Clinical Trial Design Short Course</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bios-6618" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">BIOS 6618</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-bios-6618">    
+        <li>
+    <a class="dropdown-item" href="../../index.html" rel="" target="">
+ <span class="dropdown-text">Home</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../bios_6618_materials" rel="" target="">
+ <span class="dropdown-text">Materials</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../journal_of_bios_6618" rel="" target="">
+ <span class="dropdown-text">Journal of BIOS 6618</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../recitation" rel="" target="">
+ <span class="dropdown-text">Recitation Questions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs" rel="" target="">
+ <span class="dropdown-text">Labs and Practice Problems</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:alex.kaizer@cuanschutz.edu" rel="" target=""><i class="bi bi-envelope" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=ICpH74EAAAAJ&amp;hl=en" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-google-scholar ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="http://github.com/alexbiostats" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.alexkaizer.com/files/Alex_CV.pdf" rel="" target="">
+ <span class="menu-text"><i class="ai  ai-cv ai-large"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/alex-kaizer/" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#whats-on-the-docket-this-week" id="toc-whats-on-the-docket-this-week" class="nav-link active" data-scroll-target="#whats-on-the-docket-this-week">What’s on the docket this week?</a></li>
+  <li><a href="#ifelse-statements" id="toc-ifelse-statements" class="nav-link" data-scroll-target="#ifelse-statements">if/else Statements</a>
+  <ul class="collapse">
+  <li><a href="#using-only-if" id="toc-using-only-if" class="nav-link" data-scroll-target="#using-only-if">Using Only <code>if</code></a></li>
+  <li><a href="#adding-in-else" id="toc-adding-in-else" class="nav-link" data-scroll-target="#adding-in-else">Adding in <code>else</code></a></li>
+  </ul></li>
+  <li><a href="#subsetting-data-and-objects" id="toc-subsetting-data-and-objects" class="nav-link" data-scroll-target="#subsetting-data-and-objects">Subsetting Data and Objects</a>
+  <ul class="collapse">
+  <li><a href="#subset-by-element-or-rowcolumn" id="toc-subset-by-element-or-rowcolumn" class="nav-link" data-scroll-target="#subset-by-element-or-rowcolumn">Subset by Element or Row/Column</a></li>
+  <li><a href="#subset-by-name" id="toc-subset-by-name" class="nav-link" data-scroll-target="#subset-by-name">Subset by Name</a></li>
+  <li><a href="#subset-by-condition" id="toc-subset-by-condition" class="nav-link" data-scroll-target="#subset-by-condition">Subset by Condition</a></li>
+  <li><a href="#subset-by-multiple-values" id="toc-subset-by-multiple-values" class="nav-link" data-scroll-target="#subset-by-multiple-values">Subset by Multiple Values</a></li>
+  <li><a href="#subset-with-multiple-conditions" id="toc-subset-with-multiple-conditions" class="nav-link" data-scroll-target="#subset-with-multiple-conditions">Subset with Multiple Conditions</a></li>
+  </ul></li>
+  <li><a href="#a-multiple-testing-simulation-study" id="toc-a-multiple-testing-simulation-study" class="nav-link" data-scroll-target="#a-multiple-testing-simulation-study">A Multiple Testing Simulation Study</a>
+  <ul class="collapse">
+  <li><a href="#null-scenario" id="toc-null-scenario" class="nav-link" data-scroll-target="#null-scenario">Null Scenario</a></li>
+  <li><a href="#alternative-scenario" id="toc-alternative-scenario" class="nav-link" data-scroll-target="#alternative-scenario">Alternative Scenario</a></li>
+  <li><a href="#upping-the-number-of-tests-to-100" id="toc-upping-the-number-of-tests-to-100" class="nav-link" data-scroll-target="#upping-the-number-of-tests-to-100">Upping the Number of Tests to 100</a></li>
+  <li><a href="#some-thoughts" id="toc-some-thoughts" class="nav-link" data-scroll-target="#some-thoughts">Some Thoughts</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Week 5 Lab</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Alex Kaizer </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Colorado-Anschutz Medical Campus
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This page is part of the University of Colorado-Anschutz Medical Campus’ <a href="../../labs/index.html">BIOS 6618 Labs</a> collection, the mini-lecture content delivered at the start of class before breaking out into small groups to work on the homework assignment.</p>
+<section id="whats-on-the-docket-this-week" class="level1">
+<h1>What’s on the docket this week?</h1>
+<p>In Week 5 we are introducing if statements, including if/else statements. These allow you to tell R to complete a certain step <em>if and only if</em> some criteria is met. We will also see different ways we can subset data. Finally, we have an example of a simulation study to evaluate the challenge of multiple testing in statistics.</p>
+</section>
+<section id="ifelse-statements" class="level1">
+<h1>if/else Statements</h1>
+<p><code>if</code> and <code>else</code> statements are great to employ certain conditions when you want to them complete a certain step. <a href="https://rstudio-education.github.io/hopr/programs.html#if-statements">Sections 9.2-9.3</a> of our R Textbook discuss if and else statements and can serve as an additional reference.</p>
+<section id="using-only-if" class="level2">
+<h2 class="anchored" data-anchor-id="using-only-if">Using Only <code>if</code></h2>
+<p>The <code>if</code> statement has a very simple structure:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( condition ){</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  run code <span class="cf">if</span> condition met</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The condition must be something that is either <code>TRUE</code> or <code>FALSE</code>. If the condition is met, then R will run whatever code is contained between our curly brackets.</p>
+<p>As an example, let’s write three <code>if</code> statements that generate a sample from either a normal or exponential distribution based on an object we defined called <code>dist</code> as either <code>normal</code> or <code>exponential</code>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">561326</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dist <span class="ot">&lt;-</span> <span class="st">'exponential'</span> <span class="co"># set desired distribution to simulate from</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(dist <span class="sc">==</span> <span class="st">'exponential'</span>){ <span class="fu">rexp</span>(<span class="at">n=</span><span class="dv">10</span>, <span class="at">rate=</span><span class="fl">0.5</span>) }</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(dist <span class="sc">==</span> <span class="st">'normal'</span>){ <span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">10</span>, <span class="at">mean=</span><span class="dv">10</span>, <span class="at">sd=</span><span class="dv">4</span>) }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.46504343 2.52015675 4.16642691 1.00602212 0.63401942 0.01873791
+ [7] 2.80259386 1.18373900 5.37115794 4.67971633</code></pre>
+</div>
+</div>
+<p>We could also make it more informative by also printing a character string that reminds us what distribution we selected:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">561326</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dist <span class="ot">&lt;-</span> <span class="st">'exponential'</span> <span class="co"># set desired distribution to simulate from</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(dist <span class="sc">==</span> <span class="st">'exponential'</span>){ </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">'You requested the exponential distribution.'</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rexp</span>(<span class="at">n=</span><span class="dv">10</span>, <span class="at">rate=</span><span class="fl">0.5</span>) </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(dist <span class="sc">==</span> <span class="st">'normal'</span>){ </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">'You requested the normal distribution.'</span>)  </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">10</span>, <span class="at">mean=</span><span class="dv">10</span>, <span class="at">sd=</span><span class="dv">4</span>) </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "You requested the exponential distribution."
+ [1] 0.46504343 2.52015675 4.16642691 1.00602212 0.63401942 0.01873791
+ [7] 2.80259386 1.18373900 5.37115794 4.67971633</code></pre>
+</div>
+</div>
+<p>While this example includes two <code>if</code> statements, we could add as many as desired to complete a given task.</p>
+</section>
+<section id="adding-in-else" class="level2">
+<h2 class="anchored" data-anchor-id="adding-in-else">Adding in <code>else</code></h2>
+<p>The <code>if</code> statement will only run a set of code if the condition is <code>TRUE</code>, however we often will want to implement another set of code if the condition is <code>FALSE</code>. This is where the <code>else</code> statement comes in handy:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( condition ){</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  run code <span class="cf">if</span> condition met</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  run this code instead <span class="cf">if</span> condition is NOT met</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>It is also possible to add additional <code>if</code> statements:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( condition ){</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  run code <span class="cf">if</span> condition met</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span> <span class="cf">if</span>( condition2 ){</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  run this code instead <span class="cf">if</span> condition IS NOT met but condition2 IS met</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  run this code only <span class="cf">if</span> condition and condition2 are both NOT met</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>For example, perhaps we wish to simulate 100 standard normal data sets of <span class="math inline">\(n=10\)</span> and want to count the number of times the mean is less than -0.5, between -0.5 and 0.5, and greater than 0.5. While there are multiple ways we could achieve this, let’s practice with <code>if</code> and <code>else</code> to achieve this:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">98512</span>) <span class="co"># set seed for reproducibility</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>cat_vec <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="at">length=</span>nsim) <span class="co"># initialize object to store results in</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim ){</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  asd <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">10</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>( <span class="fu">mean</span>(asd) <span class="sc">&lt;</span> <span class="sc">-</span><span class="fl">0.5</span>){</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    cat_vec[i] <span class="ot">&lt;-</span> <span class="st">'mean &lt; -0.5'</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">mean</span>(asd) <span class="sc">&gt;</span> <span class="fl">0.5</span>){</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    cat_vec[i] <span class="ot">&lt;-</span> <span class="st">'mean &gt; 0.5'</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    cat_vec[i] <span class="ot">&lt;-</span> <span class="st">'mean between -0.5 and 0.5'</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(cat_vec) <span class="co">#create a table summarizing results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>cat_vec
+              mean &lt; -0.5                mean &gt; 0.5 mean between -0.5 and 0.5 
+                        6                         6                        88 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="subsetting-data-and-objects" class="level1">
+<h1>Subsetting Data and Objects</h1>
+<p>There are a handful of different ways we have seen to subset or select specific aspects of a given object.</p>
+<section id="subset-by-element-or-rowcolumn" class="level2">
+<h2 class="anchored" data-anchor-id="subset-by-element-or-rowcolumn">Subset by Element or Row/Column</h2>
+<p>For example, we have seen using the index for both vectors and matrices. Let’s create a vector of length 5 and a 5x5 (row x column) matrix to illustrate this, where the elements are the location of the vector or row/column of the matrix from 1 to 5:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>vec1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> <span class="co"># create a vector of length 5</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>vec1 <span class="co"># view the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mat1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">as.numeric</span>(<span class="fu">paste0</span>( <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">matrix</span>( <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="at">each=</span><span class="dv">5</span>), <span class="at">nrow=</span><span class="dv">5</span>))), <span class="at">nrow=</span><span class="dv">5</span>) <span class="co">#create a matrix with each coordinate being its combination of row and column</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mat1 <span class="co"># print the matrix</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]   11   12   13   14   15
+[2,]   21   22   23   24   25
+[3,]   31   32   33   34   35
+[4,]   41   42   43   44   45
+[5,]   51   52   53   54   55</code></pre>
+</div>
+</div>
+<p>For example, if we wanted to see the 4th element of our vector:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>vec1[<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<p>We see that it is the expected value 4.</p>
+<p>If we wanted to see the 4th column of our matrix:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mat1[,<span class="dv">4</span>] <span class="co"># select entire fourth column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14 24 34 44 54</code></pre>
+</div>
+</div>
+<p>We see we have the values 14, 24, 34, 44, and 54 to reflect the 5 different rows and our column.</p>
+<p>Likewise, we can do the same for the entire 4th row of the our matrix:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mat1[<span class="dv">4</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 41 42 43 44 45</code></pre>
+</div>
+</div>
+<p>Additionally, we can select a single element of the matrix by providing both a row and column coordinate. For example, we can call the 2nd row and 4th column:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mat1[<span class="dv">2</span>,<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24</code></pre>
+</div>
+</div>
+<p>Here we see the value is 24, as expected for the requested location.</p>
+</section>
+<section id="subset-by-name" class="level2">
+<h2 class="anchored" data-anchor-id="subset-by-name">Subset by Name</h2>
+<p>Data frames always have column names (but can also be selected by index). Unique row names are optional for data frames (that aren’t just the number of the row). For vectors and matrices names are also optional, but can be helpful.</p>
+<p>When we do have a name, we can specifically request the data by name. Let’s create a small data frame of the dogs in the Kaizer family to see this behavior:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dog_name=</span><span class="fu">c</span>(<span class="st">'Baisy'</span>,<span class="st">'Kaizer'</span>,<span class="st">'Yahtzee'</span>,<span class="st">'Sheba'</span>), </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">state=</span><span class="fu">c</span>(<span class="st">'CO'</span>,<span class="st">'IA'</span>,<span class="st">'IA'</span>,<span class="st">'VA'</span>), </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">size=</span><span class="fu">c</span>(<span class="st">'med'</span>,<span class="st">'large'</span>,<span class="st">'small'</span>,<span class="st">'med'</span>), </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">est_age=</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">10</span>,<span class="dv">2</span>,<span class="dv">11</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>my_df <span class="co"># print data frame</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  dog_name state  size est_age
+1    Baisy    CO   med       7
+2   Kaizer    IA large      10
+3  Yahtzee    IA small       2
+4    Sheba    VA   med      11</code></pre>
+</div>
+</div>
+<p>We the data frame contains information in both numeric and character formats. If we wanted to extract the column of dog names we could request the data in three different ways:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>my_df[,<span class="dv">1</span>] <span class="co"># by column number</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Baisy"   "Kaizer"  "Yahtzee" "Sheba"  </code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>my_df[,<span class="st">'dog_name'</span>] <span class="co"># by column name in the [row,column] structure similar to a matrix</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Baisy"   "Kaizer"  "Yahtzee" "Sheba"  </code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>my_df<span class="sc">$</span>dog_name <span class="co"># by column name using only the "$" operator</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Baisy"   "Kaizer"  "Yahtzee" "Sheba"  </code></pre>
+</div>
+</div>
+<p>We can see that all 3 approaches correctly pull the column containing the names of the puppers.</p>
+</section>
+<section id="subset-by-condition" class="level2">
+<h2 class="anchored" data-anchor-id="subset-by-condition">Subset by Condition</h2>
+<p>One way we may wish to subset data is by applying a logical rule, where values with <code>TRUE</code> are retained and <code>FALSE</code> removed. For example, let’s say we wish to subset by dogs living in Iowa:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>my_df[ my_df<span class="sc">$</span>state<span class="sc">==</span><span class="st">'IA'</span>, ] <span class="co"># extract the dogs who live in Iowa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  dog_name state  size est_age
+2   Kaizer    IA large      10
+3  Yahtzee    IA small       2</code></pre>
+</div>
+</div>
+<p>We see that Kaizer and Yahtzee were correctly subset.</p>
+<p>Another similar approach is to use the <code>which()</code> function, which returns the indices where the statement is true:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>( my_df<span class="sc">$</span>state <span class="sc">==</span> <span class="st">'IA'</span> ) <span class="co"># check which indices match this value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 3</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>my_df[ <span class="fu">which</span>( my_df<span class="sc">$</span>state <span class="sc">==</span> <span class="st">'IA'</span> ), ] <span class="co"># extract the dogs who live in Iowa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  dog_name state  size est_age
+2   Kaizer    IA large      10
+3  Yahtzee    IA small       2</code></pre>
+</div>
+</div>
+<p>The use of <code>which()</code> resulted in the same subset that was desired.</p>
+<p>We can also subset based on conditions involving our numeric variable estimated age:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>my_df[ <span class="fu">which</span>( my_df<span class="sc">$</span>est_age <span class="sc">&lt;=</span> <span class="dv">8</span>),] <span class="co"># subset to dogs less than or equal to 8 years of age</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  dog_name state  size est_age
+1    Baisy    CO   med       7
+3  Yahtzee    IA small       2</code></pre>
+</div>
+</div>
+<p>I generally prefer using <code>which()</code> because I have occasionally run into issues without it.</p>
+</section>
+<section id="subset-by-multiple-values" class="level2">
+<h2 class="anchored" data-anchor-id="subset-by-multiple-values">Subset by Multiple Values</h2>
+<p>Another consideration is that we can match multiple elements in a column or have multiple conditions. For multiple elements instead of <code>==</code> we can use <code>%in%</code>. An example of subsetting based on a dog living in Iowa or Virginia is</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>my_df[ <span class="fu">which</span>( my_df<span class="sc">$</span>state <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'IA'</span>,<span class="st">'VA'</span>) ),] <span class="co"># subset dogs living in Iowa or Virginia</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  dog_name state  size est_age
+2   Kaizer    IA large      10
+3  Yahtzee    IA small       2
+4    Sheba    VA   med      11</code></pre>
+</div>
+</div>
+<p>If we accidentally used <code>==</code> we see an incorrect subset:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>my_df[ <span class="fu">which</span>( my_df<span class="sc">$</span>state <span class="sc">==</span> <span class="fu">c</span>(<span class="st">'IA'</span>,<span class="st">'VA'</span>) ),] <span class="co"># note the incorrect subset when using ==</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  dog_name state  size est_age
+3  Yahtzee    IA small       2
+4    Sheba    VA   med      11</code></pre>
+</div>
+</div>
+<p>Where did Kaizer go?! It turns out the R repeated the <code>c('IA','VA')</code> vector so it was really matching <code>c('IA','VA','IA','VA')</code> to our vector of <code>c('CO','IA','IA','VA')</code>.</p>
+</section>
+<section id="subset-with-multiple-conditions" class="level2">
+<h2 class="anchored" data-anchor-id="subset-with-multiple-conditions">Subset with Multiple Conditions</h2>
+<p>For multiple conditions we can either use <code>&amp;</code> (and) to indicate both conditions are met or <code>|</code> (or) to indicate either condition is met. An example of matching Iowa <em>and</em> small dogs is:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>my_df[ <span class="fu">which</span>( my_df<span class="sc">$</span>state<span class="sc">==</span><span class="st">'IA'</span> <span class="sc">&amp;</span> my_df<span class="sc">$</span>size<span class="sc">==</span><span class="st">'small'</span> ),] <span class="co"># subset rows where both conditions are TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  dog_name state  size est_age
+3  Yahtzee    IA small       2</code></pre>
+</div>
+</div>
+<p>An example of matching Colorado <em>or</em> medium size is:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>my_df[ <span class="fu">which</span>( my_df<span class="sc">$</span>state<span class="sc">==</span><span class="st">'CO'</span> <span class="sc">|</span> my_df<span class="sc">$</span>size<span class="sc">==</span><span class="st">'med'</span>),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  dog_name state size est_age
+1    Baisy    CO  med       7
+4    Sheba    VA  med      11</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="a-multiple-testing-simulation-study" class="level1">
+<h1>A Multiple Testing Simulation Study</h1>
+<p>Multiple testing or multiple comparison issues arise in many cases when you conduct more than one statistical test. In some contexts the issue is built into the methodology (e.g., an ANOVA followed by a post-hoc test), but in other cases it is the result of a study design (e.g., having multiple outcomes of interest). We’ll approach the situation more generally where we have a study with 10 different hypothesis tests being conducted.</p>
+<p>One of the easiest ways to see the impact of our choices on multiple testing correction is to conduct a simulation study. We’ll focus on the two extremes, one where all 10 hypothesis tests are null and one where all 10 hypothesis tests are an alternative. And to focus on the trade-off of both marginal and family-wise type I error rates with power, we’ll summarize the performance of all 3.</p>
+<p>As our motivating context, we wish to design a clinical trial where we want to detect a mean difference of 10 mg/dL in total cholesterol over the course of an intervention in a study comparing two groups. We have preliminary data that suggests the expected standard deviation is 15 mg/dL. Our sample size, assuming <span class="math inline">\(\alpha=0.05\)</span> and 80% power, is</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">delta=</span><span class="dv">10</span>, <span class="at">sd=</span><span class="dv">15</span>, <span class="at">sig.level=</span><span class="fl">0.05</span>, <span class="at">power=</span><span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Two-sample t test power calculation 
+
+              n = 36.3058
+          delta = 10
+             sd = 15
+      sig.level = 0.05
+          power = 0.8
+    alternative = two.sided
+
+NOTE: n is number in *each* group</code></pre>
+</div>
+</div>
+<p>Based on our <code>power.t.test</code> calculation, we would need to enroll 37 participants per group. With this information in mind, let’s explore some simulation studies with 1000 simulated trials with 10 hypotheses.</p>
+<section id="null-scenario" class="level2">
+<h2 class="anchored" data-anchor-id="null-scenario">Null Scenario</h2>
+<p>First we’ll start with the null scenario, where each group will have a simulated mean change of 0 over the course of the study. For each study we will save the uncorrected p-value, the Bonferroni corrected p-value, and the false discovery rate (FDR) corrected p-value. From our simulation study we will then be able to calculate:</p>
+<ul>
+<li>the <em>marginal</em> type I error rate (i.e., the type I error rate for each individual test)</li>
+<li>the <em>family-wise</em> type I error rate (i.e., the type I error rate within our simulated trial across all 10 tests, where even 1 falsely reject <span class="math inline">\(H_0\)</span> is a failure)</li>
+<li>the power (which we’ll see in the alternative scenario)</li>
+</ul>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r fold-show code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: set the seed for reproducibility</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1117</span>)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: define variables of interest (that will be easy to change for different simulations)</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of simulations</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>nhyp <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># number of hypothesis tests</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># type I error rate</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="co"># set simulation parameters for data:</span></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>mean_grp1 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>mean_grp2 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>sd_grp1 <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>sd_grp2 <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>n_grp1 <span class="ot">&lt;-</span> <span class="dv">37</span></span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>n_grp2 <span class="ot">&lt;-</span> <span class="dv">37</span></span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: initialize a matrix to store our results in for each test based on our 3 approaches</span></span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>null_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow=</span>nsim, <span class="at">ncol=</span>nhyp<span class="sc">*</span><span class="dv">3</span>)</span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>( null_mat ) <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp), <span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp), <span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp) )</span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: simulate the trials and hypotheses, store the p-value results</span></span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>  simdat_grp1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rnorm</span>( <span class="at">n=</span>n_grp1<span class="sc">*</span>nhyp, <span class="at">mean=</span>mean_grp1, <span class="at">sd=</span>sd_grp1 ), <span class="at">ncol=</span>nhyp, <span class="at">nrow=</span>n_grp1, <span class="at">byrow=</span><span class="cn">FALSE</span>)</span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>  simdat_grp2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rnorm</span>( <span class="at">n=</span>n_grp2<span class="sc">*</span>nhyp, <span class="at">mean=</span>mean_grp2, <span class="at">sd=</span>sd_grp2 ), <span class="at">ncol=</span>nhyp, <span class="at">nrow=</span>n_grp2, <span class="at">byrow=</span><span class="cn">FALSE</span>)</span>
+<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a>  pvec_orig <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>nhyp, <span class="cf">function</span>(x) <span class="fu">t.test</span>(<span class="at">x=</span>simdat_grp1[,x], <span class="at">y=</span>simdat_grp2[,x])<span class="sc">$</span>p.value )</span>
+<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a>  pvec_fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig, <span class="at">method=</span><span class="st">'fdr'</span>)  </span>
+<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a>  pvec_bonf <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig, <span class="at">method=</span><span class="st">'bonferroni'</span>)  </span>
+<span id="cb48-29"><a href="#cb48-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-30"><a href="#cb48-30" aria-hidden="true" tabindex="-1"></a>  null_mat[i,] <span class="ot">&lt;-</span> <span class="fu">c</span>(pvec_orig, pvec_fdr, pvec_bonf)</span>
+<span id="cb48-31"><a href="#cb48-31" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Before summarizing the type I error rates, let’s first examine some histograms of our overall collection of p-values from the 10 tests:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)], <span class="at">main=</span><span class="st">'Uncorrected p-value'</span>, <span class="at">xlab=</span><span class="st">'p-value'</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10000</span>))</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)], <span class="at">main=</span><span class="st">'FDR Corrected p-value'</span>, <span class="at">xlab=</span><span class="st">'p-value'</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10000</span>))</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)], <span class="at">main=</span><span class="st">'Bonferroni Corrected p-Value'</span>, <span class="at">xlab=</span><span class="st">'p-value'</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The uncorrected p-value from our <span class="math inline">\(10 \times 1000 = 10000\)</span> total tests reflects the expected behavior for a null response, a uniform distribution. For both corrections, FDR and Bonferroni, we see that the distribution is skewed towards higher p-values, representing that post-hoc correction being applied to our tests.</p>
+<p>Now let’s summarize our marginal and family-wise type I error rates:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>orig_marg_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( null_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>fdr_marg_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( null_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>bonf_marg_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( null_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>orig_fw_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">rowSums</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha) <span class="sc">&gt;</span> <span class="dv">0</span> )</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>fdr_fw_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">rowSums</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha) <span class="sc">&gt;</span> <span class="dv">0</span>  )</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>bonf_fw_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">rowSums</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha) <span class="sc">&gt;</span> <span class="dv">0</span>  )</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>res_tab <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">c</span>(orig_marg_t1e,fdr_marg_t1e,bonf_marg_t1e, orig_fw_t1e, fdr_fw_t1e, bonf_fw_t1e), <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span>F, </span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">'Uncorrected'</span>,<span class="st">'FDR'</span>,<span class="st">'Bonferroni'</span>), <span class="fu">c</span>(<span class="st">'Marginal T1E'</span>,<span class="st">'Family-wise T1E'</span>)) )</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(res_tab, <span class="at">align=</span><span class="st">'cc'</span>, <span class="at">escape=</span>F) <span class="sc">%&gt;%</span></span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>, <span class="at">full_width =</span> F, <span class="at">position =</span> <span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Marginal T1E</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Family-wise T1E</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Uncorrected</td>
+<td style="text-align: center;">0.0520</td>
+<td style="text-align: center;">0.422</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FDR</td>
+<td style="text-align: center;">0.0054</td>
+<td style="text-align: center;">0.050</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bonferroni</td>
+<td style="text-align: center;">0.0050</td>
+<td style="text-align: center;">0.050</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>We can also compare our estimated family-wise type I error rate for the uncorrected p-values through the formula of <span class="math inline">\(1-(1-\alpha)^{10} = 1-(0.95)^{10} = 0.401\)</span>. In other words, we’d expect among 10 hypothesis tests the probability of incorrectly rejecting at least 1 test is expected to be 40.1% (or 42.2% from our simulation).</p>
+</section>
+<section id="alternative-scenario" class="level2">
+<h2 class="anchored" data-anchor-id="alternative-scenario">Alternative Scenario</h2>
+<p>We can use the same code above with a few tweaks to the specified effect size (i.e., 10) and also the object names in our code for some of our results:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r fold-show code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: set the seed for reproducibility</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1117</span>)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: define variables of interest (that will be easy to change for different simulations)</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of simulations</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>nhyp <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># number of hypothesis tests</span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># type I error rate</span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="co"># set simulation parameters for data:</span></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>mean_grp1 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>mean_grp2 <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># alternative scenario</span></span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>sd_grp1 <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>sd_grp2 <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>n_grp1 <span class="ot">&lt;-</span> <span class="dv">37</span></span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>n_grp2 <span class="ot">&lt;-</span> <span class="dv">37</span></span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: initialize a matrix to store our results in for each test based on our 3 approaches</span></span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>alt_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow=</span>nsim, <span class="at">ncol=</span>nhyp<span class="sc">*</span><span class="dv">3</span>)</span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>( alt_mat ) <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp), <span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp), <span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp) )</span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: simulate the trials and hypotheses, store the p-value results</span></span>
+<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>  simdat_grp1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rnorm</span>( <span class="at">n=</span>n_grp1<span class="sc">*</span>nhyp, <span class="at">mean=</span>mean_grp1, <span class="at">sd=</span>sd_grp1 ), <span class="at">ncol=</span>nhyp, <span class="at">nrow=</span>n_grp1, <span class="at">byrow=</span><span class="cn">FALSE</span>)</span>
+<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>  simdat_grp2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rnorm</span>( <span class="at">n=</span>n_grp2<span class="sc">*</span>nhyp, <span class="at">mean=</span>mean_grp2, <span class="at">sd=</span>sd_grp2 ), <span class="at">ncol=</span>nhyp, <span class="at">nrow=</span>n_grp2, <span class="at">byrow=</span><span class="cn">FALSE</span>)</span>
+<span id="cb51-25"><a href="#cb51-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-26"><a href="#cb51-26" aria-hidden="true" tabindex="-1"></a>  pvec_orig <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>nhyp, <span class="cf">function</span>(x) <span class="fu">t.test</span>(<span class="at">x=</span>simdat_grp1[,x], <span class="at">y=</span>simdat_grp2[,x])<span class="sc">$</span>p.value )</span>
+<span id="cb51-27"><a href="#cb51-27" aria-hidden="true" tabindex="-1"></a>  pvec_fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig, <span class="at">method=</span><span class="st">'fdr'</span>)  </span>
+<span id="cb51-28"><a href="#cb51-28" aria-hidden="true" tabindex="-1"></a>  pvec_bonf <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig, <span class="at">method=</span><span class="st">'bonferroni'</span>)  </span>
+<span id="cb51-29"><a href="#cb51-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-30"><a href="#cb51-30" aria-hidden="true" tabindex="-1"></a>  alt_mat[i,] <span class="ot">&lt;-</span> <span class="fu">c</span>(pvec_orig, pvec_fdr, pvec_bonf)</span>
+<span id="cb51-31"><a href="#cb51-31" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Before summarizing the power, let’s examine some histograms of our overall collection of p-values from the 10 tests:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(alt_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)], <span class="at">main=</span><span class="st">'Uncorrected p-value'</span>, <span class="at">xlab=</span><span class="st">'p-value'</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10000</span>))</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(alt_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)], <span class="at">main=</span><span class="st">'FDR Corrected p-value'</span>, <span class="at">xlab=</span><span class="st">'p-value'</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10000</span>))</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(alt_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)], <span class="at">main=</span><span class="st">'Bonferroni Corrected p-Value'</span>, <span class="at">xlab=</span><span class="st">'p-value'</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>For our alternative scenario we see the approximate behavior we’d expect, where the distribution is strongly concentrated towards lower p-values and is right skewed. One interesting observation is for our Bonferroni correct p-value, where we also see the spike for corrected p-values between 0.95 and 1.0.</p>
+<p>Now let’s summarize the power and add it to our results table from above:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>orig_marg_pwr <span class="ot">&lt;-</span> <span class="fu">mean</span>( alt_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>fdr_marg_pwr <span class="ot">&lt;-</span> <span class="fu">mean</span>( alt_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>bonf_marg_pwr <span class="ot">&lt;-</span> <span class="fu">mean</span>( alt_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>res_tab <span class="ot">&lt;-</span> <span class="fu">cbind</span>(res_tab, <span class="st">'Power'</span><span class="ot">=</span><span class="fu">c</span>(orig_marg_pwr, fdr_marg_pwr, bonf_marg_pwr))</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(res_tab, <span class="at">align=</span><span class="st">'ccc'</span>, <span class="at">escape=</span>F) <span class="sc">%&gt;%</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>, <span class="at">full_width =</span> F, <span class="at">position =</span> <span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Marginal T1E</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Family-wise T1E</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Power</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Uncorrected</td>
+<td style="text-align: center;">0.0520</td>
+<td style="text-align: center;">0.422</td>
+<td style="text-align: center;">0.8110</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FDR</td>
+<td style="text-align: center;">0.0054</td>
+<td style="text-align: center;">0.050</td>
+<td style="text-align: center;">0.7804</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bonferroni</td>
+<td style="text-align: center;">0.0050</td>
+<td style="text-align: center;">0.050</td>
+<td style="text-align: center;">0.4844</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Here we see the trade-offs between our different approaches:</p>
+<ul>
+<li><p>Our uncorrected approach has our desired <em>marginal</em> type I error rate and power, but the family-wise type I error rate is very large.</p></li>
+<li><p>The FDR has a conservative marginal type I error rate, but achieves the desired <span class="math inline">\(\alpha\)</span> for our family-wise type I error rate. The power is slightly lower than the uncorrected, but not by much in this case.</p></li>
+<li><p>The Bonferroni has similar type I error rates as the FDR, but it is far more conservative since its power is only 48.4%.</p></li>
+</ul>
+</section>
+<section id="upping-the-number-of-tests-to-100" class="level2">
+<h2 class="anchored" data-anchor-id="upping-the-number-of-tests-to-100">Upping the Number of Tests to 100</h2>
+<p>Let’s just see the results for our study if we up the number of tests to 100 from 10:</p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-29_01b82a3dd8309e24e91ce4efd9fac2fa">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: set the seed for reproducibility</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11172020</span>)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: define variables of interest (that will be easy to change for different simulations)</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of simulations</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>nhyp <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># number of hypothesis tests</span></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># type I error rate</span></span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a><span class="co"># set simulation parameters for data:</span></span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>mean_grp1 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>mean_grp2_null <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># null scenario</span></span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>mean_grp2_alt <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># alternative scenario</span></span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>sd_grp1 <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>sd_grp2 <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>n_grp1 <span class="ot">&lt;-</span> <span class="dv">37</span></span>
+<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>n_grp2 <span class="ot">&lt;-</span> <span class="dv">37</span></span>
+<span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: initialize a matrix to store our results in for each test based on our 3 approaches</span></span>
+<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a>null_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow=</span>nsim, <span class="at">ncol=</span>nhyp<span class="sc">*</span><span class="dv">3</span>)</span>
+<span id="cb54-20"><a href="#cb54-20" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>( null_mat ) <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp), <span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp), <span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp) )</span>
+<span id="cb54-21"><a href="#cb54-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-22"><a href="#cb54-22" aria-hidden="true" tabindex="-1"></a>alt_mat <span class="ot">&lt;-</span> null_mat <span class="co"># create alt_mat to save results in for alternative scenario</span></span>
+<span id="cb54-23"><a href="#cb54-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-24"><a href="#cb54-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: simulate the trials and hypotheses, store the p-value results</span></span>
+<span id="cb54-25"><a href="#cb54-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb54-26"><a href="#cb54-26" aria-hidden="true" tabindex="-1"></a>  simdat_grp1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rnorm</span>( <span class="at">n=</span>n_grp1<span class="sc">*</span>nhyp, <span class="at">mean=</span>mean_grp1, <span class="at">sd=</span>sd_grp1 ), <span class="at">ncol=</span>nhyp, <span class="at">nrow=</span>n_grp1, <span class="at">byrow=</span><span class="cn">FALSE</span>)</span>
+<span id="cb54-27"><a href="#cb54-27" aria-hidden="true" tabindex="-1"></a>  simdat_grp2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rnorm</span>( <span class="at">n=</span>n_grp2<span class="sc">*</span>nhyp, <span class="at">mean=</span>mean_grp2_null, <span class="at">sd=</span>sd_grp2 ), <span class="at">ncol=</span>nhyp, <span class="at">nrow=</span>n_grp2, <span class="at">byrow=</span><span class="cn">FALSE</span>)</span>
+<span id="cb54-28"><a href="#cb54-28" aria-hidden="true" tabindex="-1"></a>  simdat_grp2_alt <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rnorm</span>( <span class="at">n=</span>n_grp2<span class="sc">*</span>nhyp, <span class="at">mean=</span>mean_grp2_alt, <span class="at">sd=</span>sd_grp2 ), <span class="at">ncol=</span>nhyp, <span class="at">nrow=</span>n_grp2, <span class="at">byrow=</span><span class="cn">FALSE</span>)</span>
+<span id="cb54-29"><a href="#cb54-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-30"><a href="#cb54-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># null scenario</span></span>
+<span id="cb54-31"><a href="#cb54-31" aria-hidden="true" tabindex="-1"></a>  pvec_orig <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>nhyp, <span class="cf">function</span>(x) <span class="fu">t.test</span>(<span class="at">x=</span>simdat_grp1[,x], <span class="at">y=</span>simdat_grp2[,x])<span class="sc">$</span>p.value )</span>
+<span id="cb54-32"><a href="#cb54-32" aria-hidden="true" tabindex="-1"></a>  pvec_fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig, <span class="at">method=</span><span class="st">'fdr'</span>)  </span>
+<span id="cb54-33"><a href="#cb54-33" aria-hidden="true" tabindex="-1"></a>  pvec_bonf <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig, <span class="at">method=</span><span class="st">'bonferroni'</span>)  </span>
+<span id="cb54-34"><a href="#cb54-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-35"><a href="#cb54-35" aria-hidden="true" tabindex="-1"></a>  null_mat[i,] <span class="ot">&lt;-</span> <span class="fu">c</span>(pvec_orig, pvec_fdr, pvec_bonf)</span>
+<span id="cb54-36"><a href="#cb54-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-37"><a href="#cb54-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># alternative scenario</span></span>
+<span id="cb54-38"><a href="#cb54-38" aria-hidden="true" tabindex="-1"></a>  pvec_orig_alt <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>nhyp, <span class="cf">function</span>(x) <span class="fu">t.test</span>(<span class="at">x=</span>simdat_grp1[,x], <span class="at">y=</span>simdat_grp2_alt[,x])<span class="sc">$</span>p.value )</span>
+<span id="cb54-39"><a href="#cb54-39" aria-hidden="true" tabindex="-1"></a>  pvec_fdr_alt <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig_alt, <span class="at">method=</span><span class="st">'fdr'</span>)  </span>
+<span id="cb54-40"><a href="#cb54-40" aria-hidden="true" tabindex="-1"></a>  pvec_bonf_alt <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig_alt, <span class="at">method=</span><span class="st">'bonferroni'</span>)  </span>
+<span id="cb54-41"><a href="#cb54-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-42"><a href="#cb54-42" aria-hidden="true" tabindex="-1"></a>  alt_mat[i,] <span class="ot">&lt;-</span> <span class="fu">c</span>(pvec_orig_alt, pvec_fdr_alt, pvec_bonf_alt)</span>
+<span id="cb54-43"><a href="#cb54-43" aria-hidden="true" tabindex="-1"></a>}  </span>
+<span id="cb54-44"><a href="#cb54-44" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-45"><a href="#cb54-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Make Table for Results</span></span>
+<span id="cb54-46"><a href="#cb54-46" aria-hidden="true" tabindex="-1"></a>orig_marg_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( null_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb54-47"><a href="#cb54-47" aria-hidden="true" tabindex="-1"></a>fdr_marg_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( null_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb54-48"><a href="#cb54-48" aria-hidden="true" tabindex="-1"></a>bonf_marg_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( null_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb54-49"><a href="#cb54-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-50"><a href="#cb54-50" aria-hidden="true" tabindex="-1"></a>orig_fw_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">rowSums</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha) <span class="sc">&gt;</span> <span class="dv">0</span> )</span>
+<span id="cb54-51"><a href="#cb54-51" aria-hidden="true" tabindex="-1"></a>fdr_fw_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">rowSums</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha) <span class="sc">&gt;</span> <span class="dv">0</span>  )</span>
+<span id="cb54-52"><a href="#cb54-52" aria-hidden="true" tabindex="-1"></a>bonf_fw_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">rowSums</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha) <span class="sc">&gt;</span> <span class="dv">0</span>  )</span>
+<span id="cb54-53"><a href="#cb54-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-54"><a href="#cb54-54" aria-hidden="true" tabindex="-1"></a>orig_marg_pwr <span class="ot">&lt;-</span> <span class="fu">mean</span>( alt_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb54-55"><a href="#cb54-55" aria-hidden="true" tabindex="-1"></a>fdr_marg_pwr <span class="ot">&lt;-</span> <span class="fu">mean</span>( alt_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb54-56"><a href="#cb54-56" aria-hidden="true" tabindex="-1"></a>bonf_marg_pwr <span class="ot">&lt;-</span> <span class="fu">mean</span>( alt_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb54-57"><a href="#cb54-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-58"><a href="#cb54-58" aria-hidden="true" tabindex="-1"></a>res_tab <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">c</span>(orig_marg_t1e,fdr_marg_t1e,bonf_marg_t1e, orig_fw_t1e, fdr_fw_t1e, bonf_fw_t1e, orig_marg_pwr, fdr_marg_pwr, bonf_marg_pwr)</span>
+<span id="cb54-59"><a href="#cb54-59" aria-hidden="true" tabindex="-1"></a>                   , <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">byrow=</span>F, <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">'Uncorrected'</span>,<span class="st">'FDR'</span>,<span class="st">'Bonferroni'</span>), <span class="fu">c</span>(<span class="st">'Marginal T1E'</span>,<span class="st">'Family-wise T1E'</span>,<span class="st">'Power'</span>)) )</span>
+<span id="cb54-60"><a href="#cb54-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-61"><a href="#cb54-61" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(res_tab, <span class="at">align=</span><span class="st">'ccc'</span>, <span class="at">escape=</span>F) <span class="sc">%&gt;%</span></span>
+<span id="cb54-62"><a href="#cb54-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>, <span class="at">full_width =</span> F, <span class="at">position =</span> <span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Marginal T1E</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Family-wise T1E</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Power</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Uncorrected</td>
+<td style="text-align: center;">0.05007</td>
+<td style="text-align: center;">0.992</td>
+<td style="text-align: center;">0.80844</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FDR</td>
+<td style="text-align: center;">0.00042</td>
+<td style="text-align: center;">0.039</td>
+<td style="text-align: center;">0.77744</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bonferroni</td>
+<td style="text-align: center;">0.00040</td>
+<td style="text-align: center;">0.038</td>
+<td style="text-align: center;">0.23273</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="some-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="some-thoughts">Some Thoughts</h2>
+<p>Like almost everything in statistics, there is not a single right answer for how to approach the question of multiple comparisons. However, a few considerations are highlighted below.</p>
+<ul>
+<li><p>Is the study “exploratory” or “confirmatory”? One way to distinguish these ideas is that <em>exploratory</em> research should be hypothesis generating, whereas <em>confirmatory</em> research should have a well-defined hypothesis you are attempting to evaluate. It is possible things fall along this spectrum as well, but this should be identified at the start of the study design and/or data collection process.</p></li>
+<li><p>Specifying a single primary outcome, a small set of secondary outcomes, and everything else as exploratory outcomes. In this case, the primary outcome would stand on its own, and you wouldn’t have to correct for multiple comparisons. For the secondary outcomes, you may want to correct for multiple comparisons within that set, but it will partly depend on the outcomes in question and the hypotheses being tested. We rarely correct for “exploratory” outcomes in practice.</p></li>
+<li><p>Instead of the Bonferroni correction, use the Holm (also known as Bonferroni-Holm) correction, which is still conservative but generally has greater power. The challenge with Bonferroni-Holm or FDR, like with many other correction strategies, is it is more complex and it is not easy to generalize for a power/sample size calculation (although you can always do simulation studies!).</p></li>
+</ul>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb55" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 5 Lab"</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
+<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb55-20"><a href="#cb55-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-21"><a href="#cb55-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-22"><a href="#cb55-22" aria-hidden="true" tabindex="-1"></a>This page is part of the University of Colorado-Anschutz Medical Campus' <span class="co">[</span><span class="ot">BIOS 6618 Labs</span><span class="co">](/labs/index.qmd)</span> collection, the mini-lecture content delivered at the start of class before breaking out into small groups to work on the homework assignment.</span>
+<span id="cb55-23"><a href="#cb55-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-24"><a href="#cb55-24" aria-hidden="true" tabindex="-1"></a><span class="fu"># What's on the docket this week?</span></span>
+<span id="cb55-25"><a href="#cb55-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-26"><a href="#cb55-26" aria-hidden="true" tabindex="-1"></a>In Week 5 we are introducing if statements, including if/else statements. These allow you to tell R to complete a certain step *if and only if* some criteria is met. We will also see different ways we can subset data. Finally, we have an example of a simulation study to evaluate the challenge of multiple testing in statistics.</span>
+<span id="cb55-27"><a href="#cb55-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-28"><a href="#cb55-28" aria-hidden="true" tabindex="-1"></a><span class="fu"># if/else Statements</span></span>
+<span id="cb55-29"><a href="#cb55-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-30"><a href="#cb55-30" aria-hidden="true" tabindex="-1"></a><span class="in">`if`</span> and <span class="in">`else`</span> statements are great to employ certain conditions when you want to them complete a certain step. <span class="co">[</span><span class="ot">Sections 9.2-9.3</span><span class="co">](https://rstudio-education.github.io/hopr/programs.html#if-statements)</span> of our R Textbook discuss if and else statements and can serve as an additional reference.</span>
+<span id="cb55-31"><a href="#cb55-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-32"><a href="#cb55-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Using Only `if`</span></span>
+<span id="cb55-33"><a href="#cb55-33" aria-hidden="true" tabindex="-1"></a>The <span class="in">`if`</span> statement has a very simple structure:</span>
+<span id="cb55-34"><a href="#cb55-34" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=F}</span></span>
+<span id="cb55-35"><a href="#cb55-35" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( condition ){</span>
+<span id="cb55-36"><a href="#cb55-36" aria-hidden="true" tabindex="-1"></a>  run code <span class="cf">if</span> condition met</span>
+<span id="cb55-37"><a href="#cb55-37" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb55-38"><a href="#cb55-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-39"><a href="#cb55-39" aria-hidden="true" tabindex="-1"></a>The condition must be something that is either <span class="in">`TRUE`</span> or <span class="in">`FALSE`</span>. If the condition is met, then R will run whatever code is contained between our curly brackets.</span>
+<span id="cb55-40"><a href="#cb55-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-41"><a href="#cb55-41" aria-hidden="true" tabindex="-1"></a>As an example, let's write three <span class="in">`if`</span> statements that generate a sample from either a normal or exponential distribution based on an object we defined called <span class="in">`dist`</span> as either <span class="in">`normal`</span> or <span class="in">`exponential`</span>:</span>
+<span id="cb55-42"><a href="#cb55-42" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hold'}</span></span>
+<span id="cb55-43"><a href="#cb55-43" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">561326</span>)</span>
+<span id="cb55-44"><a href="#cb55-44" aria-hidden="true" tabindex="-1"></a>dist <span class="ot">&lt;-</span> <span class="st">'exponential'</span> <span class="co"># set desired distribution to simulate from</span></span>
+<span id="cb55-45"><a href="#cb55-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-46"><a href="#cb55-46" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(dist <span class="sc">==</span> <span class="st">'exponential'</span>){ <span class="fu">rexp</span>(<span class="at">n=</span><span class="dv">10</span>, <span class="at">rate=</span><span class="fl">0.5</span>) }</span>
+<span id="cb55-47"><a href="#cb55-47" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(dist <span class="sc">==</span> <span class="st">'normal'</span>){ <span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">10</span>, <span class="at">mean=</span><span class="dv">10</span>, <span class="at">sd=</span><span class="dv">4</span>) }</span>
+<span id="cb55-48"><a href="#cb55-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-49"><a href="#cb55-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-50"><a href="#cb55-50" aria-hidden="true" tabindex="-1"></a>We could also make it more informative by also printing a character string that reminds us what distribution we selected:</span>
+<span id="cb55-51"><a href="#cb55-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hold'}</span></span>
+<span id="cb55-52"><a href="#cb55-52" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">561326</span>)</span>
+<span id="cb55-53"><a href="#cb55-53" aria-hidden="true" tabindex="-1"></a>dist <span class="ot">&lt;-</span> <span class="st">'exponential'</span> <span class="co"># set desired distribution to simulate from</span></span>
+<span id="cb55-54"><a href="#cb55-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-55"><a href="#cb55-55" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(dist <span class="sc">==</span> <span class="st">'exponential'</span>){ </span>
+<span id="cb55-56"><a href="#cb55-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">'You requested the exponential distribution.'</span>)</span>
+<span id="cb55-57"><a href="#cb55-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rexp</span>(<span class="at">n=</span><span class="dv">10</span>, <span class="at">rate=</span><span class="fl">0.5</span>) </span>
+<span id="cb55-58"><a href="#cb55-58" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb55-59"><a href="#cb55-59" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(dist <span class="sc">==</span> <span class="st">'normal'</span>){ </span>
+<span id="cb55-60"><a href="#cb55-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">'You requested the normal distribution.'</span>)  </span>
+<span id="cb55-61"><a href="#cb55-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">10</span>, <span class="at">mean=</span><span class="dv">10</span>, <span class="at">sd=</span><span class="dv">4</span>) </span>
+<span id="cb55-62"><a href="#cb55-62" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb55-63"><a href="#cb55-63" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-64"><a href="#cb55-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-65"><a href="#cb55-65" aria-hidden="true" tabindex="-1"></a>While this example includes two <span class="in">`if`</span> statements, we could add as many as desired to complete a given task.</span>
+<span id="cb55-66"><a href="#cb55-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-67"><a href="#cb55-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-68"><a href="#cb55-68" aria-hidden="true" tabindex="-1"></a><span class="fu">## Adding in `else`</span></span>
+<span id="cb55-69"><a href="#cb55-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-70"><a href="#cb55-70" aria-hidden="true" tabindex="-1"></a>The <span class="in">`if`</span> statement will only run a set of code if the condition is <span class="in">`TRUE`</span>, however we often will want to implement another set of code if the condition is <span class="in">`FALSE`</span>. This is where the <span class="in">`else`</span> statement comes in handy:</span>
+<span id="cb55-71"><a href="#cb55-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=F}</span></span>
+<span id="cb55-72"><a href="#cb55-72" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( condition ){</span>
+<span id="cb55-73"><a href="#cb55-73" aria-hidden="true" tabindex="-1"></a>  run code <span class="cf">if</span> condition met</span>
+<span id="cb55-74"><a href="#cb55-74" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb55-75"><a href="#cb55-75" aria-hidden="true" tabindex="-1"></a>  run this code instead <span class="cf">if</span> condition is NOT met</span>
+<span id="cb55-76"><a href="#cb55-76" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb55-77"><a href="#cb55-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-78"><a href="#cb55-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-79"><a href="#cb55-79" aria-hidden="true" tabindex="-1"></a>It is also possible to add additional <span class="in">`if`</span> statements:</span>
+<span id="cb55-80"><a href="#cb55-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=F}</span></span>
+<span id="cb55-81"><a href="#cb55-81" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( condition ){</span>
+<span id="cb55-82"><a href="#cb55-82" aria-hidden="true" tabindex="-1"></a>  run code <span class="cf">if</span> condition met</span>
+<span id="cb55-83"><a href="#cb55-83" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span> <span class="cf">if</span>( condition2 ){</span>
+<span id="cb55-84"><a href="#cb55-84" aria-hidden="true" tabindex="-1"></a>  run this code instead <span class="cf">if</span> condition IS NOT met but condition2 IS met</span>
+<span id="cb55-85"><a href="#cb55-85" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb55-86"><a href="#cb55-86" aria-hidden="true" tabindex="-1"></a>  run this code only <span class="cf">if</span> condition and condition2 are both NOT met</span>
+<span id="cb55-87"><a href="#cb55-87" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb55-88"><a href="#cb55-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-89"><a href="#cb55-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-90"><a href="#cb55-90" aria-hidden="true" tabindex="-1"></a>For example, perhaps we wish to simulate 100 standard normal data sets of $n=10$ and want to count the number of times the mean is less than -0.5, between -0.5 and 0.5, and greater than 0.5. While there are multiple ways we could achieve this, let's practice with <span class="in">`if`</span> and <span class="in">`else`</span> to achieve this:</span>
+<span id="cb55-93"><a href="#cb55-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-94"><a href="#cb55-94" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">98512</span>) <span class="co"># set seed for reproducibility</span></span>
+<span id="cb55-95"><a href="#cb55-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-96"><a href="#cb55-96" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb55-97"><a href="#cb55-97" aria-hidden="true" tabindex="-1"></a>cat_vec <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="at">length=</span>nsim) <span class="co"># initialize object to store results in</span></span>
+<span id="cb55-98"><a href="#cb55-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-99"><a href="#cb55-99" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim ){</span>
+<span id="cb55-100"><a href="#cb55-100" aria-hidden="true" tabindex="-1"></a>  asd <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">10</span>)</span>
+<span id="cb55-101"><a href="#cb55-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-102"><a href="#cb55-102" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>( <span class="fu">mean</span>(asd) <span class="sc">&lt;</span> <span class="sc">-</span><span class="fl">0.5</span>){</span>
+<span id="cb55-103"><a href="#cb55-103" aria-hidden="true" tabindex="-1"></a>    cat_vec[i] <span class="ot">&lt;-</span> <span class="st">'mean &lt; -0.5'</span></span>
+<span id="cb55-104"><a href="#cb55-104" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">mean</span>(asd) <span class="sc">&gt;</span> <span class="fl">0.5</span>){</span>
+<span id="cb55-105"><a href="#cb55-105" aria-hidden="true" tabindex="-1"></a>    cat_vec[i] <span class="ot">&lt;-</span> <span class="st">'mean &gt; 0.5'</span></span>
+<span id="cb55-106"><a href="#cb55-106" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb55-107"><a href="#cb55-107" aria-hidden="true" tabindex="-1"></a>    cat_vec[i] <span class="ot">&lt;-</span> <span class="st">'mean between -0.5 and 0.5'</span></span>
+<span id="cb55-108"><a href="#cb55-108" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb55-109"><a href="#cb55-109" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb55-110"><a href="#cb55-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-111"><a href="#cb55-111" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(cat_vec) <span class="co">#create a table summarizing results</span></span>
+<span id="cb55-112"><a href="#cb55-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-113"><a href="#cb55-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-114"><a href="#cb55-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-115"><a href="#cb55-115" aria-hidden="true" tabindex="-1"></a><span class="fu"># Subsetting Data and Objects</span></span>
+<span id="cb55-116"><a href="#cb55-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-117"><a href="#cb55-117" aria-hidden="true" tabindex="-1"></a>There are a handful of different ways we have seen to subset or select specific aspects of a given object. </span>
+<span id="cb55-118"><a href="#cb55-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-119"><a href="#cb55-119" aria-hidden="true" tabindex="-1"></a><span class="fu">## Subset by Element or Row/Column</span></span>
+<span id="cb55-120"><a href="#cb55-120" aria-hidden="true" tabindex="-1"></a>For example, we have seen using the index for both vectors and matrices. Let's create a vector of length 5 and a 5x5 (row x column) matrix to illustrate this, where the elements are the location of the vector or row/column of the matrix from 1 to 5:</span>
+<span id="cb55-123"><a href="#cb55-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-124"><a href="#cb55-124" aria-hidden="true" tabindex="-1"></a>vec1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> <span class="co"># create a vector of length 5</span></span>
+<span id="cb55-125"><a href="#cb55-125" aria-hidden="true" tabindex="-1"></a>vec1 <span class="co"># view the vector</span></span>
+<span id="cb55-126"><a href="#cb55-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-127"><a href="#cb55-127" aria-hidden="true" tabindex="-1"></a>mat1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">as.numeric</span>(<span class="fu">paste0</span>( <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">matrix</span>( <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="at">each=</span><span class="dv">5</span>), <span class="at">nrow=</span><span class="dv">5</span>))), <span class="at">nrow=</span><span class="dv">5</span>) <span class="co">#create a matrix with each coordinate being its combination of row and column</span></span>
+<span id="cb55-128"><a href="#cb55-128" aria-hidden="true" tabindex="-1"></a>mat1 <span class="co"># print the matrix</span></span>
+<span id="cb55-129"><a href="#cb55-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-130"><a href="#cb55-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-131"><a href="#cb55-131" aria-hidden="true" tabindex="-1"></a>For example, if we wanted to see the 4th element of our vector:</span>
+<span id="cb55-134"><a href="#cb55-134" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-135"><a href="#cb55-135" aria-hidden="true" tabindex="-1"></a>vec1[<span class="dv">4</span>]</span>
+<span id="cb55-136"><a href="#cb55-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-137"><a href="#cb55-137" aria-hidden="true" tabindex="-1"></a>We see that it is the expected value 4.</span>
+<span id="cb55-138"><a href="#cb55-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-139"><a href="#cb55-139" aria-hidden="true" tabindex="-1"></a>If we wanted to see the 4th column of our matrix:</span>
+<span id="cb55-142"><a href="#cb55-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-143"><a href="#cb55-143" aria-hidden="true" tabindex="-1"></a>mat1[,<span class="dv">4</span>] <span class="co"># select entire fourth column</span></span>
+<span id="cb55-144"><a href="#cb55-144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-145"><a href="#cb55-145" aria-hidden="true" tabindex="-1"></a>We see we have the values 14, 24, 34, 44, and 54 to reflect the 5 different rows and our column.</span>
+<span id="cb55-146"><a href="#cb55-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-147"><a href="#cb55-147" aria-hidden="true" tabindex="-1"></a>Likewise, we can do the same for the entire 4th row of the our matrix:</span>
+<span id="cb55-150"><a href="#cb55-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-151"><a href="#cb55-151" aria-hidden="true" tabindex="-1"></a>mat1[<span class="dv">4</span>,]</span>
+<span id="cb55-152"><a href="#cb55-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-153"><a href="#cb55-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-154"><a href="#cb55-154" aria-hidden="true" tabindex="-1"></a>Additionally, we can select a single element of the matrix by providing both a row and column coordinate. For example, we can call the 2nd row and 4th column:</span>
+<span id="cb55-157"><a href="#cb55-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-158"><a href="#cb55-158" aria-hidden="true" tabindex="-1"></a>mat1[<span class="dv">2</span>,<span class="dv">4</span>]</span>
+<span id="cb55-159"><a href="#cb55-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-160"><a href="#cb55-160" aria-hidden="true" tabindex="-1"></a>Here we see the value is 24, as expected for the requested location.</span>
+<span id="cb55-161"><a href="#cb55-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-162"><a href="#cb55-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-163"><a href="#cb55-163" aria-hidden="true" tabindex="-1"></a><span class="fu">## Subset by Name</span></span>
+<span id="cb55-164"><a href="#cb55-164" aria-hidden="true" tabindex="-1"></a>Data frames always have column names (but can also be selected by index). Unique row names are optional for data frames (that aren't just the number of the row). For vectors and matrices names are also optional, but can be helpful.</span>
+<span id="cb55-165"><a href="#cb55-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-166"><a href="#cb55-166" aria-hidden="true" tabindex="-1"></a>When we do have a name, we can specifically request the data by name. Let's create a small data frame of the dogs in the Kaizer family to see this behavior:</span>
+<span id="cb55-167"><a href="#cb55-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-170"><a href="#cb55-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-171"><a href="#cb55-171" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( </span>
+<span id="cb55-172"><a href="#cb55-172" aria-hidden="true" tabindex="-1"></a>  <span class="at">dog_name=</span><span class="fu">c</span>(<span class="st">'Baisy'</span>,<span class="st">'Kaizer'</span>,<span class="st">'Yahtzee'</span>,<span class="st">'Sheba'</span>), </span>
+<span id="cb55-173"><a href="#cb55-173" aria-hidden="true" tabindex="-1"></a>  <span class="at">state=</span><span class="fu">c</span>(<span class="st">'CO'</span>,<span class="st">'IA'</span>,<span class="st">'IA'</span>,<span class="st">'VA'</span>), </span>
+<span id="cb55-174"><a href="#cb55-174" aria-hidden="true" tabindex="-1"></a>  <span class="at">size=</span><span class="fu">c</span>(<span class="st">'med'</span>,<span class="st">'large'</span>,<span class="st">'small'</span>,<span class="st">'med'</span>), </span>
+<span id="cb55-175"><a href="#cb55-175" aria-hidden="true" tabindex="-1"></a>  <span class="at">est_age=</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">10</span>,<span class="dv">2</span>,<span class="dv">11</span>)</span>
+<span id="cb55-176"><a href="#cb55-176" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb55-177"><a href="#cb55-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-178"><a href="#cb55-178" aria-hidden="true" tabindex="-1"></a>my_df <span class="co"># print data frame</span></span>
+<span id="cb55-179"><a href="#cb55-179" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-180"><a href="#cb55-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-181"><a href="#cb55-181" aria-hidden="true" tabindex="-1"></a>We the data frame contains information in both numeric and character formats. If we wanted to extract the column of dog names we could request the data in three different ways:</span>
+<span id="cb55-182"><a href="#cb55-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-185"><a href="#cb55-185" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-186"><a href="#cb55-186" aria-hidden="true" tabindex="-1"></a>my_df[,<span class="dv">1</span>] <span class="co"># by column number</span></span>
+<span id="cb55-187"><a href="#cb55-187" aria-hidden="true" tabindex="-1"></a>my_df[,<span class="st">'dog_name'</span>] <span class="co"># by column name in the [row,column] structure similar to a matrix</span></span>
+<span id="cb55-188"><a href="#cb55-188" aria-hidden="true" tabindex="-1"></a>my_df<span class="sc">$</span>dog_name <span class="co"># by column name using only the "$" operator</span></span>
+<span id="cb55-189"><a href="#cb55-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-190"><a href="#cb55-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-191"><a href="#cb55-191" aria-hidden="true" tabindex="-1"></a>We can see that all 3 approaches correctly pull the column containing the names of the puppers.</span>
+<span id="cb55-192"><a href="#cb55-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-193"><a href="#cb55-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-194"><a href="#cb55-194" aria-hidden="true" tabindex="-1"></a><span class="fu">## Subset by Condition</span></span>
+<span id="cb55-195"><a href="#cb55-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-196"><a href="#cb55-196" aria-hidden="true" tabindex="-1"></a>One way we may wish to subset data is by applying a logical rule, where values with <span class="in">`TRUE`</span> are retained and <span class="in">`FALSE`</span> removed. For example, let's say we wish to subset by dogs living in Iowa:</span>
+<span id="cb55-197"><a href="#cb55-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-200"><a href="#cb55-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-201"><a href="#cb55-201" aria-hidden="true" tabindex="-1"></a>my_df[ my_df<span class="sc">$</span>state<span class="sc">==</span><span class="st">'IA'</span>, ] <span class="co"># extract the dogs who live in Iowa</span></span>
+<span id="cb55-202"><a href="#cb55-202" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-203"><a href="#cb55-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-204"><a href="#cb55-204" aria-hidden="true" tabindex="-1"></a>We see that Kaizer and Yahtzee were correctly subset.</span>
+<span id="cb55-205"><a href="#cb55-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-206"><a href="#cb55-206" aria-hidden="true" tabindex="-1"></a>Another similar approach is to use the <span class="in">`which()`</span> function, which returns the indices where the statement is true:</span>
+<span id="cb55-207"><a href="#cb55-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-210"><a href="#cb55-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-211"><a href="#cb55-211" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>( my_df<span class="sc">$</span>state <span class="sc">==</span> <span class="st">'IA'</span> ) <span class="co"># check which indices match this value</span></span>
+<span id="cb55-212"><a href="#cb55-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-213"><a href="#cb55-213" aria-hidden="true" tabindex="-1"></a>my_df[ <span class="fu">which</span>( my_df<span class="sc">$</span>state <span class="sc">==</span> <span class="st">'IA'</span> ), ] <span class="co"># extract the dogs who live in Iowa</span></span>
+<span id="cb55-214"><a href="#cb55-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-215"><a href="#cb55-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-216"><a href="#cb55-216" aria-hidden="true" tabindex="-1"></a>The use of <span class="in">`which()`</span> resulted in the same subset that was desired. </span>
+<span id="cb55-217"><a href="#cb55-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-218"><a href="#cb55-218" aria-hidden="true" tabindex="-1"></a>We can also subset based on conditions involving our numeric variable estimated age:</span>
+<span id="cb55-219"><a href="#cb55-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-222"><a href="#cb55-222" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-223"><a href="#cb55-223" aria-hidden="true" tabindex="-1"></a>my_df[ <span class="fu">which</span>( my_df<span class="sc">$</span>est_age <span class="sc">&lt;=</span> <span class="dv">8</span>),] <span class="co"># subset to dogs less than or equal to 8 years of age</span></span>
+<span id="cb55-224"><a href="#cb55-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-225"><a href="#cb55-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-226"><a href="#cb55-226" aria-hidden="true" tabindex="-1"></a>I generally prefer using <span class="in">`which()`</span> because I have occasionally run into issues without it.</span>
+<span id="cb55-227"><a href="#cb55-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-228"><a href="#cb55-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-229"><a href="#cb55-229" aria-hidden="true" tabindex="-1"></a><span class="fu">## Subset by Multiple Values</span></span>
+<span id="cb55-230"><a href="#cb55-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-231"><a href="#cb55-231" aria-hidden="true" tabindex="-1"></a>Another consideration is that we can match multiple elements in a column or have multiple conditions. For multiple elements instead of <span class="in">`==`</span> we can use <span class="in">`%in%`</span>. An example of subsetting based on a dog living in Iowa or Virginia is</span>
+<span id="cb55-232"><a href="#cb55-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-235"><a href="#cb55-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-236"><a href="#cb55-236" aria-hidden="true" tabindex="-1"></a>my_df[ <span class="fu">which</span>( my_df<span class="sc">$</span>state <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'IA'</span>,<span class="st">'VA'</span>) ),] <span class="co"># subset dogs living in Iowa or Virginia</span></span>
+<span id="cb55-237"><a href="#cb55-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-238"><a href="#cb55-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-239"><a href="#cb55-239" aria-hidden="true" tabindex="-1"></a>If we accidentally used <span class="in">`==`</span> we see an incorrect subset:</span>
+<span id="cb55-240"><a href="#cb55-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-243"><a href="#cb55-243" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-244"><a href="#cb55-244" aria-hidden="true" tabindex="-1"></a>my_df[ <span class="fu">which</span>( my_df<span class="sc">$</span>state <span class="sc">==</span> <span class="fu">c</span>(<span class="st">'IA'</span>,<span class="st">'VA'</span>) ),] <span class="co"># note the incorrect subset when using ==</span></span>
+<span id="cb55-245"><a href="#cb55-245" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-246"><a href="#cb55-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-247"><a href="#cb55-247" aria-hidden="true" tabindex="-1"></a>Where did Kaizer go?! It turns out the R repeated the <span class="in">`c('IA','VA')`</span> vector so it was really matching <span class="in">`c('IA','VA','IA','VA')`</span> to our vector of <span class="in">`c('CO','IA','IA','VA')`</span>.</span>
+<span id="cb55-248"><a href="#cb55-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-249"><a href="#cb55-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-250"><a href="#cb55-250" aria-hidden="true" tabindex="-1"></a><span class="fu">## Subset with Multiple Conditions</span></span>
+<span id="cb55-251"><a href="#cb55-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-252"><a href="#cb55-252" aria-hidden="true" tabindex="-1"></a>For multiple conditions we can either use <span class="in">`&amp;`</span> (and) to indicate both conditions are met or <span class="in">`|`</span> (or) to indicate either condition is met. An example of matching Iowa *and* small dogs is:</span>
+<span id="cb55-253"><a href="#cb55-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-256"><a href="#cb55-256" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-257"><a href="#cb55-257" aria-hidden="true" tabindex="-1"></a>my_df[ <span class="fu">which</span>( my_df<span class="sc">$</span>state<span class="sc">==</span><span class="st">'IA'</span> <span class="sc">&amp;</span> my_df<span class="sc">$</span>size<span class="sc">==</span><span class="st">'small'</span> ),] <span class="co"># subset rows where both conditions are TRUE</span></span>
+<span id="cb55-258"><a href="#cb55-258" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-259"><a href="#cb55-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-260"><a href="#cb55-260" aria-hidden="true" tabindex="-1"></a>An example of matching Colorado *or* medium size is:</span>
+<span id="cb55-261"><a href="#cb55-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-264"><a href="#cb55-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-265"><a href="#cb55-265" aria-hidden="true" tabindex="-1"></a>my_df[ <span class="fu">which</span>( my_df<span class="sc">$</span>state<span class="sc">==</span><span class="st">'CO'</span> <span class="sc">|</span> my_df<span class="sc">$</span>size<span class="sc">==</span><span class="st">'med'</span>),]</span>
+<span id="cb55-266"><a href="#cb55-266" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-267"><a href="#cb55-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-268"><a href="#cb55-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-269"><a href="#cb55-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-270"><a href="#cb55-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-271"><a href="#cb55-271" aria-hidden="true" tabindex="-1"></a><span class="fu"># A Multiple Testing Simulation Study</span></span>
+<span id="cb55-272"><a href="#cb55-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-273"><a href="#cb55-273" aria-hidden="true" tabindex="-1"></a>Multiple testing or multiple comparison issues arise in many cases when you conduct more than one statistical test. In some contexts the issue is built into the methodology (e.g., an ANOVA followed by a post-hoc test), but in other cases it is the result of a study design (e.g., having multiple outcomes of interest). We'll approach the situation more generally where we have a study with 10 different hypothesis tests being conducted.</span>
+<span id="cb55-274"><a href="#cb55-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-275"><a href="#cb55-275" aria-hidden="true" tabindex="-1"></a>One of the easiest ways to see the impact of our choices on multiple testing correction is to conduct a simulation study. We'll focus on the two extremes, one where all 10 hypothesis tests are null and one where all 10 hypothesis tests are an alternative. And to focus on the trade-off of both marginal and family-wise type I error rates with power, we'll summarize the performance of all 3.</span>
+<span id="cb55-276"><a href="#cb55-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-277"><a href="#cb55-277" aria-hidden="true" tabindex="-1"></a>As our motivating context, we wish to design a clinical trial where we want to detect a mean difference of 10 mg/dL in total cholesterol over the course of an intervention in a study comparing two groups. We have preliminary data that suggests the expected standard deviation is 15 mg/dL. Our sample size, assuming $\alpha=0.05$ and 80% power, is</span>
+<span id="cb55-278"><a href="#cb55-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-281"><a href="#cb55-281" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-282"><a href="#cb55-282" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">delta=</span><span class="dv">10</span>, <span class="at">sd=</span><span class="dv">15</span>, <span class="at">sig.level=</span><span class="fl">0.05</span>, <span class="at">power=</span><span class="fl">0.8</span>)</span>
+<span id="cb55-283"><a href="#cb55-283" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-284"><a href="#cb55-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-285"><a href="#cb55-285" aria-hidden="true" tabindex="-1"></a>Based on our <span class="in">`power.t.test`</span> calculation, we would need to enroll 37 participants per group. With this information in mind, let's explore some simulation studies with 1000 simulated trials with 10 hypotheses.</span>
+<span id="cb55-286"><a href="#cb55-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-287"><a href="#cb55-287" aria-hidden="true" tabindex="-1"></a><span class="fu">## Null Scenario</span></span>
+<span id="cb55-288"><a href="#cb55-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-289"><a href="#cb55-289" aria-hidden="true" tabindex="-1"></a>First we'll start with the null scenario, where each group will have a simulated mean change of 0 over the course of the study. For each study we will save the uncorrected p-value, the Bonferroni corrected p-value, and the false discovery rate (FDR) corrected p-value. From our simulation study we will then be able to calculate:</span>
+<span id="cb55-290"><a href="#cb55-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-291"><a href="#cb55-291" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>the *marginal* type I error rate (i.e., the type I error rate for each individual test)</span>
+<span id="cb55-292"><a href="#cb55-292" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>the *family-wise* type I error rate (i.e., the type I error rate within our simulated trial across all 10 tests, where even 1 falsely reject $H_0$ is a failure)</span>
+<span id="cb55-293"><a href="#cb55-293" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>the power (which we'll see in the alternative scenario)</span>
+<span id="cb55-294"><a href="#cb55-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-295"><a href="#cb55-295" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.source='fold-show'}</span></span>
+<span id="cb55-296"><a href="#cb55-296" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: set the seed for reproducibility</span></span>
+<span id="cb55-297"><a href="#cb55-297" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1117</span>)</span>
+<span id="cb55-298"><a href="#cb55-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-299"><a href="#cb55-299" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: define variables of interest (that will be easy to change for different simulations)</span></span>
+<span id="cb55-300"><a href="#cb55-300" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of simulations</span></span>
+<span id="cb55-301"><a href="#cb55-301" aria-hidden="true" tabindex="-1"></a>nhyp <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># number of hypothesis tests</span></span>
+<span id="cb55-302"><a href="#cb55-302" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># type I error rate</span></span>
+<span id="cb55-303"><a href="#cb55-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-304"><a href="#cb55-304" aria-hidden="true" tabindex="-1"></a><span class="co"># set simulation parameters for data:</span></span>
+<span id="cb55-305"><a href="#cb55-305" aria-hidden="true" tabindex="-1"></a>mean_grp1 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb55-306"><a href="#cb55-306" aria-hidden="true" tabindex="-1"></a>mean_grp2 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb55-307"><a href="#cb55-307" aria-hidden="true" tabindex="-1"></a>sd_grp1 <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb55-308"><a href="#cb55-308" aria-hidden="true" tabindex="-1"></a>sd_grp2 <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb55-309"><a href="#cb55-309" aria-hidden="true" tabindex="-1"></a>n_grp1 <span class="ot">&lt;-</span> <span class="dv">37</span></span>
+<span id="cb55-310"><a href="#cb55-310" aria-hidden="true" tabindex="-1"></a>n_grp2 <span class="ot">&lt;-</span> <span class="dv">37</span></span>
+<span id="cb55-311"><a href="#cb55-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-312"><a href="#cb55-312" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: initialize a matrix to store our results in for each test based on our 3 approaches</span></span>
+<span id="cb55-313"><a href="#cb55-313" aria-hidden="true" tabindex="-1"></a>null_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow=</span>nsim, <span class="at">ncol=</span>nhyp<span class="sc">*</span><span class="dv">3</span>)</span>
+<span id="cb55-314"><a href="#cb55-314" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>( null_mat ) <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp), <span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp), <span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp) )</span>
+<span id="cb55-315"><a href="#cb55-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-316"><a href="#cb55-316" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: simulate the trials and hypotheses, store the p-value results</span></span>
+<span id="cb55-317"><a href="#cb55-317" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb55-318"><a href="#cb55-318" aria-hidden="true" tabindex="-1"></a>  simdat_grp1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rnorm</span>( <span class="at">n=</span>n_grp1<span class="sc">*</span>nhyp, <span class="at">mean=</span>mean_grp1, <span class="at">sd=</span>sd_grp1 ), <span class="at">ncol=</span>nhyp, <span class="at">nrow=</span>n_grp1, <span class="at">byrow=</span><span class="cn">FALSE</span>)</span>
+<span id="cb55-319"><a href="#cb55-319" aria-hidden="true" tabindex="-1"></a>  simdat_grp2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rnorm</span>( <span class="at">n=</span>n_grp2<span class="sc">*</span>nhyp, <span class="at">mean=</span>mean_grp2, <span class="at">sd=</span>sd_grp2 ), <span class="at">ncol=</span>nhyp, <span class="at">nrow=</span>n_grp2, <span class="at">byrow=</span><span class="cn">FALSE</span>)</span>
+<span id="cb55-320"><a href="#cb55-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-321"><a href="#cb55-321" aria-hidden="true" tabindex="-1"></a>  pvec_orig <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>nhyp, <span class="cf">function</span>(x) <span class="fu">t.test</span>(<span class="at">x=</span>simdat_grp1[,x], <span class="at">y=</span>simdat_grp2[,x])<span class="sc">$</span>p.value )</span>
+<span id="cb55-322"><a href="#cb55-322" aria-hidden="true" tabindex="-1"></a>  pvec_fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig, <span class="at">method=</span><span class="st">'fdr'</span>)  </span>
+<span id="cb55-323"><a href="#cb55-323" aria-hidden="true" tabindex="-1"></a>  pvec_bonf <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig, <span class="at">method=</span><span class="st">'bonferroni'</span>)  </span>
+<span id="cb55-324"><a href="#cb55-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-325"><a href="#cb55-325" aria-hidden="true" tabindex="-1"></a>  null_mat[i,] <span class="ot">&lt;-</span> <span class="fu">c</span>(pvec_orig, pvec_fdr, pvec_bonf)</span>
+<span id="cb55-326"><a href="#cb55-326" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb55-327"><a href="#cb55-327" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-328"><a href="#cb55-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-329"><a href="#cb55-329" aria-hidden="true" tabindex="-1"></a>Before summarizing the type I error rates, let's first examine some histograms of our overall collection of p-values from the 10 tests:</span>
+<span id="cb55-330"><a href="#cb55-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-333"><a href="#cb55-333" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-334"><a href="#cb55-334" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb55-335"><a href="#cb55-335" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)], <span class="at">main=</span><span class="st">'Uncorrected p-value'</span>, <span class="at">xlab=</span><span class="st">'p-value'</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10000</span>))</span>
+<span id="cb55-336"><a href="#cb55-336" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)], <span class="at">main=</span><span class="st">'FDR Corrected p-value'</span>, <span class="at">xlab=</span><span class="st">'p-value'</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10000</span>))</span>
+<span id="cb55-337"><a href="#cb55-337" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)], <span class="at">main=</span><span class="st">'Bonferroni Corrected p-Value'</span>, <span class="at">xlab=</span><span class="st">'p-value'</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10000</span>))</span>
+<span id="cb55-338"><a href="#cb55-338" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-339"><a href="#cb55-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-340"><a href="#cb55-340" aria-hidden="true" tabindex="-1"></a>The uncorrected p-value from our $10 \times 1000 = 10000$ total tests reflects the expected behavior for a null response, a uniform distribution. For both corrections, FDR and Bonferroni, we see that the distribution is skewed towards higher p-values, representing that post-hoc correction being applied to our tests.</span>
+<span id="cb55-341"><a href="#cb55-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-342"><a href="#cb55-342" aria-hidden="true" tabindex="-1"></a>Now let's summarize our marginal and family-wise type I error rates:</span>
+<span id="cb55-343"><a href="#cb55-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-346"><a href="#cb55-346" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-347"><a href="#cb55-347" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb55-348"><a href="#cb55-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-349"><a href="#cb55-349" aria-hidden="true" tabindex="-1"></a>orig_marg_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( null_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb55-350"><a href="#cb55-350" aria-hidden="true" tabindex="-1"></a>fdr_marg_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( null_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb55-351"><a href="#cb55-351" aria-hidden="true" tabindex="-1"></a>bonf_marg_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( null_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb55-352"><a href="#cb55-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-353"><a href="#cb55-353" aria-hidden="true" tabindex="-1"></a>orig_fw_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">rowSums</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha) <span class="sc">&gt;</span> <span class="dv">0</span> )</span>
+<span id="cb55-354"><a href="#cb55-354" aria-hidden="true" tabindex="-1"></a>fdr_fw_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">rowSums</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha) <span class="sc">&gt;</span> <span class="dv">0</span>  )</span>
+<span id="cb55-355"><a href="#cb55-355" aria-hidden="true" tabindex="-1"></a>bonf_fw_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">rowSums</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha) <span class="sc">&gt;</span> <span class="dv">0</span>  )</span>
+<span id="cb55-356"><a href="#cb55-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-357"><a href="#cb55-357" aria-hidden="true" tabindex="-1"></a>res_tab <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">c</span>(orig_marg_t1e,fdr_marg_t1e,bonf_marg_t1e, orig_fw_t1e, fdr_fw_t1e, bonf_fw_t1e), <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span>F, </span>
+<span id="cb55-358"><a href="#cb55-358" aria-hidden="true" tabindex="-1"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">'Uncorrected'</span>,<span class="st">'FDR'</span>,<span class="st">'Bonferroni'</span>), <span class="fu">c</span>(<span class="st">'Marginal T1E'</span>,<span class="st">'Family-wise T1E'</span>)) )</span>
+<span id="cb55-359"><a href="#cb55-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-360"><a href="#cb55-360" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(res_tab, <span class="at">align=</span><span class="st">'cc'</span>, <span class="at">escape=</span>F) <span class="sc">%&gt;%</span></span>
+<span id="cb55-361"><a href="#cb55-361" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>, <span class="at">full_width =</span> F, <span class="at">position =</span> <span class="st">"left"</span>)</span>
+<span id="cb55-362"><a href="#cb55-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-363"><a href="#cb55-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-364"><a href="#cb55-364" aria-hidden="true" tabindex="-1"></a>We can also compare our estimated family-wise type I error rate for the uncorrected p-values through the formula of $1-(1-\alpha)^{10} = 1-(0.95)^{10} = 0.401$. In other words, we'd expect among 10 hypothesis tests the probability of incorrectly rejecting at least 1 test is expected to be 40.1% (or <span class="in">`r round(orig_fw_t1e*100,1)`</span>% from our simulation).</span>
+<span id="cb55-365"><a href="#cb55-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-366"><a href="#cb55-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-367"><a href="#cb55-367" aria-hidden="true" tabindex="-1"></a><span class="fu">## Alternative Scenario</span></span>
+<span id="cb55-368"><a href="#cb55-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-369"><a href="#cb55-369" aria-hidden="true" tabindex="-1"></a>We can use the same code above with a few tweaks to the specified effect size (i.e., 10) and also the object names in our code for some of our results:</span>
+<span id="cb55-370"><a href="#cb55-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-371"><a href="#cb55-371" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.source='fold-show'}</span></span>
+<span id="cb55-372"><a href="#cb55-372" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: set the seed for reproducibility</span></span>
+<span id="cb55-373"><a href="#cb55-373" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1117</span>)</span>
+<span id="cb55-374"><a href="#cb55-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-375"><a href="#cb55-375" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: define variables of interest (that will be easy to change for different simulations)</span></span>
+<span id="cb55-376"><a href="#cb55-376" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of simulations</span></span>
+<span id="cb55-377"><a href="#cb55-377" aria-hidden="true" tabindex="-1"></a>nhyp <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># number of hypothesis tests</span></span>
+<span id="cb55-378"><a href="#cb55-378" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># type I error rate</span></span>
+<span id="cb55-379"><a href="#cb55-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-380"><a href="#cb55-380" aria-hidden="true" tabindex="-1"></a><span class="co"># set simulation parameters for data:</span></span>
+<span id="cb55-381"><a href="#cb55-381" aria-hidden="true" tabindex="-1"></a>mean_grp1 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb55-382"><a href="#cb55-382" aria-hidden="true" tabindex="-1"></a>mean_grp2 <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># alternative scenario</span></span>
+<span id="cb55-383"><a href="#cb55-383" aria-hidden="true" tabindex="-1"></a>sd_grp1 <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb55-384"><a href="#cb55-384" aria-hidden="true" tabindex="-1"></a>sd_grp2 <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb55-385"><a href="#cb55-385" aria-hidden="true" tabindex="-1"></a>n_grp1 <span class="ot">&lt;-</span> <span class="dv">37</span></span>
+<span id="cb55-386"><a href="#cb55-386" aria-hidden="true" tabindex="-1"></a>n_grp2 <span class="ot">&lt;-</span> <span class="dv">37</span></span>
+<span id="cb55-387"><a href="#cb55-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-388"><a href="#cb55-388" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: initialize a matrix to store our results in for each test based on our 3 approaches</span></span>
+<span id="cb55-389"><a href="#cb55-389" aria-hidden="true" tabindex="-1"></a>alt_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow=</span>nsim, <span class="at">ncol=</span>nhyp<span class="sc">*</span><span class="dv">3</span>)</span>
+<span id="cb55-390"><a href="#cb55-390" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>( alt_mat ) <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp), <span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp), <span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp) )</span>
+<span id="cb55-391"><a href="#cb55-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-392"><a href="#cb55-392" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: simulate the trials and hypotheses, store the p-value results</span></span>
+<span id="cb55-393"><a href="#cb55-393" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb55-394"><a href="#cb55-394" aria-hidden="true" tabindex="-1"></a>  simdat_grp1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rnorm</span>( <span class="at">n=</span>n_grp1<span class="sc">*</span>nhyp, <span class="at">mean=</span>mean_grp1, <span class="at">sd=</span>sd_grp1 ), <span class="at">ncol=</span>nhyp, <span class="at">nrow=</span>n_grp1, <span class="at">byrow=</span><span class="cn">FALSE</span>)</span>
+<span id="cb55-395"><a href="#cb55-395" aria-hidden="true" tabindex="-1"></a>  simdat_grp2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rnorm</span>( <span class="at">n=</span>n_grp2<span class="sc">*</span>nhyp, <span class="at">mean=</span>mean_grp2, <span class="at">sd=</span>sd_grp2 ), <span class="at">ncol=</span>nhyp, <span class="at">nrow=</span>n_grp2, <span class="at">byrow=</span><span class="cn">FALSE</span>)</span>
+<span id="cb55-396"><a href="#cb55-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-397"><a href="#cb55-397" aria-hidden="true" tabindex="-1"></a>  pvec_orig <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>nhyp, <span class="cf">function</span>(x) <span class="fu">t.test</span>(<span class="at">x=</span>simdat_grp1[,x], <span class="at">y=</span>simdat_grp2[,x])<span class="sc">$</span>p.value )</span>
+<span id="cb55-398"><a href="#cb55-398" aria-hidden="true" tabindex="-1"></a>  pvec_fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig, <span class="at">method=</span><span class="st">'fdr'</span>)  </span>
+<span id="cb55-399"><a href="#cb55-399" aria-hidden="true" tabindex="-1"></a>  pvec_bonf <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig, <span class="at">method=</span><span class="st">'bonferroni'</span>)  </span>
+<span id="cb55-400"><a href="#cb55-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-401"><a href="#cb55-401" aria-hidden="true" tabindex="-1"></a>  alt_mat[i,] <span class="ot">&lt;-</span> <span class="fu">c</span>(pvec_orig, pvec_fdr, pvec_bonf)</span>
+<span id="cb55-402"><a href="#cb55-402" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb55-403"><a href="#cb55-403" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-404"><a href="#cb55-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-405"><a href="#cb55-405" aria-hidden="true" tabindex="-1"></a>Before summarizing the power, let's examine some histograms of our overall collection of p-values from the 10 tests:</span>
+<span id="cb55-406"><a href="#cb55-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-409"><a href="#cb55-409" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-410"><a href="#cb55-410" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb55-411"><a href="#cb55-411" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(alt_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)], <span class="at">main=</span><span class="st">'Uncorrected p-value'</span>, <span class="at">xlab=</span><span class="st">'p-value'</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10000</span>))</span>
+<span id="cb55-412"><a href="#cb55-412" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(alt_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)], <span class="at">main=</span><span class="st">'FDR Corrected p-value'</span>, <span class="at">xlab=</span><span class="st">'p-value'</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10000</span>))</span>
+<span id="cb55-413"><a href="#cb55-413" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(alt_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)], <span class="at">main=</span><span class="st">'Bonferroni Corrected p-Value'</span>, <span class="at">xlab=</span><span class="st">'p-value'</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10000</span>))</span>
+<span id="cb55-414"><a href="#cb55-414" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-415"><a href="#cb55-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-416"><a href="#cb55-416" aria-hidden="true" tabindex="-1"></a>For our alternative scenario we see the approximate behavior we'd expect, where the distribution is strongly concentrated towards lower p-values and is right skewed. One interesting observation is for our Bonferroni correct p-value, where we also see the spike for corrected p-values between 0.95 and 1.0.</span>
+<span id="cb55-417"><a href="#cb55-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-418"><a href="#cb55-418" aria-hidden="true" tabindex="-1"></a>Now let's summarize the power and add it to our results table from above:</span>
+<span id="cb55-419"><a href="#cb55-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-422"><a href="#cb55-422" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-423"><a href="#cb55-423" aria-hidden="true" tabindex="-1"></a>orig_marg_pwr <span class="ot">&lt;-</span> <span class="fu">mean</span>( alt_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb55-424"><a href="#cb55-424" aria-hidden="true" tabindex="-1"></a>fdr_marg_pwr <span class="ot">&lt;-</span> <span class="fu">mean</span>( alt_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb55-425"><a href="#cb55-425" aria-hidden="true" tabindex="-1"></a>bonf_marg_pwr <span class="ot">&lt;-</span> <span class="fu">mean</span>( alt_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb55-426"><a href="#cb55-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-427"><a href="#cb55-427" aria-hidden="true" tabindex="-1"></a>res_tab <span class="ot">&lt;-</span> <span class="fu">cbind</span>(res_tab, <span class="st">'Power'</span><span class="ot">=</span><span class="fu">c</span>(orig_marg_pwr, fdr_marg_pwr, bonf_marg_pwr))</span>
+<span id="cb55-428"><a href="#cb55-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-429"><a href="#cb55-429" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(res_tab, <span class="at">align=</span><span class="st">'ccc'</span>, <span class="at">escape=</span>F) <span class="sc">%&gt;%</span></span>
+<span id="cb55-430"><a href="#cb55-430" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>, <span class="at">full_width =</span> F, <span class="at">position =</span> <span class="st">"left"</span>)</span>
+<span id="cb55-431"><a href="#cb55-431" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-432"><a href="#cb55-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-433"><a href="#cb55-433" aria-hidden="true" tabindex="-1"></a>Here we see the trade-offs between our different approaches:</span>
+<span id="cb55-434"><a href="#cb55-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-435"><a href="#cb55-435" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Our uncorrected approach has our desired *marginal* type I error rate and power, but the family-wise type I error rate is very large.</span>
+<span id="cb55-436"><a href="#cb55-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-437"><a href="#cb55-437" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The FDR has a conservative marginal type I error rate, but achieves the desired $\alpha$ for our family-wise type I error rate. The power is slightly lower than the uncorrected, but not by much in this case.</span>
+<span id="cb55-438"><a href="#cb55-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-439"><a href="#cb55-439" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The Bonferroni has similar type I error rates as the FDR, but it is far more conservative since its power is only <span class="in">`r round(bonf_marg_pwr*100,1)`</span>%.</span>
+<span id="cb55-440"><a href="#cb55-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-441"><a href="#cb55-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-442"><a href="#cb55-442" aria-hidden="true" tabindex="-1"></a><span class="fu">## Upping the Number of Tests to 100</span></span>
+<span id="cb55-443"><a href="#cb55-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-444"><a href="#cb55-444" aria-hidden="true" tabindex="-1"></a>Let's just see the results for our study if we up the number of tests to 100 from 10:</span>
+<span id="cb55-445"><a href="#cb55-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-446"><a href="#cb55-446" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, cache=T}</span></span>
+<span id="cb55-447"><a href="#cb55-447" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: set the seed for reproducibility</span></span>
+<span id="cb55-448"><a href="#cb55-448" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11172020</span>)</span>
+<span id="cb55-449"><a href="#cb55-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-450"><a href="#cb55-450" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: define variables of interest (that will be easy to change for different simulations)</span></span>
+<span id="cb55-451"><a href="#cb55-451" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of simulations</span></span>
+<span id="cb55-452"><a href="#cb55-452" aria-hidden="true" tabindex="-1"></a>nhyp <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># number of hypothesis tests</span></span>
+<span id="cb55-453"><a href="#cb55-453" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># type I error rate</span></span>
+<span id="cb55-454"><a href="#cb55-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-455"><a href="#cb55-455" aria-hidden="true" tabindex="-1"></a><span class="co"># set simulation parameters for data:</span></span>
+<span id="cb55-456"><a href="#cb55-456" aria-hidden="true" tabindex="-1"></a>mean_grp1 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb55-457"><a href="#cb55-457" aria-hidden="true" tabindex="-1"></a>mean_grp2_null <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># null scenario</span></span>
+<span id="cb55-458"><a href="#cb55-458" aria-hidden="true" tabindex="-1"></a>mean_grp2_alt <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># alternative scenario</span></span>
+<span id="cb55-459"><a href="#cb55-459" aria-hidden="true" tabindex="-1"></a>sd_grp1 <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb55-460"><a href="#cb55-460" aria-hidden="true" tabindex="-1"></a>sd_grp2 <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb55-461"><a href="#cb55-461" aria-hidden="true" tabindex="-1"></a>n_grp1 <span class="ot">&lt;-</span> <span class="dv">37</span></span>
+<span id="cb55-462"><a href="#cb55-462" aria-hidden="true" tabindex="-1"></a>n_grp2 <span class="ot">&lt;-</span> <span class="dv">37</span></span>
+<span id="cb55-463"><a href="#cb55-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-464"><a href="#cb55-464" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: initialize a matrix to store our results in for each test based on our 3 approaches</span></span>
+<span id="cb55-465"><a href="#cb55-465" aria-hidden="true" tabindex="-1"></a>null_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow=</span>nsim, <span class="at">ncol=</span>nhyp<span class="sc">*</span><span class="dv">3</span>)</span>
+<span id="cb55-466"><a href="#cb55-466" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>( null_mat ) <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp), <span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp), <span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp) )</span>
+<span id="cb55-467"><a href="#cb55-467" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-468"><a href="#cb55-468" aria-hidden="true" tabindex="-1"></a>alt_mat <span class="ot">&lt;-</span> null_mat <span class="co"># create alt_mat to save results in for alternative scenario</span></span>
+<span id="cb55-469"><a href="#cb55-469" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-470"><a href="#cb55-470" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: simulate the trials and hypotheses, store the p-value results</span></span>
+<span id="cb55-471"><a href="#cb55-471" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb55-472"><a href="#cb55-472" aria-hidden="true" tabindex="-1"></a>  simdat_grp1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rnorm</span>( <span class="at">n=</span>n_grp1<span class="sc">*</span>nhyp, <span class="at">mean=</span>mean_grp1, <span class="at">sd=</span>sd_grp1 ), <span class="at">ncol=</span>nhyp, <span class="at">nrow=</span>n_grp1, <span class="at">byrow=</span><span class="cn">FALSE</span>)</span>
+<span id="cb55-473"><a href="#cb55-473" aria-hidden="true" tabindex="-1"></a>  simdat_grp2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rnorm</span>( <span class="at">n=</span>n_grp2<span class="sc">*</span>nhyp, <span class="at">mean=</span>mean_grp2_null, <span class="at">sd=</span>sd_grp2 ), <span class="at">ncol=</span>nhyp, <span class="at">nrow=</span>n_grp2, <span class="at">byrow=</span><span class="cn">FALSE</span>)</span>
+<span id="cb55-474"><a href="#cb55-474" aria-hidden="true" tabindex="-1"></a>  simdat_grp2_alt <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">rnorm</span>( <span class="at">n=</span>n_grp2<span class="sc">*</span>nhyp, <span class="at">mean=</span>mean_grp2_alt, <span class="at">sd=</span>sd_grp2 ), <span class="at">ncol=</span>nhyp, <span class="at">nrow=</span>n_grp2, <span class="at">byrow=</span><span class="cn">FALSE</span>)</span>
+<span id="cb55-475"><a href="#cb55-475" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-476"><a href="#cb55-476" aria-hidden="true" tabindex="-1"></a>  <span class="co"># null scenario</span></span>
+<span id="cb55-477"><a href="#cb55-477" aria-hidden="true" tabindex="-1"></a>  pvec_orig <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>nhyp, <span class="cf">function</span>(x) <span class="fu">t.test</span>(<span class="at">x=</span>simdat_grp1[,x], <span class="at">y=</span>simdat_grp2[,x])<span class="sc">$</span>p.value )</span>
+<span id="cb55-478"><a href="#cb55-478" aria-hidden="true" tabindex="-1"></a>  pvec_fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig, <span class="at">method=</span><span class="st">'fdr'</span>)  </span>
+<span id="cb55-479"><a href="#cb55-479" aria-hidden="true" tabindex="-1"></a>  pvec_bonf <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig, <span class="at">method=</span><span class="st">'bonferroni'</span>)  </span>
+<span id="cb55-480"><a href="#cb55-480" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-481"><a href="#cb55-481" aria-hidden="true" tabindex="-1"></a>  null_mat[i,] <span class="ot">&lt;-</span> <span class="fu">c</span>(pvec_orig, pvec_fdr, pvec_bonf)</span>
+<span id="cb55-482"><a href="#cb55-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-483"><a href="#cb55-483" aria-hidden="true" tabindex="-1"></a>  <span class="co"># alternative scenario</span></span>
+<span id="cb55-484"><a href="#cb55-484" aria-hidden="true" tabindex="-1"></a>  pvec_orig_alt <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>nhyp, <span class="cf">function</span>(x) <span class="fu">t.test</span>(<span class="at">x=</span>simdat_grp1[,x], <span class="at">y=</span>simdat_grp2_alt[,x])<span class="sc">$</span>p.value )</span>
+<span id="cb55-485"><a href="#cb55-485" aria-hidden="true" tabindex="-1"></a>  pvec_fdr_alt <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig_alt, <span class="at">method=</span><span class="st">'fdr'</span>)  </span>
+<span id="cb55-486"><a href="#cb55-486" aria-hidden="true" tabindex="-1"></a>  pvec_bonf_alt <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>( pvec_orig_alt, <span class="at">method=</span><span class="st">'bonferroni'</span>)  </span>
+<span id="cb55-487"><a href="#cb55-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-488"><a href="#cb55-488" aria-hidden="true" tabindex="-1"></a>  alt_mat[i,] <span class="ot">&lt;-</span> <span class="fu">c</span>(pvec_orig_alt, pvec_fdr_alt, pvec_bonf_alt)</span>
+<span id="cb55-489"><a href="#cb55-489" aria-hidden="true" tabindex="-1"></a>}  </span>
+<span id="cb55-490"><a href="#cb55-490" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb55-491"><a href="#cb55-491" aria-hidden="true" tabindex="-1"></a><span class="co"># Make Table for Results</span></span>
+<span id="cb55-492"><a href="#cb55-492" aria-hidden="true" tabindex="-1"></a>orig_marg_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( null_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb55-493"><a href="#cb55-493" aria-hidden="true" tabindex="-1"></a>fdr_marg_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( null_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb55-494"><a href="#cb55-494" aria-hidden="true" tabindex="-1"></a>bonf_marg_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( null_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb55-495"><a href="#cb55-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-496"><a href="#cb55-496" aria-hidden="true" tabindex="-1"></a>orig_fw_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">rowSums</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha) <span class="sc">&gt;</span> <span class="dv">0</span> )</span>
+<span id="cb55-497"><a href="#cb55-497" aria-hidden="true" tabindex="-1"></a>fdr_fw_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">rowSums</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha) <span class="sc">&gt;</span> <span class="dv">0</span>  )</span>
+<span id="cb55-498"><a href="#cb55-498" aria-hidden="true" tabindex="-1"></a>bonf_fw_t1e <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">rowSums</span>(null_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha) <span class="sc">&gt;</span> <span class="dv">0</span>  )</span>
+<span id="cb55-499"><a href="#cb55-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-500"><a href="#cb55-500" aria-hidden="true" tabindex="-1"></a>orig_marg_pwr <span class="ot">&lt;-</span> <span class="fu">mean</span>( alt_mat[,<span class="fu">paste0</span>(<span class="st">'original_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb55-501"><a href="#cb55-501" aria-hidden="true" tabindex="-1"></a>fdr_marg_pwr <span class="ot">&lt;-</span> <span class="fu">mean</span>( alt_mat[,<span class="fu">paste0</span>(<span class="st">'fdr_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb55-502"><a href="#cb55-502" aria-hidden="true" tabindex="-1"></a>bonf_marg_pwr <span class="ot">&lt;-</span> <span class="fu">mean</span>( alt_mat[,<span class="fu">paste0</span>(<span class="st">'bonf_p_'</span>,<span class="dv">1</span><span class="sc">:</span>nhyp)] <span class="sc">&lt;=</span> alpha )</span>
+<span id="cb55-503"><a href="#cb55-503" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-504"><a href="#cb55-504" aria-hidden="true" tabindex="-1"></a>res_tab <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">c</span>(orig_marg_t1e,fdr_marg_t1e,bonf_marg_t1e, orig_fw_t1e, fdr_fw_t1e, bonf_fw_t1e, orig_marg_pwr, fdr_marg_pwr, bonf_marg_pwr)</span>
+<span id="cb55-505"><a href="#cb55-505" aria-hidden="true" tabindex="-1"></a>                   , <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">byrow=</span>F, <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">'Uncorrected'</span>,<span class="st">'FDR'</span>,<span class="st">'Bonferroni'</span>), <span class="fu">c</span>(<span class="st">'Marginal T1E'</span>,<span class="st">'Family-wise T1E'</span>,<span class="st">'Power'</span>)) )</span>
+<span id="cb55-506"><a href="#cb55-506" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-507"><a href="#cb55-507" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(res_tab, <span class="at">align=</span><span class="st">'ccc'</span>, <span class="at">escape=</span>F) <span class="sc">%&gt;%</span></span>
+<span id="cb55-508"><a href="#cb55-508" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>, <span class="at">full_width =</span> F, <span class="at">position =</span> <span class="st">"left"</span>)</span>
+<span id="cb55-509"><a href="#cb55-509" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-510"><a href="#cb55-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-511"><a href="#cb55-511" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-512"><a href="#cb55-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-513"><a href="#cb55-513" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some Thoughts</span></span>
+<span id="cb55-514"><a href="#cb55-514" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-515"><a href="#cb55-515" aria-hidden="true" tabindex="-1"></a>Like almost everything in statistics, there is not a single right answer for how to approach the question of multiple comparisons. However, a few considerations are highlighted below.</span>
+<span id="cb55-516"><a href="#cb55-516" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-517"><a href="#cb55-517" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Is the study "exploratory" or "confirmatory"? One way to distinguish these ideas is that *exploratory* research should be hypothesis generating, whereas *confirmatory* research should have a well-defined hypothesis you are attempting to evaluate. It is possible things fall along this spectrum as well, but this should be identified at the start of the study design and/or data collection process.</span>
+<span id="cb55-518"><a href="#cb55-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-519"><a href="#cb55-519" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Specifying a single primary outcome, a small set of secondary outcomes, and everything else as exploratory outcomes. In this case, the primary outcome would stand on its own, and you wouldn't have to correct for multiple comparisons. For the secondary outcomes, you may want to correct for multiple comparisons within that set, but it will partly depend on the outcomes in question and the hypotheses being tested. We rarely correct for "exploratory" outcomes in practice.</span>
+<span id="cb55-520"><a href="#cb55-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-521"><a href="#cb55-521" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Instead of the Bonferroni correction, use the Holm (also known as Bonferroni-Holm) correction, which is still conservative but generally has greater power. The challenge with Bonferroni-Holm or FDR, like with many other correction strategies, is it is more complex and it is not easy to generalize for a power/sample size calculation (although you can always do simulation studies!).</span>
+<span id="cb55-522"><a href="#cb55-522" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-523"><a href="#cb55-523" aria-hidden="true" tabindex="-1"></a></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

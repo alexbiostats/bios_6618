@@ -1,0 +1,89 @@
+---
+title: "Week 3 Practice Problems"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page includes optional practice problems, many of which are structured to assist you on the homework with [Solutions provided on a separate page](/labs/prac3s/index.qmd). Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.
+
+This week's extra practice exercises focus on subsetting data objects and identifying relationships between the various assumptions in power calculations. 
+
+# Exercise 1
+
+## 1a 
+
+Run the following code to combine a few state-related data sets that are part of R's available data sets:
+```{r}
+states <- data.frame(state.x77, state.region, state.abb)
+```
+
+## 1b 
+
+Calculate the mean (SD) life expectancy by state region.
+
+## 1c
+
+Subset the four corner states (Utah, Colorado, Arizona, and New Mexico) **by row name**. Which state has the largest population? Which state has the lowest high school graduation rate?
+
+## 1d
+
+Subset states that either have an area greater than 90,000 miles$^2$ *or* a percent of high school graduates below 50\%. How many states meet this criteria?
+
+## 1e
+
+Subset states that have an area greater than 90,000 miles$^2$ *and* a percent of high school graduates below 50\%. How many states meet this criteria?
+
+## 1f
+
+Are there any states where the mean number of days with a minimum temperature below freezing is above 100, the murder rate is greater than 10 per 100,000 population, and the rate of illiteracy is below 1\%?
+
+
+# Exercise 2
+
+This exercise focuses on evaluating the relationship of what happens as we change different parts of a power calculation for the case of the **known standard deviation**. You may find the website <https://rpsychologist.com/d3/nhst/> helpful to visualize the different scenarios.
+
+For each of these scenarios, assume that all parameters not discussed are fixed at some value, then identify what happens to the different quantities.
+
+**As sample size $n$ increases:**
+
+1. Power:
+2. Detectable Difference $|\mu_0 - \mu_1|$:
+
+**As the difference to be detected, $|\mu_0 - \mu_1|$, increases:**
+
+1. Power:
+2. Required Sample Size: 
+
+**As desired power increases:**
+
+1. Required Sample Size:
+2. Detectable Difference $|\mu_0 - \mu_1|$:
+
+**As $\sigma$, the population SD, increases:**
+
+1. Power:
+2. Detectable Difference $|\mu_0 - \mu_1|$:
+3. Required Sample Size: 
+
+**As $\alpha$, the significance level of the test, increases:**
+
+1. Power:
+2. Detectable Difference $|\mu_0 - \mu_1|$:
+3. Required Sample Size: 
+
+

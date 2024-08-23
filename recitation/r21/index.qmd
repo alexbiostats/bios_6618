@@ -1,0 +1,47 @@
+---
+title: "Precision Variables"
+author: 
+  name: Alex Kaizer
+  roles: "Instructor"
+  affiliation: University of Colorado-Anschutz Medical Campus
+toc: true
+toc_float: true
+toc-location: left
+format:
+  html:
+    code-fold: show
+    code-overflow: wrap 
+    code-tools: true
+---
+
+```{r, echo=F, message=F, warning=F}
+library(kableExtra)
+library(dplyr)
+```
+
+This page is part of the University of Colorado-Anschutz Medical Campus' [BIOS 6618 Recitation](/recitation/index.qmd) collection. To view other questions, you can view the [BIOS 6618 Recitation](/recitation/index.qmd) collection page or use the search bar to look for keywords.
+
+# Precision Variables
+
+Another role a predictor can play in our model is to be a precision variable.
+
+The term **precision** refers to the size of an estimator's variance, or equivalently, the narrowness of a confidence interval for the parameter being estimated. 
+
+The smaller the variance of the estimator, the higher the precision of the estimator:
+
+$$ \frac{Var(\hat{\beta}_{adj})}{Var(\hat{\beta}_{crude})}=\frac{1-\hat{\rho}_{YZ | X}^2}{n-3}\left(\frac{n-2}{1-\hat{\rho}_{XZ}^2}\right) $$
+
+where $Z$ is another independent variable, $\hat{\rho}_{YZ|X}$ is the **partial correlation** between $Y$ and $Z$ that controls for $X$, and $\hat{\rho}_{XZ}$ is the correlation between $X$ and $Z$.
+
+A strong association between $Y$ and $Z$ has a *beneficial* effect upon the precision of $\hat{\beta}_{adj}$ (i.e., it *decreases* $SE(\hat{\beta}_{adj})$).
+
+A strong association between $X$ and $Z$ has a *detrimental* effect on the precision of $\hat{\beta}_{adj}$ (i.e., it *increases* $SE(\hat{\beta}_{adj})$).
+
+Thus, the precision of $\hat{\beta}_{adj}$ reflects the competing effects of the $Y$-$Z$ and $X$-$Z$ relationships. A **precision variable** improves the precision of the estimate of the PEV.
+
+In our regression model, if we have ruled out the variable $Z$ as being a potential confounder, we can evaluate the change in the variability of our PEV's beta coefficient to see if it may be a precision variable. If there is a strong association between $Z$ and $Y$, then we would expect our variance of $\hat{\beta}_{adj}$ to decrease (i.e., the presence of $Z$ helped address the variability in a way that improved our estimation).
+
+However, if there is a strong(er) association between $Z$ and $X$, we may actually increase our variance of $\hat{\beta}_{adj}$. This may lead us to remove it from the model (assuming we have no strong biological/scientific reasons to keep the variable).
+
+The consequence of increasing the variance of our beta coefficients is that it may lead to a smaller test statistic and larger p-value.
+

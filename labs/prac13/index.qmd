@@ -35,7 +35,7 @@ The dataset represents a random sample of 2500 births in the US during 2018 coll
 
 * `dbwt`: infant birth weight in grams
 * `mager`: mother's age in years
-* `rf_cesar``: binary variable indicating if mother previously had a Cesarean delivery ('Y'=yes, 'N'=no)
+* `rf_cesar`: binary variable indicating if mother previously had a Cesarean delivery ('Y'=yes, 'N'=no)
 * `rf_ghype`: binary variable indicating if mother had gestational hypertension ('Y'=yes, 'N'=no)
 * `dob_mm`: month of birth (1=January, ..., 12=December)
 

@@ -35,7 +35,7 @@ The dataset represents a random sample of 2500 births in the US during 2018 coll
 
 * `dbwt`: infant birth weight in grams
 * `mager`: mother's age in years
-* `rf_cesar``: binary variable indicating if mother previously had a Cesarean delivery ('Y'=yes, 'N'=no)
+* `rf_cesar`: binary variable indicating if mother previously had a Cesarean delivery ('Y'=yes, 'N'=no)
 * `rf_ghype`: binary variable indicating if mother had gestational hypertension ('Y'=yes, 'N'=no)
 * `dob_mm`: month of birth (1=January, ..., 12=December)
 
@@ -60,7 +60,7 @@ summary(glm1)
 
 The simple quantile regression of the median model is
 
-```{r}
+```{r, message=F}
 # Fit with rq from the quantreg package
 library(quantreg)
 qr1 <- rq(dbwt ~ mager, data=dat, tau=c(0.5)) # note, default is to model the 50th percentile (i.e., median) but we include tau parameter for completeness

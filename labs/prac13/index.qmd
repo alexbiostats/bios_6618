@@ -21,7 +21,76 @@ library(dplyr)
 
 This page includes optional practice problems, many of which are structured to assist you on the homework with [Solutions provided on a separate page](/labs/prac13s/index.qmd). Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.
 
-# TBD
+This week's extra practice exercises are focusing on some of our "advanced" topics including segmented (piecewise) regression, quantile regression, and splines to model nonlinear trends.
 
-Content for this week is to be decided.
+# Dataset Background
 
+The following code can load the `natl2018us_random2500.csv` file into R:
+
+```{r, eval=T}
+dat <- read.csv('../../.data/natl2018us_random2500.csv')
+```
+
+The dataset represents a random sample of 2500 births in the US during 2018 collected by the CDC. For our exercises below we will focus on the following variables:
+
+* `dbwt`: infant birth weight in grams
+* `mager`: mother's age in years
+* `rf_cesar``: binary variable indicating if mother previously had a Cesarean delivery ('Y'=yes, 'N'=no)
+* `rf_ghype`: binary variable indicating if mother had gestational hypertension ('Y'=yes, 'N'=no)
+* `dob_mm`: month of birth (1=January, ..., 12=December)
+
+
+# Exercise 1: Quantile Regression Example (with Multiple QR, Interactions, and Splines)
+
+This problem will focus on exploring quantile regression modeling. The first problems explore comparing linear regression with quantile regression of the median, then special topics are explored including adjusting for other covariates, including interactions, and modeling potentially nonlinear trends with splines.
+
+## 1a: Comparing Simple Linear Regression and Quantile Regression
+
+Fit and compare the simple linear regression model and quantile regression model for the outcome of infant birth weight in grams (i.e., dependent variable) and independent variable for mother's age in years. State the interpretations of both models for the intercept and mother's age, then compare the estimated coefficients and statistical significance for the two approaches.
+
+
+
+## 1b: Comparing Multiple Linear Regression and Quantile Regression
+
+Now add the predictors for prior cesarean delivery, gestational hypertension, and month of birth (as a categorical variable) to the models from **1a**. Provide an interpretation of the beta coefficients for mother's age from both models, then briefly compare the beta coefficients between the linear and quantile regression models.
+
+
+
+## 1c: Quantile Regression for Other Quantiles
+
+For the simple quantile regression in **1a**, expand to include estimates for the 5th to the 95th quantile in increments of 5 and then create a scatterplot to demonstrate the model fits for each quantile. Briefly describe the figure.
+
+
+
+## 1d: Quantile Regression for Other Quantiles with Splines
+
+Take your approach in **1c** and now add some form of flexible spline to measure if there are any nonlinear effects. Create a new scatterplot with this information and provide a brief discussion if it seems like the splines may be a meaningful addition or if a simpler model for any/all quantiles may be recommended.
+
+
+
+## 1e: Quantile Regression with an Interaction
+
+From the results in **1b**, we noticed what may be an interesting association between infant birth weight and presence of gestational hypertension. For the quantile regression of the median, fit a model that includes mother's age, gestational hypertension, and the interaction of the two. Create a scatterplot with the predicted birth weight's by mother's age and gestational hypertension status. From your figure, does there appear to be a significant difference? From the results of the regression model, does there appear to be a statistically significant difference?
+
+
+
+
+# Exercise 2: Segmented Regression
+
+This problem uses the same dataset to explore if a breakpoint may be beneficial to model the association between mother's age and infant birth weight.
+
+## 2a: Segmented Regression with 1 Breakpoint
+
+Fit a segmented regression with 1 breakpoint and plot the fitted segmented regression line on a scatterplot of the observed data. What is the estimated breakpoint? Does it visually seem like there may be a meaningful change in slope where the breakpoint is plotted?
+
+
+
+## 2b: Significance Test for Breakpoints
+
+Using Davies' test, determine if there is a significant change in slope. State your null and alternative hypothesis.
+
+
+
+## 2c: Significance Testing of Slopes
+
+Are the slopes both significantly different from 0 before and after the breakpoint? 

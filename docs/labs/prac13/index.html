@@ -238,7 +238,21 @@ window.onload = setBrand;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tbd" id="toc-tbd" class="nav-link active" data-scroll-target="#tbd">TBD</a></li>
+  <li><a href="#dataset-background" id="toc-dataset-background" class="nav-link active" data-scroll-target="#dataset-background">Dataset Background</a></li>
+  <li><a href="#exercise-1-quantile-regression-example-with-multiple-qr-interactions-and-splines" id="toc-exercise-1-quantile-regression-example-with-multiple-qr-interactions-and-splines" class="nav-link" data-scroll-target="#exercise-1-quantile-regression-example-with-multiple-qr-interactions-and-splines">Exercise 1: Quantile Regression Example (with Multiple QR, Interactions, and Splines)</a>
+  <ul class="collapse">
+  <li><a href="#a-comparing-simple-linear-regression-and-quantile-regression" id="toc-a-comparing-simple-linear-regression-and-quantile-regression" class="nav-link" data-scroll-target="#a-comparing-simple-linear-regression-and-quantile-regression">1a: Comparing Simple Linear Regression and Quantile Regression</a></li>
+  <li><a href="#b-comparing-multiple-linear-regression-and-quantile-regression" id="toc-b-comparing-multiple-linear-regression-and-quantile-regression" class="nav-link" data-scroll-target="#b-comparing-multiple-linear-regression-and-quantile-regression">1b: Comparing Multiple Linear Regression and Quantile Regression</a></li>
+  <li><a href="#c-quantile-regression-for-other-quantiles" id="toc-c-quantile-regression-for-other-quantiles" class="nav-link" data-scroll-target="#c-quantile-regression-for-other-quantiles">1c: Quantile Regression for Other Quantiles</a></li>
+  <li><a href="#d-quantile-regression-for-other-quantiles-with-splines" id="toc-d-quantile-regression-for-other-quantiles-with-splines" class="nav-link" data-scroll-target="#d-quantile-regression-for-other-quantiles-with-splines">1d: Quantile Regression for Other Quantiles with Splines</a></li>
+  <li><a href="#e-quantile-regression-with-an-interaction" id="toc-e-quantile-regression-with-an-interaction" class="nav-link" data-scroll-target="#e-quantile-regression-with-an-interaction">1e: Quantile Regression with an Interaction</a></li>
+  </ul></li>
+  <li><a href="#exercise-2-segmented-regression" id="toc-exercise-2-segmented-regression" class="nav-link" data-scroll-target="#exercise-2-segmented-regression">Exercise 2: Segmented Regression</a>
+  <ul class="collapse">
+  <li><a href="#a-segmented-regression-with-1-breakpoint" id="toc-a-segmented-regression-with-1-breakpoint" class="nav-link" data-scroll-target="#a-segmented-regression-with-1-breakpoint">2a: Segmented Regression with 1 Breakpoint</a></li>
+  <li><a href="#b-significance-test-for-breakpoints" id="toc-b-significance-test-for-breakpoints" class="nav-link" data-scroll-target="#b-significance-test-for-breakpoints">2b: Significance Test for Breakpoints</a></li>
+  <li><a href="#c-significance-testing-of-slopes" id="toc-c-significance-testing-of-slopes" class="nav-link" data-scroll-target="#c-significance-testing-of-slopes">2c: Significance Testing of Slopes</a></li>
+  </ul></li>
   </ul>
 </nav>
 </nav>
@@ -251,7 +265,7 @@ window.onload = setBrand;
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Week 13 Practice Problems</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Week 13 Practice Problems</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -280,13 +294,68 @@ window.onload = setBrand;
 </header>
 
 <p>This page includes optional practice problems, many of which are structured to assist you on the homework with <a href="../../labs/prac13s/index.html">Solutions provided on a separate page</a>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</p>
-<section id="tbd" class="level1">
-<h1>TBD</h1>
-<p>Content for this week is to be decided.</p>
+<p>This week’s extra practice exercises are focusing on some of our “advanced” topics including segmented (piecewise) regression, quantile regression, and splines to model nonlinear trends.</p>
+<section id="dataset-background" class="level1">
+<h1>Dataset Background</h1>
+<p>The following code can load the <code>natl2018us_random2500.csv</code> file into R:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../../.data/natl2018us_random2500.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The dataset represents a random sample of 2500 births in the US during 2018 collected by the CDC. For our exercises below we will focus on the following variables:</p>
+<ul>
+<li><code>dbwt</code>: infant birth weight in grams</li>
+<li><code>mager</code>: mother’s age in years</li>
+<li>`rf_cesar``: binary variable indicating if mother previously had a Cesarean delivery (‘Y’=yes, ‘N’=no)</li>
+<li><code>rf_ghype</code>: binary variable indicating if mother had gestational hypertension (‘Y’=yes, ‘N’=no)</li>
+<li><code>dob_mm</code>: month of birth (1=January, …, 12=December)</li>
+</ul>
+</section>
+<section id="exercise-1-quantile-regression-example-with-multiple-qr-interactions-and-splines" class="level1">
+<h1>Exercise 1: Quantile Regression Example (with Multiple QR, Interactions, and Splines)</h1>
+<p>This problem will focus on exploring quantile regression modeling. The first problems explore comparing linear regression with quantile regression of the median, then special topics are explored including adjusting for other covariates, including interactions, and modeling potentially nonlinear trends with splines.</p>
+<section id="a-comparing-simple-linear-regression-and-quantile-regression" class="level2">
+<h2 class="anchored" data-anchor-id="a-comparing-simple-linear-regression-and-quantile-regression">1a: Comparing Simple Linear Regression and Quantile Regression</h2>
+<p>Fit and compare the simple linear regression model and quantile regression model for the outcome of infant birth weight in grams (i.e., dependent variable) and independent variable for mother’s age in years. State the interpretations of both models for the intercept and mother’s age, then compare the estimated coefficients and statistical significance for the two approaches.</p>
+</section>
+<section id="b-comparing-multiple-linear-regression-and-quantile-regression" class="level2">
+<h2 class="anchored" data-anchor-id="b-comparing-multiple-linear-regression-and-quantile-regression">1b: Comparing Multiple Linear Regression and Quantile Regression</h2>
+<p>Now add the predictors for prior cesarean delivery, gestational hypertension, and month of birth (as a categorical variable) to the models from <strong>1a</strong>. Provide an interpretation of the beta coefficients for mother’s age from both models, then briefly compare the beta coefficients between the linear and quantile regression models.</p>
+</section>
+<section id="c-quantile-regression-for-other-quantiles" class="level2">
+<h2 class="anchored" data-anchor-id="c-quantile-regression-for-other-quantiles">1c: Quantile Regression for Other Quantiles</h2>
+<p>For the simple quantile regression in <strong>1a</strong>, expand to include estimates for the 5th to the 95th quantile in increments of 5 and then create a scatterplot to demonstrate the model fits for each quantile. Briefly describe the figure.</p>
+</section>
+<section id="d-quantile-regression-for-other-quantiles-with-splines" class="level2">
+<h2 class="anchored" data-anchor-id="d-quantile-regression-for-other-quantiles-with-splines">1d: Quantile Regression for Other Quantiles with Splines</h2>
+<p>Take your approach in <strong>1c</strong> and now add some form of flexible spline to measure if there are any nonlinear effects. Create a new scatterplot with this information and provide a brief discussion if it seems like the splines may be a meaningful addition or if a simpler model for any/all quantiles may be recommended.</p>
+</section>
+<section id="e-quantile-regression-with-an-interaction" class="level2">
+<h2 class="anchored" data-anchor-id="e-quantile-regression-with-an-interaction">1e: Quantile Regression with an Interaction</h2>
+<p>From the results in <strong>1b</strong>, we noticed what may be an interesting association between infant birth weight and presence of gestational hypertension. For the quantile regression of the median, fit a model that includes mother’s age, gestational hypertension, and the interaction of the two. Create a scatterplot with the predicted birth weight’s by mother’s age and gestational hypertension status. From your figure, does there appear to be a significant difference? From the results of the regression model, does there appear to be a statistically significant difference?</p>
+</section>
+</section>
+<section id="exercise-2-segmented-regression" class="level1">
+<h1>Exercise 2: Segmented Regression</h1>
+<p>This problem uses the same dataset to explore if a breakpoint may be beneficial to model the association between mother’s age and infant birth weight.</p>
+<section id="a-segmented-regression-with-1-breakpoint" class="level2">
+<h2 class="anchored" data-anchor-id="a-segmented-regression-with-1-breakpoint">2a: Segmented Regression with 1 Breakpoint</h2>
+<p>Fit a segmented regression with 1 breakpoint and plot the fitted segmented regression line on a scatterplot of the observed data. What is the estimated breakpoint? Does it visually seem like there may be a meaningful change in slope where the breakpoint is plotted?</p>
+</section>
+<section id="b-significance-test-for-breakpoints" class="level2">
+<h2 class="anchored" data-anchor-id="b-significance-test-for-breakpoints">2b: Significance Test for Breakpoints</h2>
+<p>Using Davies’ test, determine if there is a significant change in slope. State your null and alternative hypothesis.</p>
+</section>
+<section id="c-significance-testing-of-slopes" class="level2">
+<h2 class="anchored" data-anchor-id="c-significance-testing-of-slopes">2c: Significance Testing of Slopes</h2>
+<p>Are the slopes both significantly different from 0 before and after the breakpoint?</p>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -574,32 +643,102 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 13 Practice Problems"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>This page includes optional practice problems, many of which are structured to assist you on the homework with <span class="co">[</span><span class="ot">Solutions provided on a separate page</span><span class="co">](/labs/prac13s/index.qmd)</span>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu"># TBD</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>Content for this week is to be decided.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 13 Practice Problems"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>This page includes optional practice problems, many of which are structured to assist you on the homework with <span class="co">[</span><span class="ot">Solutions provided on a separate page</span><span class="co">](/labs/prac13s/index.qmd)</span>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>This week's extra practice exercises are focusing on some of our "advanced" topics including segmented (piecewise) regression, quantile regression, and splines to model nonlinear trends.</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu"># Dataset Background</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>The following code can load the <span class="in">`natl2018us_random2500.csv`</span> file into R:</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=T}</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../../.data/natl2018us_random2500.csv'</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>The dataset represents a random sample of 2500 births in the US during 2018 collected by the CDC. For our exercises below we will focus on the following variables:</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`dbwt`</span>: infant birth weight in grams</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`mager`</span>: mother's age in years</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>`rf_cesar``: binary variable indicating if mother previously had a Cesarean delivery ('Y'=yes, 'N'=no)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`rf_ghype`</span>: binary variable indicating if mother had gestational hypertension ('Y'=yes, 'N'=no)</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`dob_mm`</span>: month of birth (1=January, ..., 12=December)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise 1: Quantile Regression Example (with Multiple QR, Interactions, and Splines)</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>This problem will focus on exploring quantile regression modeling. The first problems explore comparing linear regression with quantile regression of the median, then special topics are explored including adjusting for other covariates, including interactions, and modeling potentially nonlinear trends with splines.</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1a: Comparing Simple Linear Regression and Quantile Regression</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>Fit and compare the simple linear regression model and quantile regression model for the outcome of infant birth weight in grams (i.e., dependent variable) and independent variable for mother's age in years. State the interpretations of both models for the intercept and mother's age, then compare the estimated coefficients and statistical significance for the two approaches.</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1b: Comparing Multiple Linear Regression and Quantile Regression</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>Now add the predictors for prior cesarean delivery, gestational hypertension, and month of birth (as a categorical variable) to the models from **1a**. Provide an interpretation of the beta coefficients for mother's age from both models, then briefly compare the beta coefficients between the linear and quantile regression models.</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1c: Quantile Regression for Other Quantiles</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>For the simple quantile regression in **1a**, expand to include estimates for the 5th to the 95th quantile in increments of 5 and then create a scatterplot to demonstrate the model fits for each quantile. Briefly describe the figure.</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1d: Quantile Regression for Other Quantiles with Splines</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>Take your approach in **1c** and now add some form of flexible spline to measure if there are any nonlinear effects. Create a new scatterplot with this information and provide a brief discussion if it seems like the splines may be a meaningful addition or if a simpler model for any/all quantiles may be recommended.</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1e: Quantile Regression with an Interaction</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>From the results in **1b**, we noticed what may be an interesting association between infant birth weight and presence of gestational hypertension. For the quantile regression of the median, fit a model that includes mother's age, gestational hypertension, and the interaction of the two. Create a scatterplot with the predicted birth weight's by mother's age and gestational hypertension status. From your figure, does there appear to be a significant difference? From the results of the regression model, does there appear to be a statistically significant difference?</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise 2: Segmented Regression</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>This problem uses the same dataset to explore if a breakpoint may be beneficial to model the association between mother's age and infant birth weight.</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2a: Segmented Regression with 1 Breakpoint</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>Fit a segmented regression with 1 breakpoint and plot the fitted segmented regression line on a scatterplot of the observed data. What is the estimated breakpoint? Does it visually seem like there may be a meaningful change in slope where the breakpoint is plotted?</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2b: Significance Test for Breakpoints</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>Using Davies' test, determine if there is a significant change in slope. State your null and alternative hypothesis.</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2c: Significance Testing of Slopes</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>Are the slopes both significantly different from 0 before and after the breakpoint? </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

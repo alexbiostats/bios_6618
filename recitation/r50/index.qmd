@@ -150,7 +150,7 @@ where adding the intercept to any other coefficient matches its mean weight gain
 
 This saturated model can be used to conduct a **lack of fit $F$-test**, a special version of the partial $F$-test. In cases where we are considering polynomial models, this is a great test because we can fit the saturated model that represents:
 
-\[ Y = \beta_0 + \beta_{linear} X + \beta_{quadratic} X^2 + \beta_{cubic} X^3 + \beta_{quartic} X^4 + \beta_{quintic} X^5 + \beta_{sextic} X^6 + \beta_{septic} X^7 + \epsilon; \text{ where } \epsilon \sim N(0,\sigma^{2}_{e}) \]
+$$ Y = \beta_0 + \beta_{linear} X + \beta_{quadratic} X^2 + \beta_{cubic} X^3 + \beta_{quartic} X^4 + \beta_{quintic} X^5 + \beta_{sextic} X^6 + \beta_{septic} X^7 + \epsilon; \text{ where } \epsilon \sim N(0,\sigma^{2}_{e}) $$
 
 and then evaluate reduced models that contain only lower level polynomials to evaluate which is optimal. Nicely, we can use the `anova` function to implement this test as we do with any other partial $F$-test.
 

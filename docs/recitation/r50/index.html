@@ -610,7 +610,7 @@ as.factor(dose)5 as.factor(dose)6 as.factor(dose)7 as.factor(dose)8
 </div>
 <p>where adding the intercept to any other coefficient matches its mean weight gain.</p>
 <p>This saturated model can be used to conduct a <strong>lack of fit <span class="math inline">\(F\)</span>-test</strong>, a special version of the partial <span class="math inline">\(F\)</span>-test. In cases where we are considering polynomial models, this is a great test because we can fit the saturated model that represents:</p>
-<p>[ Y = <em>0 + </em>{linear} X + <em>{quadratic} X^2 + </em>{cubic} X^3 + <em>{quartic} X^4 + </em>{quintic} X^5 + <em>{sextic} X^6 + </em>{septic} X^7 + ; N(0,^{2}_{e}) ]</p>
+<p><span class="math display">\[ Y = \beta_0 + \beta_{linear} X + \beta_{quadratic} X^2 + \beta_{cubic} X^3 + \beta_{quartic} X^4 + \beta_{quintic} X^5 + \beta_{sextic} X^6 + \beta_{septic} X^7 + \epsilon; \text{ where } \epsilon \sim N(0,\sigma^{2}_{e}) \]</span></p>
 <p>and then evaluate reduced models that contain only lower level polynomials to evaluate which is optimal. Nicely, we can use the <code>anova</code> function to implement this test as we do with any other partial <span class="math inline">\(F\)</span>-test.</p>
 <p>Let’s start by determining if a model with only the linear predictor for dose is needed:</p>
 <div class="cell">
@@ -1118,7 +1118,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb15-158"><a href="#cb15-158" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-159"><a href="#cb15-159" aria-hidden="true" tabindex="-1"></a>This saturated model can be used to conduct a **lack of fit $F$-test**, a special version of the partial $F$-test. In cases where we are considering polynomial models, this is a great test because we can fit the saturated model that represents:</span>
 <span id="cb15-160"><a href="#cb15-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-161"><a href="#cb15-161" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span> Y = \beta_0 + \beta_{linear} X + \beta_{quadratic} X^2 + \beta_{cubic} X^3 + \beta_{quartic} X^4 + \beta_{quintic} X^5 + \beta_{sextic} X^6 + \beta_{septic} X^7 + \epsilon; \text{ where } \epsilon \sim N(0,\sigma^{2}_{e}) <span class="sc">\]</span></span>
+<span id="cb15-161"><a href="#cb15-161" aria-hidden="true" tabindex="-1"></a>$$ Y = \beta_0 + \beta_{linear} X + \beta_{quadratic} X^2 + \beta_{cubic} X^3 + \beta_{quartic} X^4 + \beta_{quintic} X^5 + \beta_{sextic} X^6 + \beta_{septic} X^7 + \epsilon; \text{ where } \epsilon \sim N(0,\sigma^{2}_{e}) $$</span>
 <span id="cb15-162"><a href="#cb15-162" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-163"><a href="#cb15-163" aria-hidden="true" tabindex="-1"></a>and then evaluate reduced models that contain only lower level polynomials to evaluate which is optimal. Nicely, we can use the <span class="in">`anova`</span> function to implement this test as we do with any other partial $F$-test.</span>
 <span id="cb15-164"><a href="#cb15-164" aria-hidden="true" tabindex="-1"></a></span>

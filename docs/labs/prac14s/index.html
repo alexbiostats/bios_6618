@@ -115,6 +115,8 @@ window.onload = setBrand;
   gtag('config', 'G-5PBG7BL207');
 </script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -238,7 +240,15 @@ window.onload = setBrand;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tbd" id="toc-tbd" class="nav-link active" data-scroll-target="#tbd">TBD</a></li>
+  <li><a href="#dataset-background" id="toc-dataset-background" class="nav-link active" data-scroll-target="#dataset-background">Dataset Background</a></li>
+  <li><a href="#exercise-1-multiple-linear-regression-example" id="toc-exercise-1-multiple-linear-regression-example" class="nav-link" data-scroll-target="#exercise-1-multiple-linear-regression-example">Exercise 1: Multiple Linear Regression Example</a>
+  <ul class="collapse">
+  <li><a href="#a-fitting-the-model-frequentist" id="toc-a-fitting-the-model-frequentist" class="nav-link" data-scroll-target="#a-fitting-the-model-frequentist">1a: Fitting the Model (Frequentist)</a></li>
+  <li><a href="#b-fitting-the-model-bayesian" id="toc-b-fitting-the-model-bayesian" class="nav-link" data-scroll-target="#b-fitting-the-model-bayesian">1b: Fitting the Model (Bayesian)</a></li>
+  <li><a href="#c-mcmc-diagnostic-plots" id="toc-c-mcmc-diagnostic-plots" class="nav-link" data-scroll-target="#c-mcmc-diagnostic-plots">1c: MCMC Diagnostic Plots</a></li>
+  <li><a href="#d-more-informative-priors" id="toc-d-more-informative-priors" class="nav-link" data-scroll-target="#d-more-informative-priors">1d: More Informative Priors</a></li>
+  <li><a href="#e-posterior-probability-calculations" id="toc-e-posterior-probability-calculations" class="nav-link" data-scroll-target="#e-posterior-probability-calculations">1e: Posterior Probability Calculations</a></li>
+  </ul></li>
   </ul>
 </nav>
 </nav>
@@ -251,7 +261,7 @@ window.onload = setBrand;
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Week 13 Practice Problems: Solutions</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Week 13 Practice Problems: Solutions</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -280,13 +290,314 @@ window.onload = setBrand;
 </header>
 
 <p>This page includes the solutions to the optional practice problems for the given week. If you want to see a version <a href="../../labs/prac14/index.html">without solutions please click here</a>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</p>
-<section id="tbd" class="level1">
-<h1>TBD</h1>
-<p>Content for this week is to be decided.</p>
+<p>This week’s extra practice exercises are focusing on implementing and interpreting a linear regression model using Bayesian approaches. We leverage the same data set from the MLR practice problems to help compare results with our frequentist approaches.</p>
+<section id="dataset-background" class="level1">
+<h1>Dataset Background</h1>
+<p>The following code can load the <code>Licorice_Gargle.csv</code> file into R leveraging the <code>here</code> package:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat_all <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../../.data/Licorice_Gargle.csv'</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># remove records with missing data for the outcome or any predictors:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>complete_case_vec <span class="ot">&lt;-</span> <span class="fu">complete.cases</span>(dat_all[,<span class="fu">c</span>(<span class="st">'pacu30min_throatPain'</span>,<span class="st">'preOp_gender'</span>,<span class="st">'preOp_age'</span>,<span class="st">'treat'</span>)]) <span class="co"># creates a vector of TRUE or FALSE for each row if the cases are complete (i.e., no NA values)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat_all[complete_case_vec,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The dataset represents a randomized control trial of 236 adult patients undergoing elective thoracic surgery requiring a double-lumen endotracheal tube comparing if licorice vs.&nbsp;sugar-water gargle prevents postoperative sore throat. For our exercises below we will focus on the following variables:</p>
+<ul>
+<li><code>pacu30min_throatPain</code>: sore throat pain score at rest 30 minutes after arriving in the post-anesthesia care unit (PACU) measured on an 11 point Likert scale (0=no pain to 10=worst pain)</li>
+<li><code>preOp_gender</code>: an indicator variable for gender (0=Male, 1=Female)</li>
+<li><code>preOp_age</code>: age (in years)</li>
+<li><code>treat</code>: the randomized treatment in the trial where 0=sugar 5g and 1=licorice 0.5g</li>
+</ul>
+</section>
+<section id="exercise-1-multiple-linear-regression-example" class="level1">
+<h1>Exercise 1: Multiple Linear Regression Example</h1>
+<section id="a-fitting-the-model-frequentist" class="level2">
+<h2 class="anchored" data-anchor-id="a-fitting-the-model-frequentist">1a: Fitting the Model (Frequentist)</h2>
+<p>Fit the frequentist multiple linear regression model for the outcome of throat pain (i.e., dependent variable) and independent variables for ASA score, gender, age, and treatment status. Print the summary table output for reference in the following questions.</p>
+<p><strong>Solution:</strong></p>
+<p>Our (frequentist) linear regression model is</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit with glm function</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>glm_full <span class="ot">&lt;-</span> <span class="fu">glm</span>(pacu30min_throatPain <span class="sc">~</span> treat <span class="sc">+</span> preOp_gender <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = pacu30min_throatPain ~ treat + preOp_gender + preOp_age, 
+    data = dat)
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   1.229559   0.317234   3.876 0.000139 ***
+treat        -0.744559   0.156179  -4.767 3.32e-06 ***
+preOp_gender -0.259238   0.159345  -1.627 0.105134    
+preOp_age    -0.001819   0.005051  -0.360 0.719128    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 1.415709)
+
+    Null deviance: 361.14  on 232  degrees of freedom
+Residual deviance: 324.20  on 229  degrees of freedom
+AIC: 748.19
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<p>The 95% confidence intervals (to compare with credible intervals later) are:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print confidence intervals to use for later responses</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(glm_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   2.5 %       97.5 %
+(Intercept)   0.60779299  1.851325830
+treat        -1.05066508 -0.438452912
+preOp_gender -0.57154892  0.053072117
+preOp_age    -0.01171743  0.008080349</code></pre>
+</div>
+</div>
+</section>
+<section id="b-fitting-the-model-bayesian" class="level2">
+<h2 class="anchored" data-anchor-id="b-fitting-the-model-bayesian">1b: Fitting the Model (Bayesian)</h2>
+<p>Fit the Bayesian multiple linear regression model for the outcome of throat pain (i.e., dependent variable) and independent variables for ASA score, gender, age, and treatment status. Assume priors of <span class="math inline">\(\beta_i \sim N(\mu=0,\sigma=100)\)</span> for all beta coefficients and use the default prior for <span class="math inline">\(\sigma\)</span> in your chosen package/software. Compare your results to the frequentist linear regression in <strong>1a</strong>. Provide an interpretation of the slope for the treatment effect and its 95% credible interval.</p>
+<p><strong>Solution:</strong></p>
+<p>We will use the <code>brms</code> package for our Bayesian implementation:</p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-5_b31823c010ba4754734c1d72d8bf5efb">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">515</span>) <span class="co"># set seed for reproducibility</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>bayes1 <span class="ot">&lt;-</span> <span class="fu">brm</span>( pacu30min_throatPain <span class="sc">~</span> treat <span class="sc">+</span> preOp_gender <span class="sc">+</span> preOp_age, </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> dat,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">set_prior</span>(<span class="st">"normal(0,10000)"</span>, <span class="at">class=</span><span class="st">'b'</span>),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">set_prior</span>(<span class="st">"normal(0,10000)"</span>, <span class="at">class=</span><span class="st">'Intercept'</span>)) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms) <span class="co"># load package</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bayes1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: gaussian 
+  Links: mu = identity; sigma = identity 
+Formula: pacu30min_throatPain ~ treat + preOp_gender + preOp_age 
+   Data: dat (Number of observations: 233) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Regression Coefficients:
+             Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept        1.24      0.32     0.61     1.84 1.00     5777     3483
+treat           -0.75      0.16    -1.05    -0.44 1.00     5223     3217
+preOp_gender    -0.26      0.16    -0.58     0.05 1.00     5248     3078
+preOp_age       -0.00      0.01    -0.01     0.01 1.00     5645     3494
+
+Further Distributional Parameters:
+      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sigma     1.19      0.06     1.09     1.31 1.00     4529     3210
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_summary</span>(bayes1) <span class="co"># get results to place into table, 95% CrI specifically</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    Estimate   Est.Error          Q2.5         Q97.5
+b_Intercept     1.235084e+00 0.318260922    0.60580350    1.83967321
+b_treat        -7.455838e-01 0.156281746   -1.04588405   -0.44296585
+b_preOp_gender -2.568938e-01 0.158918083   -0.57933482    0.05474165
+b_preOp_age    -1.919861e-03 0.005008127   -0.01145995    0.00804481
+sigma           1.194846e+00 0.056497367    1.09124113    1.31046288
+Intercept       6.482126e-01 0.079092495    0.49225522    0.80525722
+lprior         -4.188818e+01 0.013426863  -41.91641877  -41.86429702
+lp__           -4.133291e+02 1.557275698 -417.19347046 -411.25006983</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prior_summary</span>(bayes1) <span class="co"># check priors</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                prior     class         coef group resp dpar nlpar lb ub
+      normal(0,10000)         b                                         
+      normal(0,10000)         b    preOp_age                            
+      normal(0,10000)         b preOp_gender                            
+      normal(0,10000)         b        treat                            
+      normal(0,10000) Intercept                                         
+ student_t(3, 0, 2.5)     sigma                                     0   
+       source
+         user
+ (vectorized)
+ (vectorized)
+ (vectorized)
+         user
+      default</code></pre>
+</div>
+</div>
+<p>For those in the treatment group with licorice gargle, throat pain at 30 minutes in the PACU is 0.75 points lower (95% CrI: 0.61, 1.84) on average than those in the control group with sugar water after adjusting for age and gender.</p>
+<p>In general, our beta coefficients and standard errors are quite similiar. The 95% confidence intervals and 95% credible intervals are also fairly similar. This suggests that using “non-informative” priors may result in similar findings to those of the standard frequentist analysis, but we would want to consider other priors that may be meaningful as well. We can also note that our Rhat estimates are all 1.0, suggesting good convergence for our MCMC.</p>
+</section>
+<section id="c-mcmc-diagnostic-plots" class="level2">
+<h2 class="anchored" data-anchor-id="c-mcmc-diagnostic-plots">1c: MCMC Diagnostic Plots</h2>
+<p>Create the density and trace plots for your intercept and slope parameters from <strong>1b</strong>. Briefly describe them and note any potential issues. <em>Note, it is okay if additional parameters are included in your plots, just focus on the beta coefficients for this problem.</em></p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bayes1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We see that the posterior distribution for each beta coefficient is approximately normal, although the tails may be fatter with some non-normal deviation. The trace plots show mixing across the sample space from all chains, suggesting adequate information for our posterior.</p>
+</section>
+<section id="d-more-informative-priors" class="level2">
+<h2 class="anchored" data-anchor-id="d-more-informative-priors">1d: More Informative Priors</h2>
+<p>Let’s assume that we <em>a priori</em> believed that the treatment should result in a 3 point reduction with a standard deviation of 0.25 (i.e., <span class="math inline">\(\beta_{treat} \sim N(\mu=-3,\sigma=0.25)\)</span>. Now fit the Bayesian model with this informative prior for treatment group but leaving all other priors unchanged from <strong>1c</strong>. How do the beta coefficients change? Briefly discuss the potential impact of sample size on the informativeness of the prior.</p>
+<p><strong>Solution:</strong></p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-8_c46cc798d1486985d6606c6aec9a3593">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">515</span>) <span class="co"># set seed for reproducibility</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>bayes2 <span class="ot">&lt;-</span> <span class="fu">brm</span>( pacu30min_throatPain <span class="sc">~</span> treat <span class="sc">+</span> preOp_gender <span class="sc">+</span> preOp_age, </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> dat,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">set_prior</span>(<span class="st">"normal(-3,0.0625)"</span>, <span class="at">coef=</span><span class="st">'treat'</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">set_prior</span>(<span class="st">"normal(0,10000)"</span>, <span class="at">class=</span><span class="st">'b'</span>),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">set_prior</span>(<span class="st">"normal(0,10000)"</span>, <span class="at">class=</span><span class="st">'Intercept'</span>)) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bayes2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: gaussian 
+  Links: mu = identity; sigma = identity 
+Formula: pacu30min_throatPain ~ treat + preOp_gender + preOp_age 
+   Data: dat (Number of observations: 233) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Regression Coefficients:
+             Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept        2.40      0.41     1.62     3.20 1.00     5189     3414
+treat           -2.81      0.06    -2.93    -2.69 1.00     4308     3044
+preOp_gender    -0.17      0.21    -0.59     0.23 1.00     4853     3095
+preOp_age       -0.00      0.01    -0.02     0.01 1.00     5285     3276
+
+Further Distributional Parameters:
+      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sigma     1.59      0.08     1.45     1.74 1.00     4021     3336
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_summary</span>(bayes2) <span class="co"># get results to place into table, 95% CrI specifically</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    Estimate  Est.Error          Q2.5         Q97.5
+b_Intercept     2.404429e+00 0.40697609    1.62054091  3.202742e+00
+b_treat        -2.811520e+00 0.06188197   -2.93446188 -2.690691e+00
+b_preOp_gender -1.745726e-01 0.20811488   -0.58916498  2.295389e-01
+b_preOp_age    -4.780098e-03 0.00673394   -0.01792011  8.209132e-03
+sigma           1.585061e+00 0.07569206    1.44556915  1.742159e+00
+Intercept       6.492187e-01 0.10306522    0.44754935  8.461912e-01
+lprior         -3.504734e+01 3.04133539  -42.25318392 -3.054857e+01
+lp__           -4.718568e+02 1.55714624 -475.61981036 -4.697922e+02</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prior_summary</span>(bayes2) <span class="co"># check priors</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                prior     class         coef group resp dpar nlpar lb ub
+      normal(0,10000)         b                                         
+      normal(0,10000)         b    preOp_age                            
+      normal(0,10000)         b preOp_gender                            
+    normal(-3,0.0625)         b        treat                            
+      normal(0,10000) Intercept                                         
+ student_t(3, 0, 2.5)     sigma                                     0   
+       source
+         user
+ (vectorized)
+ (vectorized)
+         user
+         user
+      default</code></pre>
+</div>
+</div>
+<p>The most meaningful changes in our posterior inference are for the intercept and the treatment group beta coefficient. For example, our treatment estimate is now <span class="math inline">\(\hat{\beta}_{treat}=-2.81\)</span> versus the original <span class="math inline">\(\hat{\beta}_{treat}=-0.75\)</span> when we used a “non-informative” prior. This suggests our posterior is more reflective of our prior belief than the observed data.</p>
+<p>This shift in the treatment group estimate then led to our intercept estimate of <span class="math inline">\(\hat{\beta}_{0}=2.40\)</span> versus the estimate of <span class="math inline">\(\hat{\beta}_{0}=1.24\)</span> with the “non-informative” prior. We see that there are some changes to gender and age, but not as large.</p>
+<p>Our sample size is 233 for this data set. In an analysis with a larger sample size, we may expect this “informative” prior to be less informative. However, it currently is providing more influence to our posterior estimate of treatment group than the observed likelihood.</p>
+</section>
+<section id="e-posterior-probability-calculations" class="level2">
+<h2 class="anchored" data-anchor-id="e-posterior-probability-calculations">1e: Posterior Probability Calculations</h2>
+<p>Calculate the posterior probabilities that <span class="math inline">\(P(\hat{\beta}_{treat} \leq 0)\)</span>, <span class="math inline">\(P(\hat{\beta}_{treat} &gt; 0)\)</span>, and <span class="math inline">\(P(\hat{\beta}_{treat} \leq -1)\)</span> for both <strong>1b</strong> and <strong>1d</strong>. Summarize your results in a table and briefly compare model results.</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract posterior samples for calculations</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>post1 <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(bayes1)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>post2 <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(bayes2)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># P(betahat_treat &lt;= 0)</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>pp1_lte0 <span class="ot">&lt;-</span> <span class="fu">mean</span>( post1[,<span class="st">'b_treat'</span>] <span class="sc">&lt;=</span> <span class="dv">0</span> )</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>pp2_lte0 <span class="ot">&lt;-</span> <span class="fu">mean</span>( post2[,<span class="st">'b_treat'</span>] <span class="sc">&lt;=</span> <span class="dv">0</span> )</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co"># P(betahat_treat &gt; 0)</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>pp1_gt0 <span class="ot">&lt;-</span> <span class="fu">mean</span>( post1[,<span class="st">'b_treat'</span>] <span class="sc">&gt;</span> <span class="dv">0</span> )</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>pp2_gt0 <span class="ot">&lt;-</span> <span class="fu">mean</span>( post2[,<span class="st">'b_treat'</span>] <span class="sc">&gt;</span> <span class="dv">0</span> )</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># P(betahat_treat &lt;= -1)</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>pp1_lten1 <span class="ot">&lt;-</span> <span class="fu">mean</span>( post1[,<span class="st">'b_treat'</span>] <span class="sc">&lt;=</span> <span class="sc">-</span><span class="dv">1</span> )</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>pp2_lten1 <span class="ot">&lt;-</span> <span class="fu">mean</span>( post2[,<span class="st">'b_treat'</span>] <span class="sc">&lt;=</span> <span class="sc">-</span><span class="dv">1</span> )</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="co"># make matrix for table of results, round to 4 places</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>res_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">round</span>( <span class="fu">c</span>(pp1_lte0, pp1_gt0, pp1_lten1, </span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>                     pp2_lte0, pp2_gt0, pp2_lten1), <span class="dv">4</span>), </span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">byrow=</span>T,</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>                   <span class="at">dimnames =</span> <span class="fu">list</span>( <span class="fu">c</span>(<span class="st">'Non-Informative Prior (1b)'</span>,<span class="st">'Informative Prior (1d)'</span>) ,</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">c</span>(<span class="st">'&lt;=0'</span>,<span class="st">'&gt;0'</span>,<span class="st">'&lt;=-1'</span>)) )</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a><span class="co"># print table</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>res_mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           &lt;=0 &gt;0   &lt;=-1
+Non-Informative Prior (1b)   1  0 0.0508
+Informative Prior (1d)       1  0 1.0000</code></pre>
+</div>
+</div>
+<p>In this example, we see both the non-informative and informative priors agree with respect to posterior probabilities estimated for 0 (i.e., 100% for being less than or equal to 0 and 0% for being greater than 0).</p>
+<p>However, we see very different results for <span class="math inline">\(P(\hat{\beta}_{treat} \leq -1\)</span>) where the non-informative prior’s posterior probability is only 5.08% (i.e., very unlikely), whereas the informative prior’s posterior probability is 100% (i.e., definitely less than -1). Given that we know the informative prior is very strong and disagrees with our likelihood, it seems more likely that the non-informative prior is appropriately summarizing our results based on the observed data.</p>
+<p>In practice, we want to consider multiple priors and present all results while being transparent to their limitations. For instance, we could present our non-informative prior as a potentially more statistically and scientifically conservative priors, but then also present the informative prior and make it clear that this is very strong due to its larger than observed mean difference and small standard deviation. Then, a reader can use this information to decide amongst the results themselves.</p>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -574,32 +885,188 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 13 Practice Problems: Solutions"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>This page includes the solutions to the optional practice problems for the given week. If you want to see a version <span class="co">[</span><span class="ot">without solutions please click here</span><span class="co">](/labs/prac14/index.qmd)</span>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu"># TBD</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>Content for this week is to be decided.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 13 Practice Problems: Solutions"</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>This page includes the solutions to the optional practice problems for the given week. If you want to see a version <span class="co">[</span><span class="ot">without solutions please click here</span><span class="co">](/labs/prac14/index.qmd)</span>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>This week's extra practice exercises are focusing on implementing and interpreting a linear regression model using Bayesian approaches. We leverage the same data set from the MLR practice problems to help compare results with our frequentist approaches.</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="fu"># Dataset Background</span></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>The following code can load the <span class="in">`Licorice_Gargle.csv`</span> file into R leveraging the <span class="in">`here`</span> package:</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=T}</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>dat_all <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../../.data/Licorice_Gargle.csv'</span>)</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a><span class="co"># remove records with missing data for the outcome or any predictors:</span></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>complete_case_vec <span class="ot">&lt;-</span> <span class="fu">complete.cases</span>(dat_all[,<span class="fu">c</span>(<span class="st">'pacu30min_throatPain'</span>,<span class="st">'preOp_gender'</span>,<span class="st">'preOp_age'</span>,<span class="st">'treat'</span>)]) <span class="co"># creates a vector of TRUE or FALSE for each row if the cases are complete (i.e., no NA values)</span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat_all[complete_case_vec,]</span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>The dataset represents a randomized control trial of 236 adult patients undergoing elective thoracic surgery requiring a double-lumen endotracheal tube comparing if licorice vs. sugar-water gargle prevents postoperative sore throat. For our exercises below we will focus on the following variables:</span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`pacu30min_throatPain`</span>: sore throat pain score at rest 30 minutes after arriving in the post-anesthesia care unit (PACU) measured on an 11 point Likert scale (0=no pain to 10=worst pain)</span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`preOp_gender`</span>: an indicator variable for gender (0=Male, 1=Female)</span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`preOp_age`</span>: age (in years)</span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`treat`</span>: the randomized treatment in the trial where 0=sugar 5g and 1=licorice 0.5g</span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise 1: Multiple Linear Regression Example</span></span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1a: Fitting the Model (Frequentist)</span></span>
+<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a>Fit the frequentist multiple linear regression model for the outcome of throat pain (i.e., dependent variable) and independent variables for ASA score, gender, age, and treatment status. Print the summary table output for reference in the following questions.</span>
+<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a>Our (frequentist) linear regression model is</span>
+<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-58"><a href="#cb23-58" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit with glm function</span></span>
+<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a>glm_full <span class="ot">&lt;-</span> <span class="fu">glm</span>(pacu30min_throatPain <span class="sc">~</span> treat <span class="sc">+</span> preOp_gender <span class="sc">+</span> preOp_age, <span class="at">data=</span>dat)</span>
+<span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm_full)</span>
+<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-63"><a href="#cb23-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-64"><a href="#cb23-64" aria-hidden="true" tabindex="-1"></a>The 95% confidence intervals (to compare with credible intervals later) are:</span>
+<span id="cb23-65"><a href="#cb23-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-66"><a href="#cb23-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=F}</span></span>
+<span id="cb23-67"><a href="#cb23-67" aria-hidden="true" tabindex="-1"></a><span class="co"># Print confidence intervals to use for later responses</span></span>
+<span id="cb23-68"><a href="#cb23-68" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(glm_full)</span>
+<span id="cb23-69"><a href="#cb23-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-70"><a href="#cb23-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-71"><a href="#cb23-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-72"><a href="#cb23-72" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1b: Fitting the Model (Bayesian)</span></span>
+<span id="cb23-73"><a href="#cb23-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-74"><a href="#cb23-74" aria-hidden="true" tabindex="-1"></a>Fit the Bayesian multiple linear regression model for the outcome of throat pain (i.e., dependent variable) and independent variables for ASA score, gender, age, and treatment status. Assume priors of $\beta_i \sim N(\mu=0,\sigma=100)$ for all beta coefficients and use the default prior for $\sigma$ in your chosen package/software. Compare your results to the frequentist linear regression in **1a**. Provide an interpretation of the slope for the treatment effect and its 95% credible interval.</span>
+<span id="cb23-75"><a href="#cb23-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-77"><a href="#cb23-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-78"><a href="#cb23-78" aria-hidden="true" tabindex="-1"></a>We will use the <span class="in">`brms`</span> package for our Bayesian implementation:</span>
+<span id="cb23-79"><a href="#cb23-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-80"><a href="#cb23-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=F, warning=F, cache=T, results='hide'}</span></span>
+<span id="cb23-81"><a href="#cb23-81" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb23-82"><a href="#cb23-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-83"><a href="#cb23-83" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">515</span>) <span class="co"># set seed for reproducibility</span></span>
+<span id="cb23-84"><a href="#cb23-84" aria-hidden="true" tabindex="-1"></a>bayes1 <span class="ot">&lt;-</span> <span class="fu">brm</span>( pacu30min_throatPain <span class="sc">~</span> treat <span class="sc">+</span> preOp_gender <span class="sc">+</span> preOp_age, </span>
+<span id="cb23-85"><a href="#cb23-85" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> dat,</span>
+<span id="cb23-86"><a href="#cb23-86" aria-hidden="true" tabindex="-1"></a>               <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb23-87"><a href="#cb23-87" aria-hidden="true" tabindex="-1"></a>               <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">set_prior</span>(<span class="st">"normal(0,10000)"</span>, <span class="at">class=</span><span class="st">'b'</span>),</span>
+<span id="cb23-88"><a href="#cb23-88" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">set_prior</span>(<span class="st">"normal(0,10000)"</span>, <span class="at">class=</span><span class="st">'Intercept'</span>)) )</span>
+<span id="cb23-89"><a href="#cb23-89" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-90"><a href="#cb23-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-91"><a href="#cb23-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=F, warning=F}</span></span>
+<span id="cb23-92"><a href="#cb23-92" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms) <span class="co"># load package</span></span>
+<span id="cb23-93"><a href="#cb23-93" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bayes1)</span>
+<span id="cb23-94"><a href="#cb23-94" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_summary</span>(bayes1) <span class="co"># get results to place into table, 95% CrI specifically</span></span>
+<span id="cb23-95"><a href="#cb23-95" aria-hidden="true" tabindex="-1"></a><span class="fu">prior_summary</span>(bayes1) <span class="co"># check priors</span></span>
+<span id="cb23-96"><a href="#cb23-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-97"><a href="#cb23-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-98"><a href="#cb23-98" aria-hidden="true" tabindex="-1"></a>For those in the treatment group with licorice gargle, throat pain at 30 minutes in the PACU is 0.75 points lower (95% CrI: 0.61, 1.84) on average than those in the control group with sugar water after adjusting for age and gender.</span>
+<span id="cb23-99"><a href="#cb23-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-100"><a href="#cb23-100" aria-hidden="true" tabindex="-1"></a>In general, our beta coefficients and standard errors are quite similiar. The 95% confidence intervals and 95% credible intervals are also fairly similar. This suggests that using "non-informative" priors may result in similar findings to those of the standard frequentist analysis, but we would want to consider other priors that may be meaningful as well. We can also note that our Rhat estimates are all 1.0, suggesting good convergence for our MCMC.</span>
+<span id="cb23-101"><a href="#cb23-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-102"><a href="#cb23-102" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1c: MCMC Diagnostic Plots</span></span>
+<span id="cb23-103"><a href="#cb23-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-104"><a href="#cb23-104" aria-hidden="true" tabindex="-1"></a>Create the density and trace plots for your intercept and slope parameters from **1b**. Briefly describe them and note any potential issues. *Note, it is okay if additional parameters are included in your plots, just focus on the beta coefficients for this problem.*</span>
+<span id="cb23-105"><a href="#cb23-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-106"><a href="#cb23-106" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-107"><a href="#cb23-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-110"><a href="#cb23-110" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-111"><a href="#cb23-111" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bayes1)</span>
+<span id="cb23-112"><a href="#cb23-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-113"><a href="#cb23-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-114"><a href="#cb23-114" aria-hidden="true" tabindex="-1"></a>We see that the posterior distribution for each beta coefficient is approximately normal, although the tails may be fatter with some non-normal deviation. The trace plots show mixing across the sample space from all chains, suggesting adequate information for our posterior.</span>
+<span id="cb23-115"><a href="#cb23-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-116"><a href="#cb23-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-117"><a href="#cb23-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1d: More Informative Priors</span></span>
+<span id="cb23-118"><a href="#cb23-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-119"><a href="#cb23-119" aria-hidden="true" tabindex="-1"></a>Let's assume that we *a priori* believed that the treatment should result in a 3 point reduction with a standard deviation of 0.25 (i.e., $\beta_{treat} \sim N(\mu=-3,\sigma=0.25)$. Now fit the Bayesian model with this informative prior for treatment group but leaving all other priors unchanged from **1c**. How do the beta coefficients change? Briefly discuss the potential impact of sample size on the informativeness of the prior.</span>
+<span id="cb23-120"><a href="#cb23-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-121"><a href="#cb23-121" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-122"><a href="#cb23-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-123"><a href="#cb23-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=F, warning=F, cache=T, results='hide'}</span></span>
+<span id="cb23-124"><a href="#cb23-124" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">515</span>) <span class="co"># set seed for reproducibility</span></span>
+<span id="cb23-125"><a href="#cb23-125" aria-hidden="true" tabindex="-1"></a>bayes2 <span class="ot">&lt;-</span> <span class="fu">brm</span>( pacu30min_throatPain <span class="sc">~</span> treat <span class="sc">+</span> preOp_gender <span class="sc">+</span> preOp_age, </span>
+<span id="cb23-126"><a href="#cb23-126" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> dat,</span>
+<span id="cb23-127"><a href="#cb23-127" aria-hidden="true" tabindex="-1"></a>               <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb23-128"><a href="#cb23-128" aria-hidden="true" tabindex="-1"></a>               <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">set_prior</span>(<span class="st">"normal(-3,0.0625)"</span>, <span class="at">coef=</span><span class="st">'treat'</span>),</span>
+<span id="cb23-129"><a href="#cb23-129" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">set_prior</span>(<span class="st">"normal(0,10000)"</span>, <span class="at">class=</span><span class="st">'b'</span>),</span>
+<span id="cb23-130"><a href="#cb23-130" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">set_prior</span>(<span class="st">"normal(0,10000)"</span>, <span class="at">class=</span><span class="st">'Intercept'</span>)) )</span>
+<span id="cb23-131"><a href="#cb23-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-132"><a href="#cb23-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-133"><a href="#cb23-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=F, warning=F}</span></span>
+<span id="cb23-134"><a href="#cb23-134" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bayes2)</span>
+<span id="cb23-135"><a href="#cb23-135" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_summary</span>(bayes2) <span class="co"># get results to place into table, 95% CrI specifically</span></span>
+<span id="cb23-136"><a href="#cb23-136" aria-hidden="true" tabindex="-1"></a><span class="fu">prior_summary</span>(bayes2) <span class="co"># check priors</span></span>
+<span id="cb23-137"><a href="#cb23-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-138"><a href="#cb23-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-139"><a href="#cb23-139" aria-hidden="true" tabindex="-1"></a>The most meaningful changes in our posterior inference are for the intercept and the treatment group beta coefficient. For example, our treatment estimate is now $\hat{\beta}_{treat}=-2.81$ versus the original $\hat{\beta}_{treat}=-0.75$ when we used a "non-informative" prior. This suggests our posterior is more reflective of our prior belief than the observed data.</span>
+<span id="cb23-140"><a href="#cb23-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-141"><a href="#cb23-141" aria-hidden="true" tabindex="-1"></a>This shift in the treatment group estimate then led to our intercept estimate of $\hat{\beta}_{0}=2.40$ versus the estimate of $\hat{\beta}_{0}=1.24$ with the "non-informative" prior. We see that there are some changes to gender and age, but not as large.</span>
+<span id="cb23-142"><a href="#cb23-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-143"><a href="#cb23-143" aria-hidden="true" tabindex="-1"></a>Our sample size is 233 for this data set. In an analysis with a larger sample size, we may expect this "informative" prior to be less informative. However, it currently is providing more influence to our posterior estimate of treatment group than the observed likelihood.</span>
+<span id="cb23-144"><a href="#cb23-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-145"><a href="#cb23-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-146"><a href="#cb23-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-147"><a href="#cb23-147" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1e: Posterior Probability Calculations</span></span>
+<span id="cb23-148"><a href="#cb23-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-149"><a href="#cb23-149" aria-hidden="true" tabindex="-1"></a>Calculate the posterior probabilities that $P(\hat{\beta}_{treat} \leq 0)$, $P(\hat{\beta}_{treat} &gt; 0)$, and $P(\hat{\beta}_{treat} \leq -1)$ for both **1b** and **1d**. Summarize your results in a table and briefly compare model results.</span>
+<span id="cb23-150"><a href="#cb23-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-151"><a href="#cb23-151" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb23-152"><a href="#cb23-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-153"><a href="#cb23-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, warning=F, message=F}</span></span>
+<span id="cb23-154"><a href="#cb23-154" aria-hidden="true" tabindex="-1"></a><span class="co"># extract posterior samples for calculations</span></span>
+<span id="cb23-155"><a href="#cb23-155" aria-hidden="true" tabindex="-1"></a>post1 <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(bayes1)</span>
+<span id="cb23-156"><a href="#cb23-156" aria-hidden="true" tabindex="-1"></a>post2 <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(bayes2)</span>
+<span id="cb23-157"><a href="#cb23-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-158"><a href="#cb23-158" aria-hidden="true" tabindex="-1"></a><span class="co"># P(betahat_treat &lt;= 0)</span></span>
+<span id="cb23-159"><a href="#cb23-159" aria-hidden="true" tabindex="-1"></a>pp1_lte0 <span class="ot">&lt;-</span> <span class="fu">mean</span>( post1[,<span class="st">'b_treat'</span>] <span class="sc">&lt;=</span> <span class="dv">0</span> )</span>
+<span id="cb23-160"><a href="#cb23-160" aria-hidden="true" tabindex="-1"></a>pp2_lte0 <span class="ot">&lt;-</span> <span class="fu">mean</span>( post2[,<span class="st">'b_treat'</span>] <span class="sc">&lt;=</span> <span class="dv">0</span> )</span>
+<span id="cb23-161"><a href="#cb23-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-162"><a href="#cb23-162" aria-hidden="true" tabindex="-1"></a><span class="co"># P(betahat_treat &gt; 0)</span></span>
+<span id="cb23-163"><a href="#cb23-163" aria-hidden="true" tabindex="-1"></a>pp1_gt0 <span class="ot">&lt;-</span> <span class="fu">mean</span>( post1[,<span class="st">'b_treat'</span>] <span class="sc">&gt;</span> <span class="dv">0</span> )</span>
+<span id="cb23-164"><a href="#cb23-164" aria-hidden="true" tabindex="-1"></a>pp2_gt0 <span class="ot">&lt;-</span> <span class="fu">mean</span>( post2[,<span class="st">'b_treat'</span>] <span class="sc">&gt;</span> <span class="dv">0</span> )</span>
+<span id="cb23-165"><a href="#cb23-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-166"><a href="#cb23-166" aria-hidden="true" tabindex="-1"></a><span class="co"># P(betahat_treat &lt;= -1)</span></span>
+<span id="cb23-167"><a href="#cb23-167" aria-hidden="true" tabindex="-1"></a>pp1_lten1 <span class="ot">&lt;-</span> <span class="fu">mean</span>( post1[,<span class="st">'b_treat'</span>] <span class="sc">&lt;=</span> <span class="sc">-</span><span class="dv">1</span> )</span>
+<span id="cb23-168"><a href="#cb23-168" aria-hidden="true" tabindex="-1"></a>pp2_lten1 <span class="ot">&lt;-</span> <span class="fu">mean</span>( post2[,<span class="st">'b_treat'</span>] <span class="sc">&lt;=</span> <span class="sc">-</span><span class="dv">1</span> )</span>
+<span id="cb23-169"><a href="#cb23-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-170"><a href="#cb23-170" aria-hidden="true" tabindex="-1"></a><span class="co"># make matrix for table of results, round to 4 places</span></span>
+<span id="cb23-171"><a href="#cb23-171" aria-hidden="true" tabindex="-1"></a>res_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">round</span>( <span class="fu">c</span>(pp1_lte0, pp1_gt0, pp1_lten1, </span>
+<span id="cb23-172"><a href="#cb23-172" aria-hidden="true" tabindex="-1"></a>                     pp2_lte0, pp2_gt0, pp2_lten1), <span class="dv">4</span>), </span>
+<span id="cb23-173"><a href="#cb23-173" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">byrow=</span>T,</span>
+<span id="cb23-174"><a href="#cb23-174" aria-hidden="true" tabindex="-1"></a>                   <span class="at">dimnames =</span> <span class="fu">list</span>( <span class="fu">c</span>(<span class="st">'Non-Informative Prior (1b)'</span>,<span class="st">'Informative Prior (1d)'</span>) ,</span>
+<span id="cb23-175"><a href="#cb23-175" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">c</span>(<span class="st">'&lt;=0'</span>,<span class="st">'&gt;0'</span>,<span class="st">'&lt;=-1'</span>)) )</span>
+<span id="cb23-176"><a href="#cb23-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-177"><a href="#cb23-177" aria-hidden="true" tabindex="-1"></a><span class="co"># print table</span></span>
+<span id="cb23-178"><a href="#cb23-178" aria-hidden="true" tabindex="-1"></a>res_mat</span>
+<span id="cb23-179"><a href="#cb23-179" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-180"><a href="#cb23-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-181"><a href="#cb23-181" aria-hidden="true" tabindex="-1"></a>In this example, we see both the non-informative and informative priors agree with respect to posterior probabilities estimated for 0 (i.e., 100% for being less than or equal to 0 and 0% for being greater than 0). </span>
+<span id="cb23-182"><a href="#cb23-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-183"><a href="#cb23-183" aria-hidden="true" tabindex="-1"></a>However, we see very different results for $P(\hat{\beta}_{treat} \leq -1$) where the non-informative prior's posterior probability is only 5.08% (i.e., very unlikely), whereas the informative prior's posterior probability is 100% (i.e., definitely less than -1). Given that we know the informative prior is very strong and disagrees with our likelihood, it seems more likely that the non-informative prior is appropriately summarizing our results based on the observed data. </span>
+<span id="cb23-184"><a href="#cb23-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-185"><a href="#cb23-185" aria-hidden="true" tabindex="-1"></a>In practice, we want to consider multiple priors and present all results while being transparent to their limitations. For instance, we could present our non-informative prior as a potentially more statistically and scientifically conservative priors, but then also present the informative prior and make it clear that this is very strong due to its larger than observed mean difference and small standard deviation. Then, a reader can use this information to decide amongst the results themselves. </span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

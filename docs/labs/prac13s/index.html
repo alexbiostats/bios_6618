@@ -115,6 +115,8 @@ window.onload = setBrand;
   gtag('config', 'G-5PBG7BL207');
 </script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -238,7 +240,21 @@ window.onload = setBrand;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tbd" id="toc-tbd" class="nav-link active" data-scroll-target="#tbd">TBD</a></li>
+  <li><a href="#dataset-background" id="toc-dataset-background" class="nav-link active" data-scroll-target="#dataset-background">Dataset Background</a></li>
+  <li><a href="#exercise-1-quantile-regression-example-with-multiple-qr-interactions-and-splines" id="toc-exercise-1-quantile-regression-example-with-multiple-qr-interactions-and-splines" class="nav-link" data-scroll-target="#exercise-1-quantile-regression-example-with-multiple-qr-interactions-and-splines">Exercise 1: Quantile Regression Example (with Multiple QR, Interactions, and Splines)</a>
+  <ul class="collapse">
+  <li><a href="#a-comparing-simple-linear-regression-and-quantile-regression" id="toc-a-comparing-simple-linear-regression-and-quantile-regression" class="nav-link" data-scroll-target="#a-comparing-simple-linear-regression-and-quantile-regression">1a: Comparing Simple Linear Regression and Quantile Regression</a></li>
+  <li><a href="#b-comparing-multiple-linear-regression-and-quantile-regression" id="toc-b-comparing-multiple-linear-regression-and-quantile-regression" class="nav-link" data-scroll-target="#b-comparing-multiple-linear-regression-and-quantile-regression">1b: Comparing Multiple Linear Regression and Quantile Regression</a></li>
+  <li><a href="#c-quantile-regression-for-other-quantiles" id="toc-c-quantile-regression-for-other-quantiles" class="nav-link" data-scroll-target="#c-quantile-regression-for-other-quantiles">1c: Quantile Regression for Other Quantiles</a></li>
+  <li><a href="#d-quantile-regression-for-other-quantiles-with-splines" id="toc-d-quantile-regression-for-other-quantiles-with-splines" class="nav-link" data-scroll-target="#d-quantile-regression-for-other-quantiles-with-splines">1d: Quantile Regression for Other Quantiles with Splines</a></li>
+  <li><a href="#e-quantile-regression-with-an-interaction" id="toc-e-quantile-regression-with-an-interaction" class="nav-link" data-scroll-target="#e-quantile-regression-with-an-interaction">1e: Quantile Regression with an Interaction</a></li>
+  </ul></li>
+  <li><a href="#exercise-2-segmented-regression" id="toc-exercise-2-segmented-regression" class="nav-link" data-scroll-target="#exercise-2-segmented-regression">Exercise 2: Segmented Regression</a>
+  <ul class="collapse">
+  <li><a href="#a-segmented-regression-with-1-breakpoint" id="toc-a-segmented-regression-with-1-breakpoint" class="nav-link" data-scroll-target="#a-segmented-regression-with-1-breakpoint">2a: Segmented Regression with 1 Breakpoint</a></li>
+  <li><a href="#b-significance-test-for-breakpoints" id="toc-b-significance-test-for-breakpoints" class="nav-link" data-scroll-target="#b-significance-test-for-breakpoints">2b: Significance Test for Breakpoints</a></li>
+  <li><a href="#c-significance-testing-of-slopes" id="toc-c-significance-testing-of-slopes" class="nav-link" data-scroll-target="#c-significance-testing-of-slopes">2c: Significance Testing of Slopes</a></li>
+  </ul></li>
   </ul>
 </nav>
 </nav>
@@ -251,7 +267,7 @@ window.onload = setBrand;
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Week 13 Practice Problems: Solutions</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Week 13 Practice Problems: Solutions</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -280,13 +296,436 @@ window.onload = setBrand;
 </header>
 
 <p>This page includes the solutions to the optional practice problems for the given week. If you want to see a version <a href="../../labs/prac13/index.html">without solutions please click here</a>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</p>
-<section id="tbd" class="level1">
-<h1>TBD</h1>
-<p>Content for this week is to be decided.</p>
+<p>This week’s extra practice exercises are focusing on some of our “advanced” topics including segmented (piecewise) regression, quantile regression, and splines to model nonlinear trends.</p>
+<section id="dataset-background" class="level1">
+<h1>Dataset Background</h1>
+<p>The following code can load the <code>natl2018us_random2500.csv</code> file into R:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../../.data/natl2018us_random2500.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The dataset represents a random sample of 2500 births in the US during 2018 collected by the CDC. For our exercises below we will focus on the following variables:</p>
+<ul>
+<li><code>dbwt</code>: infant birth weight in grams</li>
+<li><code>mager</code>: mother’s age in years</li>
+<li>`rf_cesar``: binary variable indicating if mother previously had a Cesarean delivery (‘Y’=yes, ‘N’=no)</li>
+<li><code>rf_ghype</code>: binary variable indicating if mother had gestational hypertension (‘Y’=yes, ‘N’=no)</li>
+<li><code>dob_mm</code>: month of birth (1=January, …, 12=December)</li>
+</ul>
+</section>
+<section id="exercise-1-quantile-regression-example-with-multiple-qr-interactions-and-splines" class="level1">
+<h1>Exercise 1: Quantile Regression Example (with Multiple QR, Interactions, and Splines)</h1>
+<p>This problem will focus on exploring quantile regression modeling. The first problems explore comparing linear regression with quantile regression of the median, then special topics are explored including adjusting for other covariates, including interactions, and modeling potentially nonlinear trends with splines.</p>
+<section id="a-comparing-simple-linear-regression-and-quantile-regression" class="level2">
+<h2 class="anchored" data-anchor-id="a-comparing-simple-linear-regression-and-quantile-regression">1a: Comparing Simple Linear Regression and Quantile Regression</h2>
+<p>Fit and compare the simple linear regression model and quantile regression model for the outcome of infant birth weight in grams (i.e., dependent variable) and independent variable for mother’s age in years. State the interpretations of both models for the intercept and mother’s age, then compare the estimated coefficients and statistical significance for the two approaches.</p>
+<p><strong>Solution:</strong></p>
+<p>The simple linear regression model is</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit with glm function</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>glm1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(dbwt <span class="sc">~</span> mager, <span class="at">data=</span>dat)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = dbwt ~ mager, data = dat)
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 3037.136     57.841  52.508  &lt; 2e-16 ***
+mager          8.641      1.955   4.421 1.03e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 311196.5)
+
+    Null deviance: 783450552  on 2499  degrees of freedom
+Residual deviance: 777368935  on 2498  degrees of freedom
+AIC: 38719
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<p>The simple quantile regression of the median model is</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit with rq from the quantreg package</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quantreg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: SparseM</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'SparseM'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:base':
+
+    backsolve</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>qr1 <span class="ot">&lt;-</span> <span class="fu">rq</span>(dbwt <span class="sc">~</span> mager, <span class="at">data=</span>dat, <span class="at">tau=</span><span class="fu">c</span>(<span class="fl">0.5</span>)) <span class="co"># note, default is to model the 50th percentile (i.e., median) but we include tau parameter for completeness</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(qr1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call: rq(formula = dbwt ~ mager, tau = c(0.5), data = dat)
+
+tau: [1] 0.5
+
+Coefficients:
+            Value      Std. Error t value    Pr(&gt;|t|)  
+(Intercept) 3097.50000   59.10962   52.40264    0.00000
+mager          7.50000    1.99064    3.76762    0.00017</code></pre>
+</div>
+</div>
+<p>Our intercept interpretations are:</p>
+<ul>
+<li>For linear regression, the average birth weight in grams is 3037.136 for a mother who is 0 years old.</li>
+<li>For quantile regression, the median birth weight in grams is 3097.5 for a mother who is 0 years old.</li>
+<li>Note, the intercept doesn’t have a meaningful interpretation because it doesn’t make scientific sense for a mother to be 0 years old themselves and, even if it did, it would represent extrapolation from our data.</li>
+</ul>
+<p>Our slope interpretations for mother’s age are:</p>
+<ul>
+<li>For linear regression, a one year increase in mother’s age leads to an average increase of 8.6 grams in the baby’s birth weight.</li>
+<li>For quantile regression, a one year increase in mother’s age leads to an increase of 7.5 grams for the 50th percentile (i.e., median) birth weight.</li>
+</ul>
+<p>For the most part, these coefficients are not drastically different and they are both statistically significant (p&lt;0.001 for both). This may suggest that the mean and median have similar trajectories across mother’s age when assuming a linear trend.</p>
+</section>
+<section id="b-comparing-multiple-linear-regression-and-quantile-regression" class="level2">
+<h2 class="anchored" data-anchor-id="b-comparing-multiple-linear-regression-and-quantile-regression">1b: Comparing Multiple Linear Regression and Quantile Regression</h2>
+<p>Now add the predictors for prior cesarean delivery, gestational hypertension, and month of birth (as a categorical variable) to the models from <strong>1a</strong>. Provide an interpretation of the beta coefficients for mother’s age from both models, then briefly compare the beta coefficients between the linear and quantile regression models.</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple linear regression</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>glm2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(dbwt <span class="sc">~</span> mager <span class="sc">+</span> rf_cesar <span class="sc">+</span> rf_ghype <span class="sc">+</span> <span class="fu">as.factor</span>(dob_mm), <span class="at">data=</span>dat)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = dbwt ~ mager + rf_cesar + rf_ghype + as.factor(dob_mm), 
+    data = dat)
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         3000.826     72.167  41.582  &lt; 2e-16 ***
+mager                  8.545      1.966   4.345 1.45e-05 ***
+rf_cesarY             26.123     30.229   0.864   0.3876    
+rf_ghypeY           -259.607     45.675  -5.684 1.47e-08 ***
+as.factor(dob_mm)2    -7.222     59.951  -0.120   0.9041    
+as.factor(dob_mm)3    70.440     56.992   1.236   0.2166    
+as.factor(dob_mm)4    68.558     58.141   1.179   0.2384    
+as.factor(dob_mm)5    72.556     56.815   1.277   0.2017    
+as.factor(dob_mm)6    65.468     56.648   1.156   0.2479    
+as.factor(dob_mm)7    95.284     57.351   1.661   0.0968 .  
+as.factor(dob_mm)8    34.017     56.953   0.597   0.5504    
+as.factor(dob_mm)9     5.302     56.840   0.093   0.9257    
+as.factor(dob_mm)10  108.976     60.754   1.794   0.0730 .  
+as.factor(dob_mm)11   17.148     57.610   0.298   0.7660    
+as.factor(dob_mm)12   73.305     56.602   1.295   0.1954    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 307537.2)
+
+    Null deviance: 783450552  on 2499  degrees of freedom
+Residual deviance: 764229872  on 2485  degrees of freedom
+AIC: 38703
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple quantile regression</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>qr2 <span class="ot">&lt;-</span> <span class="fu">rq</span>(dbwt <span class="sc">~</span> mager <span class="sc">+</span> rf_cesar <span class="sc">+</span> rf_ghype <span class="sc">+</span> <span class="fu">as.factor</span>(dob_mm), <span class="at">data=</span>dat, <span class="at">tau=</span><span class="fu">c</span>(<span class="fl">0.5</span>)) <span class="co"># note, default is to model the 50th percentile (i.e., median) but we include tau parameter for completeness</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in rq.fit.br(x, y, tau = tau, ...): Solution may be nonunique</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(qr2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call: rq(formula = dbwt ~ mager + rf_cesar + rf_ghype + as.factor(dob_mm), 
+    tau = c(0.5), data = dat)
+
+tau: [1] 0.5
+
+Coefficients:
+                    Value      Std. Error t value    Pr(&gt;|t|)  
+(Intercept)         3124.16667   91.35139   34.19944    0.00000
+mager                  7.83333    1.99683    3.92289    0.00009
+rf_cesarY              7.16667   30.22528    0.23711    0.81259
+rf_ghypeY           -266.16667   53.07499   -5.01492    0.00000
+as.factor(dob_mm)2   -91.33333   86.48415   -1.05607    0.29104
+as.factor(dob_mm)3   -27.33333   75.57091   -0.36169    0.71761
+as.factor(dob_mm)4   -45.16667   78.09007   -0.57839    0.56305
+as.factor(dob_mm)5   -35.66667   79.23438   -0.45014    0.65265
+as.factor(dob_mm)6   -17.50000   77.58002   -0.22557    0.82155
+as.factor(dob_mm)7   -42.16667   84.30264   -0.50018    0.61699
+as.factor(dob_mm)8   -33.66667   76.57305   -0.43967    0.66022
+as.factor(dob_mm)9   -58.50000   75.42326   -0.77562    0.43805
+as.factor(dob_mm)10   43.00000   89.69914    0.47938    0.63171
+as.factor(dob_mm)11  -35.16667   77.67001   -0.45277    0.65075
+as.factor(dob_mm)12   58.50000   78.68332    0.74349    0.45726</code></pre>
+</div>
+</div>
+<p>Note, you may receive a message “Warning: Solution may be nonunique”. You can learn more through the <code>FAQ()</code> of the quantreg package, but it is likely not too concerning in our case.</p>
+<p>With regards to our interpretation, our slope parameters for mother’s age are:</p>
+<ul>
+<li>For linear regression, a one year increase in mother’s age leads to an average increase of 8.5 grams in the baby’s birth weight after adjusting for previous cesarean, gestational hypertension, and month of the birth.</li>
+<li>For quantile regression, a one year increase in mother’s age leads to an increase of 7.8 grams for the 50th percentile (i.e., median) birth weight after adjusting for previous cesarean, gestational hypertension, and month of the birth.</li>
+</ul>
+<p>With regards to our other coefficients, we see some more substantial differences between the estimated effect of a coefficient on the <em>mean</em> of the outcome versus the <em>median</em> of the outcome. For example, a previous cesarean resulted in an average increase of 26 grams, after adjusting for all other terms. The increase in the median is lower at only 7 grams after adjusting for all other terms. This may indicate that we could have outliers affecting our mean estimate within certain categories or potentially that the mean and median have greater differences. When considering month-specific effects, we see the quantile regression has many negative coefficients with respect to the reference month of January, whereas the linear regression generally has <em>higher</em> mean birth weights relative to January.</p>
+</section>
+<section id="c-quantile-regression-for-other-quantiles" class="level2">
+<h2 class="anchored" data-anchor-id="c-quantile-regression-for-other-quantiles">1c: Quantile Regression for Other Quantiles</h2>
+<p>For the simple quantile regression in <strong>1a</strong>, expand to include estimates for the 5th to the 95th quantile in increments of 5 and then create a scatterplot to demonstrate the model fits for each quantile. Briefly describe the figure.</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit quantile regression over all requested quantiles</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>qr3 <span class="ot">&lt;-</span> <span class="fu">rq</span>(dbwt <span class="sc">~</span> mager, <span class="at">data=</span>dat, <span class="at">tau=</span><span class="fu">seq</span>(<span class="fl">0.05</span>,<span class="fl">0.95</span>,<span class="at">by=</span><span class="fl">0.05</span>))</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">5.1</span>,<span class="fl">4.1</span>,<span class="fl">4.1</span>,<span class="fl">4.1</span>))</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat<span class="sc">$</span>mager, <span class="at">y=</span>dat<span class="sc">$</span>dbwt, <span class="at">xlab=</span><span class="st">"Mother's Age (Years)"</span>, <span class="at">ylab=</span><span class="st">'Infant Birth Weight (grams)'</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>quant_col <span class="ot">&lt;-</span> <span class="fu">rainbow</span>(<span class="dv">19</span>) <span class="co"># create grid of 19 colors to plot lines for</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">19</span> ){ <span class="fu">abline</span>(<span class="at">a=</span><span class="fu">coef</span>(qr3)[<span class="dv">1</span>,i], <span class="at">b=</span><span class="fu">coef</span>(qr3)[<span class="dv">2</span>,i], <span class="at">col=</span>quant_col[i]) }</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'right'</span>, <span class="at">xpd=</span>T, <span class="at">inset=</span><span class="sc">-</span><span class="fl">0.1</span>, <span class="at">col=</span><span class="fu">rev</span>(quant_col), <span class="at">legend=</span><span class="fu">seq</span>(<span class="dv">95</span>,<span class="dv">5</span>,<span class="sc">-</span><span class="dv">5</span>), <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">bty=</span><span class="st">'n'</span>, <span class="at">lty=</span><span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">19</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We see that all modeled quantiles show increasing birth weights across the span of mother’s age at birth, but the slopes are not consistent. For example, the 10th percentile nearly combines with the 15th percentile at older ages. Likewise, some younger ages seem to converge before getting older and spreading out somewhat. It is also worth noting that with 2500 points, it is challenging to get a good sense of the density at a given age/weight combination since the points are mostly overlapping.</p>
+</section>
+<section id="d-quantile-regression-for-other-quantiles-with-splines" class="level2">
+<h2 class="anchored" data-anchor-id="d-quantile-regression-for-other-quantiles-with-splines">1d: Quantile Regression for Other Quantiles with Splines</h2>
+<p>Take your approach in <strong>1c</strong> and now add some form of flexible spline to measure if there are any nonlinear effects. Create a new scatterplot with this information and provide a brief discussion if it seems like the splines may be a meaningful addition or if a simpler model for any/all quantiles may be recommended.</p>
+<p><strong>Solution:</strong></p>
+<p>Here we’ll use a B-spline for mother’s age. We’ll then predict the outcomes over a grid of ages to create nonlinear lines to plot:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(splines)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit quantile regression over all requested quantiles</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>qr4 <span class="ot">&lt;-</span> <span class="fu">rq</span>(dbwt <span class="sc">~</span> <span class="fu">bs</span>(mager), <span class="at">data=</span>dat, <span class="at">tau=</span><span class="fu">seq</span>(<span class="fl">0.05</span>,<span class="fl">0.95</span>,<span class="at">by=</span><span class="fl">0.05</span>))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create predictions</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>newage <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">'mager'</span> <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">14</span>,<span class="dv">49</span>,<span class="at">length.out=</span><span class="dv">100</span>))</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>pred_y <span class="ot">&lt;-</span> <span class="fu">predict</span>(qr4, <span class="at">newdata=</span>newage)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">5.1</span>,<span class="fl">4.1</span>,<span class="fl">4.1</span>,<span class="fl">4.1</span>))</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat<span class="sc">$</span>mager, <span class="at">y=</span>dat<span class="sc">$</span>dbwt, <span class="at">xlab=</span><span class="st">"Mother's Age (Years)"</span>, <span class="at">ylab=</span><span class="st">'Infant Birth Weight (grams)'</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>quant_col <span class="ot">&lt;-</span> <span class="fu">rainbow</span>(<span class="dv">19</span>) <span class="co"># create grid of 19 colors to plot lines for</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">19</span> ){ <span class="fu">lines</span>(<span class="at">x=</span>newage<span class="sc">$</span>mager, <span class="at">y=</span>pred_y[,i], <span class="at">col=</span>quant_col[i]) }</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'right'</span>, <span class="at">xpd=</span>T, <span class="at">inset=</span><span class="sc">-</span><span class="fl">0.1</span>, <span class="at">col=</span><span class="fu">rev</span>(quant_col), <span class="at">legend=</span><span class="fu">seq</span>(<span class="dv">95</span>,<span class="dv">5</span>,<span class="sc">-</span><span class="dv">5</span>), <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">bty=</span><span class="st">'n'</span>, <span class="at">lty=</span><span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">19</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>There appears to be some potentially concerning bheavior near the tails of the distribution for mother’s age where different quantiles are overlapping (sometimes by multiple magnitudes of 5% increments). The general trend for many of the quantiles, especially between about 20-40 years of age where most of the data is, is largely linear. This suggests we may be fine with our more parsimonious quantile regression that only included a single predictor for mother’s age. It is possible that some of the more extreme quantiles and/or more extreme ages may benefit from a non-linear trend provided by the B-spline, but this may also be artificially present given the sparsity of the data at this points (e.g., the 5th percentile slopes strongly downward due to some lower birth weight’s at around 42 years of age and none later).</p>
+</section>
+<section id="e-quantile-regression-with-an-interaction" class="level2">
+<h2 class="anchored" data-anchor-id="e-quantile-regression-with-an-interaction">1e: Quantile Regression with an Interaction</h2>
+<p>From the results in <strong>1b</strong>, we noticed what may be an interesting association between infant birth weight and presence of gestational hypertension. For the quantile regression of the median, fit a model that includes mother’s age, gestational hypertension, and the interaction of the two. Create a scatterplot with the predicted birth weight’s by mother’s age and gestational hypertension status. From your figure, does there appear to be a significant difference? From the results of the regression model, does there appear to be a statistically significant difference?</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>qr5 <span class="ot">&lt;-</span> <span class="fu">rq</span>(dbwt <span class="sc">~</span> mager <span class="sc">*</span> rf_ghype, <span class="at">data=</span>dat, <span class="at">tau=</span><span class="fu">c</span>(<span class="fl">0.5</span>))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(qr5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call: rq(formula = dbwt ~ mager * rf_ghype, tau = c(0.5), data = dat)
+
+tau: [1] 0.5
+
+Coefficients:
+                Value      Std. Error t value    Pr(&gt;|t|)  
+(Intercept)     3097.22222   60.09310   51.54040    0.00000
+mager              7.88889    1.98361    3.97705    0.00007
+rf_ghypeY       -367.05556  197.70765   -1.85656    0.06349
+mager:rf_ghypeY    3.40278    5.30995    0.64083    0.52169</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create predictions</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>newage <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">'mager'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="dv">14</span>,<span class="dv">49</span>,<span class="at">length.out=</span><span class="dv">100</span>),<span class="fu">seq</span>(<span class="dv">14</span>,<span class="dv">49</span>,<span class="at">length.out=</span><span class="dv">100</span>)),</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'rf_ghype'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">'N'</span>,<span class="dv">100</span>), <span class="fu">rep</span>(<span class="st">'Y'</span>,<span class="dv">100</span>)) ) <span class="co"># data frame needs variables for both age and hypertension</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>pred_y <span class="ot">&lt;-</span> <span class="fu">predict</span>(qr5, <span class="at">newdata=</span>newage)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">5.1</span>,<span class="fl">4.1</span>,<span class="fl">4.1</span>,<span class="fl">4.1</span>))</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat<span class="sc">$</span>mager, <span class="at">y=</span>dat<span class="sc">$</span>dbwt, <span class="at">xlab=</span><span class="st">"Mother's Age (Years)"</span>, <span class="at">ylab=</span><span class="st">'Infant Birth Weight (grams)'</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'top'</span>, <span class="at">xpd=</span>T, <span class="at">inset=</span><span class="sc">-</span><span class="fl">0.13</span>, <span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">lwd=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">'black'</span>,<span class="st">'blue'</span>), <span class="at">legend=</span><span class="fu">c</span>(<span class="st">'No Hypertension'</span>,<span class="st">'Hypertension'</span>), <span class="at">bty=</span><span class="st">'n'</span>, <span class="at">horiz=</span>T)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span>newage<span class="sc">$</span>mager[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>], <span class="at">y=</span>pred_y[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>], <span class="at">col=</span><span class="st">'black'</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span>newage<span class="sc">$</span>mager[<span class="dv">101</span><span class="sc">:</span><span class="dv">200</span>], <span class="at">y=</span>pred_y[<span class="dv">101</span><span class="sc">:</span><span class="dv">200</span>], <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">lty=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>From our figure, it appears that the trend of the median birth weight is very similar between mothers with and without gestational hypertension, with a slightly narrowing difference towards higher ages. However, <span class="math inline">\(p=0.522\)</span> from our quantile regression, indicating we fail to reject the null hypothesis and there is not sufficient evidence to reject that there isn’t an interaction (i.e., that the beta coefficient could truly be 0). We could likely use a more parsimonious model without the interaction and it suggests that hypertension may have a largely similar effect across the age span.</p>
+</section>
+</section>
+<section id="exercise-2-segmented-regression" class="level1">
+<h1>Exercise 2: Segmented Regression</h1>
+<p>This problem uses the same dataset to explore if a breakpoint may be beneficial to model the association between mother’s age and infant birth weight.</p>
+<section id="a-segmented-regression-with-1-breakpoint" class="level2">
+<h2 class="anchored" data-anchor-id="a-segmented-regression-with-1-breakpoint">2a: Segmented Regression with 1 Breakpoint</h2>
+<p>Fit a segmented regression with 1 breakpoint and plot the fitted segmented regression line on a scatterplot of the observed data. What is the estimated breakpoint? Does it visually seem like there may be a meaningful change in slope where the breakpoint is plotted?</p>
+<p><strong>Solution:</strong></p>
+<p>We will use the segmented package:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit our segmented regression model</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(segmented)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(dbwt <span class="sc">~</span> mager, <span class="at">data=</span>dat)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>seg2 <span class="ot">&lt;-</span> <span class="fu">segmented</span>(mod2)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(seg2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    ***Regression Model with Segmented Relationship(s)***
+
+Call: 
+segmented.glm(obj = mod2)
+
+Estimated Break-Point(s):
+            Est. St.Err
+psi1.mager   28  2.056
+
+Coefficients of the linear terms:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 2752.416    149.261  18.440  &lt; 2e-16 ***
+mager         20.473      6.362   3.218  0.00131 ** 
+U1.mager     -20.397      7.460  -2.734       NA    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 310361)
+
+Null     deviance: 783450552  on 2499  degrees of freedom
+Residual deviance: 774660965  on 2496  degrees of freedom
+AIC: 38714
+
+Boot restarting based on 10 samples. Last fit:
+Convergence attained in 0 iterations (rel. change 4.9469e-07)</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the figure</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat<span class="sc">$</span>mager, <span class="at">y=</span>dat<span class="sc">$</span>dbwt, <span class="at">xlab=</span><span class="st">"Mother's Age (Years)"</span>, <span class="at">ylab=</span><span class="st">'Infant Birth Weight (grams)'</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(seg2, <span class="at">add=</span>T, <span class="at">col=</span><span class="st">'black'</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>From our <code>summary(seg2)</code> output, the estimated breakpoint is at 28 years of age. Based on our scatterplot, it does appear that the slope seems to incresae slightly up until age 28, then it seems to stabilize as a fairly flat line (i.e., slope near 0).</p>
+</section>
+<section id="b-significance-test-for-breakpoints" class="level2">
+<h2 class="anchored" data-anchor-id="b-significance-test-for-breakpoints">2b: Significance Test for Breakpoints</h2>
+<p>Using Davies’ test, determine if there is a significant change in slope. State your null and alternative hypothesis.</p>
+<p><strong>Solution:</strong></p>
+<p>Our null hypothesis is that the difference-in-slopes is equal to 0 (i.e., <span class="math inline">\(H_0: \beta = 0\)</span> if <span class="math inline">\(\beta\)</span> is our difference-in-slopes). The alternative hypothesis is that the difference-in-slopes is not equal to 0. The null hypothesis corresponds to no breakpoint in our data.</p>
+<p>We can use the <code>davies.test()</code> function in the <code>segmented</code> package to test this hypothesis:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">davies.test</span>(mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Davies' test for a change in the slope
+
+data:  formula = dbwt ~ mager ,   method = glm 
+model = gaussian , link = identity , statist = lrt 
+segmented variable = mager
+'best' at = 32.222, n.points = 10, p-value = 0.04485
+alternative hypothesis: two.sided</code></pre>
+</div>
+</div>
+<p>From this output, we see that <span class="math inline">\(p=0.045 &lt; 0.05\)</span>. Therefore, we will reject the null hypothesis and conclude that there is a change in slopes around a single breakpoint.</p>
+<p>If we are concerned that the “best” breakpoint of 32.222 doesn’t match our estimate of 28, we can also specify the <span class="math inline">\(k\)</span> parameter and make it larger (although the p-value, since it is near 0.05, may cross over to being greater than 0.05):</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">davies.test</span>(mod2, <span class="at">k=</span><span class="dv">20</span>) <span class="co"># still significant p-value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Davies' test for a change in the slope
+
+data:  formula = dbwt ~ mager ,   method = glm 
+model = gaussian , link = identity , statist = lrt 
+segmented variable = mager
+'best' at = 28.053, n.points = 20, p-value = 0.04883
+alternative hypothesis: two.sided</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">davies.test</span>(mod2, <span class="at">k=</span><span class="dv">100</span>) <span class="co"># no longer significant p-value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Davies' test for a change in the slope
+
+data:  formula = dbwt ~ mager ,   method = glm 
+model = gaussian , link = identity , statist = lrt 
+segmented variable = mager
+'best' at = 27.838, n.points = 100, p-value = 0.05245
+alternative hypothesis: two.sided</code></pre>
+</div>
+</div>
+</section>
+<section id="c-significance-testing-of-slopes" class="level2">
+<h2 class="anchored" data-anchor-id="c-significance-testing-of-slopes">2c: Significance Testing of Slopes</h2>
+<p>Are the slopes both significantly different from 0 before and after the breakpoint?</p>
+<p><strong>Solution:</strong></p>
+<p>From <strong>2b</strong> and Davies’ test we know that the breakpoint is significant and the slopes change significantly before and after the breakpoint. However, we did not test if either (or both) slopes are significantly different from 0. We can evaluate this question using the <code>slope()</code> function:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slope</span>(seg2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$mager
+            Est. St.Err.  t value CI(95%).l CI(95%).u
+slope1 20.473000   6.362 3.218000    8.0035   32.9420
+slope2  0.075971   3.895 0.019505   -7.5581    7.7101</code></pre>
+</div>
+</div>
+<p>From the output, we see that it automatically calculates the slope after the breakpoint while also presenting the <code>slope1</code> parameter that matches the <code>mager</code> summary from <code>summary(seg2)</code>. While we could manually calculate a p-value based on the provided <span class="math inline">\(t\)</span>-value, we can also use the 95% CI to evaluate significance. In this case, only the <code>slope1</code> confidence interval doesn’t contain 0, suggesting that the slope after the breakpoint is not significantly different from 0 (i.e., it matches our visual interpretation).</p>
+<p>While not asked for in this question, we could note that for every 1 year increase in age, the average infant birth weight increases by 20.5 grams (95% CI 8.0, 32.9 grams) before 28 years of maternal age and increases by 0.1 grams (95% CI: -7.6, 7.7 grams) above 28 years of maternal age.</p>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -574,32 +1013,261 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 13 Practice Problems: Solutions"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>This page includes the solutions to the optional practice problems for the given week. If you want to see a version <span class="co">[</span><span class="ot">without solutions please click here</span><span class="co">](/labs/prac13/index.qmd)</span>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu"># TBD</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>Content for this week is to be decided.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 13 Practice Problems: Solutions"</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">  name: Alex Kaizer</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co">  roles: "Instructor"</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co">  affiliation: University of Colorado-Anschutz Medical Campus</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc_float:</span><span class="co"> true</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-location:</span><span class="co"> left</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap </span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, message=F, warning=F}</span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>This page includes the solutions to the optional practice problems for the given week. If you want to see a version <span class="co">[</span><span class="ot">without solutions please click here</span><span class="co">](/labs/prac13/index.qmd)</span>. Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>This week's extra practice exercises are focusing on some of our "advanced" topics including segmented (piecewise) regression, quantile regression, and splines to model nonlinear trends.</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a><span class="fu"># Dataset Background</span></span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>The following code can load the <span class="in">`natl2018us_random2500.csv`</span> file into R:</span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=T}</span></span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../../.data/natl2018us_random2500.csv'</span>)</span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>The dataset represents a random sample of 2500 births in the US during 2018 collected by the CDC. For our exercises below we will focus on the following variables:</span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`dbwt`</span>: infant birth weight in grams</span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`mager`</span>: mother's age in years</span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>`rf_cesar``: binary variable indicating if mother previously had a Cesarean delivery ('Y'=yes, 'N'=no)</span>
+<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`rf_ghype`</span>: binary variable indicating if mother had gestational hypertension ('Y'=yes, 'N'=no)</span>
+<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`dob_mm`</span>: month of birth (1=January, ..., 12=December)</span>
+<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise 1: Quantile Regression Example (with Multiple QR, Interactions, and Splines)</span></span>
+<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a>This problem will focus on exploring quantile regression modeling. The first problems explore comparing linear regression with quantile regression of the median, then special topics are explored including adjusting for other covariates, including interactions, and modeling potentially nonlinear trends with splines.</span>
+<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1a: Comparing Simple Linear Regression and Quantile Regression</span></span>
+<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a>Fit and compare the simple linear regression model and quantile regression model for the outcome of infant birth weight in grams (i.e., dependent variable) and independent variable for mother's age in years. State the interpretations of both models for the intercept and mother's age, then compare the estimated coefficients and statistical significance for the two approaches.</span>
+<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a>The simple linear regression model is</span>
+<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-57"><a href="#cb32-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-58"><a href="#cb32-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit with glm function</span></span>
+<span id="cb32-59"><a href="#cb32-59" aria-hidden="true" tabindex="-1"></a>glm1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(dbwt <span class="sc">~</span> mager, <span class="at">data=</span>dat)</span>
+<span id="cb32-60"><a href="#cb32-60" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm1)</span>
+<span id="cb32-61"><a href="#cb32-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-62"><a href="#cb32-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-63"><a href="#cb32-63" aria-hidden="true" tabindex="-1"></a>The simple quantile regression of the median model is</span>
+<span id="cb32-64"><a href="#cb32-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-67"><a href="#cb32-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-68"><a href="#cb32-68" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit with rq from the quantreg package</span></span>
+<span id="cb32-69"><a href="#cb32-69" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quantreg)</span>
+<span id="cb32-70"><a href="#cb32-70" aria-hidden="true" tabindex="-1"></a>qr1 <span class="ot">&lt;-</span> <span class="fu">rq</span>(dbwt <span class="sc">~</span> mager, <span class="at">data=</span>dat, <span class="at">tau=</span><span class="fu">c</span>(<span class="fl">0.5</span>)) <span class="co"># note, default is to model the 50th percentile (i.e., median) but we include tau parameter for completeness</span></span>
+<span id="cb32-71"><a href="#cb32-71" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(qr1)</span>
+<span id="cb32-72"><a href="#cb32-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-73"><a href="#cb32-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-74"><a href="#cb32-74" aria-hidden="true" tabindex="-1"></a>Our intercept interpretations are:</span>
+<span id="cb32-75"><a href="#cb32-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-76"><a href="#cb32-76" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>For linear regression, the average birth weight in grams is 3037.136 for a mother who is 0 years old.</span>
+<span id="cb32-77"><a href="#cb32-77" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>For quantile regression, the median birth weight in grams is 3097.5 for a mother who is 0 years old.</span>
+<span id="cb32-78"><a href="#cb32-78" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Note, the intercept doesn't have a meaningful interpretation because it doesn't make scientific sense for a mother to be 0 years old themselves and, even if it did, it would represent extrapolation from our data.</span>
+<span id="cb32-79"><a href="#cb32-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-80"><a href="#cb32-80" aria-hidden="true" tabindex="-1"></a>Our slope interpretations for mother's age are:</span>
+<span id="cb32-81"><a href="#cb32-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-82"><a href="#cb32-82" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>For linear regression, a one year increase in mother's age leads to an average increase of 8.6 grams in the baby's birth weight.</span>
+<span id="cb32-83"><a href="#cb32-83" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>For quantile regression, a one year increase in mother's age leads to an increase of 7.5 grams for the 50th percentile (i.e., median) birth weight.</span>
+<span id="cb32-84"><a href="#cb32-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-85"><a href="#cb32-85" aria-hidden="true" tabindex="-1"></a>For the most part, these coefficients are not drastically different and they are both statistically significant (p&lt;0.001 for both). This may suggest that the mean and median have similar trajectories across mother's age when assuming a linear trend.</span>
+<span id="cb32-86"><a href="#cb32-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-87"><a href="#cb32-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-88"><a href="#cb32-88" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1b: Comparing Multiple Linear Regression and Quantile Regression</span></span>
+<span id="cb32-89"><a href="#cb32-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-90"><a href="#cb32-90" aria-hidden="true" tabindex="-1"></a>Now add the predictors for prior cesarean delivery, gestational hypertension, and month of birth (as a categorical variable) to the models from **1a**. Provide an interpretation of the beta coefficients for mother's age from both models, then briefly compare the beta coefficients between the linear and quantile regression models.</span>
+<span id="cb32-91"><a href="#cb32-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-92"><a href="#cb32-92" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb32-93"><a href="#cb32-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-96"><a href="#cb32-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-97"><a href="#cb32-97" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple linear regression</span></span>
+<span id="cb32-98"><a href="#cb32-98" aria-hidden="true" tabindex="-1"></a>glm2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(dbwt <span class="sc">~</span> mager <span class="sc">+</span> rf_cesar <span class="sc">+</span> rf_ghype <span class="sc">+</span> <span class="fu">as.factor</span>(dob_mm), <span class="at">data=</span>dat)</span>
+<span id="cb32-99"><a href="#cb32-99" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm2)</span>
+<span id="cb32-100"><a href="#cb32-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-101"><a href="#cb32-101" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple quantile regression</span></span>
+<span id="cb32-102"><a href="#cb32-102" aria-hidden="true" tabindex="-1"></a>qr2 <span class="ot">&lt;-</span> <span class="fu">rq</span>(dbwt <span class="sc">~</span> mager <span class="sc">+</span> rf_cesar <span class="sc">+</span> rf_ghype <span class="sc">+</span> <span class="fu">as.factor</span>(dob_mm), <span class="at">data=</span>dat, <span class="at">tau=</span><span class="fu">c</span>(<span class="fl">0.5</span>)) <span class="co"># note, default is to model the 50th percentile (i.e., median) but we include tau parameter for completeness</span></span>
+<span id="cb32-103"><a href="#cb32-103" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(qr2)</span>
+<span id="cb32-104"><a href="#cb32-104" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-105"><a href="#cb32-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-106"><a href="#cb32-106" aria-hidden="true" tabindex="-1"></a>Note, you may receive a message "Warning: Solution may be nonunique". You can learn more through the <span class="in">`FAQ()`</span> of the quantreg package, but it is likely not too concerning in our case.</span>
+<span id="cb32-107"><a href="#cb32-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-108"><a href="#cb32-108" aria-hidden="true" tabindex="-1"></a>With regards to our interpretation, our slope parameters for mother's age are:</span>
+<span id="cb32-109"><a href="#cb32-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-110"><a href="#cb32-110" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>For linear regression, a one year increase in mother's age leads to an average increase of 8.5 grams in the baby's birth weight after adjusting for previous cesarean, gestational hypertension, and month of the birth.</span>
+<span id="cb32-111"><a href="#cb32-111" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>For quantile regression, a one year increase in mother's age leads to an increase of 7.8 grams for the 50th percentile (i.e., median) birth weight after adjusting for previous cesarean, gestational hypertension, and month of the birth.</span>
+<span id="cb32-112"><a href="#cb32-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-113"><a href="#cb32-113" aria-hidden="true" tabindex="-1"></a>With regards to our other coefficients, we see some more substantial differences between the estimated effect of a coefficient on the *mean* of the outcome versus the *median* of the outcome. For example, a previous cesarean resulted in an average increase of 26 grams, after adjusting for all other terms. The increase in the median is lower at only 7 grams after adjusting for all other terms. This may indicate that we could have outliers affecting our mean estimate within certain categories or potentially that the mean and median have greater differences. When considering month-specific effects, we see the quantile regression has many negative coefficients with respect to the reference month of January, whereas the linear regression generally has *higher* mean birth weights relative to January.</span>
+<span id="cb32-114"><a href="#cb32-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-115"><a href="#cb32-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-116"><a href="#cb32-116" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1c: Quantile Regression for Other Quantiles</span></span>
+<span id="cb32-117"><a href="#cb32-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-118"><a href="#cb32-118" aria-hidden="true" tabindex="-1"></a>For the simple quantile regression in **1a**, expand to include estimates for the 5th to the 95th quantile in increments of 5 and then create a scatterplot to demonstrate the model fits for each quantile. Briefly describe the figure.</span>
+<span id="cb32-119"><a href="#cb32-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-120"><a href="#cb32-120" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb32-121"><a href="#cb32-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-124"><a href="#cb32-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-125"><a href="#cb32-125" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit quantile regression over all requested quantiles</span></span>
+<span id="cb32-126"><a href="#cb32-126" aria-hidden="true" tabindex="-1"></a>qr3 <span class="ot">&lt;-</span> <span class="fu">rq</span>(dbwt <span class="sc">~</span> mager, <span class="at">data=</span>dat, <span class="at">tau=</span><span class="fu">seq</span>(<span class="fl">0.05</span>,<span class="fl">0.95</span>,<span class="at">by=</span><span class="fl">0.05</span>))</span>
+<span id="cb32-127"><a href="#cb32-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-128"><a href="#cb32-128" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot</span></span>
+<span id="cb32-129"><a href="#cb32-129" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">5.1</span>,<span class="fl">4.1</span>,<span class="fl">4.1</span>,<span class="fl">4.1</span>))</span>
+<span id="cb32-130"><a href="#cb32-130" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat<span class="sc">$</span>mager, <span class="at">y=</span>dat<span class="sc">$</span>dbwt, <span class="at">xlab=</span><span class="st">"Mother's Age (Years)"</span>, <span class="at">ylab=</span><span class="st">'Infant Birth Weight (grams)'</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb32-131"><a href="#cb32-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-132"><a href="#cb32-132" aria-hidden="true" tabindex="-1"></a>quant_col <span class="ot">&lt;-</span> <span class="fu">rainbow</span>(<span class="dv">19</span>) <span class="co"># create grid of 19 colors to plot lines for</span></span>
+<span id="cb32-133"><a href="#cb32-133" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">19</span> ){ <span class="fu">abline</span>(<span class="at">a=</span><span class="fu">coef</span>(qr3)[<span class="dv">1</span>,i], <span class="at">b=</span><span class="fu">coef</span>(qr3)[<span class="dv">2</span>,i], <span class="at">col=</span>quant_col[i]) }</span>
+<span id="cb32-134"><a href="#cb32-134" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'right'</span>, <span class="at">xpd=</span>T, <span class="at">inset=</span><span class="sc">-</span><span class="fl">0.1</span>, <span class="at">col=</span><span class="fu">rev</span>(quant_col), <span class="at">legend=</span><span class="fu">seq</span>(<span class="dv">95</span>,<span class="dv">5</span>,<span class="sc">-</span><span class="dv">5</span>), <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">bty=</span><span class="st">'n'</span>, <span class="at">lty=</span><span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">19</span>))</span>
+<span id="cb32-135"><a href="#cb32-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-136"><a href="#cb32-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-137"><a href="#cb32-137" aria-hidden="true" tabindex="-1"></a>We see that all modeled quantiles show increasing birth weights across the span of mother's age at birth, but the slopes are not consistent. For example, the 10th percentile nearly combines with the 15th percentile at older ages. Likewise, some younger ages seem to converge before getting older and spreading out somewhat. It is also worth noting that with 2500 points, it is challenging to get a good sense of the density at a given age/weight combination since the points are mostly overlapping.</span>
+<span id="cb32-138"><a href="#cb32-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-139"><a href="#cb32-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-140"><a href="#cb32-140" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1d: Quantile Regression for Other Quantiles with Splines</span></span>
+<span id="cb32-141"><a href="#cb32-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-142"><a href="#cb32-142" aria-hidden="true" tabindex="-1"></a>Take your approach in **1c** and now add some form of flexible spline to measure if there are any nonlinear effects. Create a new scatterplot with this information and provide a brief discussion if it seems like the splines may be a meaningful addition or if a simpler model for any/all quantiles may be recommended.</span>
+<span id="cb32-143"><a href="#cb32-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-144"><a href="#cb32-144" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb32-145"><a href="#cb32-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-146"><a href="#cb32-146" aria-hidden="true" tabindex="-1"></a>Here we'll use a B-spline for mother's age. We'll then predict the outcomes over a grid of ages to create nonlinear lines to plot:</span>
+<span id="cb32-147"><a href="#cb32-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-150"><a href="#cb32-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-151"><a href="#cb32-151" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(splines)</span>
+<span id="cb32-152"><a href="#cb32-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-153"><a href="#cb32-153" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit quantile regression over all requested quantiles</span></span>
+<span id="cb32-154"><a href="#cb32-154" aria-hidden="true" tabindex="-1"></a>qr4 <span class="ot">&lt;-</span> <span class="fu">rq</span>(dbwt <span class="sc">~</span> <span class="fu">bs</span>(mager), <span class="at">data=</span>dat, <span class="at">tau=</span><span class="fu">seq</span>(<span class="fl">0.05</span>,<span class="fl">0.95</span>,<span class="at">by=</span><span class="fl">0.05</span>))</span>
+<span id="cb32-155"><a href="#cb32-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-156"><a href="#cb32-156" aria-hidden="true" tabindex="-1"></a><span class="co"># Create predictions</span></span>
+<span id="cb32-157"><a href="#cb32-157" aria-hidden="true" tabindex="-1"></a>newage <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">'mager'</span> <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">14</span>,<span class="dv">49</span>,<span class="at">length.out=</span><span class="dv">100</span>))</span>
+<span id="cb32-158"><a href="#cb32-158" aria-hidden="true" tabindex="-1"></a>pred_y <span class="ot">&lt;-</span> <span class="fu">predict</span>(qr4, <span class="at">newdata=</span>newage)</span>
+<span id="cb32-159"><a href="#cb32-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-160"><a href="#cb32-160" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot</span></span>
+<span id="cb32-161"><a href="#cb32-161" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">5.1</span>,<span class="fl">4.1</span>,<span class="fl">4.1</span>,<span class="fl">4.1</span>))</span>
+<span id="cb32-162"><a href="#cb32-162" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat<span class="sc">$</span>mager, <span class="at">y=</span>dat<span class="sc">$</span>dbwt, <span class="at">xlab=</span><span class="st">"Mother's Age (Years)"</span>, <span class="at">ylab=</span><span class="st">'Infant Birth Weight (grams)'</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb32-163"><a href="#cb32-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-164"><a href="#cb32-164" aria-hidden="true" tabindex="-1"></a>quant_col <span class="ot">&lt;-</span> <span class="fu">rainbow</span>(<span class="dv">19</span>) <span class="co"># create grid of 19 colors to plot lines for</span></span>
+<span id="cb32-165"><a href="#cb32-165" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">19</span> ){ <span class="fu">lines</span>(<span class="at">x=</span>newage<span class="sc">$</span>mager, <span class="at">y=</span>pred_y[,i], <span class="at">col=</span>quant_col[i]) }</span>
+<span id="cb32-166"><a href="#cb32-166" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'right'</span>, <span class="at">xpd=</span>T, <span class="at">inset=</span><span class="sc">-</span><span class="fl">0.1</span>, <span class="at">col=</span><span class="fu">rev</span>(quant_col), <span class="at">legend=</span><span class="fu">seq</span>(<span class="dv">95</span>,<span class="dv">5</span>,<span class="sc">-</span><span class="dv">5</span>), <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">bty=</span><span class="st">'n'</span>, <span class="at">lty=</span><span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">19</span>))</span>
+<span id="cb32-167"><a href="#cb32-167" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-168"><a href="#cb32-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-169"><a href="#cb32-169" aria-hidden="true" tabindex="-1"></a>There appears to be some potentially concerning bheavior near the tails of the distribution for mother's age where different quantiles are overlapping (sometimes by multiple magnitudes of 5% increments). The general trend for many of the quantiles, especially between about 20-40 years of age where most of the data is, is largely linear. This suggests we may be fine with our more parsimonious quantile regression that only included a single predictor for mother's age. It is possible that some of the more extreme quantiles and/or more extreme ages may benefit from a non-linear trend provided by the B-spline, but this may also be artificially present given the sparsity of the data at this points (e.g., the 5th percentile slopes strongly downward due to some lower birth weight's at around 42 years of age and none later).</span>
+<span id="cb32-170"><a href="#cb32-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-171"><a href="#cb32-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-172"><a href="#cb32-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-173"><a href="#cb32-173" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1e: Quantile Regression with an Interaction</span></span>
+<span id="cb32-174"><a href="#cb32-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-175"><a href="#cb32-175" aria-hidden="true" tabindex="-1"></a>From the results in **1b**, we noticed what may be an interesting association between infant birth weight and presence of gestational hypertension. For the quantile regression of the median, fit a model that includes mother's age, gestational hypertension, and the interaction of the two. Create a scatterplot with the predicted birth weight's by mother's age and gestational hypertension status. From your figure, does there appear to be a significant difference? From the results of the regression model, does there appear to be a statistically significant difference?</span>
+<span id="cb32-176"><a href="#cb32-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-177"><a href="#cb32-177" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb32-178"><a href="#cb32-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-181"><a href="#cb32-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-182"><a href="#cb32-182" aria-hidden="true" tabindex="-1"></a>qr5 <span class="ot">&lt;-</span> <span class="fu">rq</span>(dbwt <span class="sc">~</span> mager <span class="sc">*</span> rf_ghype, <span class="at">data=</span>dat, <span class="at">tau=</span><span class="fu">c</span>(<span class="fl">0.5</span>))</span>
+<span id="cb32-183"><a href="#cb32-183" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(qr5)</span>
+<span id="cb32-184"><a href="#cb32-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-185"><a href="#cb32-185" aria-hidden="true" tabindex="-1"></a><span class="co"># Create predictions</span></span>
+<span id="cb32-186"><a href="#cb32-186" aria-hidden="true" tabindex="-1"></a>newage <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">'mager'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="dv">14</span>,<span class="dv">49</span>,<span class="at">length.out=</span><span class="dv">100</span>),<span class="fu">seq</span>(<span class="dv">14</span>,<span class="dv">49</span>,<span class="at">length.out=</span><span class="dv">100</span>)),</span>
+<span id="cb32-187"><a href="#cb32-187" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'rf_ghype'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">'N'</span>,<span class="dv">100</span>), <span class="fu">rep</span>(<span class="st">'Y'</span>,<span class="dv">100</span>)) ) <span class="co"># data frame needs variables for both age and hypertension</span></span>
+<span id="cb32-188"><a href="#cb32-188" aria-hidden="true" tabindex="-1"></a>pred_y <span class="ot">&lt;-</span> <span class="fu">predict</span>(qr5, <span class="at">newdata=</span>newage)</span>
+<span id="cb32-189"><a href="#cb32-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-190"><a href="#cb32-190" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot</span></span>
+<span id="cb32-191"><a href="#cb32-191" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">5.1</span>,<span class="fl">4.1</span>,<span class="fl">4.1</span>,<span class="fl">4.1</span>))</span>
+<span id="cb32-192"><a href="#cb32-192" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat<span class="sc">$</span>mager, <span class="at">y=</span>dat<span class="sc">$</span>dbwt, <span class="at">xlab=</span><span class="st">"Mother's Age (Years)"</span>, <span class="at">ylab=</span><span class="st">'Infant Birth Weight (grams)'</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb32-193"><a href="#cb32-193" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'top'</span>, <span class="at">xpd=</span>T, <span class="at">inset=</span><span class="sc">-</span><span class="fl">0.13</span>, <span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">lwd=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">'black'</span>,<span class="st">'blue'</span>), <span class="at">legend=</span><span class="fu">c</span>(<span class="st">'No Hypertension'</span>,<span class="st">'Hypertension'</span>), <span class="at">bty=</span><span class="st">'n'</span>, <span class="at">horiz=</span>T)</span>
+<span id="cb32-194"><a href="#cb32-194" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span>newage<span class="sc">$</span>mager[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>], <span class="at">y=</span>pred_y[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>], <span class="at">col=</span><span class="st">'black'</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb32-195"><a href="#cb32-195" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span>newage<span class="sc">$</span>mager[<span class="dv">101</span><span class="sc">:</span><span class="dv">200</span>], <span class="at">y=</span>pred_y[<span class="dv">101</span><span class="sc">:</span><span class="dv">200</span>], <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb32-196"><a href="#cb32-196" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-197"><a href="#cb32-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-198"><a href="#cb32-198" aria-hidden="true" tabindex="-1"></a>From our figure, it appears that the trend of the median birth weight is very similar between mothers with and without gestational hypertension, with a slightly narrowing difference towards higher ages. However, $p=0.522$ from our quantile regression, indicating we fail to reject the null hypothesis and there is not sufficient evidence to reject that there isn't an interaction (i.e., that the beta coefficient could truly be 0). We could likely use a more parsimonious model without the interaction and it suggests that hypertension may have a largely similar effect across the age span.</span>
+<span id="cb32-199"><a href="#cb32-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-200"><a href="#cb32-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-201"><a href="#cb32-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-202"><a href="#cb32-202" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise 2: Segmented Regression</span></span>
+<span id="cb32-203"><a href="#cb32-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-204"><a href="#cb32-204" aria-hidden="true" tabindex="-1"></a>This problem uses the same dataset to explore if a breakpoint may be beneficial to model the association between mother's age and infant birth weight.</span>
+<span id="cb32-205"><a href="#cb32-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-206"><a href="#cb32-206" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2a: Segmented Regression with 1 Breakpoint</span></span>
+<span id="cb32-207"><a href="#cb32-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-208"><a href="#cb32-208" aria-hidden="true" tabindex="-1"></a>Fit a segmented regression with 1 breakpoint and plot the fitted segmented regression line on a scatterplot of the observed data. What is the estimated breakpoint? Does it visually seem like there may be a meaningful change in slope where the breakpoint is plotted?</span>
+<span id="cb32-209"><a href="#cb32-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-210"><a href="#cb32-210" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb32-211"><a href="#cb32-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-212"><a href="#cb32-212" aria-hidden="true" tabindex="-1"></a>We will use the segmented package:</span>
+<span id="cb32-213"><a href="#cb32-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-214"><a href="#cb32-214" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, warning=F, message=F}</span></span>
+<span id="cb32-215"><a href="#cb32-215" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit our segmented regression model</span></span>
+<span id="cb32-216"><a href="#cb32-216" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(segmented)</span>
+<span id="cb32-217"><a href="#cb32-217" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(dbwt <span class="sc">~</span> mager, <span class="at">data=</span>dat)</span>
+<span id="cb32-218"><a href="#cb32-218" aria-hidden="true" tabindex="-1"></a>seg2 <span class="ot">&lt;-</span> <span class="fu">segmented</span>(mod2)</span>
+<span id="cb32-219"><a href="#cb32-219" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(seg2)</span>
+<span id="cb32-220"><a href="#cb32-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-221"><a href="#cb32-221" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the figure</span></span>
+<span id="cb32-222"><a href="#cb32-222" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>dat<span class="sc">$</span>mager, <span class="at">y=</span>dat<span class="sc">$</span>dbwt, <span class="at">xlab=</span><span class="st">"Mother's Age (Years)"</span>, <span class="at">ylab=</span><span class="st">'Infant Birth Weight (grams)'</span>, <span class="at">col=</span><span class="st">'gray65'</span>)</span>
+<span id="cb32-223"><a href="#cb32-223" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(seg2, <span class="at">add=</span>T, <span class="at">col=</span><span class="st">'black'</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb32-224"><a href="#cb32-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-225"><a href="#cb32-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-226"><a href="#cb32-226" aria-hidden="true" tabindex="-1"></a>From our <span class="in">`summary(seg2)`</span> output, the estimated breakpoint is at 28 years of age. Based on our scatterplot, it does appear that the slope seems to incresae slightly up until age 28, then it seems to stabilize as a fairly flat line (i.e., slope near 0).</span>
+<span id="cb32-227"><a href="#cb32-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-228"><a href="#cb32-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-229"><a href="#cb32-229" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2b: Significance Test for Breakpoints</span></span>
+<span id="cb32-230"><a href="#cb32-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-231"><a href="#cb32-231" aria-hidden="true" tabindex="-1"></a>Using Davies' test, determine if there is a significant change in slope. State your null and alternative hypothesis.</span>
+<span id="cb32-232"><a href="#cb32-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-233"><a href="#cb32-233" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb32-234"><a href="#cb32-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-235"><a href="#cb32-235" aria-hidden="true" tabindex="-1"></a>Our null hypothesis is that the difference-in-slopes is equal to 0 (i.e., $H_0: \beta = 0$ if $\beta$ is our difference-in-slopes). The alternative hypothesis is that the difference-in-slopes is not equal to 0. The null hypothesis corresponds to no breakpoint in our data.</span>
+<span id="cb32-236"><a href="#cb32-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-237"><a href="#cb32-237" aria-hidden="true" tabindex="-1"></a>We can use the <span class="in">`davies.test()`</span> function in the <span class="in">`segmented`</span> package to test this hypothesis:</span>
+<span id="cb32-238"><a href="#cb32-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-241"><a href="#cb32-241" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-242"><a href="#cb32-242" aria-hidden="true" tabindex="-1"></a><span class="fu">davies.test</span>(mod2)</span>
+<span id="cb32-243"><a href="#cb32-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-244"><a href="#cb32-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-245"><a href="#cb32-245" aria-hidden="true" tabindex="-1"></a>From this output, we see that $p=0.045 &lt; 0.05$. Therefore, we will reject the null hypothesis and conclude that there is a change in slopes around a single breakpoint.</span>
+<span id="cb32-246"><a href="#cb32-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-247"><a href="#cb32-247" aria-hidden="true" tabindex="-1"></a>If we are concerned that the "best" breakpoint of 32.222 doesn't match our estimate of 28, we can also specify the $k$ parameter and make it larger (although the p-value, since it is near 0.05, may cross over to being greater than 0.05):</span>
+<span id="cb32-248"><a href="#cb32-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-251"><a href="#cb32-251" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-252"><a href="#cb32-252" aria-hidden="true" tabindex="-1"></a><span class="fu">davies.test</span>(mod2, <span class="at">k=</span><span class="dv">20</span>) <span class="co"># still significant p-value</span></span>
+<span id="cb32-253"><a href="#cb32-253" aria-hidden="true" tabindex="-1"></a><span class="fu">davies.test</span>(mod2, <span class="at">k=</span><span class="dv">100</span>) <span class="co"># no longer significant p-value</span></span>
+<span id="cb32-254"><a href="#cb32-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-255"><a href="#cb32-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-256"><a href="#cb32-256" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2c: Significance Testing of Slopes</span></span>
+<span id="cb32-257"><a href="#cb32-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-258"><a href="#cb32-258" aria-hidden="true" tabindex="-1"></a>Are the slopes both significantly different from 0 before and after the breakpoint? </span>
+<span id="cb32-259"><a href="#cb32-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-260"><a href="#cb32-260" aria-hidden="true" tabindex="-1"></a>**Solution:**</span>
+<span id="cb32-261"><a href="#cb32-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-262"><a href="#cb32-262" aria-hidden="true" tabindex="-1"></a>From **2b** and Davies' test we know that the breakpoint is significant and the slopes change significantly before and after the breakpoint. However, we did not test if either (or both) slopes are significantly different from 0. We can evaluate this question using the <span class="in">`slope()`</span> function:</span>
+<span id="cb32-263"><a href="#cb32-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-266"><a href="#cb32-266" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-267"><a href="#cb32-267" aria-hidden="true" tabindex="-1"></a><span class="fu">slope</span>(seg2)</span>
+<span id="cb32-268"><a href="#cb32-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-269"><a href="#cb32-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-270"><a href="#cb32-270" aria-hidden="true" tabindex="-1"></a>From the output, we see that it automatically calculates the slope after the breakpoint while also presenting the <span class="in">`slope1`</span> parameter that matches the <span class="in">`mager`</span> summary from <span class="in">`summary(seg2)`</span>. While we could manually calculate a p-value based on the provided $t$-value, we can also use the 95% CI to evaluate significance. In this case, only the <span class="in">`slope1`</span> confidence interval doesn't contain 0, suggesting that the slope after the breakpoint is not significantly different from 0 (i.e., it matches our visual interpretation).</span>
+<span id="cb32-271"><a href="#cb32-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-272"><a href="#cb32-272" aria-hidden="true" tabindex="-1"></a>While not asked for in this question, we could note that for every 1 year increase in age, the average infant birth weight increases by 20.5 grams (95% CI 8.0, 32.9 grams) before 28 years of maternal age and increases by 0.1 grams (95% CI: -7.6, 7.7 grams) above 28 years of maternal age.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

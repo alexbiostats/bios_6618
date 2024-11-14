@@ -21,7 +21,54 @@ library(dplyr)
 
 This page includes optional practice problems, many of which are structured to assist you on the homework with [Solutions provided on a separate page](/labs/prac14s/index.qmd). Data sets, if needed, are provided on the BIOS 6618 Canvas page for students registered for the course.
 
-# TBD
+This week's extra practice exercises are focusing on implementing and interpreting a linear regression model using Bayesian approaches. We leverage the same data set from the MLR practice problems to help compare results with our frequentist approaches.
 
-Content for this week is to be decided.
+# Dataset Background
 
+The following code can load the `Licorice_Gargle.csv` file into R leveraging the `here` package:
+
+```{r, eval=T}
+dat_all <- read.csv('../../.data/Licorice_Gargle.csv')
+
+# remove records with missing data for the outcome or any predictors:
+complete_case_vec <- complete.cases(dat_all[,c('pacu30min_throatPain','preOp_gender','preOp_age','treat')]) # creates a vector of TRUE or FALSE for each row if the cases are complete (i.e., no NA values)
+dat <- dat_all[complete_case_vec,]
+```
+
+The dataset represents a randomized control trial of 236 adult patients undergoing elective thoracic surgery requiring a double-lumen endotracheal tube comparing if licorice vs. sugar-water gargle prevents postoperative sore throat. For our exercises below we will focus on the following variables:
+
+* `pacu30min_throatPain`: sore throat pain score at rest 30 minutes after arriving in the post-anesthesia care unit (PACU) measured on an 11 point Likert scale (0=no pain to 10=worst pain)
+* `preOp_gender`: an indicator variable for gender (0=Male, 1=Female)
+* `preOp_age`: age (in years)
+* `treat`: the randomized treatment in the trial where 0=sugar 5g and 1=licorice 0.5g
+
+
+# Exercise 1: Multiple Linear Regression Example
+
+## 1a: Fitting the Model (Frequentist)
+
+Fit the frequentist multiple linear regression model for the outcome of throat pain (i.e., dependent variable) and independent variables for ASA score, gender, age, and treatment status. Print the summary table output for reference in the following questions.
+
+
+
+## 1b: Fitting the Model (Bayesian)
+
+Fit the Bayesian multiple linear regression model for the outcome of throat pain (i.e., dependent variable) and independent variables for ASA score, gender, age, and treatment status. Assume priors of $\beta_i \sim N(\mu=0,\sigma=100)$ for all beta coefficients and use the default prior for $\sigma$ in your chosen package/software. Compare your results to the frequentist linear regression in **1a**. Provide an interpretation of the slope for the treatment effect and its 95% credible interval.
+
+
+
+## 1c: MCMC Diagnostic Plots
+
+Create the density and trace plots for your intercept and slope parameters from **1b**. Briefly describe them and note any potential issues. *Note, it is okay if additional parameters are included in your plots, just focus on the beta coefficients for this problem.*
+
+
+
+## 1d: More Informative Priors
+
+Let's assume that we *a priori* believed that the treatment should result in a 3 point reduction with a standard deviation of 0.25 (i.e., $\beta_{treat} \sim N(\mu=-3,\sigma=0.25)$. Now fit the Bayesian model with this informative prior for treatment group but leaving all other priors unchanged from **1c**. How do the beta coefficients change? Briefly discuss the potential impact of sample size on the informativeness of the prior.
+
+
+
+## 1e: Posterior Probability Calculations
+
+Calculate the posterior probabilities that $P(\hat{\beta}_{treat} \leq 0)$, $P(\hat{\beta}_{treat} > 0)$, and $P(\hat{\beta}_{treat} \leq -1)$ for both **1b** and **1d**. Summarize your results in a table and briefly compare model results.
